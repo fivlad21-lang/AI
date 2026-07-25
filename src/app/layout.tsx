@@ -28,6 +28,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
           rel="stylesheet"
         />
+        {/* VT323 for readable RU dialogue; Press Start for labels */}
       </head>
       <body className="min-h-full antialiased">{children}</body>
     </html>

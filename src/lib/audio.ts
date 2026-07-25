@@ -10,11 +10,36 @@ type SfxName =
   | "ball"
   | "fanfare"
   | "door"
-  | "party";
+  | "party"
+  | "drop";
+
+type CryId = "pikachu" | "bulbasaur" | "squirtle" | "psyduck";
 
 let ctx: AudioContext | null = null;
 let muted = false;
 let unlocked = false;
+let bgmTimer: number | null = null;
+let bgmGain: GainNode | null = null;
+let cryAudio: HTMLAudioElement | null = null;
+
+const CRY_URLS: Record<CryId, string> = {
+  pikachu:
+    "https://play.pokemonshowdown.com/audio/cries/pikachu.mp3",
+  bulbasaur:
+    "https://play.pokemonshowdown.com/audio/cries/bulbasaur.mp3",
+  squirtle:
+    "https://play.pokemonshowdown.com/audio/cries/squirtle.mp3",
+  psyduck:
+    "https://play.pokemonshowdown.com/audio/cries/psyduck.mp3",
+};
+
+function criesEnabled() {
+  return process.env.NEXT_PUBLIC_ENABLE_CRIES !== "false";
+}
+
+function bgmEnabled() {
+  return process.env.NEXT_PUBLIC_ENABLE_BGM !== "false";
+}
 
 function getCtx(): AudioContext | null {
   if (typeof window === "undefined") return null;
@@ -43,6 +68,13 @@ export function setMuted(value: boolean) {
   if (typeof window !== "undefined") {
     localStorage.setItem(MUTE_KEY, value ? "1" : "0");
   }
+  if (muted) {
+    stopBgm();
+    if (cryAudio) {
+      cryAudio.pause();
+      cryAudio = null;
+    }
+  }
 }
 
 export function toggleMute() {
@@ -50,7 +82,6 @@ export function toggleMute() {
   return muted;
 }
 
-/** Call on first user gesture so AudioContext can start */
 export async function unlockAudio() {
   const c = getCtx();
   if (!c) return;
@@ -70,9 +101,7 @@ function beep(
   if (muted || typeof window === "undefined") return;
   const c = getCtx();
   if (!c) return;
-  if (c.state === "suspended") {
-    void c.resume();
-  }
+  if (c.state === "suspended") void c.resume();
 
   const osc = c.createOscillator();
   const g = c.createGain();
@@ -106,9 +135,6 @@ function melody(
 }
 
 export function playSfx(name: SfxName) {
-  if (!unlocked && name !== "menu") {
-    // still try — unlockAudio may have run
-  }
   switch (name) {
     case "select":
       beep(520, 0.06, "square", 0.07);
@@ -180,5 +206,74 @@ export function playSfx(name: SfxName) {
         0.075,
       );
       break;
+    case "drop":
+      beep(240, 0.06, "triangle", 0.07);
+      window.setTimeout(() => beep(160, 0.1, "square", 0.05), 70);
+      break;
+  }
+}
+
+export function playCry(id: CryId) {
+  if (muted || !criesEnabled() || typeof window === "undefined") return;
+  try {
+    if (cryAudio) {
+      cryAudio.pause();
+    }
+    const a = new Audio(CRY_URLS[id]);
+    a.volume = 0.45;
+    cryAudio = a;
+    void a.play().catch(() => {
+      /* autoplay / network — ignore */
+    });
+  } catch {
+    /* ignore */
+  }
+}
+
+export function startHubBgm() {
+  if (muted || !bgmEnabled() || typeof window === "undefined") return;
+  stopBgm();
+  const c = getCtx();
+  if (!c) return;
+  if (c.state === "suspended") void c.resume();
+
+  bgmGain = c.createGain();
+  bgmGain.gain.value = 0.035;
+  bgmGain.connect(c.destination);
+
+  const pattern = [262, 330, 392, 330, 294, 349, 440, 349];
+  let i = 0;
+
+  const tick = () => {
+    if (muted || !bgmGain) return;
+    const osc = c.createOscillator();
+    const g = c.createGain();
+    osc.type = "square";
+    osc.frequency.value = pattern[i % pattern.length];
+    g.gain.setValueAtTime(0.04, c.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.18);
+    osc.connect(g);
+    g.connect(bgmGain);
+    osc.start();
+    osc.stop(c.currentTime + 0.2);
+    i += 1;
+  };
+
+  tick();
+  bgmTimer = window.setInterval(tick, 220);
+}
+
+export function stopBgm() {
+  if (bgmTimer != null) {
+    window.clearInterval(bgmTimer);
+    bgmTimer = null;
+  }
+  if (bgmGain) {
+    try {
+      bgmGain.disconnect();
+    } catch {
+      /* ignore */
+    }
+    bgmGain = null;
   }
 }

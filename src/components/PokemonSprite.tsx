@@ -8,6 +8,7 @@ import {
   useRealSpritesEnabled,
   type SpriteVariant,
 } from "@/data/sprites";
+import { playCry } from "@/lib/audio";
 
 type PokemonSpriteProps = {
   character: Character;
@@ -19,6 +20,7 @@ type PokemonSpriteProps = {
   react?: DialogueMood | "hit" | "win" | "talk" | "idle";
   className?: string;
   showLabel?: boolean;
+  withCry?: boolean;
 };
 
 const sizes = {
@@ -43,6 +45,7 @@ export function PokemonSprite({
   react = "idle",
   className = "",
   showLabel = true,
+  withCry = false,
 }: PokemonSpriteProps) {
   const real = useRealSpritesEnabled();
   const candidates = real ? getSpriteCandidates(character.id, variant) : [];
@@ -56,6 +59,11 @@ export function PokemonSprite({
 
   const src = candidates[srcIndex];
   const showImg = real && src && !failed;
+
+  const handleClick = () => {
+    if (withCry) playCry(character.id);
+    onClick?.();
+  };
 
   const bob =
     react === "sleep"
@@ -82,9 +90,9 @@ export function PokemonSprite({
   return (
     <motion.button
       type="button"
-      onClick={onClick}
-      whileHover={onClick ? { scale: 1.06, y: -3 } : undefined}
-      whileTap={onClick ? { scale: 0.95 } : undefined}
+      onClick={onClick || withCry ? handleClick : undefined}
+      whileHover={onClick || withCry ? { scale: 1.06, y: -3 } : undefined}
+      whileTap={onClick || withCry ? { scale: 0.95 } : undefined}
       animate={bob}
       transition={{
         repeat: react === "hit" || react === "talk" ? 0 : Infinity,
@@ -92,7 +100,7 @@ export function PokemonSprite({
         ease: "easeInOut",
       }}
       className={`relative flex flex-col items-center gap-1 ${
-        onClick ? "cursor-pointer" : "cursor-default"
+        onClick || withCry ? "cursor-pointer" : "cursor-default"
       } ${className}`}
       aria-label={character.name}
     >

@@ -4,24 +4,25 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   characters,
-  PACKAGE_LINES,
   TAYCAN_LINE,
   type DialogueLine,
   type PokemonId,
 } from "@/data/characters";
+import { pickTemuItem } from "@/data/temuCatalog";
 import { PokemonSprite } from "./PokemonSprite";
 import { DialogueBox } from "./DialogueBox";
 import { playSfx, unlockAudio } from "@/lib/audio";
+import { useBirthday } from "@/context/BirthdayContext";
 
 type HubSceneProps = {
   partyMode?: boolean;
 };
 
 export function HubScene({ partyMode = false }: HubSceneProps) {
+  const { addGift, bossAsleep } = useBirthday();
   const [active, setActive] = useState<PokemonId | null>(null);
   const [lineIndex, setLineIndex] = useState(0);
   const [override, setOverride] = useState<DialogueLine | null>(null);
-  const [pkgIndex, setPkgIndex] = useState(0);
 
   const char = characters.find((c) => c.id === active);
   const line: DialogueLine | null = override
@@ -34,10 +35,12 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
     await unlockAudio();
     playSfx("select");
     setOverride(null);
+    addGift("hub-talk");
     if (active === id) {
-      const next = (lineIndex + 1) % (char?.dialogue.length || 1);
+      const ch = characters.find((c) => c.id === id);
+      const next = (lineIndex + 1) % (ch?.dialogue.length || 1);
       setLineIndex(next);
-      const nextLine = characters.find((c) => c.id === id)?.dialogue[next];
+      const nextLine = ch?.dialogue[next];
       if (nextLine?.sfx) playSfx(nextLine.sfx);
     } else {
       setActive(id);
@@ -53,32 +56,46 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
     setActive("pikachu");
     setOverride(TAYCAN_LINE);
     setLineIndex(0);
+    addGift("hub-taycan");
   };
 
   const handlePackage = async () => {
     await unlockAudio();
-    playSfx("select");
-    const line = PACKAGE_LINES[pkgIndex % PACKAGE_LINES.length];
-    setPkgIndex((i) => i + 1);
+    playSfx("drop");
+    const item = pickTemuItem();
     setActive("pikachu");
-    setOverride(line);
+    setOverride({
+      text: `Пикачу: 📦 ${item}`,
+      mood: "smug",
+    });
     setLineIndex(0);
+    addGift("hub-package");
+  };
+
+  const handleCake = async () => {
+    await unlockAudio();
+    playSfx("fanfare");
+    setActive("pikachu");
+    setOverride({
+      text: "Пикачу: Торт? Принимаю. Свечи потом — сначала респект и треки с Ali.",
+      mood: "birthday",
+      sfx: "fanfare",
+    });
+    addGift("hub-cake");
   };
 
   return (
     <div className="flex flex-col gap-3 h-full">
-      <div className="pixel-border relative overflow-hidden min-h-[300px] sm:min-h-[360px] flex-1 bg-[#78c850]">
-        {/* sky / office wall */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#87ceeb] via-[#b8e090] to-[#78c850]" />
-        <div
-          className="absolute inset-x-0 bottom-0 h-1/2 opacity-40"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(90deg, #5a9a3a 0 16px, #6bb043 16px 32px)",
-          }}
-        />
+      {bossAsleep && (
+        <div className="gifts-bar font-display text-[8px] text-[var(--poke-dark-red)]">
+          😴 BOSS offline until 13:00 — пиши в трек-номер
+        </div>
+      )}
 
-        {/* garland */}
+      <div className="pixel-border relative overflow-hidden min-h-[300px] sm:min-h-[360px] flex-1">
+        <div className="absolute inset-0 scene-sky" />
+        <div className="absolute inset-x-0 bottom-0 h-[45%] scene-tiles opacity-50" />
+
         <div className="absolute top-1 inset-x-0 flex justify-center gap-1 z-10 pointer-events-none">
           {["🟡", "🔴", "🔵", "🟡", "🔴", "🔵"].map((c, i) => (
             <motion.span
@@ -107,65 +124,45 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
           🎈
         </motion.span>
 
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 text-center z-10 pointer-events-none">
+        <button
+          type="button"
+          onClick={() => void handleCake()}
+          className="absolute top-10 left-1/2 -translate-x-1/2 text-center z-20 cursor-pointer"
+          aria-label="Birthday cake"
+        >
           <span className="text-2xl">🎂</span>
-          <p className="text-[6px] text-[#9b1b0e]">BDAY</p>
-        </div>
+          <p className="font-display text-[6px] text-[#9b1b0e] bg-white/80 px-1">
+            CAKE ▸
+          </p>
+        </button>
 
-        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-50">
-          {(partyMode ? 12 : 5) > 0 &&
-            Array.from({ length: partyMode ? 12 : 5 }).map((_, i) => (
-              <motion.span
-                key={i}
-                className="absolute text-[7px]"
-                style={{ left: `${10 + i * 8}%`, top: `${15 + (i % 4) * 10}%` }}
-                animate={{ y: [0, 30, 0], opacity: [0.3, 0.9, 0.3] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2.8 + (i % 3) * 0.4,
-                  delay: i * 0.15,
-                }}
-              >
-                ✦
-              </motion.span>
-            ))}
-        </div>
-
-        <div className="absolute top-3 right-3 pixel-border bg-white/90 px-2 py-1 text-[8px] z-10">
+        <div className="absolute top-3 right-3 pixel-border bg-white/90 px-2 py-1 text-[8px] z-10 font-display">
           🇺🇸 USA DREAM
         </div>
-        <div className="absolute top-3 left-3 text-[8px] text-[#1a3a1a] z-10 bg-white/70 px-1">
+        <div className="absolute top-3 left-3 text-[8px] z-10 bg-white/80 px-1 font-display">
           OFFICE · LVL 100
         </div>
 
-        {/* TEMU / Ali packages */}
         <button
           type="button"
-          onClick={handlePackage}
+          onClick={() => void handlePackage()}
           className="absolute bottom-[7.5rem] right-2 sm:right-6 z-20 flex gap-1"
-          aria-label="Packages from TEMU and AliExpress"
+          aria-label="TEMU and Ali packages"
         >
-          <div className="pixel-border bg-[#ff6a00] w-9 h-8 flex items-center justify-center shadow-[2px_2px_0_#0006]">
-            <span className="text-[5px] text-white leading-none text-center">
-              TEMU
-            </span>
+          <div className="pixel-border bg-[#ff6a00] w-9 h-8 flex items-center justify-center">
+            <span className="text-[5px] text-white font-display">TEMU</span>
           </div>
-          <div className="pixel-border bg-[#ff4747] w-9 h-8 flex items-center justify-center shadow-[2px_2px_0_#0006]">
-            <span className="text-[5px] text-white leading-none text-center">
-              ALI
-            </span>
+          <div className="pixel-border bg-[#ff4747] w-9 h-8 flex items-center justify-center">
+            <span className="text-[5px] text-white font-display">ALI</span>
           </div>
         </button>
 
-        {/* Taycan */}
         <motion.button
           type="button"
-          onClick={handleTaycan}
+          onClick={() => void handleTaycan()}
           className="absolute bottom-[4.5rem] right-3 sm:right-8 flex flex-col items-center z-20"
           animate={
-            partyMode
-              ? { x: [0, 6, 0, -6, 0] }
-              : { x: [0, 2, 0, -2, 0] }
+            partyMode ? { x: [0, 6, 0, -6, 0] } : { x: [0, 2, 0, -2, 0] }
           }
           transition={{ repeat: Infinity, duration: partyMode ? 1.1 : 4 }}
           aria-label="Porsche Taycan"
@@ -181,7 +178,7 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
                 transition={{ repeat: Infinity, duration: 1.4 }}
               />
             </div>
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] text-[#4a1a6b] whitespace-nowrap bg-white/80 px-1">
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] text-[#4a1a6b] whitespace-nowrap bg-white/80 px-1 font-display">
               TAYCAN ▸
             </span>
           </div>
@@ -199,7 +196,7 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
         </div>
 
         <div className="absolute bottom-20 left-1/2 -translate-x-10 w-12 h-8 pixel-border bg-[#333] z-10">
-          <div className="w-full h-5 bg-[#0a2a1a] text-[5px] text-[#39ff14] p-0.5 leading-none">
+          <div className="w-full h-5 bg-[#0a2a1a] text-[5px] text-[#39ff14] p-0.5 leading-none font-display">
             DOTA
             <br />
             $$$
@@ -207,30 +204,36 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
         </div>
 
         <div className="absolute inset-x-0 bottom-2 flex justify-around items-end px-1 sm:px-4 z-20">
-          {characters.map((c) => (
-            <div key={c.id} className="relative">
-              {c.id === "pikachu" && (
-                <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[7px] bg-[#ffcb05] px-1 border border-black whitespace-nowrap">
-                  BOSS
-                </span>
-              )}
-              <PokemonSprite
-                character={c}
-                size="md"
-                selected={active === c.id || partyMode}
-                react={
-                  override && active === c.id
-                    ? override.mood || "talk"
-                    : active === c.id
-                      ? line?.mood || "talk"
-                      : partyMode
-                        ? "happy"
-                        : "idle"
-                }
-                onClick={() => handleClick(c.id)}
-              />
-            </div>
-          ))}
+          {characters.map((c) => {
+            const isPika = c.id === "pikachu";
+            const mood =
+              override && active === c.id
+                ? override.mood || "talk"
+                : active === c.id
+                  ? line?.mood || "talk"
+                  : partyMode
+                    ? "happy"
+                    : isPika && bossAsleep && active !== "pikachu"
+                      ? "sleep"
+                      : "idle";
+            return (
+              <div key={c.id} className="relative">
+                {isPika && (
+                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[7px] bg-[#ffcb05] px-1 border border-black whitespace-nowrap font-display">
+                    BOSS
+                  </span>
+                )}
+                <PokemonSprite
+                  character={c}
+                  size="md"
+                  selected={active === c.id || partyMode}
+                  react={mood}
+                  withCry
+                  onClick={() => void handleClick(c.id)}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -246,14 +249,14 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
               name={`${char?.name ?? "Пикачу"} / ${char?.role.split("&")[0].trim() ?? "BOSS"}`}
               text={line.text}
               face={<span className="text-2xl">{char?.emoji ?? "⚡"}</span>}
-              hint="▼ кликни снова · или коробки TEMU/ALI"
+              hint="▼ кликни снова · TEMU/ALI · торт"
             />
           </motion.div>
         ) : (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <DialogueBox
               name="NARRATOR"
-              text="Дикая birthday-команда появилась! Выбери покемона, кликни Taycan или коробки с TEMU/Ali."
+              text="Дикая birthday-команда появилась! Выбери покемона, Taycan, торт или коробки TEMU/Ali."
               withTicks={false}
               hint="▼ start"
             />
