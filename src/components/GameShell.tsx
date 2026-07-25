@@ -105,29 +105,29 @@ export function GameShell() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="fixed top-4 left-1/2 -translate-x-1/2 z-[90] pixel-border bg-[#0d1f14] text-[#f4d03f] text-[9px] px-4 py-2"
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-[90] pixel-border bg-[#ffcb05] text-[#202020] text-[9px] px-4 py-2"
           >
             {toast}
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="w-full max-w-3xl gb-shell relative">
+      <div className="w-full max-w-3xl poke-shell relative">
         <header className="text-center mb-4 sm:mb-5 relative">
           <div className="absolute right-0 top-0">
             <MuteButton />
           </div>
-          <p className="text-[8px] text-[#3d5c45] mb-2 tracking-widest">
-            GAME BOY COLOR · TEAM EDITION
+          <p className="text-[8px] text-[#ffe8e0] mb-2 tracking-widest">
+            POKéDEX · TEAM EDITION
           </p>
-          <h1 className="text-sm sm:text-base text-[#1a2e1f] leading-relaxed">
+          <h1 className="text-sm sm:text-base text-white leading-relaxed drop-shadow-[2px_2px_0_#5a0f08]">
             POKÉMON
-            <span className="block text-[10px] sm:text-xs text-[#2d4a35] mt-1">
+            <span className="block text-[10px] sm:text-xs text-[#ffcb05] mt-1">
               CEO BIRTHDAY QUEST
             </span>
           </h1>
           <motion.p
-            className="mt-2 inline-block pixel-border bg-[#1a2e1f] text-[#f4d03f] text-[8px] px-2 py-1"
+            className="mt-2 inline-block pixel-border bg-[#ffcb05] text-[#202020] text-[8px] px-2 py-1"
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
@@ -135,15 +135,15 @@ export function GameShell() {
           </motion.p>
         </header>
 
-        <div className="gb-screen">
+        <div className="poke-screen">
           <div className="flex items-center justify-between mb-3 px-1">
-            <span className="text-[7px] text-[#4a7c59]">● POWER</span>
-            <span className="text-[7px] text-[#4a7c59]">
+            <span className="text-[7px] text-[var(--poke-dark-red)]">● POWER</span>
+            <span className="text-[7px] text-[var(--poke-shadow)]">
               {buffer.length > 0
                 ? `SEQ:${buffer}`
                 : partyMode
                   ? "🎉 PARTY MODE"
-                  : "DOT MATRIX WITH STEREO SOUND"}
+                  : "FIRE RED STYLE · STEREO"}
             </span>
           </div>
 
@@ -170,7 +170,7 @@ export function GameShell() {
                   onClick={() => changeTab(t.id)}
                   className={`pixel-btn text-[8px] sm:text-[9px] px-2.5 py-1.5 ${
                     active ? "pixel-btn-active" : ""
-                  } ${t.secret ? "text-[#39ff14]!" : ""}`}
+                  } ${t.secret ? "!text-[var(--poke-dark-red)]" : ""}`}
                 >
                   {t.icon} {t.label}
                 </button>
@@ -208,11 +208,11 @@ export function GameShell() {
           <button
             type="button"
             onClick={unlockSecret}
-            className="text-[7px] text-[#2a3d2e] hover:text-[#39ff14] transition-colors"
+            className="text-[7px] text-[#ffe0d0] hover:text-[#ffcb05] transition-colors"
           >
             🦗 3301: Welcome. Epiphany is upon you.
           </button>
-          <p className="text-[7px] text-[#3d5c45]">
+          <p className="text-[7px] text-[#ffc8b8]">
             © TEAM POKÉMON · WITH LOVE FOR CEO · 🎂 HAPPY BIRTHDAY
           </p>
         </footer>

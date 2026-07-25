@@ -6,7 +6,10 @@ import { CICADA_ASCII, PGP_BLOCK } from "@/data/content";
 export function Secret3301() {
   return (
     <div className="flex flex-col gap-3 h-full">
-      <div className="pixel-border bg-black p-3 sm:p-4 flex-1 overflow-y-auto font-mono">
+      <p className="text-[9px] text-[var(--poke-dark-red)]">
+        SECRET AREA · PROJECT 3301
+      </p>
+      <div className="pixel-border bg-black p-3 sm:p-4 flex-1 overflow-y-auto font-mono shadow-[4px_4px_0_#0006]">
         <motion.pre
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -43,7 +46,7 @@ export function Secret3301() {
         </div>
 
         <p className="mt-4 text-[8px] text-[#1a5a1a]">
-          tip: open DevTools (F12) — cicada leaves a message.
+          tip: open DevTools (F12) — try ceo()
           <br />
           tip: in BATTLE, type 3301 on your keyboard.
         </p>

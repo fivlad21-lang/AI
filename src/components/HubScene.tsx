@@ -2,39 +2,46 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { characters, type PokemonId } from "@/data/characters";
+import {
+  characters,
+  TAYCAN_LINE,
+  type DialogueLine,
+  type PokemonId,
+} from "@/data/characters";
 import { PokemonSprite } from "./PokemonSprite";
-import { Typewriter } from "./Typewriter";
+import { DialogueBox } from "./DialogueBox";
 import { playSfx, unlockAudio } from "@/lib/audio";
 
 type HubSceneProps = {
   partyMode?: boolean;
 };
 
-const TAYCAN_LINE =
-  "Пикачу: *открывает дверь Taycan* Садись. Но только после 13:00. И с Днём Рождения — поехали. 🚗💜";
-
 export function HubScene({ partyMode = false }: HubSceneProps) {
   const [active, setActive] = useState<PokemonId | null>(null);
   const [lineIndex, setLineIndex] = useState(0);
-  const [overrideLine, setOverrideLine] = useState<string | null>(null);
+  const [override, setOverride] = useState<DialogueLine | null>(null);
 
   const char = characters.find((c) => c.id === active);
-  const line = overrideLine
-    ? overrideLine
+  const line: DialogueLine | null = override
+    ? override
     : char
       ? char.dialogue[lineIndex % char.dialogue.length]
-      : "";
+      : null;
 
   const handleClick = async (id: PokemonId) => {
     await unlockAudio();
     playSfx("select");
-    setOverrideLine(null);
+    setOverride(null);
     if (active === id) {
-      setLineIndex((i) => i + 1);
+      const next = (lineIndex + 1) % (char?.dialogue.length || 1);
+      setLineIndex(next);
+      const nextLine = characters.find((c) => c.id === id)?.dialogue[next];
+      if (nextLine?.sfx) playSfx(nextLine.sfx);
     } else {
       setActive(id);
       setLineIndex(0);
+      const first = characters.find((c) => c.id === id)?.dialogue[0];
+      if (first?.sfx) playSfx(first.sfx);
     }
   };
 
@@ -42,28 +49,29 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
     await unlockAudio();
     playSfx("door");
     setActive("pikachu");
-    setOverrideLine(TAYCAN_LINE);
+    setOverride(TAYCAN_LINE);
     setLineIndex(0);
   };
 
   return (
-    <div className="flex flex-col gap-4 h-full">
-      <div className="pixel-border bg-[#1a3a28] relative overflow-hidden min-h-[280px] sm:min-h-[340px] flex-1">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2d5a40] via-[#1e3d2c] to-[#0f2418]" />
+    <div className="flex flex-col gap-3 h-full">
+      <div className="pixel-border relative overflow-hidden min-h-[300px] sm:min-h-[360px] flex-1 bg-[#78c850]">
+        {/* sky / office wall */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#87ceeb] via-[#b8e090] to-[#78c850]" />
         <div
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-x-0 bottom-0 h-1/2 opacity-40"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(90deg, #0000 0 7px, #0003 7px 8px), repeating-linear-gradient(0deg, #0000 0 7px, #0003 7px 8px)",
+              "repeating-linear-gradient(90deg, #5a9a3a 0 16px, #6bb043 16px 32px)",
           }}
         />
 
-        {/* Birthday garland */}
-        <div className="absolute top-0 inset-x-0 flex justify-center gap-1 pt-1 z-10 pointer-events-none">
-          {["🟨", "🟪", "🟩", "🟦", "🟨", "🟪", "🟩"].map((c, i) => (
+        {/* garland */}
+        <div className="absolute top-1 inset-x-0 flex justify-center gap-1 z-10 pointer-events-none">
+          {["🟡", "🔴", "🔵", "🟡", "🔴", "🔵"].map((c, i) => (
             <motion.span
               key={i}
-              className="text-[8px]"
+              className="text-[9px]"
               animate={{ y: [0, 3, 0] }}
               transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.1 }}
             >
@@ -72,87 +80,83 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
           ))}
         </div>
 
-        {/* Balloons */}
         <motion.span
-          className="absolute top-8 left-6 text-lg z-10 pointer-events-none"
+          className="absolute top-8 left-5 text-lg z-10 pointer-events-none"
           animate={{ y: [0, -6, 0] }}
-          transition={{ repeat: Infinity, duration: 2.5 }}
+          transition={{ repeat: Infinity, duration: 2.4 }}
         >
           🎈
         </motion.span>
         <motion.span
-          className="absolute top-10 right-16 text-lg z-10 pointer-events-none"
+          className="absolute top-9 right-14 text-lg z-10 pointer-events-none"
           animate={{ y: [0, -8, 0] }}
-          transition={{ repeat: Infinity, duration: 2.2, delay: 0.4 }}
+          transition={{ repeat: Infinity, duration: 2.1, delay: 0.3 }}
         >
           🎈
         </motion.span>
 
-        {/* Cake */}
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 text-center z-10 pointer-events-none">
-          <span className="text-xl">🎂</span>
-          <p className="text-[6px] text-[#f4d03f]">BDAY</p>
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 text-center z-10 pointer-events-none">
+          <span className="text-2xl">🎂</span>
+          <p className="text-[6px] text-[#9b1b0e]">BDAY</p>
         </div>
 
-        {/* Party confetti dust */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-40">
-          {(partyMode ? Array.from({ length: 14 }) : Array.from({ length: 6 })).map(
-            (_, i) => (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-50">
+          {(partyMode ? 12 : 5) > 0 &&
+            Array.from({ length: partyMode ? 12 : 5 }).map((_, i) => (
               <motion.span
                 key={i}
-                className="absolute text-[6px]"
-                style={{ left: `${8 + i * 7}%`, top: `${10 + (i % 5) * 12}%` }}
-                animate={{ y: [0, 40, 0], opacity: [0.2, 0.8, 0.2] }}
+                className="absolute text-[7px]"
+                style={{ left: `${10 + i * 8}%`, top: `${15 + (i % 4) * 10}%` }}
+                animate={{ y: [0, 30, 0], opacity: [0.3, 0.9, 0.3] }}
                 transition={{
                   repeat: Infinity,
-                  duration: 3 + (i % 3),
-                  delay: i * 0.2,
+                  duration: 2.8 + (i % 3) * 0.4,
+                  delay: i * 0.15,
                 }}
               >
-                {["✦", "·", "✧", "•"][i % 4]}
+                ✦
               </motion.span>
-            ),
-          )}
+            ))}
         </div>
 
-        <div className="absolute top-3 right-4 pixel-border bg-[#0d1f14] px-2 py-1 text-[8px] text-[#f5f5f5] z-10">
+        <div className="absolute top-3 right-3 pixel-border bg-white/90 px-2 py-1 text-[8px] z-10">
           🇺🇸 USA DREAM
         </div>
-        <div className="absolute top-3 left-4 text-[8px] text-[#7dcea0] z-10">
-          OFFICE LVL 100
+        <div className="absolute top-3 left-3 text-[8px] text-[#1a3a1a] z-10 bg-white/70 px-1">
+          OFFICE · LVL 100
         </div>
 
-        {/* Purple Taycan — clickable easter egg */}
+        {/* Taycan */}
         <motion.button
           type="button"
           onClick={handleTaycan}
-          className="absolute bottom-16 right-4 sm:right-10 flex flex-col items-center z-20 cursor-pointer"
+          className="absolute bottom-[4.5rem] right-3 sm:right-8 flex flex-col items-center z-20"
           animate={
             partyMode
-              ? { x: [0, 8, 0, -8, 0], rotate: [0, 2, 0, -2, 0] }
+              ? { x: [0, 6, 0, -6, 0] }
               : { x: [0, 2, 0, -2, 0] }
           }
-          transition={{ repeat: Infinity, duration: partyMode ? 1.2 : 4 }}
+          transition={{ repeat: Infinity, duration: partyMode ? 1.1 : 4 }}
           aria-label="Porsche Taycan"
         >
           <div className="relative">
-            <div className="w-28 sm:w-36 h-10 sm:h-12 rounded-sm bg-gradient-to-r from-[#4a1a6b] via-[#7b2cbf] to-[#2d0a45] pixel-border border-[#1a0a2a]">
+            <div className="w-28 sm:w-36 h-10 sm:h-12 rounded-sm bg-gradient-to-r from-[#4a1a6b] via-[#7b2cbf] to-[#2d0a45] pixel-border">
               <div className="absolute top-1 left-3 w-8 h-4 bg-[#9b59b6]/70 rounded-sm" />
               <div className="absolute bottom-0 left-3 w-4 h-3 rounded-full bg-[#111]" />
               <div className="absolute bottom-0 right-3 w-4 h-3 rounded-full bg-[#111]" />
               <motion.div
                 className="absolute top-2 right-2 w-2 h-1 bg-[#f1c40f]"
-                animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
+                animate={{ opacity: [1, 0.25, 1] }}
+                transition={{ repeat: Infinity, duration: 1.4 }}
               />
             </div>
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] text-[#c39bd3] whitespace-nowrap">
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] text-[#4a1a6b] whitespace-nowrap bg-white/80 px-1">
               TAYCAN ▸
             </span>
           </div>
         </motion.button>
 
-        <div className="absolute bottom-14 left-3 sm:left-8 w-10 h-10 grid grid-cols-4 grid-rows-4 pixel-border opacity-80 z-10">
+        <div className="absolute bottom-16 left-3 sm:left-6 w-10 h-10 grid grid-cols-4 grid-rows-4 pixel-border opacity-90 z-10">
           {Array.from({ length: 16 }).map((_, i) => (
             <div
               key={i}
@@ -163,31 +167,35 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
           ))}
         </div>
 
-        <div className="absolute bottom-20 left-1/2 -translate-x-8 w-12 h-8 pixel-border bg-[#222] z-10">
-          <div className="w-full h-5 bg-[#0a2a1a] text-[5px] text-[#39ff14] p-0.5 overflow-hidden leading-none">
+        <div className="absolute bottom-20 left-1/2 -translate-x-10 w-12 h-8 pixel-border bg-[#333] z-10">
+          <div className="w-full h-5 bg-[#0a2a1a] text-[5px] text-[#39ff14] p-0.5 leading-none">
             DOTA
             <br />
             $$$
           </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-2 flex justify-around items-end px-2 sm:px-6 z-20">
+        <div className="absolute inset-x-0 bottom-2 flex justify-around items-end px-1 sm:px-4 z-20">
           {characters.map((c) => (
             <div key={c.id} className="relative">
               {c.id === "pikachu" && (
-                <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[7px] text-[#f4d03f] whitespace-nowrap">
-                  👔 CEO
-                </span>
-              )}
-              {c.id === "bulbasaur" && (
-                <span className="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px]">
-                  🎸
+                <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[7px] bg-[#ffcb05] px-1 border border-black whitespace-nowrap">
+                  CEO
                 </span>
               )}
               <PokemonSprite
                 character={c}
                 size="md"
                 selected={active === c.id || partyMode}
+                react={
+                  override && active === c.id
+                    ? override.mood || "talk"
+                    : active === c.id
+                      ? line?.mood || "talk"
+                      : partyMode
+                        ? "happy"
+                        : "idle"
+                }
                 onClick={() => handleClick(c.id)}
               />
             </div>
@@ -196,43 +204,28 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
       </div>
 
       <AnimatePresence mode="wait">
-        {char || overrideLine ? (
+        {line ? (
           <motion.div
-            key={`${active}-${lineIndex}-${overrideLine ? "ov" : "n"}`}
-            initial={{ opacity: 0, y: 12 }}
+            key={`${active}-${lineIndex}-${override ? "o" : "n"}`}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="pixel-border bg-[#0d1f14] p-3 sm:p-4 min-h-[88px]"
           >
-            <div className="flex items-start gap-3">
-              <span className="text-2xl shrink-0">
-                {char?.emoji ?? "⚡"}
-              </span>
-              <div className="flex-1 min-w-0">
-                <p className="text-[8px] text-[#7dcea0] mb-2 uppercase">
-                  {char?.name ?? "Пикачу"} —{" "}
-                  {char?.role.split("&")[0].trim() ?? "CEO"}
-                </p>
-                <Typewriter
-                  text={line}
-                  className="text-[10px] sm:text-xs text-[#d4edda]"
-                  withTicks
-                />
-                <p className="text-[7px] text-[#4a7c59] mt-2">
-                  ▸ кликни снова для следующей реплики
-                </p>
-              </div>
-            </div>
+            <DialogueBox
+              name={`${char?.name ?? "Пикачу"} / ${char?.role.split("&")[0].trim() ?? "CEO"}`}
+              text={line.text}
+              face={<span className="text-2xl">{char?.emoji ?? "⚡"}</span>}
+              hint="▼ кликни покемона снова"
+            />
           </motion.div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="pixel-border bg-[#0d1f14] p-4 min-h-[88px] flex items-center"
-          >
-            <p className="text-[10px] sm:text-xs text-[#7dcea0]">
-              ▸ Выбери покемона или кликни Taycan... С Днём Рождения! 🎂
-            </p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <DialogueBox
+              name="NARRATOR"
+              text="Дикая birthday-команда появилась! Выбери покемона или кликни Taycan."
+              withTicks={false}
+              hint="▼ start"
+            />
           </motion.div>
         )}
       </AnimatePresence>

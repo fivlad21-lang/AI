@@ -37,23 +37,17 @@ export function IntroSplash({ onDone }: IntroSplashProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0a1a0a] p-6"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#1a0c08] p-6"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, #000 2px, #000 4px)",
-        }}
-      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#e3350d33] to-transparent pointer-events-none" />
 
       <motion.p
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: phase >= 0 ? 1 : 0, scale: 1 }}
-        className="text-[#39ff14] text-[10px] sm:text-xs mb-6 tracking-widest"
+        className="text-[#ffcb05] text-[10px] sm:text-xs mb-6 tracking-widest"
       >
         GAME START
       </motion.p>
@@ -61,13 +55,18 @@ export function IntroSplash({ onDone }: IntroSplashProps) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: phase >= 1 ? 1 : 0, y: phase >= 1 ? 0 : 20 }}
-        className="text-center"
+        className="text-center dialogue-box max-w-md"
       >
         <p className="text-2xl sm:text-4xl mb-4">🎂⚡</p>
-        <h1 className="text-[#f4d03f] text-sm sm:text-xl leading-relaxed mb-3">
+        <h1 className="text-[var(--poke-dark-red)] text-sm sm:text-lg leading-relaxed mb-3">
           HAPPY BIRTHDAY
         </h1>
-        <p className="text-[#c8e6c9] text-xs sm:text-sm">CEO ПИКАЧУ!</p>
+        <p className="text-[var(--poke-ink)] text-[10px] sm:text-xs mb-2">
+          CEO ПИКАЧУ!
+        </p>
+        <p className="text-[8px] text-[var(--poke-shadow)]">
+          A birthday legend is about to begin!
+        </p>
       </motion.div>
 
       <motion.div
@@ -90,7 +89,7 @@ export function IntroSplash({ onDone }: IntroSplashProps) {
         ))}
       </motion.div>
 
-      <p className="mt-10 text-[8px] text-[#4a7c59]">
+      <p className="mt-10 text-[8px] text-[#ffcb05]">
         LEVEL UP: +1 YEAR UNLOCKED
       </p>
 

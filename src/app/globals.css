@@ -1,24 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --gb-body: #8fbc8f;
-  --gb-body-dark: #6b9b6b;
-  --gb-screen: #0a1f12;
-  --gb-pixel: #c8e6c9;
-  --gb-accent: #39ff14;
-  --gb-yellow: #f4d03f;
-  --background: #1a2e1f;
-  --foreground: #c8e6c9;
+  --poke-red: #e3350d;
+  --poke-dark-red: #9b1b0e;
+  --poke-blue: #3b5ba7;
+  --poke-yellow: #ffcb05;
+  --poke-cream: #f8f0d8;
+  --poke-panel: #f8f8f8;
+  --poke-ink: #202020;
+  --poke-hp-green: #7ac74f;
+  --poke-hp-yellow: #f7d02c;
+  --poke-hp-red: #ee8130;
+  --poke-shadow: #4a4a4a;
+  --poke-grass: #78c850;
+  --poke-screen: #c6e4a5;
+  --background: #2a1a12;
+  --foreground: #202020;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Press Start 2P", monospace;
-}
-
-* {
-  image-rendering: pixelated;
+  --font-sans: "Press Start 2P", "VT323", monospace;
 }
 
 html {
@@ -27,78 +30,82 @@ html {
 
 body {
   background:
-    radial-gradient(ellipse at 20% 0%, #2d4a35 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, #1a3324 0%, transparent 45%),
-    linear-gradient(180deg, #152418 0%, #0d1a12 100%);
+    radial-gradient(ellipse at 15% 0%, #5a2010 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 100%, #3b5ba7 0%, transparent 40%),
+    linear-gradient(180deg, #1a0c08 0%, #2a1510 40%, #121820 100%);
   color: var(--foreground);
   font-family: "Press Start 2P", monospace;
   min-height: 100vh;
 }
 
-/* CRT scanlines on screen */
-.gb-screen {
-  position: relative;
-  background: var(--gb-screen);
-  border: 4px solid #0a120c;
-  box-shadow:
-    inset 0 0 40px #000a,
-    0 0 0 6px #4a6b4a,
-    0 0 0 10px #2d4a35,
-    6px 6px 0 #0a1a0a;
-  padding: 1rem;
-  color: var(--gb-pixel);
+.poke-sprite {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
-.gb-screen::after {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.12) 2px,
-    rgba(0, 0, 0, 0.12) 4px
-  );
-  z-index: 40;
-}
-
-.gb-shell {
-  background: linear-gradient(160deg, #a8d5a2 0%, #7cb87c 40%, #5a9a5a 100%);
-  border: 4px solid #3d5c45;
+/* Pokédex / handheld shell */
+.gb-shell,
+.poke-shell {
+  background: linear-gradient(160deg, #ff5a3c 0%, #e3350d 45%, #9b1b0e 100%);
+  border: 4px solid #5a0f08;
   box-shadow:
-    8px 8px 0 #0a1a0a,
-    inset 0 1px 0 #c8eec8;
+    8px 8px 0 #1a0805,
+    inset 0 2px 0 #ff8a70;
   padding: 1.25rem 1rem 1rem;
-  border-radius: 12px 12px 40px 40px;
+  border-radius: 16px 16px 36px 36px;
+}
+
+.gb-screen,
+.poke-screen {
+  position: relative;
+  background: linear-gradient(180deg, #b8e090 0%, #c6e4a5 40%, #9ccc65 100%);
+  border: 4px solid #1a1a1a;
+  box-shadow:
+    inset 0 0 0 3px #f8f0d8,
+    0 0 0 6px #5a0f08,
+    4px 4px 0 #1a0805;
+  padding: 0.9rem;
+  color: var(--poke-ink);
+}
+
+.gb-screen::after,
+.poke-screen::after {
+  content: none;
+}
+
+.gb-screen > *,
+.poke-screen > * {
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 640px) {
-  .gb-shell {
+  .gb-shell,
+  .poke-shell {
     padding: 1.75rem 1.5rem 1.25rem;
   }
-  .gb-screen {
-    padding: 1.25rem;
+  .gb-screen,
+  .poke-screen {
+    padding: 1.15rem;
   }
 }
 
 .pixel-border {
-  border: 3px solid #0a1a0a;
-  box-shadow: 3px 3px 0 #0006;
+  border: 3px solid #202020;
+  box-shadow: 3px 3px 0 #0004;
 }
 
 .pixel-btn {
-  background: #1a3a28;
-  color: #c8e6c9;
-  border: 3px solid #0a1a0a;
+  background: #f8f8f8;
+  color: #202020;
+  border: 3px solid #202020;
   box-shadow: 3px 3px 0 #000;
   font-family: inherit;
   transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
 }
 
 .pixel-btn:hover {
-  background: #244a34;
+  background: #fff8d6;
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0 #000;
 }
@@ -109,35 +116,80 @@ body {
 }
 
 .pixel-btn-active {
-  background: #f4d03f !important;
-  color: #1a2e1f !important;
+  background: #ffcb05 !important;
+  color: #202020 !important;
 }
 
-.blink-cursor::after {
-  content: "█";
-  animation: blink 1s step-end infinite;
-  margin-left: 2px;
+.dialogue-box {
+  background: #f8f8f8;
+  border: 4px solid #202020;
+  box-shadow:
+    inset 0 0 0 3px #f8f0d8,
+    4px 4px 0 #0005;
+  padding: 0.85rem 1rem;
+  min-height: 96px;
+  color: var(--poke-ink);
 }
 
-@keyframes blink {
+.dialogue-caret {
+  animation: caret-blink 0.9s step-end infinite;
+}
+
+@keyframes caret-blink {
   50% {
     opacity: 0;
   }
 }
 
-/* Hide scanline overlay from blocking clicks — already pointer-events none */
-.gb-screen > * {
-  position: relative;
-  z-index: 1;
+.blink-cursor::after {
+  content: "█";
+  animation: caret-blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+.hp-track {
+  background: #202020;
+  border: 2px solid #202020;
+  height: 10px;
+  overflow: hidden;
+}
+
+.hp-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.battle-menu-btn {
+  background: #f8f8f8;
+  border: 3px solid #202020;
+  box-shadow: 3px 3px 0 #000;
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  font-size: 9px;
+  color: #202020;
+}
+
+.battle-menu-btn:hover {
+  background: #ffcb05;
+}
+
+.battle-menu-btn:disabled {
+  opacity: 0.5;
+}
+
+.dex-card {
+  background: linear-gradient(160deg, #ffefe8, #fff);
+  border: 4px solid #202020;
+  box-shadow: 4px 4px 0 #0004;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a1a0a;
+  background: #f0e6c8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4a7c59;
-  border: 2px solid #0a1a0a;
+  background: #e3350d;
+  border: 2px solid #202020;
 }
