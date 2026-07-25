@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+:root {
+  --gb-body: #8fbc8f;
+  --gb-body-dark: #6b9b6b;
+  --gb-screen: #0a1f12;
+  --gb-pixel: #c8e6c9;
+  --gb-accent: #39ff14;
+  --gb-yellow: #f4d03f;
+  --background: #1a2e1f;
+  --foreground: #c8e6c9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Press Start 2P", monospace;
+}
+
+* {
+  image-rendering: pixelated;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 20% 0%, #2d4a35 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, #1a3324 0%, transparent 45%),
+    linear-gradient(180deg, #152418 0%, #0d1a12 100%);
+  color: var(--foreground);
+  font-family: "Press Start 2P", monospace;
+  min-height: 100vh;
+}
+
+/* CRT scanlines on screen */
+.gb-screen {
+  position: relative;
+  background: var(--gb-screen);
+  border: 4px solid #0a120c;
+  box-shadow:
+    inset 0 0 40px #000a,
+    0 0 0 6px #4a6b4a,
+    0 0 0 10px #2d4a35,
+    6px 6px 0 #0a1a0a;
+  padding: 1rem;
+  color: var(--gb-pixel);
+}
+
+.gb-screen::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  z-index: 40;
+}
+
+.gb-shell {
+  background: linear-gradient(160deg, #a8d5a2 0%, #7cb87c 40%, #5a9a5a 100%);
+  border: 4px solid #3d5c45;
+  box-shadow:
+    8px 8px 0 #0a1a0a,
+    inset 0 1px 0 #c8eec8;
+  padding: 1.25rem 1rem 1rem;
+  border-radius: 12px 12px 40px 40px;
+}
+
+@media (min-width: 640px) {
+  .gb-shell {
+    padding: 1.75rem 1.5rem 1.25rem;
+  }
+  .gb-screen {
+    padding: 1.25rem;
+  }
+}
+
+.pixel-border {
+  border: 3px solid #0a1a0a;
+  box-shadow: 3px 3px 0 #0006;
+}
+
+.pixel-btn {
+  background: #1a3a28;
+  color: #c8e6c9;
+  border: 3px solid #0a1a0a;
+  box-shadow: 3px 3px 0 #000;
+  font-family: inherit;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+}
+
+.pixel-btn:hover {
+  background: #244a34;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #000;
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #000;
+}
+
+.pixel-btn-active {
+  background: #f4d03f !important;
+  color: #1a2e1f !important;
+}
+
+.blink-cursor::after {
+  content: "█";
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Hide scanline overlay from blocking clicks — already pointer-events none */
+.gb-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a7c59;
+  border: 2px solid #0a1a0a;
+}
