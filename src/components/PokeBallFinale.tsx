@@ -97,7 +97,7 @@ export function PokeBallFinale({ highlight = false }: PokeBallFinaleProps) {
                 ✕
               </button>
               <p className="text-[10px] text-[#f4d03f] mb-3 text-center">
-                🎉 CATCH SUCCESSFUL! HAPPY BIRTHDAY! 🎉
+                🎉 CATCH SUCCESSFUL! HAPPY BIRTHDAY, BOSS! 🎉
               </p>
               <pre className="text-[9px] sm:text-[10px] text-[#d4edda] whitespace-pre-wrap leading-relaxed">
                 {BIRTHDAY_MESSAGE}

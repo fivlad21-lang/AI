@@ -123,7 +123,7 @@ export function GameShell() {
           <h1 className="text-sm sm:text-base text-white leading-relaxed drop-shadow-[2px_2px_0_#5a0f08]">
             POKÉMON
             <span className="block text-[10px] sm:text-xs text-[#ffcb05] mt-1">
-              CEO BIRTHDAY QUEST
+              BOSS BIRTHDAY QUEST
             </span>
           </h1>
           <motion.p
@@ -213,7 +213,7 @@ export function GameShell() {
             🦗 3301: Welcome. Epiphany is upon you.
           </button>
           <p className="text-[7px] text-[#ffc8b8]">
-            © TEAM POKÉMON · WITH LOVE FOR CEO · 🎂 HAPPY BIRTHDAY
+            © TEAM POKÉMON · WITH LOVE FOR BOSS · 🎂 HAPPY BIRTHDAY
           </p>
         </footer>
       </div>

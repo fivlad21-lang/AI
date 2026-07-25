@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   characters,
+  PACKAGE_LINES,
   TAYCAN_LINE,
   type DialogueLine,
   type PokemonId,
@@ -20,6 +21,7 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
   const [active, setActive] = useState<PokemonId | null>(null);
   const [lineIndex, setLineIndex] = useState(0);
   const [override, setOverride] = useState<DialogueLine | null>(null);
+  const [pkgIndex, setPkgIndex] = useState(0);
 
   const char = characters.find((c) => c.id === active);
   const line: DialogueLine | null = override
@@ -50,6 +52,16 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
     playSfx("door");
     setActive("pikachu");
     setOverride(TAYCAN_LINE);
+    setLineIndex(0);
+  };
+
+  const handlePackage = async () => {
+    await unlockAudio();
+    playSfx("select");
+    const line = PACKAGE_LINES[pkgIndex % PACKAGE_LINES.length];
+    setPkgIndex((i) => i + 1);
+    setActive("pikachu");
+    setOverride(line);
     setLineIndex(0);
   };
 
@@ -126,6 +138,25 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
           OFFICE · LVL 100
         </div>
 
+        {/* TEMU / Ali packages */}
+        <button
+          type="button"
+          onClick={handlePackage}
+          className="absolute bottom-[7.5rem] right-2 sm:right-6 z-20 flex gap-1"
+          aria-label="Packages from TEMU and AliExpress"
+        >
+          <div className="pixel-border bg-[#ff6a00] w-9 h-8 flex items-center justify-center shadow-[2px_2px_0_#0006]">
+            <span className="text-[5px] text-white leading-none text-center">
+              TEMU
+            </span>
+          </div>
+          <div className="pixel-border bg-[#ff4747] w-9 h-8 flex items-center justify-center shadow-[2px_2px_0_#0006]">
+            <span className="text-[5px] text-white leading-none text-center">
+              ALI
+            </span>
+          </div>
+        </button>
+
         {/* Taycan */}
         <motion.button
           type="button"
@@ -180,7 +211,7 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
             <div key={c.id} className="relative">
               {c.id === "pikachu" && (
                 <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[7px] bg-[#ffcb05] px-1 border border-black whitespace-nowrap">
-                  CEO
+                  BOSS
                 </span>
               )}
               <PokemonSprite
@@ -212,17 +243,17 @@ export function HubScene({ partyMode = false }: HubSceneProps) {
             exit={{ opacity: 0 }}
           >
             <DialogueBox
-              name={`${char?.name ?? "Пикачу"} / ${char?.role.split("&")[0].trim() ?? "CEO"}`}
+              name={`${char?.name ?? "Пикачу"} / ${char?.role.split("&")[0].trim() ?? "BOSS"}`}
               text={line.text}
               face={<span className="text-2xl">{char?.emoji ?? "⚡"}</span>}
-              hint="▼ кликни покемона снова"
+              hint="▼ кликни снова · или коробки TEMU/ALI"
             />
           </motion.div>
         ) : (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <DialogueBox
               name="NARRATOR"
-              text="Дикая birthday-команда появилась! Выбери покемона или кликни Taycan."
+              text="Дикая birthday-команда появилась! Выбери покемона, кликни Taycan или коробки с TEMU/Ali."
               withTicks={false}
               hint="▼ start"
             />

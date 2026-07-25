@@ -25,8 +25,8 @@ export function BattleArena({
 
   const [hp, setHp] = useState(100);
   const [log, setLog] = useState<string[]>([
-    "A wild CEO Пикачу (Lvl 100) appeared!",
-    "Что будет делать команда?",
+    "A wild BOSS Пикачу (Lvl 100) appeared!",
+    "Что будет делать команда? (осторожно: рядом коробки с TEMU)",
   ]);
   const [busy, setBusy] = useState(false);
   const [bossReact, setBossReact] = useState<"idle" | "hit" | "happy" | "sleep">(
@@ -55,7 +55,7 @@ export function BattleArena({
       playSfx("protocol");
       pushLog("⚠️ 3301 PROTOCOL ACTIVATED");
       pushLog(
-        "Пикачу в маске Цикады: «Истинный пассивный бизнес — для тех, кто расшифрует хэш… С Днём Рождения!»",
+        "Пикачу в маске Цикады: «Истинный пассивный бизнес — для тех, кто расшифрует хэш… и разберёт склады TEMU. С Днём Рождения!»",
       );
     }
   }, [protocol3301, pushLog]);
@@ -97,7 +97,7 @@ export function BattleArena({
       await wait(450);
       setBossReact("happy");
       setFloatDmg(null);
-      pushLog("★ CRITICAL HIT! Пикачу в экстазе от билета в США!");
+      pushLog("★ CRITICAL HIT! Пикачу в экстазе: США + новые склады!");
       triggerClear("Билет в Америку доставлен.");
     } else if (action.healBoss) {
       setBossReact("sleep");
@@ -118,7 +118,10 @@ export function BattleArena({
     }
 
     if (actionId === "gift") {
-      pushLog("Псайдак: свайбкодил этот сайт. Happy Birthday, Boss!");
+      pushLog("Псайдак: свайбкодил сайт. Happy Birthday, BOSS!");
+    }
+    if (actionId === "temu") {
+      pushLog("Система: +12 к карме склада. TEMU status: BOUGHT OUT.");
     }
 
     if (nextUsed.size >= 4 && !cleared && action.damage < 9999) {
@@ -152,7 +155,7 @@ export function BattleArena({
         <div className="flex justify-between items-start gap-2">
           <div className="bg-white/95 pixel-border p-2 flex-1 max-w-[58%]">
             <p className="text-[9px] mb-1">
-              CEO {boss.name} {protocol3301 ? "🦗" : ""}{" "}
+              BOSS {boss.name} {protocol3301 ? "🦗" : ""}{" "}
               <span className="text-[var(--poke-shadow)]">Lv100</span>
             </p>
             <div className="flex items-center gap-1 mb-0.5">

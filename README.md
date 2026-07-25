@@ -1,4 +1,4 @@
-# Pokémon CEO Birthday Quest
+# Pokémon BOSS Birthday Quest
 
 Интерактивная веб-открытка в стиле **Pokémon FireRed / GBA** с пасхалками Cicada 3301.
 
@@ -11,34 +11,34 @@ npm run dev
 
 Открой [http://localhost:3000](http://localhost:3000).
 
-## Локальные спрайты покемонов (опционально)
+## Спрайты покемонов
 
-Спрайти **не коммитятся** (gitignore). Только для локального просмотра:
+По умолчанию грузятся **реальные спрайты** с PokeAPI CDN (animated Gen V + PNG).  
+Emoji — только fallback.
+
+Локальный офлайн-кэш (не коммитится):
 
 ```bash
 npm run sprites:fetch
-cp .env.local.example .env.local
-npm run dev
 ```
 
-Без спрайтов сайт работает на emoji-fallback — так и задумано для GitHub / Vercel.
+Выключить спрайты: в `.env.local` поставь `NEXT_PUBLIC_USE_REAL_SPRITES=false`.
+
+Fan gift / non-commercial. Sprites © Pokémon/Nintendo/Creatures/GAME FREAK.
 
 ## Вкладки
 
 | Tab | Описание |
 |-----|----------|
-| 🏠 HUB | Офис + Taycan + 4 покемона с живыми диалогами |
-| ⚔️ BATTLE | Бой против CEO Пикачу (GBA layout) |
+| 🏠 HUB | Офис + Taycan + коробки TEMU/Ali + диалоги |
+| ⚔️ BATTLE | Бой против BOSS Пикачу |
 | 🎴 POKÉDEX | Досье команды |
-| 🌐 3301 | Секретный терминал Cicada |
+| 🌐 3301 | Секретный терминал |
 
 ## Пасхалки
 
-- Футер / `???` → Secret 3301
-- `F12` → ASCII + `ceo()`
-- Клавиши **3301** → Protocol в бою
-- **Konami** ↑↑↓↓←→←→BA → Party Mode
-- Клик по **Taycan**
+- `boss()` в консоли (legacy: `ceo()` → redirect)
+- Клавиши **3301**, Konami, клик Taycan / коробки
 - **Master Ball** → confetti + поздравление
 
 ## Стек

@@ -62,7 +62,7 @@ export function IntroSplash({ onDone }: IntroSplashProps) {
           HAPPY BIRTHDAY
         </h1>
         <p className="text-[var(--poke-ink)] text-[10px] sm:text-xs mb-2">
-          CEO ПИКАЧУ!
+          BOSS ПИКАЧУ!
         </p>
         <p className="text-[8px] text-[var(--poke-shadow)]">
           A birthday legend is about to begin!

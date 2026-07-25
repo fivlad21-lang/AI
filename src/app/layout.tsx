@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "🎂 Pokémon CEO Birthday Quest",
+  title: "🎂 Pokémon BOSS Birthday Quest",
   description:
-    "Интерактивная открытка в стиле Game Boy — команда покемонов поздравляет CEO Пикачу с Днём Рождения",
+    "Интерактивная открытка в стиле Pokémon — команда поздравляет BOSS Пикачу с Днём Рождения",
   icons: {
     icon: "/favicon.svg",
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CICADA_ASCII, PGP_BLOCK } from "@/data/content";
+import { CICADA_ASCII, PGP_BLOCK, BOSS_BINARY } from "@/data/content";
 
 export function Secret3301() {
   return (
@@ -27,14 +27,17 @@ export function Secret3301() {
           <p className="text-[#1a9a1a]">
             Binary transmission:
             <br />
-            01000011 01000101 01001111 00110011 00110011 00110000 00110001
+            {BOSS_BINARY}
           </p>
-          <p className="text-[#0d6b0d]">→ decoded: CEO3301</p>
-          <p>
-            The path to true passive income is not through Slack before 13:00.
+          <p className="text-[#0d6b0d]">→ decoded: BOSS3301</p>
+          <p className="text-[#1a9a1a]">
+            cargo://temu/ali → BOSS_WAREHOUSE · STATUS: BOUGHT OUT
           </p>
           <p>
-            Seek the Master Ball. Decrypt the Taycan. Trust the vibe coder.
+            True passive income is not through Slack before 13:00.
+          </p>
+          <p>
+            Seek the Master Ball. Decrypt the Taycan. Mind the packages.
           </p>
         </div>
 
@@ -46,7 +49,7 @@ export function Secret3301() {
         </div>
 
         <p className="mt-4 text-[8px] text-[#1a5a1a]">
-          tip: open DevTools (F12) — try ceo()
+          tip: open DevTools (F12) — try boss()
           <br />
           tip: in BATTLE, type 3301 on your keyboard.
         </p>
