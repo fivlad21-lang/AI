@@ -19,7 +19,7 @@
 | 5 | Слоган A | *Homes by the sea. No more hassle.* (+ BG/RU/UA) |
 | 6 | Каталог старт | Демо-об’єкти з міткою Demo |
 | 7 | Візуал | Синьо-чорний, glass; стриманіше за LAB |
-| 8 | Telegram bot / @ | TBD → ліди через WhatsApp; UI-заглушка TG |
+| 8 | Telegram @ | **@notany** (dock deep-link). Bot token — TBD; ліди також через WhatsApp |
 | 9 | Беклог | **Реалізувати все** (§10 A1–G4, HIGH/MED/LOW) |
 | 10 | Логотипи | Згенерувати wordmark + mark + favicon + OG |
 
@@ -109,7 +109,7 @@ Listing {
 ## 5. Ліди
 
 Форми → WhatsApp з префіксами `[BUY]` `[RENT]` `[SELL]` `[VIEW]` `[SHORTLIST]` `[FAQ]`.  
-Telegram: stub у dock до появи `@username` / bot token.  
+Telegram dock: `@notany` → `t.me/notany`. Bot API — коли буде token.  
 Static export → без server `/api/leads` у v1; шлях описано в ops.
 
 ---
@@ -142,7 +142,7 @@ Next.js App Router + TS · Tailwind 4 · `output: "export"` · Vercel · Unbound
 ## 9. Відкриті питання (не блокують)
 
 1. Купівля `nomore.estate`  
-2. Telegram `@` / bot token + chat id  
+2. Telegram bot token + chat id (username вже: `@notany`)  
 3. Реальні об’єкти замість демо  
 
 ---
