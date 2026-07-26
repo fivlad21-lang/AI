@@ -2,8 +2,7 @@ import type { NextConfig } from "next";
 
 /**
  * Vercel-native Next.js deploy (no `output: "export"`).
- * Static export caused Ready + platform 404: NOT_FOUND when Output Directory
- * was mis-set; server redirects also do not apply under pure export.
+ * Root `/` locale redirect is handled in `src/proxy.ts` (Accept-Language + cookie).
  */
 const nextConfig: NextConfig = {
   images: {
@@ -13,15 +12,6 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
-  },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/bg",
-        permanent: true,
-      },
-    ];
   },
 };
 

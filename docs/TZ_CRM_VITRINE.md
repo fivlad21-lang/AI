@@ -116,7 +116,7 @@ CRM має віддати (REST або аналог) список published-об
 ### Додати (черга)
 | Пріоритет | Фіча |
 |-----------|------|
-| P0 | Авто-locale з `Accept-Language` / `navigator` → `/bg\|ru\|ua\|en` |
+| P0 | ~~Авто-locale з `Accept-Language` / cookie~~ **Done** (`src/proxy.ts`, cookie `nomore-locale`) |
 | P0 | ~~Карта каталогу + `lat/lng`~~ **Done** (Leaflet, dark Carto tiles) |
 | P1 | Grid / list щільність (опційно) |
 | P1 | CRM sync job + generated cache |
@@ -128,7 +128,7 @@ CRM має віддати (REST або аналог) список published-об
 ## 4. i18n (з ГС — актуальне)
 
 1. Перемикач мов у хедері/меню — **є**.  
-2. Автовибір мови браузера при першому візиті на `/` — **зробити**.  
+2. Автовибір мови браузера при першому візиті на `/` — **Done** (cookie після ручного перемикача → Accept-Language → `bg`).  
 3. UI-словники — **є**; добивати дірки copy.  
 4. **Описи/тайтли об’єктів** приходять з CRM уже перекладені; сайт не machine-translate на льоту.  
 5. Prefill WhatsApp — мовою поточного `locale`.

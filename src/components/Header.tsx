@@ -10,6 +10,7 @@ import { Logo } from "@/components/Logo";
 import { HeartIcon } from "@/components/HeartIcon";
 import { MessengerButton } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
+import { persistLocalePreference } from "@/lib/locale-detect";
 
 export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const pathname = usePathname();
@@ -71,6 +72,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               <Link
                 key={l}
                 href={switchLocale(l)}
+                onClick={() => persistLocalePreference(l)}
                 className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ${
                   l === locale ? "bg-sea text-white" : "text-ink-muted hover:text-ink"
                 }`}
@@ -136,7 +138,10 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               <Link
                 key={l}
                 href={switchLocale(l)}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  persistLocalePreference(l);
+                  setOpen(false);
+                }}
                 className={`rounded-full px-3 py-1.5 text-[11px] font-bold uppercase glass ${
                   l === locale ? "!bg-sea text-white" : ""
                 }`}
