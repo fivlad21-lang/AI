@@ -80,6 +80,13 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </div>
           <MessengerButton
             kind="whatsapp"
+            variant="icon"
+            href={whatsappUrl("Hi! Nomore Real Estate")}
+            label={dict.cta.whatsapp}
+            className="md:hidden"
+          />
+          <MessengerButton
+            kind="whatsapp"
             href={whatsappUrl("Hi! Nomore Real Estate")}
             label={dict.cta.whatsapp}
             className="hidden !px-4 !py-2 md:inline-flex"

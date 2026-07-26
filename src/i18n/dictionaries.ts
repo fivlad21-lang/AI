@@ -320,7 +320,7 @@ const en: Dictionary = {
   },
   about: {
     title: "About Nomore",
-    p1: "Nomore means two things: no more outdated realtor noise — and life by the sea (на морі).",
+    p1: "Nomore means two things: an end to outdated realtor noise — and life by the sea.",
     p2: "We’re a modern agency for Burgas and the coast. Clear presentation, messenger-first communication, media that actually helps sell.",
     p3: "Site in four languages. Catalog built for phones. Owners get shooting without a separate media invoice.",
     valuesTitle: "How we work",
@@ -543,7 +543,7 @@ const bg: Dictionary = {
   },
   about: {
     title: "За Nomore",
-    p1: "Nomore означава две неща: no more остарял брокерски шум — и живот край морето (на морі).",
+    p1: "Nomore означава две неща: край на остарелия брокерски шум — и живот край морето.",
     p2: "Модерна агенция за Бургас и крайбрежието. Ясна презентация, комуникация в месинджър, медио което помага да се продаде.",
     p3: "Сайт на четири езика. Каталог за телефона. Собствениците получават заснемане без отделна фактура за медио.",
     valuesTitle: "Как работим",
@@ -765,7 +765,7 @@ const ru: Dictionary = {
   },
   about: {
     title: "О Nomore",
-    p1: "Nomore — это два смысла: no more устаревшего риелторского шума и жизнь у моря (на морі).",
+    p1: "Nomore — это два смысла: конец устаревшему риелторскому шуму и жизнь у моря.",
     p2: "Современное агентство для Бургаса и побережья. Понятная подача, общение в мессенджере, медиа которое помогает продать.",
     p3: "Сайт на четырёх языках. Каталог для телефона. Собственникам — съёмка без отдельного счёта за медиа.",
     valuesTitle: "Как работаем",
@@ -987,7 +987,7 @@ const ua: Dictionary = {
   },
   about: {
     title: "Про Nomore",
-    p1: "Nomore — два сенси: no more застарілого ріелторського шуму і життя на морі.",
+    p1: "Nomore — два сенси: кінець застарілому ріелторському шуму і життя на морі.",
     p2: "Сучасне агентство для Бургаса та узбережжя. Зрозуміла подача, спілкування в месенджері, медіа яке допомагає продати.",
     p3: "Сайт чотирма мовами. Каталог для телефона. Власникам — зйомка без окремого рахунку за медіа.",
     valuesTitle: "Як працюємо",

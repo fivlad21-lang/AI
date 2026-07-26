@@ -43,8 +43,8 @@ export function CatalogFilters({
     "glass mt-1.5 w-full rounded-xl px-3 py-2.5 text-sm text-ink outline-none focus:ring-2 focus:ring-sea/50";
 
   return (
-    <div className="glass space-y-4 rounded-3xl p-4">
-      <div className="grid gap-3 md:grid-cols-4">
+    <div className="glass space-y-4 overflow-visible rounded-3xl p-4">
+      <div className="relative z-10 grid gap-3 md:grid-cols-4">
         <GlassSelect
           label={dict.catalog.location}
           value={sp.get("location") || "all"}

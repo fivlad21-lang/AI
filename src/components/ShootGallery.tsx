@@ -16,7 +16,14 @@ export function ShootGallery({ dict }: { dict: Dictionary }) {
       <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
         {shots.map((src) => (
           <div key={src} className="relative aspect-[3/4] overflow-hidden rounded-2xl">
-            <Image src={src} alt="" fill className="object-cover" unoptimized sizes="25vw" />
+            <Image
+              src={src}
+              alt={dict.sell.shootTitle}
+              fill
+              className="object-cover"
+              unoptimized
+              sizes="25vw"
+            />
           </div>
         ))}
       </div>

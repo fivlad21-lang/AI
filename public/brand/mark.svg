@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Nomore mark">
-  <rect width="64" height="64" rx="14" fill="#0A101A"/>
-  <path d="M18 44V20h6.2l11.4 16.8V20H42v24h-6.2L24.4 27.2V44H18z" fill="#E8EEF6"/>
-  <path d="M16 48h32" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Nomore Estate">
+  <rect width="64" height="64" rx="16" fill="#06080F"/>
+  <path d="M14 36.5c6-7 12-7 18 0s12 7 18 0" stroke="#7DD3FC" stroke-width="1.75" stroke-linecap="round"/>
+  <path d="M18 42h28" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
 </svg>

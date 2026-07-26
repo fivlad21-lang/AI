@@ -78,7 +78,13 @@ export default function ComparePage() {
                 {items.map((l) => (
                   <th key={l.id} className="p-3 text-left align-top">
                     <div className="relative mb-3 aspect-[4/3] w-full max-w-[220px] overflow-hidden rounded-2xl">
-                      <Image src={l.cover} alt="" fill className="object-cover" unoptimized />
+                      <Image
+                        src={l.cover}
+                        alt={l.title[locale]}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
                     </div>
                     <Link
                       href={`/${locale}/listings/${l.slug}`}

@@ -42,7 +42,7 @@ export function MessengerButton({
         className={`glass-strong flex items-center gap-3 rounded-full py-2.5 pl-2.5 pr-5 text-sm font-semibold text-ink shadow-[0_12px_40px_-16px_rgba(0,0,0,0.8)] ${className}`}
       >
         <span
-          className={`flex h-11 w-11 items-center justify-center rounded-full text-white ${bg}`}
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white ${bg}`}
         >
           <Icon className="h-6 w-6" />
         </span>

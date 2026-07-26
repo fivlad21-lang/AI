@@ -10,7 +10,7 @@ export function CompareBar({ locale, dict }: { locale: Locale; dict: Dictionary 
   if (compare.length === 0) return null;
 
   return (
-    <div className="fixed bottom-20 left-1/2 z-40 -translate-x-1/2 print:hidden md:bottom-8">
+    <div className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 print:hidden md:bottom-8">
       <Link
         href={`/${locale}/compare`}
         className="glass-strong flex items-center gap-3 rounded-full px-5 py-2.5 text-sm font-semibold shadow-lg"

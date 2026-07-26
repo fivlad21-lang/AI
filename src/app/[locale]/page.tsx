@@ -29,7 +29,7 @@ export default async function HomePage({
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&q=80"
-            alt=""
+            alt="Black Sea coast near Burgas"
             fill
             className="object-cover object-center"
             priority
