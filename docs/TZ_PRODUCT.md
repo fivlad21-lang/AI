@@ -57,9 +57,9 @@
 
 Повне вилизування під малий обсяг: **`docs/TZ_POLISH.md`**.
 
-6. Локаційні інтро на `/buy?location=…`  
+6. ~~Локаційні інтро на `/buy?location=…`~~ **Done**  
 7. ~~Поля `lat` / `lng` / `addressPublic` + карта каталогу~~ **Done**  
-8. 3–6 статей блогу під запити Бургас / Акт 16 / оренда  
+8. ~~Блог під запити Бургас / Акт 16 / оренда~~ **Done** (4 пости; добивати за потреби)  
 9. ~~Локалізовані префіли WhatsApp~~ **Done** (`src/lib/wa-messages.ts`)  
 9b–9f. ~~Auto-locale · review · hero search · drawer · ≤1 WA~~ **Done**  
 9g. ~~TZ-POLISH code~~ **Done** (sitemap/SSG, OG cover, GlassSelect forms, not-found…) · **Owner:** реальні фото + GA ID

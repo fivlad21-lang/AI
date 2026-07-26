@@ -56,9 +56,9 @@
 |---|--------|--------|
 | P2.1 | Aria menu/close локалізовані | Done |
 | P2.2 | Favorites heart на вузькому екрані | Done |
-| P2.3 | Локаційні інтро `/buy?location=` | Open |
-| P2.4 | +2–4 пости блогу | Open |
-| P2.5 | Авто-sitemap при зміні лотів | Partial (clean static) |
+| P2.3 | Локаційні інтро `/buy?location=` | **Done** (`locations.intro` + CatalogView) |
+| P2.4 | +2–4 пости блогу | **Done** (+ Act 16, rent season) |
+| P2.5 | Авто-sitemap при зміні лотів | **Done** (`npm run sitemap`) |
 | P2.6 | Реальні testimonials | Open (Owner) |
 
 ---
