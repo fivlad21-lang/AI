@@ -43,7 +43,6 @@ export type Dictionary = {
     areasTitle: string;
     ownersTitle: string;
     ownersText: string;
-    demoNote: string;
     trustTitle: string;
   };
   catalog: {
@@ -218,7 +217,7 @@ const en: Dictionary = {
     copied: "Copied",
   },
   home: {
-    featured: "Featured (demo)",
+    featured: "Featured",
     howTitle: "How it works",
     howSteps: [
       "Tell us what you need — or list your place",
@@ -229,7 +228,6 @@ const en: Dictionary = {
     ownersTitle: "Own a property?",
     ownersText:
       "List with Nomore: pro photo & vertical video for our socials, then we handle the leads. Shooting is free — we work on a deal commission.",
-    demoNote: "Catalog currently shows demo homes so you can feel the product.",
     trustTitle: "What clients say",
   },
   catalog: {
@@ -258,7 +256,7 @@ const en: Dictionary = {
     loading: "Loading listings…",
   },
   listing: {
-    demo: "Demo",
+    demo: "",
     sale: "Sale",
     rent: "Rent",
     video: "Video",
@@ -358,7 +356,7 @@ const en: Dictionary = {
     body: [
       "We collect contact details you send via forms or WhatsApp only to respond about property inquiries.",
       "Favorites, compare list, and cookie consent are stored in your browser (localStorage).",
-      "Demo listings are fictional previews and not real offers.",
+      "Prices and availability can change; we confirm details during viewings and WhatsApp chat.",
       "We use essential cookies/local storage for preferences. Analytics may be added later; see this page for updates.",
       "Property info is provided in good faith; always verify documents with professionals before a deal.",
     ],
@@ -395,7 +393,7 @@ const en: Dictionary = {
   },
   footer: {
     rights: "All rights reserved.",
-    demo: "Demo listings for preview.",
+    demo: "Write us on WhatsApp — we reply the same business day.",
     geo: "Burgas region · Sunny Beach coast",
   },
 };
@@ -437,7 +435,7 @@ const bg: Dictionary = {
     viber: "Viber",
   },
   home: {
-    featured: "Избрани (демо)",
+    featured: "Избрани",
     howTitle: "Как работим",
     howSteps: [
       "Казваш какво търсиш — или даваш имота",
@@ -448,7 +446,6 @@ const bg: Dictionary = {
     ownersTitle: "Имаш имот?",
     ownersText:
       "Пусни го с Nomore: професионални фото и вертикално видео за нашите социални мрежи. Заснемането е без отделна такса — работим на комисиона от сделката.",
-    demoNote: "Каталогът показва демо имоти, за да усетиш продукта.",
     trustTitle: "Какво казват клиентите",
   },
   catalog: {
@@ -479,7 +476,7 @@ const bg: Dictionary = {
   },
   listing: {
     ...en.listing,
-    demo: "Демо",
+    demo: "",
     sale: "Продажба",
     rent: "Наем",
     video: "Видео",
@@ -581,7 +578,7 @@ const bg: Dictionary = {
     body: [
       "Събираме контакти, които изпращате чрез форми или WhatsApp, само за да отговорим за имоти.",
       "Запазени, сравнение и съгласие за cookies се пазят в браузъра (localStorage).",
-      "Демо обявите са примерни и не са реални оферти.",
+      "Цените и наличността могат да се променят; уточняваме детайлите при оглед и във WhatsApp.",
       "Използваме необходими cookies/local storage за настройки. Аналитика може да се добави по-късно.",
       "Информацията за имоти е добросъвестна; винаги проверявайте документите с професионалисти преди сделка.",
     ],
@@ -618,7 +615,7 @@ const bg: Dictionary = {
   },
   footer: {
     rights: "Всички права запазени.",
-    demo: "Демо обяви за преглед.",
+    demo: "Пиши във WhatsApp — отговаряме в същия работен ден.",
     geo: "Област Бургас · Слънчев бряг",
   },
 };
@@ -659,7 +656,7 @@ const ru: Dictionary = {
     telegramSoon: "Telegram скоро",
   },
   home: {
-    featured: "Избранное (демо)",
+    featured: "Избранное",
     howTitle: "Как это работает",
     howSteps: [
       "Пишешь, что нужно — или отдаёшь объект",
@@ -670,7 +667,6 @@ const ru: Dictionary = {
     ownersTitle: "Есть объект?",
     ownersText:
       "С Nomore: профессиональные фото и вертикальное видео для наших соцсетей. Съёмка без отдельной оплаты — работаем за комиссию со сделки.",
-    demoNote: "В каталоге демо-объекты, чтобы показать продукт.",
     trustTitle: "Что говорят клиенты",
   },
   catalog: {
@@ -701,7 +697,7 @@ const ru: Dictionary = {
   },
   listing: {
     ...en.listing,
-    demo: "Демо",
+    demo: "",
     sale: "Продажа",
     rent: "Аренда",
     video: "Видео",
@@ -803,7 +799,7 @@ const ru: Dictionary = {
     body: [
       "Мы обрабатываем контакты из форм или WhatsApp только для ответа по недвижимости.",
       "Избранное, сравнение и согласие на cookies хранятся в браузере (localStorage).",
-      "Демо-объявления — превью, не реальные оферты.",
+      "Цены и наличие могут меняться; детали подтверждаем на просмотре и в WhatsApp.",
       "Используем необходимые cookies/local storage для настроек. Аналитика может появиться позже.",
       "Информация об объектах добросовестная; документы всегда проверяйте со специалистами перед сделкой.",
     ],
@@ -840,7 +836,7 @@ const ru: Dictionary = {
   },
   footer: {
     rights: "Все права защищены.",
-    demo: "Демо-объявления для превью.",
+    demo: "Пишите в WhatsApp — отвечаем в тот же рабочий день.",
     geo: "Область Бургас · Солнечный Берег",
   },
 };
@@ -881,7 +877,7 @@ const ua: Dictionary = {
     telegramSoon: "Telegram скоро",
   },
   home: {
-    featured: "Обране (демо)",
+    featured: "Обране",
     howTitle: "Як це працює",
     howSteps: [
       "Пишеш, що потрібно — або віддаєш об’єкт",
@@ -892,7 +888,6 @@ const ua: Dictionary = {
     ownersTitle: "Є об’єкт?",
     ownersText:
       "З Nomore: професійні фото та вертикальне відео для наших соцмереж. Зйомка без окремої оплати — працюємо за комісією з угоди.",
-    demoNote: "У каталозі демо-об’єкти, щоб показати продукт.",
     trustTitle: "Що кажуть клієнти",
   },
   catalog: {
@@ -923,7 +918,7 @@ const ua: Dictionary = {
   },
   listing: {
     ...en.listing,
-    demo: "Демо",
+    demo: "",
     sale: "Продаж",
     rent: "Оренда",
     video: "Відео",
@@ -1025,7 +1020,7 @@ const ua: Dictionary = {
     body: [
       "Ми обробляємо контакти з форм або WhatsApp лише щоб відповісти щодо нерухомості.",
       "Збережене, порівняння і згода на cookies зберігаються в браузері (localStorage).",
-      "Демо-оголошення — прев’ю, не реальні оферти.",
+      "Ціни й наявність можуть змінюватися; деталі підтверджуємо на огляді та у WhatsApp.",
       "Використовуємо необхідні cookies/local storage для налаштувань. Аналітика може з’явитися пізніше.",
       "Інформація про об’єкти добросовісна; документи завжди перевіряйте з фахівцями перед угодою.",
     ],
@@ -1062,7 +1057,7 @@ const ua: Dictionary = {
   },
   footer: {
     rights: "Усі права захищено.",
-    demo: "Демо-оголошення для прев’ю.",
+    demo: "Пишіть у WhatsApp — відповідаємо того ж робочого дня.",
     geo: "Область Бургас · Сонячний Берег",
   },
 };

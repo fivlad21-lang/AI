@@ -38,21 +38,6 @@ export const faqItems: FaqItem[] = [
     },
   },
   {
-    id: "demo",
-    q: {
-      en: "Why are some listings marked Demo?",
-      bg: "Защо някои обяви са Demo?",
-      ru: "Почему часть объявлений Demo?",
-      ua: "Чому частина оголошень Demo?",
-    },
-    a: {
-      en: "They preview the product UX while we onboard real inventory. Real homes won’t have the Demo badge.",
-      bg: "Показват UX на продукта, докато добавяме реални имоти. Реалните обяви няма да имат Demo.",
-      ru: "Это превью продукта, пока подключаем реальные объекты. У реальных не будет бейджа Demo.",
-      ua: "Це прев’ю продукту, поки підключаємо реальні об’єкти. У реальних не буде бейджа Demo.",
-    },
-  },
-  {
     id: "langs",
     q: {
       en: "Which languages?",

@@ -1,71 +1,55 @@
 # Monitoring report — Nomore Real Estate
 
-**When:** 2026-07-26 (pass 2 — UI audit + wordmark)  
+**When:** 2026-07-26 (pass 3 — no public Demo labels + product TZ)  
 **Branch:** `cursor/tz-pro-full-backlog-da6b`  
-**Method:** code audit against production screenshots + static build checks  
-
-Live target (after deploy): `https://ai.nomorevlad.vercel.app`  
-Deploy mode: Vercel-native Next.js (**no** `output: "export"`) — see `docs/TZ_DEPLOY.md`  
-Planned domain (later): `nomore.estate`
+**Live:** `https://ai.nomorevlad.vercel.app`  
+**Product roadmap:** `docs/TZ_PRODUCT.md`  
+**Deploy:** `docs/TZ_DEPLOY.md` (Vercel-native Next.js, no `output: "export"`)
 
 ---
 
 ## 1. Verdict
 
-Shell is strong; remaining blockers are **content** (demo/Unsplash) and **deploy lag** (live still showed old logo/messengers).  
-Pass 2 closed the mobile filter overlap and premium wordmark polish.
+UI reads as a live agency catalog (no Demo badges / notes).  
+Remaining gap: **replace placeholder inventory + Unsplash with real media** when ready (`demo: true` stays internal only).
 
-| Area | Score (1–5) | Note |
-|------|-------------|------|
-| Visual polish | 4.5 | Text wordmark + horizon favicon; no letter-N tile |
-| Trust | 2 | Demo listings + stock photos dominate |
-| Lead path | 4.5 | WA / TG / Viber logos in dock + header |
-| i18n quality | 4 | Filter keys + about copy cleaned |
-| Local SEO | 3 | Unique titles shipped; location intros still open |
-| Mobile UX | 4.5 | GlassSelect portal; compare/dock/cookie stacking fixed |
-| Ops readiness | 3 | Checklist exists; no CMS/analytics yet |
-
----
-
-## 2. Pass 2 fixes (this slice)
-
-| Issue | Fix |
-|-------|-----|
-| Letter **N** mark looked cheap | Text wordmark only; tracking/weight/Estate color; favicon → horizon mark |
-| Filter district list overlapped Type/Rooms | `GlassSelect` → `createPortal` + `fixed` + flip-up |
-| Dock / CompareBar collision | Compare `z-50` bottom-center; dock lifts when compare or cookies open |
-| Header WA text-only on mobile screenshots | Icon-only WA on `<md`, full button on desktop |
-| Empty image alts | Hero / compare / shoot gallery |
-| About “no more” English leak | Localized without English idiom |
+| Area | Score | Note |
+|------|-------|------|
+| Visual polish | 4.5 | Wordmark + messengers OK |
+| Trust | 3 | No Demo labels; stock photos still temporary |
+| Lead path | 4.5 | WA / TG / Viber |
+| i18n | 4 | Demo FAQ/copy removed |
+| Local SEO | 3 | Location intros still open |
+| Mobile UX | 4.5 | Filters/dock OK |
+| Ops | 3 | Manual `listings.ts` until Airtable |
 
 ---
 
-## 3. Still open
+## 2. Pass 3 changes
 
-| Severity | Finding |
-|----------|---------|
-| **P0 content** | All public listings `demo: true` + Unsplash |
-| **P0 deploy** | Merge/redeploy PR so live matches branch |
-| **P1** | Location SEO intros on `/buy?location=…` |
-| **P1** | Soft 404 under pure static host |
-| **P2** | Hero slim-down; localized WA prefills |
-| **P3** | Analytics, TG bot, CMS, domain cutover |
+- Removed Demo badge (cards + listing)
+- Removed home `demoNote`, footer/privacy/FAQ demo wording
+- Cleaned listing descriptions
+- Added `docs/TZ_PRODUCT.md`
 
 ---
 
-## 4. Suggested next slice
+## 3. Open backlog
 
-1. Owner: real listings + own photos.  
-2. Location intro copy (P1 SEO).  
-3. Hero CTA slim-down (P2).
+| Sev | Item |
+|-----|------|
+| P0 | Owner: real photos + texts; set `demo: false` |
+| P1 | Location SEO intros; map + lat/lng |
+| P2 | Localized WA; GA |
+| P3 | Domain, Airtable, TG bot |
 
 ---
 
-## 5. Test commands
+## 4. Weekly smoke
 
 ```bash
 npm run build
-npx serve out -l 3456
-# Open /ru/buy — open district select — must not cover Type/Rooms
-# Scroll catalog — dock + compare bar must not overlap
+# /bg /ru/buy — no «Demo» / «Демо» in UI
+# dock: Viber / Telegram / WhatsApp labels only
+# / → /bg
 ```

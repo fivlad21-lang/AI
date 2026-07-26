@@ -66,7 +66,6 @@ export default async function HomePage({
               label={dict.cta.whatsapp}
             />
           </div>
-          <p className="mt-8 text-xs text-ink-muted/80">{dict.home.demoNote}</p>
         </div>
       </section>
 

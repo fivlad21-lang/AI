@@ -37,11 +37,6 @@ export function ListingCard({
               <span className="glass rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide">
                 {listing.deal === "sale" ? dict.listing.sale : dict.listing.rent}
               </span>
-              {listing.demo && (
-                <span className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-lagoon ring-1 ring-white/15 backdrop-blur">
-                  {dict.listing.demo}
-                </span>
-              )}
               {listing.video && (
                 <span className="glass rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide">
                   {dict.listing.video}

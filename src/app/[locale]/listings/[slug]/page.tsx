@@ -83,11 +83,6 @@ export default async function ListingPage({
             <span className="glass rounded-full px-3 py-1 text-xs font-semibold uppercase">
               {listing.deal === "sale" ? dict.listing.sale : dict.listing.rent}
             </span>
-            {listing.demo && (
-              <span className="rounded-full bg-lagoon/15 px-3 py-1 text-xs font-semibold uppercase text-lagoon ring-1 ring-lagoon/30">
-                {dict.listing.demo}
-              </span>
-            )}
             {listing.status === "reserved" && (
               <span className="glass rounded-full px-3 py-1 text-xs font-semibold uppercase">
                 {dict.listing.reserved}
