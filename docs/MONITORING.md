@@ -4,7 +4,7 @@
 **Branch:** `cursor/tz-pro-full-backlog-da6b`  
 **Method:** code audit against production screenshots + static build checks  
 
-Live target (after deploy): `https://ai-nomorevlad.vercel.app`  
+Live target (after deploy): `https://ai.nomorevlad.vercel.app`  
 Planned domain (later): `nomore.estate`
 
 ---

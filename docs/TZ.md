@@ -3,7 +3,7 @@
 **Статус:** затверджено замовником (2026-07-26)  
 **Бренд:** Nomore Real Estate  
 **Плановий домен:** `nomore.estate` — **купівля пізніше** (не блокує реліз)  
-**Live (поки):** `https://ai-nomorevlad.vercel.app`  
+**Live (поки):** `https://ai.nomorevlad.vercel.app`  
 **Референс відчуття:** [nomorelab.wtf](https://nomorelab.wtf) — dark + glass + CTA + блоки; **без** курс-крику  
 
 ---
