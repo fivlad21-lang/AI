@@ -35,15 +35,27 @@ export type Dictionary = {
     share: string;
     copyLink: string;
     copied: string;
+    leaveReview: string;
+    getMatch: string;
   };
   home: {
     featured: string;
+    featuredHint: string;
     howTitle: string;
     howSteps: [string, string, string];
     areasTitle: string;
     ownersTitle: string;
     ownersText: string;
     trustTitle: string;
+  };
+  review: {
+    title: string;
+    subtitle: string;
+    stars: string;
+    description: string;
+    submit: string;
+    hint: string;
+    optional: string;
   };
   catalog: {
     saleTitle: string;
@@ -188,8 +200,8 @@ const en: Dictionary = {
   taglineLine1: "Homes by the sea.",
   taglineLine2: "No more hassle.",
   taglineSub:
-    "Buy, sell, and rent across Burgas region and Sunny Beach — clear listings, fast replies, modern media.",
-  microcopy: "Clear listings. A simple process. Homes by the sea.",
+    "Write us what you need on the Burgas coast — we match buy, rent, or sale. Fast replies on WhatsApp.",
+  microcopy: "Messenger-first. Homes by the sea. No more hassle.",
   nav: {
     buy: "Buy",
     rent: "Rent",
@@ -203,7 +215,7 @@ const en: Dictionary = {
     privacy: "Privacy",
   },
   cta: {
-    viewListings: "View listings",
+    viewListings: "Browse examples",
     sellWithUs: "Sell with Nomore",
     whatsapp: "WhatsApp",
     telegram: "Telegram",
@@ -218,20 +230,32 @@ const en: Dictionary = {
     share: "Share",
     copyLink: "Copy link",
     copied: "Copied",
+    leaveReview: "Leave a review",
+    getMatch: "Get a shortlist",
   },
   home: {
-    featured: "Featured",
+    featured: "Example homes",
+    featuredHint: "Illustrative of style and areas — write us for a live match.",
     howTitle: "How it works",
     howSteps: [
-      "Tell us what you need — or list your place",
-      "We shoot, publish, and filter real interest",
+      "Tell us budget, area, and timing on WhatsApp",
+      "We shortlist what fits — buy, rent, or your sale",
       "Viewings and deal support without the chaos",
     ],
-    areasTitle: "Homes in the region",
+    areasTitle: "Where we work",
     ownersTitle: "Own a property?",
     ownersText:
       "List with Nomore: pro photo & vertical video for our socials, then we handle the leads. Shooting is free — we work on a deal commission.",
     trustTitle: "What clients say",
+  },
+  review: {
+    title: "Leave a review",
+    subtitle: "Stars and a short note — sent to us on WhatsApp.",
+    stars: "Your rating",
+    description: "Your review",
+    submit: "Send review via WhatsApp",
+    hint: "We moderate before publishing — nothing goes live automatically.",
+    optional: "optional",
   },
   catalog: {
     saleTitle: "Buy",
@@ -410,8 +434,8 @@ const bg: Dictionary = {
   taglineLine1: "Жилище край морето.",
   taglineLine2: "Без излишното.",
   taglineSub:
-    "Покупка, продажба и наем в Бургас и по крайбрежието — ясни обяви, бърз отговор, модерно медио.",
-  microcopy: "Ясни имоти. Удобен процес. Жилище край морето.",
+    "Пиши какво търсиш по Бургаското крайбрежие — подбираме покупка, наем или продажба. Бърз отговор във WhatsApp.",
+  microcopy: "Първо месинджър. Жилище край морето. Без излишното.",
   nav: {
     buy: "Купи",
     rent: "Наем",
@@ -426,7 +450,7 @@ const bg: Dictionary = {
   },
   cta: {
     ...en.cta,
-    viewListings: "Виж имотите",
+    viewListings: "Виж примери",
     sellWithUs: "Продай с Nomore",
     applyViewing: "Заяви оглед",
     send: "Изпрати във WhatsApp",
@@ -439,20 +463,32 @@ const bg: Dictionary = {
     copied: "Копирано",
     telegramSoon: "Telegram скоро",
     viber: "Viber",
+    leaveReview: "Остави отзив",
+    getMatch: "Получи подборка",
   },
   home: {
-    featured: "Избрани",
+    featured: "Примери за имоти",
+    featuredHint: "За стил и райони — за актуален подбор пиши ни.",
     howTitle: "Как работим",
     howSteps: [
-      "Казваш какво търсиш — или даваш имота",
-      "Заснемаме, публикуваме, филтрираме интереса",
+      "Казваш бюджет, район и срок във WhatsApp",
+      "Подбираме подходящото — покупка, наем или твоя продажба",
       "Огледи и сделка без хаос",
     ],
-    areasTitle: "Имоти в региона",
+    areasTitle: "Къде работим",
     ownersTitle: "Имаш имот?",
     ownersText:
       "Пусни го с Nomore: професионални фото и вертикално видео за нашите социални мрежи. Заснемането е без отделна такса — работим на комисиона от сделката.",
     trustTitle: "Какво казват клиентите",
+  },
+  review: {
+    title: "Остави отзив",
+    subtitle: "Звезди и кратък текст — изпраща се към нас във WhatsApp.",
+    stars: "Твоята оценка",
+    description: "Отзивът",
+    submit: "Изпрати отзив във WhatsApp",
+    hint: "Публикуваме след преглед — нищо не излиза автоматично.",
+    optional: "по желание",
   },
   catalog: {
     ...en.catalog,
@@ -635,8 +671,8 @@ const ru: Dictionary = {
   taglineLine1: "Жильё у моря.",
   taglineLine2: "Без лишнего.",
   taglineSub:
-    "Покупка, продажа и аренда в Бургасе и на побережье — понятные объявления, быстрый ответ, современная подача.",
-  microcopy: "Понятные объекты. Удобный процесс. Жильё на берегу моря.",
+    "Напиши, что ищешь на побережье Бургаса — подберём покупку, аренду или продажу. Быстрый ответ в WhatsApp.",
+  microcopy: "Сначала мессенджер. Жильё у моря. Без лишнего.",
   nav: {
     buy: "Купить",
     rent: "Аренда",
@@ -651,7 +687,7 @@ const ru: Dictionary = {
   },
   cta: {
     ...en.cta,
-    viewListings: "Смотреть объекты",
+    viewListings: "Смотреть примеры",
     sellWithUs: "Продать с Nomore",
     applyViewing: "Заявка на просмотр",
     send: "Отправить в WhatsApp",
@@ -663,20 +699,32 @@ const ru: Dictionary = {
     copyLink: "Копировать ссылку",
     copied: "Скопировано",
     telegramSoon: "Telegram скоро",
+    leaveReview: "Оставить отзыв",
+    getMatch: "Получить подборку",
   },
   home: {
-    featured: "Избранное",
+    featured: "Примеры объектов",
+    featuredHint: "Для стиля и районов — актуальный подбор напишите нам.",
     howTitle: "Как это работает",
     howSteps: [
-      "Пишешь, что нужно — или отдаёшь объект",
-      "Снимаем, публикуем, отсеиваем интерес",
+      "Пишешь бюджет, район и сроки в WhatsApp",
+      "Подбираем подходящее — покупка, аренда или ваша продажа",
       "Показы и сделка без хаоса",
     ],
-    areasTitle: "Объекты в регионе",
+    areasTitle: "Где работаем",
     ownersTitle: "Есть объект?",
     ownersText:
       "С Nomore: профессиональные фото и вертикальное видео для наших соцсетей. Съёмка без отдельной оплаты — работаем за комиссию со сделки.",
     trustTitle: "Что говорят клиенты",
+  },
+  review: {
+    title: "Оставить отзыв",
+    subtitle: "Звёзды и короткий текст — уходит нам в WhatsApp.",
+    stars: "Ваша оценка",
+    description: "Отзыв",
+    submit: "Отправить отзыв в WhatsApp",
+    hint: "Публикуем после проверки — ничего не выходит автоматически.",
+    optional: "необязательно",
   },
   catalog: {
     ...en.catalog,
@@ -859,8 +907,8 @@ const ua: Dictionary = {
   taglineLine1: "Житло на морі.",
   taglineLine2: "Без зайвого.",
   taglineSub:
-    "Купівля, продаж і оренда в Бургасі та на узбережжі — зрозумілі оголошення, швидка відповідь, сучасна подача.",
-  microcopy: "Зрозумілі об’єкти. Зручний процес. Житло на березі моря.",
+    "Напиши, що шукаєш на узбережжі Бургаса — підберемо купівлю, оренду чи продаж. Швидка відповідь у WhatsApp.",
+  microcopy: "Спочатку месенджер. Житло на морі. Без зайвого.",
   nav: {
     buy: "Купити",
     rent: "Оренда",
@@ -875,7 +923,7 @@ const ua: Dictionary = {
   },
   cta: {
     ...en.cta,
-    viewListings: "Дивитись об’єкти",
+    viewListings: "Дивитись приклади",
     sellWithUs: "Продати з Nomore",
     applyViewing: "Заявка на перегляд",
     send: "Надіслати в WhatsApp",
@@ -887,20 +935,32 @@ const ua: Dictionary = {
     copyLink: "Копіювати лінк",
     copied: "Скопійовано",
     telegramSoon: "Telegram скоро",
+    leaveReview: "Залишити відгук",
+    getMatch: "Отримати підбірку",
   },
   home: {
-    featured: "Обране",
+    featured: "Приклади об’єктів",
+    featuredHint: "Для стилю й районів — актуальну підбірку напишіть нам.",
     howTitle: "Як це працює",
     howSteps: [
-      "Пишеш, що потрібно — або віддаєш об’єкт",
-      "Знімаємо, публікуємо, відсіюємо інтерес",
+      "Пишеш бюджет, район і строки в WhatsApp",
+      "Підбираємо відповідне — купівля, оренда чи ваш продаж",
       "Покази й угода без хаосу",
     ],
-    areasTitle: "Об’єкти в регіоні",
+    areasTitle: "Де працюємо",
     ownersTitle: "Є об’єкт?",
     ownersText:
       "З Nomore: професійні фото та вертикальне відео для наших соцмереж. Зйомка без окремої оплати — працюємо за комісією з угоди.",
     trustTitle: "Що кажуть клієнти",
+  },
+  review: {
+    title: "Залишити відгук",
+    subtitle: "Зірки й короткий текст — іде нам у WhatsApp.",
+    stars: "Ваша оцінка",
+    description: "Відгук",
+    submit: "Надіслати відгук у WhatsApp",
+    hint: "Публікуємо після перевірки — нічого не виходить автоматично.",
+    optional: "необов’язково",
   },
   catalog: {
     ...en.catalog,

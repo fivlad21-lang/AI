@@ -1,6 +1,7 @@
 import { testimonials } from "@/data/testimonials";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { ReviewForm } from "@/components/ReviewForm";
 
 export function Testimonials({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
@@ -25,6 +26,7 @@ export function Testimonials({ locale, dict }: { locale: Locale; dict: Dictionar
             </blockquote>
           ))}
         </div>
+        <ReviewForm locale={locale} dict={dict} />
       </div>
     </section>
   );

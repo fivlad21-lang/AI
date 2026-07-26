@@ -12,6 +12,13 @@ import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
 
+const matchPrefill: Record<Locale, string> = {
+  en: "Hi! Nomore — I need a shortlist (budget / area / buy or rent):",
+  bg: "Здравейте! Nomore — искам подборка (бюджет / район / покупка или наем):",
+  ru: "Здравствуйте! Nomore — нужна подборка (бюджет / район / покупка или аренда):",
+  ua: "Вітаю! Nomore — потрібна підбірка (бюджет / район / купівля чи оренда):",
+};
+
 export default async function HomePage({
   params,
 }: {
@@ -54,37 +61,19 @@ export default async function HomePage({
             {dict.taglineSub}
           </p>
           <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
-            <GlassButton href={`/${locale}/buy`} variant="primary">
-              {dict.cta.viewListings}
-            </GlassButton>
+            <MessengerButton
+              kind="whatsapp"
+              href={whatsappUrl(matchPrefill[locale])}
+              label={dict.cta.getMatch}
+              className="!px-6 !py-3"
+            />
             <GlassButton href={`/${locale}/sell`} variant="glass">
               {dict.cta.sellWithUs}
             </GlassButton>
-            <MessengerButton
-              kind="whatsapp"
-              href={whatsappUrl("Hi! I want help finding a home")}
-              label={dict.cta.whatsapp}
-            />
+            <GlassButton href={`/${locale}/buy`} variant="ghost">
+              {dict.cta.viewListings}
+            </GlassButton>
           </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-            {dict.home.featured}
-          </h2>
-          <Link
-            href={`/${locale}/buy`}
-            className="text-sm font-semibold text-sea transition hover:text-ink"
-          >
-            {dict.cta.viewListings} →
-          </Link>
-        </div>
-        <div className="grid gap-5 md:grid-cols-3">
-          {featured.map((l) => (
-            <ListingCard key={l.id} listing={l} locale={locale} dict={dict} />
-          ))}
         </div>
       </section>
 
@@ -104,6 +93,28 @@ export default async function HomePage({
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
+        <div className="mb-3 flex items-end justify-between gap-4">
+          <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            {dict.home.featured}
+          </h2>
+          <Link
+            href={`/${locale}/buy`}
+            className="text-sm font-semibold text-sea transition hover:text-ink"
+          >
+            {dict.cta.viewListings} →
+          </Link>
+        </div>
+        <p className="mb-8 max-w-2xl text-sm leading-relaxed text-ink-muted">
+          {dict.home.featuredHint}
+        </p>
+        <div className="grid gap-5 md:grid-cols-3">
+          {featured.map((l) => (
+            <ListingCard key={l.id} listing={l} locale={locale} dict={dict} />
+          ))}
         </div>
       </section>
 
