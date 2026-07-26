@@ -7,6 +7,7 @@ import type { Locale } from "@/i18n/config";
 import { locales } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Logo } from "@/components/Logo";
+import { HeartIcon } from "@/components/HeartIcon";
 import { MessengerButton } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
 
@@ -63,7 +64,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             aria-label={dict.nav.favorites}
             title={dict.nav.favorites}
           >
-            ♥
+            <HeartIcon className="h-4 w-4" filled />
           </Link>
           <div className="glass hidden items-center rounded-full p-1 sm:flex">
             {locales.map((l) => (
