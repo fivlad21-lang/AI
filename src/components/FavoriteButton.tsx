@@ -2,7 +2,7 @@
 
 import { useApp } from "@/components/providers/AppProviders";
 
-export function FavoriteButton({ id }: { id: string }) {
+export function FavoriteButton({ id, onMedia = false }: { id: string; onMedia?: boolean }) {
   const { isFavorite, toggleFavorite } = useApp();
   const on = isFavorite(id);
 
@@ -16,9 +16,11 @@ export function FavoriteButton({ id }: { id: string }) {
         e.stopPropagation();
         toggleFavorite(id);
       }}
-      className={`glass flex h-9 w-9 items-center justify-center rounded-full text-sm transition ${
-        on ? "text-rose-300" : "text-ink-muted hover:text-ink"
-      }`}
+      className={`flex h-9 w-9 items-center justify-center rounded-full text-sm transition ${
+        onMedia
+          ? "bg-black/55 text-white shadow-[0_2px_8px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:bg-black/70"
+          : "glass text-ink-muted hover:text-ink"
+      } ${on ? "text-rose-300" : ""}`}
     >
       {on ? "♥" : "♡"}
     </button>

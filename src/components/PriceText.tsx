@@ -3,7 +3,7 @@ import type { Listing } from "@/data/listings";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-function formatEur(eur: number, locale: Locale) {
+export function formatEur(eur: number, locale: Locale) {
   return new Intl.NumberFormat(locale === "ua" ? "uk" : locale, {
     style: "currency",
     currency: "EUR",

@@ -12,6 +12,9 @@ import { PriceText } from "@/components/PriceText";
 import { PrintButton } from "@/components/PrintButton";
 import { ListingJsonLd } from "@/components/JsonLd";
 import { MessengerButton, MessengerGlyph } from "@/components/MessengerButton";
+import { ListingBadges } from "@/components/ListingBadges";
+import { StickyListingCta } from "@/components/StickyListingCta";
+import { formatEur } from "@/components/PriceText";
 import { getListing, getPublishedListings, listings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
@@ -65,8 +68,12 @@ export default async function ListingPage({
     `[VIEW] ${listing.title.en}\n${listing.priceEur} EUR\n${pageUrl}`,
   );
 
+  const priceLabel = `${formatEur(listing.priceEur, locale)}${
+    listing.deal === "rent" ? dict.listing.month : ""
+  }`;
+
   return (
-    <div className="listing-print mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-12">
+    <div className="listing-print mx-auto max-w-6xl px-4 py-8 pb-28 md:px-6 md:py-12 md:pb-12">
       <ListingJsonLd
         name={listing.title[locale]}
         description={listing.description[locale]}
@@ -79,30 +86,17 @@ export default async function ListingPage({
 
       <div className="mt-8 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <div className="flex flex-wrap gap-2">
-            <span className="glass rounded-full px-3 py-1 text-xs font-semibold uppercase">
-              {listing.deal === "sale" ? dict.listing.sale : dict.listing.rent}
-            </span>
-            {listing.status === "reserved" && (
-              <span className="glass rounded-full px-3 py-1 text-xs font-semibold uppercase">
-                {dict.listing.reserved}
-              </span>
-            )}
-            {listing.status === "sold" && (
-              <span className="glass rounded-full px-3 py-1 text-xs font-semibold uppercase">
-                {dict.listing.sold}
-              </span>
-            )}
-          </div>
+          <ListingBadges
+            deal={listing.deal}
+            video={listing.video}
+            status={listing.status === "published" ? undefined : listing.status}
+            dict={dict}
+            beachMinutes={listing.beachMinutes}
+          />
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
             {listing.title[locale]}
           </h1>
           <p className="mt-2 text-ink-muted">{loc?.label[locale]}</p>
-          {listing.beachMinutes != null && (
-            <p className="mt-1 text-sm text-ink-muted">
-              {dict.listing.beach}: {listing.beachMinutes} {dict.listing.minutes}
-            </p>
-          )}
           <p className="mt-4 text-2xl font-semibold tabular-nums">
             <PriceText listing={listing} dict={dict} locale={locale} />
           </p>
@@ -207,6 +201,11 @@ export default async function ListingPage({
         </section>
       )}
 
+      <StickyListingCta
+        href={wa}
+        label={dict.cta.whatsapp}
+        priceLabel={priceLabel}
+      />
     </div>
   );
 }

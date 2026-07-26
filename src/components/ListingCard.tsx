@@ -6,6 +6,7 @@ import type { Listing } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { CompareButton } from "@/components/CompareButton";
+import { ListingBadges } from "@/components/ListingBadges";
 import { PriceText } from "@/components/PriceText";
 
 export function ListingCard({
@@ -32,27 +33,21 @@ export function ListingCard({
               sizes="(max-width:768px) 100vw, 33vw"
               unoptimized
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg/50 via-transparent to-transparent opacity-80" />
-            <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-              <span className="glass rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide">
-                {listing.deal === "sale" ? dict.listing.sale : dict.listing.rent}
-              </span>
-              {listing.video && (
-                <span className="glass rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide">
-                  {dict.listing.video}
-                </span>
-              )}
-              {listing.status === "reserved" && (
-                <span className="glass rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide">
-                  {dict.listing.reserved}
-                </span>
-              )}
+            <div className="absolute inset-0 bg-gradient-to-t from-bg/55 via-transparent to-black/25" />
+            <div className="absolute left-3 top-3 max-w-[70%]">
+              <ListingBadges
+                deal={listing.deal}
+                video={listing.video}
+                status={listing.status === "published" ? undefined : listing.status}
+                dict={dict}
+                beachMinutes={listing.beachMinutes}
+              />
             </div>
           </div>
         </Link>
         <div className="absolute right-3 top-3 flex flex-col items-end gap-2">
-          <FavoriteButton id={listing.id} />
-          <CompareButton id={listing.id} dict={dict} />
+          <FavoriteButton id={listing.id} onMedia />
+          <CompareButton id={listing.id} dict={dict} onMedia />
         </div>
       </div>
       <Link href={`/${locale}/listings/${listing.slug}`} className="block space-y-1.5 p-4 md:p-5">
@@ -68,9 +63,6 @@ export function ListingCard({
             listing.rooms === "studio" ? dict.types.studio : String(listing.rooms),
             `${listing.areaM2} m²`,
             listing.floor != null ? `${dict.listing.floor} ${listing.floor}` : null,
-            listing.beachMinutes != null
-              ? `${dict.listing.beach} ${listing.beachMinutes} ${dict.listing.minutes}`
-              : null,
           ]
             .filter(Boolean)
             .join(" · ")}
