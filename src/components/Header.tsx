@@ -76,12 +76,15 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
     mounted &&
     present &&
     createPortal(
-      <div className="fixed inset-0 z-[80] lg:hidden" aria-hidden={!open}>
+      <div
+        className="fixed inset-0 z-[100] h-[100dvh] min-h-[100dvh] w-full lg:hidden"
+        aria-hidden={!open}
+      >
         <button
           type="button"
           aria-label="Close menu"
           onClick={close}
-          className={`absolute inset-0 bg-black/55 backdrop-blur-[2px] transition-opacity ease-out ${
+          className={`absolute inset-0 h-full w-full bg-black/70 transition-opacity ease-out ${
             entered ? "opacity-100" : "opacity-0"
           }`}
           style={{ transitionDuration: "320ms" }}
@@ -90,7 +93,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className={`absolute inset-y-0 right-0 flex w-[min(86vw,20.5rem)] flex-col border-l border-white/10 bg-[#0a0f18]/96 shadow-[-24px_0_60px_-20px_rgba(0,0,0,0.85)] backdrop-blur-2xl transition-transform ease-[cubic-bezier(0.32,0.72,0,1)] ${
+          className={`absolute inset-y-0 right-0 flex h-full min-h-[100dvh] w-[min(86vw,20.5rem)] flex-col border-l border-white/10 bg-[#0a0f18] shadow-[-24px_0_60px_-20px_rgba(0,0,0,0.85)] transition-transform ease-[cubic-bezier(0.32,0.72,0,1)] ${
             entered ? "translate-x-0" : "translate-x-full"
           }`}
           style={{ transitionDuration: "420ms" }}

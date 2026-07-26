@@ -103,7 +103,7 @@ export function GlassSelect({
         ref={listRef}
         role="listbox"
         id={`${id}-list`}
-        className="glass-strong fixed z-[60] max-h-56 overflow-auto rounded-xl py-1 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.85)]"
+        className="fixed z-[90] max-h-56 overflow-auto rounded-xl border border-white/12 bg-[#0c121c] py-1 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.95)]"
         style={{
           top: pos.top,
           bottom: pos.bottom,
