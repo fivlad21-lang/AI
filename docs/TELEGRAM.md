@@ -2,7 +2,7 @@
 
 ## Current state
 - Site is **static export** → no Next.js API routes on Vercel for this deploy mode.
-- Floating dock shows **“Telegram soon”** until username is set.
+- Floating dock links to **[@notany](https://t.me/notany)** (`TELEGRAM_USERNAME` in `contacts.ts`).
 - All leads go to **WhatsApp** with prefixes `[BUY]` `[RENT]` `[SELL]` `[VIEW]` `[SHORTLIST]` `[FAQ]`.
 
 ## When ready

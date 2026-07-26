@@ -3,8 +3,8 @@ export const WHATSAPP_DISPLAY = "+380 93 385 18 04";
 export const BRAND = "Nomore Real Estate";
 export const DOMAIN = "nomore.estate";
 
-/** Set when Telegram is ready: username without @ */
-export const TELEGRAM_USERNAME: string | null = null;
+/** Public Telegram username (without @) */
+export const TELEGRAM_USERNAME: string | null = "notany";
 
 export function whatsappUrl(text: string) {
   return `https://wa.me/${WHATSAPP_E164}?text=${encodeURIComponent(text)}`;
