@@ -5,39 +5,43 @@ import { WHATSAPP_DISPLAY, whatsappUrl } from "@/lib/contacts";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
-    <footer className="mt-auto border-t border-line bg-bg-elevated/50">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-3 md:px-6">
+    <footer className="mt-auto border-t border-white/[0.06] bg-[#080c14]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-3 md:px-6">
         <div>
-          <p className="font-display text-xl font-semibold">Nomore estate</p>
-          <p className="mt-2 max-w-xs text-sm text-ink-muted">{dict.tagline}</p>
+          <p className="font-display text-xl font-semibold tracking-tight">
+            Nomore <span className="text-ink-muted">estate</span>
+          </p>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-muted">
+            {dict.tagline}
+          </p>
         </div>
-        <div className="flex flex-col gap-2 text-sm">
-          <Link href={`/${locale}/buy`} className="text-ink-muted hover:text-ink">
+        <div className="flex flex-col gap-2.5 text-sm">
+          <Link href={`/${locale}/buy`} className="text-ink-muted transition hover:text-ink">
             {dict.nav.buy}
           </Link>
-          <Link href={`/${locale}/rent`} className="text-ink-muted hover:text-ink">
+          <Link href={`/${locale}/rent`} className="text-ink-muted transition hover:text-ink">
             {dict.nav.rent}
           </Link>
-          <Link href={`/${locale}/sell`} className="text-lagoon hover:text-ink">
+          <Link href={`/${locale}/sell`} className="text-ink transition hover:text-sea">
             {dict.nav.sell}
           </Link>
-          <Link href={`/${locale}/contacts`} className="text-ink-muted hover:text-ink">
+          <Link href={`/${locale}/contacts`} className="text-ink-muted transition hover:text-ink">
             {dict.nav.contacts}
           </Link>
         </div>
         <div className="text-sm text-ink-muted">
           <a
             href={whatsappUrl("Hi from footer")}
-            className="font-semibold text-ink hover:text-sea"
+            className="font-semibold text-ink transition hover:text-sea"
             target="_blank"
             rel="noopener noreferrer"
           >
             WhatsApp {WHATSAPP_DISPLAY}
           </a>
-          <p className="mt-3">{dict.footer.demo}</p>
+          <p className="mt-3 text-xs leading-relaxed">{dict.footer.demo}</p>
         </div>
       </div>
-      <div className="border-t border-line px-4 py-4 text-center text-xs text-ink-muted">
+      <div className="border-t border-white/[0.05] px-4 py-4 text-center text-[11px] text-ink-muted/80">
         © {new Date().getFullYear()} Nomore Real Estate · {dict.footer.rights}
       </div>
     </footer>

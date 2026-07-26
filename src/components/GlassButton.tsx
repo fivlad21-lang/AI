@@ -12,13 +12,13 @@ type Props = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition active:scale-[0.98]";
+  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-tight transition duration-200 active:scale-[0.98]";
 
 const variants = {
-  primary: "bg-sea text-white shadow-[0_0_0_1px_rgba(59,130,246,0.4)] hover:bg-sea-deep",
-  glass:
-    "glass text-ink hover:bg-white/10 hover:border-white/25",
-  ghost: "text-ink-muted hover:text-ink border border-transparent",
+  primary:
+    "bg-sea text-white shadow-[0_0_0_1px_rgba(59,130,246,0.35),0_10px_30px_-12px_rgba(37,99,235,0.7)] hover:bg-sea-deep",
+  glass: "glass text-ink hover:bg-white/[0.11] hover:border-white/25",
+  ghost: "text-ink-muted hover:text-ink border border-transparent hover:border-line",
 };
 
 export function GlassButton({

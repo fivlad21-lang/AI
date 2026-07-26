@@ -36,8 +36,9 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
   };
 
   return (
-    <form onSubmit={submit} className="glass space-y-4 rounded-3xl p-5 md:p-6">
-      <h3 className="font-display text-xl">{dict.sell.formTitle}</h3>
+    <form onSubmit={submit} className="glass-strong space-y-4 rounded-[1.75rem] p-5 md:p-7">
+      <p className="section-label">Request</p>
+      <h3 className="font-display text-xl font-semibold tracking-tight">{dict.sell.formTitle}</h3>
       <label className="block text-xs font-semibold uppercase text-ink-muted">
         {dict.forms.name}
         <input required className={field} value={name} onChange={(e) => setName(e.target.value)} />

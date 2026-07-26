@@ -28,21 +28,25 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-bg/70 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-        <Link href={`/${locale}`} className="font-display text-lg font-semibold tracking-tight md:text-xl">
-          Nomore
-          <span className="ml-1.5 text-sm font-medium text-ink-muted">estate</span>
+    <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#06080f]/75 backdrop-blur-2xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 md:px-6">
+        <Link href={`/${locale}`} className="group flex items-baseline gap-2">
+          <span className="font-display text-lg font-semibold tracking-tight md:text-xl">
+            Nomore
+          </span>
+          <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-muted group-hover:text-ink">
+            estate
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className={`rounded-xl px-3 py-2 text-sm font-medium transition ${
+              className={`rounded-full px-3.5 py-2 text-[13px] font-medium transition ${
                 l.accent
-                  ? "glass text-lagoon hover:bg-white/10"
+                  ? "glass text-ink hover:bg-white/10"
                   : "text-ink-muted hover:text-ink"
               }`}
             >
@@ -52,12 +56,12 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="glass hidden items-center rounded-xl p-1 sm:flex">
+          <div className="glass hidden items-center rounded-full p-1 sm:flex">
             {locales.map((l) => (
               <Link
                 key={l}
                 href={switchLocale(l)}
-                className={`rounded-lg px-2 py-1 text-xs font-semibold uppercase ${
+                className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide ${
                   l === locale ? "bg-sea text-white" : "text-ink-muted hover:text-ink"
                 }`}
               >
@@ -69,13 +73,13 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             href={whatsappUrl("Hi! Nomore Real Estate")}
             external
             variant="primary"
-            className="hidden !py-2.5 md:inline-flex"
+            className="hidden !px-4 !py-2 md:inline-flex"
           >
             {dict.cta.whatsapp}
           </GlassButton>
           <button
             type="button"
-            className="glass rounded-xl px-3 py-2 text-sm lg:hidden"
+            className="glass rounded-full px-3 py-2 text-sm lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -85,15 +89,15 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
       </div>
 
       {open && (
-        <div className="border-t border-line bg-bg-elevated px-4 py-4 lg:hidden">
+        <div className="border-t border-white/[0.06] bg-bg-elevated/95 px-4 py-4 backdrop-blur-xl lg:hidden">
           <div className="flex flex-col gap-1">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className={`rounded-xl px-3 py-3 text-sm font-medium ${
-                  l.accent ? "glass text-lagoon" : "text-ink"
+                className={`rounded-2xl px-3 py-3 text-sm font-medium ${
+                  l.accent ? "glass text-ink" : "text-ink-muted"
                 }`}
               >
                 {l.label}
@@ -106,7 +110,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                 key={l}
                 href={switchLocale(l)}
                 onClick={() => setOpen(false)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-semibold uppercase glass ${
+                className={`rounded-full px-3 py-1.5 text-[11px] font-bold uppercase glass ${
                   l === locale ? "!bg-sea text-white" : ""
                 }`}
               >
