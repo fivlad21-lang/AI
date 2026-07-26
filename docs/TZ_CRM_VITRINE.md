@@ -117,7 +117,7 @@ CRM має віддати (REST або аналог) список published-об
 | Пріоритет | Фіча |
 |-----------|------|
 | P0 | Авто-locale з `Accept-Language` / `navigator` → `/bg\|ru\|ua\|en` |
-| P0 | Карта каталогу (MapLibre/Leaflet) + `lat/lng` |
+| P0 | ~~Карта каталогу + `lat/lng`~~ **Done** (Leaflet, dark Carto tiles) |
 | P1 | Grid / list щільність (опційно) |
 | P1 | CRM sync job + generated cache |
 | P2 | Incremental `updatedSince` |
