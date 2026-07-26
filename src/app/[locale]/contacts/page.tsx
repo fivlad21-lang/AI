@@ -48,20 +48,16 @@ export default async function ContactsPage({
           <MessengerButton
             kind="whatsapp"
             href={whatsappUrl("Hi! Contacts page")}
-            label={`${dict.cta.whatsapp} ${WHATSAPP_DISPLAY}`}
-          >
-            {dict.cta.whatsapp}
-          </MessengerButton>
+            label={dict.cta.whatsapp}
+          />
           {tg && (
             <MessengerButton kind="telegram" href={tg} label={dict.cta.telegram} />
           )}
           <MessengerButton
             kind="viber"
             href={viberUrl()}
-            label={`${dict.cta.viber} ${VIBER_DISPLAY}`}
-          >
-            {dict.cta.viber}
-          </MessengerButton>
+            label={dict.cta.viber}
+          />
         </div>
         <p className="mt-3 text-xs text-ink-muted">
           WhatsApp {WHATSAPP_DISPLAY} · Viber {VIBER_DISPLAY}

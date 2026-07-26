@@ -3,13 +3,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Logo } from "@/components/Logo";
 import { MessengerButton } from "@/components/MessengerButton";
-import {
-  VIBER_DISPLAY,
-  WHATSAPP_DISPLAY,
-  telegramUrl,
-  viberUrl,
-  whatsappUrl,
-} from "@/lib/contacts";
+import { telegramUrl, viberUrl, whatsappUrl } from "@/lib/contacts";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const tg = telegramUrl("Hi from footer");
@@ -59,7 +53,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <MessengerButton
               kind="whatsapp"
               href={whatsappUrl("Hi from footer")}
-              label={`${dict.cta.whatsapp} ${WHATSAPP_DISPLAY}`}
+              label={dict.cta.whatsapp}
               className="!px-4 !py-2"
             />
             {tg && (
@@ -73,7 +67,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <MessengerButton
               kind="viber"
               href={viberUrl()}
-              label={`${dict.cta.viber} ${VIBER_DISPLAY}`}
+              label={dict.cta.viber}
               className="!px-4 !py-2"
             />
           </div>
