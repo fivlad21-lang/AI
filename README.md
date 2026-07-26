@@ -1,10 +1,11 @@
 # Nomore Real Estate
 
-Agency site for Burgas region & Sunny Beach (BG / RU / UA / EN).
+Modern agency site for Burgas region & Sunny Beach.
 
-## Docs
-
-- Product brief / TZ: [`docs/TZ.md`](./docs/TZ.md)
+- **Domain (planned):** nomore.estate  
+- **TZ:** [`docs/TZ.md`](./docs/TZ.md)  
+- **Languages:** BG (default), RU, UA, EN  
+- **WhatsApp:** +380 93 385 18 04  
 
 ## Dev
 
@@ -13,6 +14,8 @@ npm install
 npm run dev
 ```
 
-## Status
+Open http://localhost:3000 → redirects to `/bg`.
 
-Phase 0: brand landing (coming soon). Catalog after first real listings.
+## Stack
+
+Next.js 16 · Tailwind 4 · static export · demo listings

@@ -1,42 +1,94 @@
 @import "tailwindcss";
 
 :root {
-  --sand: #f4efe6;
-  --sand-deep: #e8dfd0;
-  --ink: #1c2430;
-  --ink-soft: #4a5563;
-  --sea: #1f4b66;
-  --sea-deep: #16384d;
-  --foam: #faf8f4;
-  --accent: #c47a4a;
-  --background: var(--sand);
+  --bg: #070b12;
+  --bg-elevated: #0e1522;
+  --bg-soft: #151d2e;
+  --ink: #e8eef7;
+  --ink-muted: #8b9bb4;
+  --sea: #3b82f6;
+  --sea-deep: #1d4ed8;
+  --lagoon: #22d3ee;
+  --line: rgba(232, 238, 247, 0.12);
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --ok: #34d399;
+  --background: var(--bg);
   --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-sand: var(--sand);
-  --color-sand-deep: var(--sand-deep);
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-soft: var(--bg-soft);
   --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
   --color-sea: var(--sea);
   --color-sea-deep: var(--sea-deep);
-  --color-foam: var(--foam);
-  --color-accent: var(--accent);
+  --color-lagoon: var(--lagoon);
+  --color-line: var(--line);
+  --color-glass: var(--glass);
+  --color-ok: var(--ok);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
-.hero-wash {
-  background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(31, 75, 102, 0.18), transparent 55%),
-    radial-gradient(900px 500px at 10% 100%, rgba(196, 122, 74, 0.12), transparent 50%),
-    linear-gradient(165deg, #f7f2ea 0%, #ebe3d4 45%, #dfe8ee 100%);
+.font-display {
+  font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
+}
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.hero-grid {
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgba(59, 130, 246, 0.35), transparent 55%),
+    radial-gradient(700px 400px at 10% 90%, rgba(34, 211, 238, 0.12), transparent 50%),
+    linear-gradient(180deg, #070b12 0%, #0b1220 50%, #070b12 100%);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s ease-out both;
+}
+
+.animate-rise-delay-1 {
+  animation: rise 0.7s ease-out 0.1s both;
+}
+
+.animate-rise-delay-2 {
+  animation: rise 0.7s ease-out 0.2s both;
 }

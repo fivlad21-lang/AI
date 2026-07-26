@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Manrope, Unbounded } from "next/font/google";
 import "./globals.css";
 
-const display = Fraunces({
+const display = Unbounded({
   variable: "--font-display",
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin", "latin-ext", "cyrillic"],
   weight: ["500", "600", "700"],
 });
 
@@ -15,18 +15,17 @@ const body = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Nomore Real Estate · Burgas",
+  title: {
+    default: "Nomore Real Estate · Burgas",
+    template: "%s · Nomore Real Estate",
+  },
   description:
-    "Real estate in Burgas and the coast — buy, sell, and rent. Clear, modern, no noise.",
+    "Homes by the sea. No more hassle. Buy, sell, and rent in Burgas region & Sunny Beach.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} h-full`}>
+    <html lang="bg" className={`${display.variable} ${body.variable} h-full`}>
       <body className="min-h-full antialiased">{children}</body>
     </html>
   );
