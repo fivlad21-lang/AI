@@ -17,7 +17,7 @@
 | 3 | Default locale | **`bg`**. Пріоритет якості copy: **RU + UA** |
 | 4 | WhatsApp | **+380 93 385 18 04** → `wa.me/380933851804` |
 | 5 | Слоган A | *Homes by the sea. No more hassle.* (+ BG/RU/UA) |
-| 6 | Каталог старт | Демо-об’єкти з міткою Demo |
+| 6 | Каталог старт | Placeholder-об’єкти без публічної мітки Demo (заміна пізніше) |
 | 7 | Візуал | Синьо-чорний, glass; стриманіше за LAB |
 | 8 | Telegram @ | **@notany** (dock deep-link). Bot token — TBD; ліди також через WhatsApp |
 | 9 | Беклог | **Реалізувати все** (§10 A1–G4, HIGH/MED/LOW) |
@@ -51,7 +51,7 @@
 
 ## 2. Візуал
 
-Coastal dark-tech. Палітра: `#070B12` / sea `#3B82F6` / lagoon лише для Demo.  
+Coastal dark-tech. Палітра: `#070B12` / sea `#3B82F6` / lagoon як акцент.  
 Шрифти: **Unbounded** (display) + **Manrope** (body).  
 Hero: один склад — бренд, слоган, 1 речення, CTA, full-bleed візуал.  
 Без purple glow, cream+terracotta, газетного layout, «зібрано за N хв».
