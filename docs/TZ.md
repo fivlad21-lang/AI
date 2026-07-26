@@ -123,7 +123,8 @@ Static export → без server `/api/leads` у v1; шлях описано в o
 
 ## 7. Tech
 
-Next.js App Router + TS · Tailwind 4 · `output: "export"` · Vercel · Unbounded + Manrope · listings у TS.
+Next.js App Router + TS · Tailwind 4 · Vercel (server/SSG, **без** `output: "export"`) · Unbounded + Manrope · listings у TS.  
+Див. також `docs/TZ_DEPLOY.md`.
 
 ---
 

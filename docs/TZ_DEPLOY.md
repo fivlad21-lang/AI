@@ -1,99 +1,89 @@
 # ТЗ-DEPLOY 1.0 — Аудит деплою Nomore
 
-**Статус:** затверджено (2026-07-26)  
+**Статус:** затверджено + **fix deployed** (2026-07-26)  
 **Канонічний live URL:** `https://ai.nomorevlad.vercel.app`  
+**Також на проєкті може бути:** `https://ai-nomorevlad.vercel.app` (дефіс = project slug)  
 **Плановий домен (пізніше):** `nomore.estate`  
 **Репо:** `fivlad21-lang/AI`  
-**Гілка робіт:** `cursor/tz-pro-full-backlog-da6b`
+**Гілка:** `cursor/tz-pro-full-backlog-da6b`
 
 ---
 
 ## 0. Мета
 
-Один Vercel-проєкт → один канонічний hostname → сайт відкривається без платформенного `404: NOT_FOUND`, а canonical / sitemap / OG / лінки в WhatsApp збігаються з реальним доменом.
+Один Vercel-проєкт → сайт відкривається без платформенного `404: NOT_FOUND` → canonical / sitemap збігаються з live host.
 
 ---
 
-## 1. Де пішло не так (таймлайн)
+## 1. Root cause (що зламалось)
 
-| # | Момент | Що сталось | Симптом |
-|---|--------|------------|---------|
-| A | Import репо в Vercel двічі | Два проєкти (`pokemon3301`, `ai`, …) на один GitHub repo | Подвійні деплої одного коміту |
-| B | Різні hostname | Project slug vs team subdomain | Плутанина «який лінк правильний» |
-| C | **Hyphen vs dot** | У коді було `ai-nomorevlad.vercel.app`; у Domains Valid = `ai.nomorevlad.vercel.app` | Sitemap / canonical / share-лінки вели не туди |
-| D | Production rebuild битого деплою | Status Ready, output порожній / не той Output Directory | Білий Vercel `404: NOT_FOUND` |
-| E | `output: "export"` | Redirects у `next.config` не застосовуються до static export | `/` → `/bg` лише через `vercel.json` (або статичний `index`) |
+| # | Проблема | Ефект |
+|---|----------|--------|
+| A | Два Vercel-проєкти на один GitHub repo | Подвійні деплої |
+| B | Hyphen vs dot hostname у docs/коді | Плутанина URL |
+| C | **`output: "export"` + ручний Output Directory=`out`** | Build **Ready**, але CDN віддає білий `404: NOT_FOUND` |
+| D | Redirects у `next.config` ігноруються при static export | Крихкий `/` → `/bg` |
 
-**Коренева помилка в репо (виправлено в цьому ТЗ):** дефолтний `SITE_URL` з **дефісом** замість **крапки**.
+**Фікс у коді:** прибрано `output: "export"`. Деплой як **звичайний Next.js на Vercel** (SSG через `generateStaticParams` лишається). Redirect `/` → `/bg` працює через `next.config` + `vercel.json` + `app/page.tsx`.
 
 ---
 
-## 2. Канон (locked)
+## 2. Канон URL
 
 ```
 https://ai.nomorevlad.vercel.app
 ```
 
 - Без trailing slash.
-- Не плутати з `ai-nomorevlad.vercel.app` (дефіс) і не з тимчасовими `*-phi-gold.vercel.app`.
-- Після купівлі `nomore.estate`: оновити Domains + `NEXT_PUBLIC_SITE_URL` + fallback у `src/lib/site.ts` + sitemap/robots.
+- Env: `NEXT_PUBLIC_SITE_URL=https://ai.nomorevlad.vercel.app`
+- Fallback у `src/lib/site.ts` — той самий host.
+- Після `nomore.estate`: оновити Domains + env + fallback + sitemap/robots.
 
 ---
 
-## 3. Owner checklist (Vercel UI)
+## 3. Owner checklist (Vercel UI) — обовʼязково один раз
 
-Зробити в Dashboard один раз:
-
-1. Залишити **один** Git-linked проєкт; дубль — Disconnect Git або Delete.
-2. Settings → Domains: Production = `ai.nomorevlad.vercel.app` (Valid Configuration).
-3. Settings → General: Framework = **Next.js**; Root Directory = `.`; Output Directory = **порожньо** (або явно `out`).
-4. Git: Production Branch = `main` (або явна prod-гілка).
-5. Env (Production + Preview):  
-   `NEXT_PUBLIC_SITE_URL=https://ai.nomorevlad.vercel.app`
-6. Redeploy Production після зміни env.
-7. Перевірити логи останнього Ready: є export / `out/`, немає fail на post-build.
-8. Відкрити:
-   - `https://ai.nomorevlad.vercel.app/bg` → 200 + сайт
-   - `https://ai.nomorevlad.vercel.app/` → redirect або landing на `/bg`
-   - `https://ai.nomorevlad.vercel.app/ru/buy` → каталог
+1. **Один** Git-linked проєкт; дубль Disconnect/Delete.
+2. Settings → **Build & Development**:
+   - Framework Preset: **Next.js**
+   - Root Directory: *(empty)*
+   - **Output Directory: EMPTY** ← не `out`, не `.next`
+   - Build Command: default (`next build` / `npm run build`)
+3. Env: `NEXT_PUBLIC_SITE_URL=https://ai.nomorevlad.vercel.app`
+4. **Redeploy → Clear cache and redeploy**
+5. Smoke:
+   - `https://ai.nomorevlad.vercel.app/` → 308/307 → `/bg`
+   - `https://ai.nomorevlad.vercel.app/bg` → сайт Nomore
+   - `https://ai-nomorevlad.vercel.app/bg` → те саме (якщо alias живий)
 
 ---
 
-## 4. Code scope (реалізація ТЗ)
+## 4. Code changes (цей фікс)
 
 | Файл | Зміна |
 |------|--------|
-| `src/lib/site.ts` | Fallback `SITE_URL` → `https://ai.nomorevlad.vercel.app` |
-| `public/sitemap.xml` | Усі `<loc>` на канон |
-| `public/robots.txt` | Sitemap URL на канон |
-| `docs/TZ.md`, `docs/MONITORING.md` | Live URL |
-| `docs/TZ_DEPLOY.md` | Цей документ |
+| `next.config.ts` | Без `output: "export"`; redirects `/`→`/bg`; Image remotePatterns |
+| `vercel.json` | Redirect `/`→`/bg` |
+| `src/app/page.tsx` | `redirect('/bg')` fallback |
+| `src/lib/site.ts` | Canonical host з крапкою |
+| `public/sitemap.xml`, `robots.txt` | Canonical host |
 | `.env.example` | `NEXT_PUBLIC_SITE_URL` |
-
-Поза скоупом: купівля `nomore.estate`, контент listings, UI-баги.
 
 ---
 
 ## 5. Acceptance
 
-- [ ] Один Git-linked Vercel project
-- [ ] `https://ai.nomorevlad.vercel.app/bg` = 200 + Nomore UI
-- [ ] Немає білого Vercel `NOT_FOUND` на Production domain
-- [ ] У HTML canonical / sitemap host = `ai.nomorevlad.vercel.app`
-- [ ] Env `NEXT_PUBLIC_SITE_URL` виставлений і задеплоєний
-- [ ] Дубль-проєкт відключений
+- [ ] Немає білого Vercel `NOT_FOUND` на Production
+- [ ] `/` редіректить на `/bg`
+- [ ] `/bg` показує Nomore (wordmark без N, месенджери з іконками)
+- [ ] Output Directory у Dashboard порожній
+- [ ] Один Git-linked проєкт
 
 ---
 
-## 6. Smoke після деплою
+## 6. Якщо знову NOT_FOUND
 
-```bash
-# локально
-npm run build
-# після Vercel Ready:
-curl -sI https://ai.nomorevlad.vercel.app/bg | head -n 5
-curl -sI https://ai.nomorevlad.vercel.app/ | head -n 8
-# у HTML головної: canonical містить ai.nomorevlad.vercel.app
-```
-
-UI: text wordmark (без літери N), horizon favicon, WA/TG/Viber іконки в dock.
+1. Відкрий Deployment → Build Logs: чи є `Compiled successfully` без export/`out`.
+2. Перевір Output Directory = empty.
+3. Clear cache redeploy.
+4. Не імпортуй репо в другий Vercel project.

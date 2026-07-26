@@ -11,7 +11,7 @@
 2. Get your chat id (or channel id).
 3. Set `TELEGRAM_USERNAME` in `src/lib/contacts.ts` (public deep-link for users).
 4. Either:
-   - **A)** Drop `output: "export"` and add `POST /api/leads` that forwards to Telegram Bot API, or
+   - **A)** Add `POST /api/leads` that forwards to Telegram Bot API (static export already removed for Vercel), or
    - **B)** Point forms to an external webhook (Make / n8n / Cloudflare Worker) that posts to Telegram.
 
 ## Payload shape (ready)

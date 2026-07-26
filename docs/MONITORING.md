@@ -5,6 +5,7 @@
 **Method:** code audit against production screenshots + static build checks  
 
 Live target (after deploy): `https://ai.nomorevlad.vercel.app`  
+Deploy mode: Vercel-native Next.js (**no** `output: "export"`) — see `docs/TZ_DEPLOY.md`  
 Planned domain (later): `nomore.estate`
 
 ---

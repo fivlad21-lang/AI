@@ -3,13 +3,7 @@
 import { useEffect, useState } from "react";
 import { MessengerButton } from "@/components/MessengerButton";
 import { useApp } from "@/components/providers/AppProviders";
-import {
-  VIBER_DISPLAY,
-  WHATSAPP_DISPLAY,
-  telegramUrl,
-  viberUrl,
-  whatsappUrl,
-} from "@/lib/contacts";
+import { telegramUrl, viberUrl, whatsappUrl } from "@/lib/contacts";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 export function MessengerDock({ dict }: { dict: Dictionary }) {
@@ -37,7 +31,7 @@ export function MessengerDock({ dict }: { dict: Dictionary }) {
         kind="viber"
         variant="dock"
         href={viberUrl()}
-        label={`${dict.cta.viber} ${VIBER_DISPLAY}`}
+        label={dict.cta.viber}
       />
       {tg && (
         <MessengerButton
@@ -51,7 +45,7 @@ export function MessengerDock({ dict }: { dict: Dictionary }) {
         kind="whatsapp"
         variant="dock"
         href={whatsappUrl("Hi! I'm writing from nomore.estate")}
-        label={`${dict.cta.whatsapp} ${WHATSAPP_DISPLAY}`}
+        label={dict.cta.whatsapp}
       />
     </div>
   );
