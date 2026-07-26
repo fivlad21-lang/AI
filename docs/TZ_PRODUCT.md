@@ -88,17 +88,21 @@ Auth, оплата, повний CRM, бронювання з бекенд-ка�
 
 ## 9. Моніторинг (щотижня)
 
-- [ ] `/bg|/ru|/ua|/en` home, buy, listing, sell, contacts = OK  
-- [ ] WA / TG / Viber з dock  
-- [ ] Немає видимих «Demo/Демо» у UI  
-- [ ] Фільтр району на мобільному  
-- [ ] `/` → `/bg`, Output Directory у Vercel порожній  
+Повний чеклист і скоринг: **`docs/MONITORING.md`**.  
+Парсери оголошень / FSBO — **не зараз**.
+
+Коротко:
+- [ ] Build OK; Vercel Output Directory порожній  
+- [ ] Home: hero search + ≤1 WA на mobile first screen; drawer на весь екран  
+- [ ] Buy: фільтри + карта; listing → WA  
+- [ ] Auto-locale `/`; немає «Demo/Демо» у UI  
+- [ ] GA увімкнено (коли є `NEXT_PUBLIC_GA_ID`)
 
 ## 10. Acceptance «повноцінне агентство»
 
 - [ ] ≥5 published з власними фото  
 - [ ] Немає Unsplash як основного візуалу  
 - [ ] About з людьми/процесом  
-- [ ] Карта або свідоме відкладення  
+- [ ] Карта (є) + живий інвентар  
 - [ ] GA + кліки в WA вимірюються  
 - [ ] Стабільний канонікал / домен  
