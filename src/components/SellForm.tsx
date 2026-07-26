@@ -31,6 +31,8 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
       `Shooting: ${needShoot ? "yes" : "no"}`,
       `Description: ${description}`,
       `Locale: ${locale}`,
+      "",
+      dict.listing.autoReply,
     ].join("\n");
     window.open(whatsappUrl(text), "_blank");
   };
@@ -102,6 +104,8 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
       <GlassButton type="submit" variant="primary" className="w-full">
         {dict.cta.send}
       </GlassButton>
+      <p className="text-xs text-ink-muted">{dict.forms.success}</p>
+      <p className="text-xs text-ink-muted">{dict.listing.autoReply}</p>
     </form>
   );
 }

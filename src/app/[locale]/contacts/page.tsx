@@ -20,6 +20,8 @@ export default async function ContactsPage({
       <div className="max-w-xl">
         <h1 className="font-display text-4xl font-semibold">{dict.contacts.title}</h1>
         <p className="mt-3 text-ink-muted">{dict.contacts.subtitle}</p>
+        <p className="mt-2 text-sm text-ink-muted">{dict.contacts.replyNote}</p>
+        <p className="mt-2 text-xs text-ink-muted">{dict.footer.geo}</p>
         <GlassButton
           className="mt-6"
           variant="primary"
@@ -32,7 +34,7 @@ export default async function ContactsPage({
       <div className="mt-12 grid gap-8 lg:grid-cols-2">
         <div>
           <h2 className="font-display text-2xl">{dict.contacts.lookingTitle}</h2>
-          <p className="mt-2 text-sm text-ink-muted">{dict.home.demoNote}</p>
+          <p className="mt-2 text-sm text-ink-muted">{dict.listing.autoReply}</p>
         </div>
         <LeadForm locale={locale} dict={dict} prefix="[BUY]" />
       </div>

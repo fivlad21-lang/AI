@@ -123,3 +123,45 @@ select option {
   background: #0e1522;
   color: #eef3fb;
 }
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.animate-pulse {
+  animation: pulse-soft 1.4s ease-in-out infinite;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: #111 !important;
+  }
+
+  body::before,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .glass,
+  .glass-strong {
+    background: transparent !important;
+    border-color: #ddd !important;
+    backdrop-filter: none !important;
+  }
+
+  a {
+    color: #111 !important;
+    text-decoration: none !important;
+  }
+
+  .listing-print {
+    max-width: 100% !important;
+  }
+}

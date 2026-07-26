@@ -1,0 +1,22 @@
+# Telegram leads (D1 / D2)
+
+## Current state
+- Site is **static export** → no Next.js API routes on Vercel for this deploy mode.
+- Floating dock shows **“Telegram soon”** until username is set.
+- All leads go to **WhatsApp** with prefixes `[BUY]` `[RENT]` `[SELL]` `[VIEW]` `[SHORTLIST]` `[FAQ]`.
+
+## When ready
+1. Create bot via `@BotFather`, get token.
+2. Get your chat id (or channel id).
+3. Set `TELEGRAM_USERNAME` in `src/lib/contacts.ts` (public deep-link for users).
+4. Either:
+   - **A)** Drop `output: "export"` and add `POST /api/leads` that forwards to Telegram Bot API, or
+   - **B)** Point forms to an external webhook (Make / n8n / Cloudflare Worker) that posts to Telegram.
+
+## Payload shape (ready)
+```
+{
+  prefix: "[BUY]" | "[RENT]" | "[SELL]" | "[VIEW]" | "[SHORTLIST]" | "[FAQ]",
+  locale, name, contact, fields..., sourceUrl
+}
+```

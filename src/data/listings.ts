@@ -3,11 +3,13 @@ import type { LocationId } from "@/data/locations";
 
 export type Deal = "sale" | "rent";
 export type PropertyType = "apartment" | "house" | "villa" | "studio";
+export type ListingStatus = "published" | "reserved" | "sold" | "draft";
 
 export type Listing = {
   id: string;
   slug: string;
-  demo: true;
+  demo: boolean;
+  status: ListingStatus;
   deal: Deal;
   type: PropertyType;
   location: LocationId;
@@ -19,9 +21,12 @@ export type Listing = {
   floorsTotal?: number;
   act?: "14" | "15" | "16";
   features: string[];
+  beachMinutes?: number;
   cover: string;
   gallery: string[];
   video?: boolean;
+  videoUrl?: string;
+  publishedAt: string;
   title: Record<Locale, string>;
   description: Record<Locale, string>;
 };
@@ -44,6 +49,7 @@ export const listings: Listing[] = [
     id: "1",
     slug: "sea-view-apartment-sunny-beach",
     demo: true,
+    status: "published",
     deal: "sale",
     type: "apartment",
     location: "sunny-beach",
@@ -54,9 +60,12 @@ export const listings: Listing[] = [
     floorsTotal: 8,
     act: "16",
     features: ["sea-view", "parking", "furnished", "elevator"],
+    beachMinutes: 7,
     cover: img.apt1,
     gallery: [img.apt1, img.coast1, img.apt2, img.sea2],
     video: true,
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    publishedAt: "2026-07-01",
     title: {
       en: "2-bed apartment with sea view",
       bg: "Двустаен апартамент с морски изглед",
@@ -74,6 +83,7 @@ export const listings: Listing[] = [
     id: "2",
     slug: "modern-studio-burgas-center",
     demo: true,
+    status: "published",
     deal: "sale",
     type: "studio",
     location: "burgas",
@@ -84,8 +94,10 @@ export const listings: Listing[] = [
     floorsTotal: 6,
     act: "16",
     features: ["furnished", "elevator"],
+    beachMinutes: 18,
     cover: img.studio1,
     gallery: [img.studio1, img.apt3, img.apt2],
+    publishedAt: "2026-07-05",
     title: {
       en: "Modern studio in Burgas center",
       bg: "Модерно студио в центъра на Бургас",
@@ -103,6 +115,7 @@ export const listings: Listing[] = [
     id: "3",
     slug: "villa-garden-sozopol",
     demo: true,
+    status: "published",
     deal: "sale",
     type: "villa",
     location: "sozopol",
@@ -111,9 +124,11 @@ export const listings: Listing[] = [
     areaM2: 186,
     act: "16",
     features: ["sea-view", "parking", "pool"],
+    beachMinutes: 12,
     cover: img.villa1,
     gallery: [img.villa1, img.villa2, img.coast2, img.sea1],
     video: true,
+    publishedAt: "2026-06-20",
     title: {
       en: "Family villa with garden near Sozopol",
       bg: "Семейна вила с градина край Созопол",
@@ -131,6 +146,7 @@ export const listings: Listing[] = [
     id: "4",
     slug: "rent-apartment-nesebar",
     demo: true,
+    status: "published",
     deal: "rent",
     type: "apartment",
     location: "nesebar",
@@ -141,8 +157,10 @@ export const listings: Listing[] = [
     floor: 2,
     floorsTotal: 5,
     features: ["furnished", "parking"],
+    beachMinutes: 9,
     cover: img.apt2,
     gallery: [img.apt2, img.apt1, img.coast1],
+    publishedAt: "2026-07-10",
     title: {
       en: "Furnished 2-bed for long-term rent",
       bg: "Обзаведен двустаен под дългосрочен наем",
@@ -160,6 +178,7 @@ export const listings: Listing[] = [
     id: "5",
     slug: "penthouse-sveti-vlas",
     demo: true,
+    status: "published",
     deal: "sale",
     type: "apartment",
     location: "sveti-vlas",
@@ -170,9 +189,11 @@ export const listings: Listing[] = [
     floorsTotal: 7,
     act: "16",
     features: ["sea-view", "parking", "elevator", "furnished"],
+    beachMinutes: 5,
     cover: img.sea1,
     gallery: [img.sea1, img.apt3, img.coast2, img.villa2],
     video: true,
+    publishedAt: "2026-06-28",
     title: {
       en: "Top-floor apartment in Sveti Vlas",
       bg: "Апартамент на последен етаж в Свети Влас",
@@ -190,6 +211,7 @@ export const listings: Listing[] = [
     id: "6",
     slug: "rent-studio-pomorie",
     demo: true,
+    status: "published",
     deal: "rent",
     type: "studio",
     location: "pomorie",
@@ -200,8 +222,10 @@ export const listings: Listing[] = [
     floor: 1,
     floorsTotal: 4,
     features: ["furnished"],
+    beachMinutes: 6,
     cover: img.apt3,
     gallery: [img.apt3, img.studio1, img.coast1],
+    publishedAt: "2026-07-12",
     title: {
       en: "Cozy studio for rent in Pomorie",
       bg: "Уютно студио под наем в Поморие",
@@ -215,32 +239,92 @@ export const listings: Listing[] = [
       ua: "Просто, чисто, біля набережної. Демо.",
     },
   },
+  {
+    id: "7",
+    slug: "draft-reserved-example",
+    demo: true,
+    status: "reserved",
+    deal: "sale",
+    type: "apartment",
+    location: "ravda",
+    priceEur: 99000,
+    rooms: 2,
+    areaM2: 68,
+    features: ["parking"],
+    beachMinutes: 4,
+    cover: img.apt2,
+    gallery: [img.apt2],
+    publishedAt: "2026-05-01",
+    title: {
+      en: "Reserved demo (hidden from catalog)",
+      bg: "Резервирано демо (скрито)",
+      ru: "Резерв демо (скрыто)",
+      ua: "Резерв демо (приховано)",
+    },
+    description: {
+      en: "Status example — not shown in public catalog.",
+      bg: "Пример за статус — не се показва.",
+      ru: "Пример статуса — не показывается.",
+      ua: "Приклад статусу — не показується.",
+    },
+  },
 ];
 
 export function getListing(slug: string) {
   return listings.find((l) => l.slug === slug);
 }
 
+export function getPublishedListings() {
+  return listings.filter((l) => l.status === "published");
+}
+
+export type SortKey = "new" | "price-asc" | "price-desc" | "area-desc";
+
 export function filterListings(opts: {
   deal?: Deal;
   location?: string;
   type?: string;
   rooms?: string;
-  q?: string;
+  priceMin?: number;
+  priceMax?: number;
+  areaMin?: number;
+  areaMax?: number;
+  features?: string[];
+  sort?: SortKey;
+  includeUnpublished?: boolean;
 }) {
-  return listings.filter((l) => {
-    if (opts.deal && l.deal !== opts.deal) return false;
-    if (opts.location && opts.location !== "all" && l.location !== opts.location)
-      return false;
-    if (opts.type && opts.type !== "all" && l.type !== opts.type) return false;
-    if (opts.rooms && opts.rooms !== "all") {
-      if (opts.rooms === "studio" && l.rooms !== "studio") return false;
-      if (opts.rooms === "4plus") {
-        if (typeof l.rooms !== "number" || l.rooms < 4) return false;
-      } else if (opts.rooms !== "studio") {
-        if (String(l.rooms) !== opts.rooms) return false;
+  let items = (opts.includeUnpublished ? listings : getPublishedListings()).filter(
+    (l) => {
+      if (opts.deal && l.deal !== opts.deal) return false;
+      if (opts.location && opts.location !== "all" && l.location !== opts.location)
+        return false;
+      if (opts.type && opts.type !== "all" && l.type !== opts.type) return false;
+      if (opts.rooms && opts.rooms !== "all") {
+        if (opts.rooms === "studio" && l.rooms !== "studio") return false;
+        if (opts.rooms === "4plus") {
+          if (typeof l.rooms !== "number" || l.rooms < 4) return false;
+        } else if (opts.rooms !== "studio") {
+          if (String(l.rooms) !== opts.rooms) return false;
+        }
       }
-    }
-    return true;
+      if (opts.priceMin != null && l.priceEur < opts.priceMin) return false;
+      if (opts.priceMax != null && l.priceEur > opts.priceMax) return false;
+      if (opts.areaMin != null && l.areaM2 < opts.areaMin) return false;
+      if (opts.areaMax != null && l.areaM2 > opts.areaMax) return false;
+      if (opts.features?.length) {
+        if (!opts.features.every((f) => l.features.includes(f))) return false;
+      }
+      return true;
+    },
+  );
+
+  const sort = opts.sort || "new";
+  items = [...items].sort((a, b) => {
+    if (sort === "price-asc") return a.priceEur - b.priceEur;
+    if (sort === "price-desc") return b.priceEur - a.priceEur;
+    if (sort === "area-desc") return b.areaM2 - a.areaM2;
+    return b.publishedAt.localeCompare(a.publishedAt);
   });
+
+  return items;
 }

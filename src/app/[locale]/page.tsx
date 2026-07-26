@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GlassButton } from "@/components/GlassButton";
 import { ListingCard } from "@/components/ListingCard";
-import { listings } from "@/data/listings";
+import { Testimonials } from "@/components/Testimonials";
+import { Logo } from "@/components/Logo";
+import { getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -18,11 +20,10 @@ export default async function HomePage({
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
   const dict = getDictionary(locale);
-  const featured = listings.slice(0, 3);
+  const featured = getPublishedListings().slice(0, 3);
 
   return (
     <>
-      {/* Hero — one composition, brand first */}
       <section className="relative min-h-[88dvh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -38,11 +39,11 @@ export default async function HomePage({
         </div>
 
         <div className="relative mx-auto flex min-h-[88dvh] max-w-6xl flex-col justify-end px-4 pb-16 pt-24 md:justify-center md:px-6 md:pb-24 md:pt-20">
-          <p className="animate-rise font-display text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-            Nomore
-            <span className="ml-2 text-sm font-semibold uppercase tracking-[0.2em] text-ink-muted">
-              estate
-            </span>
+          <div className="animate-rise">
+            <Logo locale={locale} size="lg" />
+          </div>
+          <p className="animate-rise mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+            {dict.microcopy}
           </p>
           <h1 className="animate-rise-delay-1 mt-5 max-w-3xl font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
             {dict.tagline}
@@ -69,7 +70,6 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* Featured */}
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
@@ -92,7 +92,6 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* How — LAB-style numbered steps */}
       <section className="border-y border-white/[0.06] bg-bg-elevated/50">
         <div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
           <p className="section-label">Process</p>
@@ -113,12 +112,14 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* Areas */}
+      <Testimonials locale={locale} dict={dict} />
+
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
         <p className="section-label">Coast</p>
         <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
           {dict.home.areasTitle}
         </h2>
+        <p className="mt-2 text-sm text-ink-muted">{dict.footer.geo}</p>
         <div className="mt-7 flex flex-wrap gap-2.5">
           {locations.map((l) => (
             <Link
@@ -130,9 +131,17 @@ export default async function HomePage({
             </Link>
           ))}
         </div>
+        <p className="mt-8 text-sm">
+          <Link href={`/${locale}/guide`} className="text-sea hover:text-ink">
+            {dict.nav.guide} →
+          </Link>
+          <span className="mx-3 text-ink-muted">·</span>
+          <Link href={`/${locale}/blog`} className="text-sea hover:text-ink">
+            {dict.nav.blog} →
+          </Link>
+        </p>
       </section>
 
-      {/* Owners CTA — attention → trust → action */}
       <section className="mx-auto max-w-6xl px-4 pb-24 md:px-6">
         <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.1] bg-gradient-to-br from-[#121a28] to-[#0a101a] p-7 md:flex md:items-center md:justify-between md:gap-12 md:p-12">
           <div

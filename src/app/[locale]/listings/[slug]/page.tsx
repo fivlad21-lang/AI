@@ -1,14 +1,22 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GlassButton } from "@/components/GlassButton";
 import { ListingCard } from "@/components/ListingCard";
 import { FavoriteButton } from "@/components/FavoriteButton";
-import { getListing, listings } from "@/data/listings";
+import { CompareButton } from "@/components/CompareButton";
+import { GalleryLightbox } from "@/components/GalleryLightbox";
+import { ViewingCalendar } from "@/components/ViewingCalendar";
+import { ShareButton } from "@/components/ShareButton";
+import { PriceText } from "@/components/PriceText";
+import { PrintButton } from "@/components/PrintButton";
+import { ListingJsonLd } from "@/components/JsonLd";
+import { CurrencyToggle } from "@/components/CurrencyToggle";
+import { getListing, getPublishedListings, listings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -28,31 +36,26 @@ export default async function ListingPage({
   if (!listing) notFound();
   const dict = getDictionary(locale);
   const loc = locations.find((l) => l.id === listing.location);
-  const price = new Intl.NumberFormat("en-EU", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 0,
-  }).format(listing.priceEur);
-  const similar = listings
+  const pageUrl = `${SITE_URL}/${locale}/listings/${listing.slug}`;
+  const similar = getPublishedListings()
     .filter((l) => l.id !== listing.id && l.deal === listing.deal)
     .slice(0, 3);
 
   const wa = whatsappUrl(
-    `[VIEW] ${listing.title.en}\n${price}\nhttps://nomore.estate/${locale}/listings/${listing.slug}`,
+    `[VIEW] ${listing.title.en}\n${listing.priceEur} EUR\n${pageUrl}`,
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-12">
-      <div className="grid gap-3 md:grid-cols-2">
-        {listing.gallery.map((src, i) => (
-          <div
-            key={src + i}
-            className={`relative overflow-hidden rounded-3xl ${i === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"}`}
-          >
-            <Image src={src} alt="" fill className="object-cover" unoptimized sizes="100vw" />
-          </div>
-        ))}
-      </div>
+    <div className="listing-print mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-12">
+      <ListingJsonLd
+        name={listing.title[locale]}
+        description={listing.description[locale]}
+        image={listing.cover}
+        priceEur={listing.priceEur}
+        url={pageUrl}
+      />
+
+      <GalleryLightbox images={listing.gallery} alt={listing.title[locale]} />
 
       <div className="mt-8 flex flex-wrap items-start justify-between gap-4">
         <div>
@@ -65,17 +68,37 @@ export default async function ListingPage({
                 {dict.listing.demo}
               </span>
             )}
+            {listing.status === "reserved" && (
+              <span className="glass rounded-full px-3 py-1 text-xs font-semibold uppercase">
+                {dict.listing.reserved}
+              </span>
+            )}
+            {listing.status === "sold" && (
+              <span className="glass rounded-full px-3 py-1 text-xs font-semibold uppercase">
+                {dict.listing.sold}
+              </span>
+            )}
           </div>
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
             {listing.title[locale]}
           </h1>
           <p className="mt-2 text-ink-muted">{loc?.label[locale]}</p>
+          {listing.beachMinutes != null && (
+            <p className="mt-1 text-sm text-ink-muted">
+              {dict.listing.beach}: {listing.beachMinutes} {dict.listing.minutes}
+            </p>
+          )}
           <p className="mt-4 text-2xl font-semibold tabular-nums">
-            {price}
-            {listing.deal === "rent" ? dict.listing.month : ""}
+            <PriceText listing={listing} dict={dict} locale={locale} />
           </p>
         </div>
-        <FavoriteButton id={listing.id} />
+        <div className="flex flex-wrap items-center gap-2 print:hidden">
+          <CurrencyToggle dict={dict} />
+          <FavoriteButton id={listing.id} />
+          <CompareButton id={listing.id} dict={dict} />
+          <ShareButton dict={dict} title={listing.title[locale]} url={pageUrl} />
+          <PrintButton dict={dict} />
+        </div>
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-4">
@@ -110,6 +133,20 @@ export default async function ListingPage({
         {listing.description[locale]}
       </p>
 
+      {(listing.video || listing.videoUrl) && (
+        <div className="mt-6 print:hidden">
+          {listing.videoUrl ? (
+            <GlassButton href={listing.videoUrl} external variant="glass">
+              {dict.listing.watchVideo}
+            </GlassButton>
+          ) : (
+            <span className="glass inline-flex rounded-full px-3 py-1.5 text-xs font-semibold">
+              {dict.listing.video}
+            </span>
+          )}
+        </div>
+      )}
+
       <div className="mt-6">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-ink-muted">
           {dict.listing.features}
@@ -123,20 +160,31 @@ export default async function ListingPage({
         </div>
       </div>
 
-      <div className="sticky bottom-4 z-30 mt-10 flex flex-wrap gap-3 md:static">
-        <GlassButton href={wa} external variant="primary" className="flex-1 md:flex-none">
-          {dict.cta.applyViewing}
-        </GlassButton>
-        <GlassButton href={wa} external variant="glass">
-          {dict.cta.whatsapp}
-        </GlassButton>
-        <Link href={`/${locale}/${listing.deal === "sale" ? "buy" : "rent"}`} className="text-sm text-ink-muted self-center px-2">
-          ← {listing.deal === "sale" ? dict.nav.buy : dict.nav.rent}
-        </Link>
+      <div className="mt-10 grid gap-6 lg:grid-cols-2 print:hidden">
+        <ViewingCalendar
+          dict={dict}
+          listingTitle={listing.title[locale]}
+          listingUrl={pageUrl}
+        />
+        <div className="flex flex-col justify-end gap-3">
+          <GlassButton href={wa} external variant="primary">
+            {dict.cta.applyViewing}
+          </GlassButton>
+          <GlassButton href={wa} external variant="glass">
+            {dict.cta.whatsapp}
+          </GlassButton>
+          <p className="text-xs text-ink-muted">{dict.listing.autoReply}</p>
+          <Link
+            href={`/${locale}/${listing.deal === "sale" ? "buy" : "rent"}`}
+            className="text-sm text-ink-muted"
+          >
+            ← {listing.deal === "sale" ? dict.nav.buy : dict.nav.rent}
+          </Link>
+        </div>
       </div>
 
       {similar.length > 0 && (
-        <section className="mt-16">
+        <section className="mt-16 print:hidden">
           <h2 className="font-display text-2xl">{dict.listing.similar}</h2>
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {similar.map((l) => (
@@ -145,6 +193,7 @@ export default async function ListingPage({
           </div>
         </section>
       )}
+
     </div>
   );
 }

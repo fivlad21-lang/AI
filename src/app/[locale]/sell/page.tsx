@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { GlassButton } from "@/components/GlassButton";
 import { SellForm } from "@/components/SellForm";
+import { ShootGallery } from "@/components/ShootGallery";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
@@ -74,6 +75,8 @@ export default async function SellPage({
           </div>
           <SellForm locale={locale} dict={dict} />
         </div>
+
+        <ShootGallery dict={dict} />
       </div>
     </div>
   );

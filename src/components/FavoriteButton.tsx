@@ -1,39 +1,24 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
-
-const KEY = "nomore-favorites";
-
-function read(): string[] {
-  try {
-    return JSON.parse(localStorage.getItem(KEY) || "[]");
-  } catch {
-    return [];
-  }
-}
+import { useApp } from "@/components/providers/AppProviders";
 
 export function FavoriteButton({ id }: { id: string }) {
-  const [on, setOn] = useState(false);
-
-  useEffect(() => {
-    setOn(read().includes(id));
-  }, [id]);
-
-  const toggle = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const cur = read();
-    const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
-    localStorage.setItem(KEY, JSON.stringify(next));
-    setOn(next.includes(id));
-  };
+  const { isFavorite, toggleFavorite } = useApp();
+  const on = isFavorite(id);
 
   return (
     <button
       type="button"
-      onClick={toggle}
-      className="glass flex h-9 w-9 items-center justify-center rounded-full text-sm"
-      aria-label="Favorite"
+      aria-label={on ? "Remove favorite" : "Save"}
+      aria-pressed={on}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFavorite(id);
+      }}
+      className={`glass flex h-9 w-9 items-center justify-center rounded-full text-sm transition ${
+        on ? "text-rose-300" : "text-ink-muted hover:text-ink"
+      }`}
     >
       {on ? "♥" : "♡"}
     </button>
