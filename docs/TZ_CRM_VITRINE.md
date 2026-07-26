@@ -119,6 +119,7 @@ CRM має віддати (REST або аналог) список published-об
 | P0 | ~~Авто-locale з `Accept-Language` / cookie~~ **Done** (`src/proxy.ts`, cookie `nomore-locale`) |
 | P0 | ~~Карта каталогу + `lat/lng`~~ **Done** (Leaflet, dark Carto tiles) |
 | P1 | ~~Залишити відгук (зірки + опис → WA)~~ **Done** · lead-first home без акценту на повний інвентар |
+| P1 | ~~Hero search + iPhone drawer + ≤1 WA на моб. first screen~~ **Done** |
 | P1 | Grid / list щільність (опційно) |
 | P1 | CRM sync job + generated cache |
 | P2 | Incremental `updatedSince` |

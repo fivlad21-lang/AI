@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GlassButton } from "@/components/GlassButton";
+import { HeroSearch } from "@/components/HeroSearch";
 import { ListingCard } from "@/components/ListingCard";
 import { Testimonials } from "@/components/Testimonials";
 import { Logo } from "@/components/Logo";
@@ -46,33 +47,39 @@ export default async function HomePage({
           <div className="absolute inset-0 bg-gradient-to-r from-bg/80 via-bg/40 to-transparent" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[88dvh] max-w-6xl flex-col justify-end px-4 pb-16 pt-24 md:justify-center md:px-6 md:pb-24 md:pt-20">
-          <div className="animate-rise">
-            <Logo locale={locale} size="lg" />
+        <div className="relative mx-auto grid min-h-[88dvh] max-w-6xl items-end gap-10 px-4 pb-14 pt-24 md:items-center md:gap-12 md:px-6 md:pb-24 md:pt-20 lg:grid-cols-2 lg:items-center">
+          <div>
+            <div className="animate-rise">
+              <Logo locale={locale} size="lg" />
+            </div>
+            <p className="animate-rise mt-3 max-w-xl text-sm leading-relaxed text-ink-muted md:text-[15px]">
+              {dict.microcopy}
+            </p>
+            <h1 className="animate-rise-delay-1 mt-5 max-w-xl font-display text-[2.35rem] font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-[3.25rem]">
+              <span className="block">{dict.taglineLine1}</span>
+              <span className="block">{dict.taglineLine2}</span>
+            </h1>
+            <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
+              {dict.taglineSub}
+            </p>
+            <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
+              <MessengerButton
+                kind="whatsapp"
+                href={whatsappUrl(matchPrefill[locale])}
+                label={dict.cta.getMatch}
+                className="!px-6 !py-3"
+              />
+              <GlassButton href={`/${locale}/sell`} variant="glass">
+                {dict.cta.sellWithUs}
+              </GlassButton>
+              <GlassButton href={`/${locale}/buy`} variant="ghost">
+                {dict.cta.viewListings}
+              </GlassButton>
+            </div>
           </div>
-          <p className="animate-rise mt-3 max-w-xl text-sm leading-relaxed text-ink-muted md:text-[15px]">
-            {dict.microcopy}
-          </p>
-          <h1 className="animate-rise-delay-1 mt-5 max-w-3xl font-display text-[2.35rem] font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
-            <span className="block">{dict.taglineLine1}</span>
-            <span className="block">{dict.taglineLine2}</span>
-          </h1>
-          <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
-            {dict.taglineSub}
-          </p>
-          <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
-            <MessengerButton
-              kind="whatsapp"
-              href={whatsappUrl(matchPrefill[locale])}
-              label={dict.cta.getMatch}
-              className="!px-6 !py-3"
-            />
-            <GlassButton href={`/${locale}/sell`} variant="glass">
-              {dict.cta.sellWithUs}
-            </GlassButton>
-            <GlassButton href={`/${locale}/buy`} variant="ghost">
-              {dict.cta.viewListings}
-            </GlassButton>
+
+          <div className="flex justify-start lg:justify-end">
+            <HeroSearch locale={locale} dict={dict} />
           </div>
         </div>
       </section>

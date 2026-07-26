@@ -14,13 +14,18 @@ export function MessengerDock({ dict }: { dict: Dictionary }) {
   const tg = telegramUrl("Hi from Nomore");
   const lift = compare.length > 0 || !cookiesOk;
   const onListing = /\/listings\//.test(pathname);
+  /** Home locale root — keep dock off until below hero so first screen has ≤1 WA. */
+  const onHome = /^\/(bg|ru|ua|en)\/?$/.test(pathname);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 220);
+    const threshold = onHome
+      ? Math.min(window.innerHeight * 0.75, 640)
+      : 220;
+    const onScroll = () => setVisible(window.scrollY > threshold);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [onHome, pathname]);
 
   return (
     <div

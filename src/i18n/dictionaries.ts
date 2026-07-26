@@ -37,6 +37,7 @@ export type Dictionary = {
     copied: string;
     leaveReview: string;
     getMatch: string;
+    showResults: string;
   };
   home: {
     featured: string;
@@ -47,6 +48,7 @@ export type Dictionary = {
     ownersTitle: string;
     ownersText: string;
     trustTitle: string;
+    searchTitle: string;
   };
   review: {
     title: string;
@@ -232,6 +234,7 @@ const en: Dictionary = {
     copied: "Copied",
     leaveReview: "Leave a review",
     getMatch: "Get a shortlist",
+    showResults: "Show homes",
   },
   home: {
     featured: "Example homes",
@@ -247,6 +250,7 @@ const en: Dictionary = {
     ownersText:
       "List with Nomore: pro photo & vertical video for our socials, then we handle the leads. Shooting is free — we work on a deal commission.",
     trustTitle: "What clients say",
+    searchTitle: "Quick search",
   },
   review: {
     title: "Leave a review",
@@ -465,6 +469,7 @@ const bg: Dictionary = {
     viber: "Viber",
     leaveReview: "Остави отзив",
     getMatch: "Получи подборка",
+    showResults: "Покажи имоти",
   },
   home: {
     featured: "Примери за имоти",
@@ -480,6 +485,7 @@ const bg: Dictionary = {
     ownersText:
       "Пусни го с Nomore: професионални фото и вертикално видео за нашите социални мрежи. Заснемането е без отделна такса — работим на комисиона от сделката.",
     trustTitle: "Какво казват клиентите",
+    searchTitle: "Бързо търсене",
   },
   review: {
     title: "Остави отзив",
@@ -701,6 +707,7 @@ const ru: Dictionary = {
     telegramSoon: "Telegram скоро",
     leaveReview: "Оставить отзыв",
     getMatch: "Получить подборку",
+    showResults: "Показать объекты",
   },
   home: {
     featured: "Примеры объектов",
@@ -716,6 +723,7 @@ const ru: Dictionary = {
     ownersText:
       "С Nomore: профессиональные фото и вертикальное видео для наших соцсетей. Съёмка без отдельной оплаты — работаем за комиссию со сделки.",
     trustTitle: "Что говорят клиенты",
+    searchTitle: "Быстрый поиск",
   },
   review: {
     title: "Оставить отзыв",
@@ -937,6 +945,7 @@ const ua: Dictionary = {
     telegramSoon: "Telegram скоро",
     leaveReview: "Залишити відгук",
     getMatch: "Отримати підбірку",
+    showResults: "Показати об’єкти",
   },
   home: {
     featured: "Приклади об’єктів",
@@ -952,6 +961,7 @@ const ua: Dictionary = {
     ownersText:
       "З Nomore: професійні фото та вертикальне відео для наших соцмереж. Зйомка без окремої оплати — працюємо за комісією з угоди.",
     trustTitle: "Що кажуть клієнти",
+    searchTitle: "Швидкий пошук",
   },
   review: {
     title: "Залишити відгук",

@@ -60,7 +60,10 @@
 8. 3–6 статей блогу під запити Бургас / Акт 16 / оренда  
 9. Локалізовані префіли WhatsApp  
 9b. ~~Авто-locale з браузера на `/`~~ **Done** — cookie → Accept-Language → `bg` (`src/proxy.ts`)  
-9c. ~~Залишити відгук (зірки + текст → WA, модерація)~~ **Done** · lead-first home (підбірка перша, приклади об’єктів)
+9c. ~~Залишити відгук (зірки + текст → WA, модерація)~~ **Done** · lead-first home (підбірка перша, приклади об’єктів)  
+9d. ~~**Hero search**~~ **Done** — компактна панель справа (desktop) / під текстом (mobile): район · тип · кімнати · мін/макс € · Buy|Rent → `/buy`|`/rent` з query  
+9e. ~~**Mobile menu iPhone-style**~~ **Done** — drawer справа, dim overlay, spring slide, tap outside / Esc  
+9f. ~~**Mobile first screen: ≤1 WhatsApp**~~ **Done** — без WA в хедері на `<md`; на `/` dock після скролу нижче hero
 
 ## 5. P2 — зростання / CRM
 
