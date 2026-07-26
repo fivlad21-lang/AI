@@ -93,7 +93,7 @@ export function CatalogMap({ items, locale, dict }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <div className="relative mt-8 overflow-hidden rounded-3xl border border-white/10">
+    <div className="nomore-map relative mt-8 overflow-hidden rounded-3xl border border-white/10">
       <div ref={containerRef} className="h-[min(70vh,560px)] w-full" />
       {/* SSR-friendly fallback list for no-JS is the grid; map is progressive */}
       <noscript>

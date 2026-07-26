@@ -55,7 +55,7 @@ export function ListingMiniMap({
   }, [lat, lng, label]);
 
   return (
-    <div className="mt-8 overflow-hidden rounded-3xl border border-white/10 print:hidden">
+    <div className="nomore-map mt-8 overflow-hidden rounded-3xl border border-white/10 print:hidden">
       <div ref={ref} className="h-56 w-full md:h-64" />
       <p className="border-t border-white/10 bg-bg-elevated/80 px-4 py-2.5 text-xs text-ink-muted">
         {label}
