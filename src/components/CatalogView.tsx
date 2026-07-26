@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { CatalogFilters } from "@/components/CatalogFilters";
 import { ListingCard } from "@/components/ListingCard";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
-import { GlassButton } from "@/components/GlassButton";
+import { MessengerButton } from "@/components/MessengerButton";
 import { filterListings, type Deal, type SortKey } from "@/data/listings";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -62,16 +62,14 @@ export function CatalogView({
         <div className="mt-10 glass rounded-3xl p-8 text-center">
           <p className="text-ink">{dict.catalog.empty}</p>
           <p className="mt-2 text-sm text-ink-muted">{dict.catalog.emptyHint}</p>
-          <GlassButton
+          <MessengerButton
             className="mt-4"
-            variant="primary"
+            kind="whatsapp"
             href={whatsappUrl(
               `[${deal === "sale" ? "BUY" : "RENT"}] Need help finding a property`,
             )}
-            external
-          >
-            {dict.cta.whatsapp}
-          </GlassButton>
+            label={dict.cta.whatsapp}
+          />
         </div>
       ) : (
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

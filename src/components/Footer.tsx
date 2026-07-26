@@ -2,9 +2,18 @@ import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Logo } from "@/components/Logo";
-import { WHATSAPP_DISPLAY, whatsappUrl } from "@/lib/contacts";
+import { MessengerButton } from "@/components/MessengerButton";
+import {
+  VIBER_DISPLAY,
+  WHATSAPP_DISPLAY,
+  telegramUrl,
+  viberUrl,
+  whatsappUrl,
+} from "@/lib/contacts";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const tg = telegramUrl("Hi from footer");
+
   return (
     <footer className="mt-auto border-t border-white/[0.06] bg-[#080c14] print:hidden">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-3 md:px-6">
@@ -46,14 +55,28 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </Link>
         </div>
         <div className="text-sm text-ink-muted">
-          <a
-            href={whatsappUrl("Hi from footer")}
-            className="font-semibold text-ink transition hover:text-sea"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            WhatsApp {WHATSAPP_DISPLAY}
-          </a>
+          <div className="flex flex-wrap gap-2">
+            <MessengerButton
+              kind="whatsapp"
+              href={whatsappUrl("Hi from footer")}
+              label={`${dict.cta.whatsapp} ${WHATSAPP_DISPLAY}`}
+              className="!px-4 !py-2"
+            />
+            {tg && (
+              <MessengerButton
+                kind="telegram"
+                href={tg}
+                label={dict.cta.telegram}
+                className="!px-4 !py-2"
+              />
+            )}
+            <MessengerButton
+              kind="viber"
+              href={viberUrl()}
+              label={`${dict.cta.viber} ${VIBER_DISPLAY}`}
+              className="!px-4 !py-2"
+            />
+          </div>
           <p className="mt-3 text-xs leading-relaxed">{dict.footer.demo}</p>
         </div>
       </div>

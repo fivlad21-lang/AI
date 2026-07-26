@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { GlassButton } from "@/components/GlassButton";
+import { MessengerGlyph } from "@/components/MessengerButton";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
 
@@ -88,6 +89,7 @@ export function ViewingCalendar({
       </div>
       <p className="mt-4 text-xs text-ink-muted">{dict.listing.autoReply}</p>
       <GlassButton href={wa} external variant="primary" className="mt-4">
+        <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
         {dict.cta.applyViewing}
       </GlassButton>
     </div>

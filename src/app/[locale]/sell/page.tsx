@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { GlassButton } from "@/components/GlassButton";
 import { SellForm } from "@/components/SellForm";
 import { ShootGallery } from "@/components/ShootGallery";
+import { MessengerButton } from "@/components/MessengerButton";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
@@ -41,13 +41,11 @@ export default async function SellPage({
           {dict.sell.modelB}
         </p>
         <div className="mt-7">
-          <GlassButton
+          <MessengerButton
+            kind="whatsapp"
             href={whatsappUrl("[SELL] Want to list my property with shooting")}
-            external
-            variant="glass"
-          >
-            {dict.cta.whatsapp}
-          </GlassButton>
+            label={dict.cta.whatsapp}
+          />
         </div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-14">

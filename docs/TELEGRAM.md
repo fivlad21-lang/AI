@@ -2,8 +2,9 @@
 
 ## Current state
 - Site is **static export** → no Next.js API routes on Vercel for this deploy mode.
-- Floating dock links to **[@notany](https://t.me/notany)** (`TELEGRAM_USERNAME` in `contacts.ts`).
-- All leads go to **WhatsApp** with prefixes `[BUY]` `[RENT]` `[SELL]` `[VIEW]` `[SHORTLIST]` `[FAQ]`.
+- Floating dock: **WhatsApp** (`+380 93 385 18 04`), **Telegram** [@notany](https://t.me/notany), **Viber** (`+49 151 40166765`).
+- Form leads primarily go to **WhatsApp** with prefixes `[BUY]` `[RENT]` `[SELL]` `[VIEW]` `[SHORTLIST]` `[FAQ]`.
+- Messenger buttons use brand SVG logos (not WA/TG text badges).
 
 ## When ready
 1. Create bot via `@BotFather`, get token.

@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
+import { MessengerGlyph } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
 
 export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -101,6 +102,7 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
         {dict.forms.needShoot}
       </label>
       <GlassButton type="submit" variant="primary" className="w-full">
+        <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
         {dict.cta.send}
       </GlassButton>
       <p className="text-xs text-ink-muted">{dict.forms.success}</p>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { GlassButton } from "@/components/GlassButton";
+import { MessengerButton } from "@/components/MessengerButton";
 import { faqItems } from "@/data/faq";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -49,13 +49,11 @@ export default async function GuidePage({
       </div>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <GlassButton
+        <MessengerButton
+          kind="whatsapp"
           href={whatsappUrl(`[FAQ] Question from guide page`)}
-          external
-          variant="primary"
-        >
-          {dict.cta.whatsapp}
-        </GlassButton>
+          label={dict.cta.whatsapp}
+        />
         <Link href={`/${locale}/blog`} className="self-center text-sm text-sea">
           {dict.nav.blog} →
         </Link>

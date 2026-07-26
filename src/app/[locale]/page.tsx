@@ -5,6 +5,7 @@ import { GlassButton } from "@/components/GlassButton";
 import { ListingCard } from "@/components/ListingCard";
 import { Testimonials } from "@/components/Testimonials";
 import { Logo } from "@/components/Logo";
+import { MessengerButton } from "@/components/MessengerButton";
 import { getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, type Locale } from "@/i18n/config";
@@ -59,13 +60,11 @@ export default async function HomePage({
             <GlassButton href={`/${locale}/sell`} variant="glass">
               {dict.cta.sellWithUs}
             </GlassButton>
-            <GlassButton
+            <MessengerButton
+              kind="whatsapp"
               href={whatsappUrl("Hi! I want help finding a home")}
-              external
-              variant="ghost"
-            >
-              {dict.cta.whatsapp}
-            </GlassButton>
+              label={dict.cta.whatsapp}
+            />
           </div>
           <p className="mt-8 text-xs text-ink-muted/80">{dict.home.demoNote}</p>
         </div>

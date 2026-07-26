@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 import { GlassButton } from "@/components/GlassButton";
+import { MessengerButton } from "@/components/MessengerButton";
 import { PriceText } from "@/components/PriceText";
 import { useApp } from "@/components/providers/AppProviders";
 import { listings } from "@/data/listings";
@@ -45,9 +46,11 @@ export default function ComparePage() {
         <h1 className="font-display text-3xl md:text-4xl">{dict.compare.title}</h1>
         {items.length > 0 && (
           <div className="flex flex-wrap gap-2">
-            <GlassButton href={shortlist} external variant="primary">
-              {dict.cta.shortlist}
-            </GlassButton>
+            <MessengerButton
+              kind="whatsapp"
+              href={shortlist}
+              label={dict.cta.shortlist}
+            />
             <button
               type="button"
               onClick={clearCompare}

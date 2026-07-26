@@ -6,8 +6,8 @@ import { useState } from "react";
 import type { Locale } from "@/i18n/config";
 import { locales } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { GlassButton } from "@/components/GlassButton";
 import { Logo } from "@/components/Logo";
+import { MessengerButton } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
 
 export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -78,14 +78,12 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               </Link>
             ))}
           </div>
-          <GlassButton
+          <MessengerButton
+            kind="whatsapp"
             href={whatsappUrl("Hi! Nomore Real Estate")}
-            external
-            variant="primary"
+            label={dict.cta.whatsapp}
             className="hidden !px-4 !py-2 md:inline-flex"
-          >
-            {dict.cta.whatsapp}
-          </GlassButton>
+          />
           <button
             type="button"
             className="glass rounded-full px-3 py-2 text-sm lg:hidden"

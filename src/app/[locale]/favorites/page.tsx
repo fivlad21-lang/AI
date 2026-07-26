@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useMemo } from "react";
 import { ListingCard } from "@/components/ListingCard";
 import { GlassButton } from "@/components/GlassButton";
+import { MessengerButton } from "@/components/MessengerButton";
 import { useApp } from "@/components/providers/AppProviders";
 import { listings } from "@/data/listings";
 import { isLocale, type Locale } from "@/i18n/config";
@@ -47,9 +48,11 @@ export default function FavoritesPage() {
       ) : (
         <>
           <div className="mt-6">
-            <GlassButton href={shortlist} external variant="primary">
-              {dict.favorites.sendShortlist}
-            </GlassButton>
+            <MessengerButton
+              kind="whatsapp"
+              href={shortlist}
+              label={dict.favorites.sendShortlist}
+            />
           </div>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((l) => (

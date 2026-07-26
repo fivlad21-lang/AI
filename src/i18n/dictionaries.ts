@@ -25,6 +25,7 @@ export type Dictionary = {
     whatsapp: string;
     telegram: string;
     telegramSoon: string;
+    viber: string;
     applyViewing: string;
     send: string;
     reset: string;
@@ -205,6 +206,7 @@ const en: Dictionary = {
     whatsapp: "WhatsApp",
     telegram: "Telegram",
     telegramSoon: "Telegram soon",
+    viber: "Viber",
     applyViewing: "Request a viewing",
     send: "Send via WhatsApp",
     reset: "Reset",
@@ -432,6 +434,7 @@ const bg: Dictionary = {
     copyLink: "Копирай линк",
     copied: "Копирано",
     telegramSoon: "Telegram скоро",
+    viber: "Viber",
   },
   home: {
     featured: "Избрани (демо)",

@@ -11,6 +11,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { PriceText } from "@/components/PriceText";
 import { PrintButton } from "@/components/PrintButton";
 import { ListingJsonLd } from "@/components/JsonLd";
+import { MessengerButton, MessengerGlyph } from "@/components/MessengerButton";
 import { getListing, getPublishedListings, listings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
@@ -186,11 +187,10 @@ export default async function ListingPage({
         />
         <div className="flex flex-col justify-end gap-3">
           <GlassButton href={wa} external variant="primary">
+            <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
             {dict.cta.applyViewing}
           </GlassButton>
-          <GlassButton href={wa} external variant="glass">
-            {dict.cta.whatsapp}
-          </GlassButton>
+          <MessengerButton kind="whatsapp" href={wa} label={dict.cta.whatsapp} />
           <p className="text-xs text-ink-muted">{dict.listing.autoReply}</p>
           <Link
             href={`/${locale}/${listing.deal === "sale" ? "buy" : "rent"}`}
