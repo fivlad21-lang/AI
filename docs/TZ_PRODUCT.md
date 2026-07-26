@@ -59,7 +59,7 @@
 7. ~~Поля `lat` / `lng` / `addressPublic` + карта каталогу~~ **Done** — Leaflet, Список|Карта, міні-карта на listing  
 8. 3–6 статей блогу під запити Бургас / Акт 16 / оренда  
 9. Локалізовані префіли WhatsApp  
-9b. Авто-locale з браузера на `/`
+9b. ~~Авто-locale з браузера на `/`~~ **Done** — cookie → Accept-Language → `bg` (`src/proxy.ts`)
 
 ## 5. P2 — зростання / CRM
 
