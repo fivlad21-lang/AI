@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { GlassButton } from "@/components/GlassButton";
 import { ListingCard } from "@/components/ListingCard";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -15,12 +16,31 @@ import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { pageMeta } from "@/lib/meta";
 import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
     listings.map((l) => ({ locale, slug: l.slug })),
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale: raw, slug } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  const listing = getListing(slug);
+  if (!listing) return {};
+  const loc = locations.find((l) => l.id === listing.location);
+  const place = loc?.label[locale] ?? "";
+  return pageMeta(locale, {
+    title: `${listing.title[locale]}${place ? ` · ${place}` : ""}`,
+    description: listing.description[locale],
+    path: `listings/${slug}`,
+  });
 }
 
 export default async function ListingPage({

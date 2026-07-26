@@ -1,10 +1,22 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { GlassButton } from "@/components/GlassButton";
 import { faqItems } from "@/data/faq";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { pageMeta, routeTitles } from "@/lib/meta";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  return pageMeta(locale, { title: routeTitles(locale).guide, path: "guide" });
+}
 
 export default async function GuidePage({
   params,

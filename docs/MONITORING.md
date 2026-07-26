@@ -113,15 +113,11 @@ Site UX is already ahead of typical old classifieds. **Content + SEO + real inve
 
 ## 6. Suggested next implementation slice
 
-If implementing immediately after this report:
+**Done (P0 code, 2026-07-26):** i18n filter keys + shortlist; per-page metadata; `/` → `/bg` redirect (`next.config` + `vercel.json`); cookie/privacy copy; logo mark removed (text-only Nomore Estate).
 
-1. i18n filter keys + shortlist strings  
-2. Per-page `generateMetadata`  
-3. `/` → `/bg` via `next.config` redirect  
-4. Cookie/privacy copy fix  
-5. Hero CTA slim-down  
+**Still open P0 content:** real listings + own photos (needs owner assets).
 
-Then wait on real photos/listings from owner before more visual work.
+**Next code:** hero CTA slim-down (P2); location SEO intros (P1).
 
 ---
 

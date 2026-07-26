@@ -1,13 +1,31 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { blogPosts, getPost } from "@/data/blog";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { pageMeta } from "@/lib/meta";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
     blogPosts.map((p) => ({ locale, slug: p.slug })),
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale: raw, slug } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  const post = getPost(slug);
+  if (!post) return {};
+  return pageMeta(locale, {
+    title: post.title[locale],
+    description: post.excerpt[locale],
+    path: `blog/${slug}`,
+  });
 }
 
 export default async function BlogPostPage({

@@ -1,6 +1,21 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { pageMeta, routeTitles } from "@/lib/meta";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  return pageMeta(locale, {
+    title: routeTitles(locale).privacy,
+    path: "privacy",
+  });
+}
 
 export default async function PrivacyPage({
   params,

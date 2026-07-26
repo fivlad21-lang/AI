@@ -1,16 +1,7 @@
-"use client";
-
-import { useEffect } from "react";
+import { redirect } from "next/navigation";
 import { defaultLocale } from "@/i18n/config";
 
+/** Fallback when host ignores next.config redirects (static export). */
 export default function RootPage() {
-  useEffect(() => {
-    window.location.replace(`/${defaultLocale}`);
-  }, []);
-
-  return (
-    <div className="hero-grid grid min-h-dvh place-items-center px-6 text-center">
-      <p className="font-display text-2xl">Nomore estate</p>
-    </div>
-  );
+  redirect(`/${defaultLocale}`);
 }

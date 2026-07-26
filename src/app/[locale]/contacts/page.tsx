@@ -1,9 +1,24 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { LeadForm } from "@/components/LeadForm";
 import { GlassButton } from "@/components/GlassButton";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { WHATSAPP_DISPLAY, whatsappUrl } from "@/lib/contacts";
+import { pageMeta, routeTitles } from "@/lib/meta";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  return pageMeta(locale, {
+    title: routeTitles(locale).contacts,
+    path: "contacts",
+  });
+}
 
 export default async function ContactsPage({
   params,

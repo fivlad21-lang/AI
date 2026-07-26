@@ -10,6 +10,7 @@ import { OrganizationJsonLd } from "@/components/JsonLd";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { localeAlternates, routeTitles } from "@/lib/meta";
 import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -22,22 +23,20 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: raw } = await params;
-  const locale = isLocale(raw) ? raw : "bg";
-  const dict = getDictionary(locale as Locale);
-  const languages = Object.fromEntries(
-    locales.map((l) => [l === "ua" ? "uk" : l, `${SITE_URL}/${l}`]),
-  );
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  const dict = getDictionary(locale);
+  const titles = routeTitles(locale);
 
   return {
-    title: { absolute: dict.brand },
+    title: titles.home,
     description: dict.taglineSub,
     alternates: {
       canonical: `${SITE_URL}/${locale}`,
-      languages: { ...languages, "x-default": `${SITE_URL}/bg` },
+      ...localeAlternates(),
     },
     openGraph: {
       locale: locale === "ua" ? "uk_UA" : locale,
-      title: dict.brand,
+      title: `${titles.home} · Nomore Real Estate`,
       description: dict.tagline,
       url: `${SITE_URL}/${locale}`,
       images: [{ url: "/brand/og-default.png" }],
