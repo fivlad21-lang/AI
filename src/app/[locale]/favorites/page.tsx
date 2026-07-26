@@ -10,7 +10,7 @@ import { listings } from "@/data/listings";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
-import { SITE_URL } from "@/lib/site";
+import { waShortlist } from "@/lib/wa-messages";
 
 export default function FavoritesPage() {
   const params = useParams();
@@ -24,16 +24,7 @@ export default function FavoritesPage() {
     [favorites],
   );
 
-  const shortlist = whatsappUrl(
-    [
-      "[SHORTLIST] Nomore favorites",
-      ...items.map(
-        (l) =>
-          `- ${l.title.en} · ${l.priceEur} EUR · ${SITE_URL}/${locale}/listings/${l.slug}`,
-      ),
-      items.length ? "" : "(empty)",
-    ].join("\n"),
-  );
+  const shortlist = whatsappUrl(waShortlist(locale, items, "favorites"));
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">

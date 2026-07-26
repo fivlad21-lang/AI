@@ -13,7 +13,7 @@ import { locations } from "@/data/locations";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
-import { SITE_URL } from "@/lib/site";
+import { waShortlist } from "@/lib/wa-messages";
 
 export default function ComparePage() {
   const params = useParams();
@@ -30,15 +30,7 @@ export default function ComparePage() {
     [compare],
   );
 
-  const shortlist = whatsappUrl(
-    [
-      "[SHORTLIST] Nomore compare",
-      ...items.map(
-        (l) =>
-          `- ${l.title.en} · ${l.priceEur} EUR · ${SITE_URL}/${locale}/listings/${l.slug}`,
-      ),
-    ].join("\n"),
-  );
+  const shortlist = whatsappUrl(waShortlist(locale, items, "compare"));
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">

@@ -11,6 +11,7 @@ import { filterListings, type Deal, type SortKey } from "@/data/listings";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { waCatalogHelp } from "@/lib/wa-messages";
 import { track } from "@/lib/analytics";
 
 export function CatalogView({
@@ -101,9 +102,7 @@ export function CatalogView({
             className="mt-4"
             kind="whatsapp"
             place="catalog"
-            href={whatsappUrl(
-              `[${deal === "sale" ? "BUY" : "RENT"}] Need help finding a property`,
-            )}
+            href={whatsappUrl(waCatalogHelp(locale, deal))}
             label={dict.cta.whatsapp}
           />
         </div>

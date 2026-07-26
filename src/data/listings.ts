@@ -75,8 +75,7 @@ export const listings: Listing[] = [
     beachMinutes: 7,
     cover: img.apt1,
     gallery: [img.apt1, img.coast1, img.apt2, img.sea2],
-    video: true,
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    video: false,
     publishedAt: "2026-07-01",
     title: {
       en: "2-bed apartment with sea view",

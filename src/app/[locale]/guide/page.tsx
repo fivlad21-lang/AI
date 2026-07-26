@@ -6,6 +6,7 @@ import { faqItems } from "@/data/faq";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { waGuide } from "@/lib/wa-messages";
 import { pageMeta, routeTitles } from "@/lib/meta";
 
 export async function generateMetadata({
@@ -52,7 +53,7 @@ export default async function GuidePage({
         <MessengerButton
           kind="whatsapp"
           place="guide"
-          href={whatsappUrl(`[FAQ] Question from guide page`)}
+          href={whatsappUrl(waGuide(locale))}
           label={dict.cta.whatsapp}
         />
         <Link href={`/${locale}/blog`} className="self-center text-sm text-sea">

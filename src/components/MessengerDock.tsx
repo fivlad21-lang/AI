@@ -5,13 +5,17 @@ import { usePathname } from "next/navigation";
 import { MessengerButton } from "@/components/MessengerButton";
 import { useApp } from "@/components/providers/AppProviders";
 import { telegramUrl, viberUrl, whatsappUrl } from "@/lib/contacts";
+import { waDock } from "@/lib/wa-messages";
+import { isLocale, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 export function MessengerDock({ dict }: { dict: Dictionary }) {
   const [visible, setVisible] = useState(false);
   const { compare, cookiesOk } = useApp();
   const pathname = usePathname();
-  const tg = telegramUrl("Hi from Nomore");
+  const localePart = pathname.split("/")[1] ?? "bg";
+  const locale = (isLocale(localePart) ? localePart : "bg") as Locale;
+  const tg = telegramUrl(waDock(locale));
   const lift = compare.length > 0 || !cookiesOk;
   const onListing = /\/listings\//.test(pathname);
   /** Home locale root — keep dock off until below hero so first screen has ≤1 WA. */
@@ -55,7 +59,7 @@ export function MessengerDock({ dict }: { dict: Dictionary }) {
         kind="whatsapp"
         variant="dock"
         place="dock"
-        href={whatsappUrl("Hi! I'm writing from nomore.estate")}
+        href={whatsappUrl(waDock(locale))}
         label={dict.cta.whatsapp}
       />
     </div>

@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
+import { GlassSelect } from "@/components/GlassSelect";
 import { MessengerGlyph } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
 import { track } from "@/lib/analytics";
@@ -56,24 +57,22 @@ export function LeadForm({
         {dict.forms.contact}
         <input required className={field} value={contact} onChange={(e) => setContact(e.target.value)} />
       </label>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <label className="block text-xs font-semibold uppercase text-ink-muted">
-          Deal
-          <select className={field} value={deal} onChange={(e) => setDeal(e.target.value)}>
-            <option value="buy">{dict.nav.buy}</option>
-            <option value="rent">{dict.nav.rent}</option>
-          </select>
-        </label>
-        <label className="block text-xs font-semibold uppercase text-ink-muted">
-          {dict.forms.location}
-          <select className={field} value={location} onChange={(e) => setLocation(e.target.value)}>
-            {locations.map((l) => (
-              <option key={l.id} value={l.id}>
-                {l.label[locale]}
-              </option>
-            ))}
-          </select>
-        </label>
+      <div className="relative z-10 grid gap-3 sm:grid-cols-2">
+        <GlassSelect
+          label={dict.forms.deal}
+          value={deal}
+          onChange={setDeal}
+          options={[
+            { value: "buy", label: dict.nav.buy },
+            { value: "rent", label: dict.nav.rent },
+          ]}
+        />
+        <GlassSelect
+          label={dict.forms.location}
+          value={location}
+          onChange={setLocation}
+          options={locations.map((l) => ({ value: l.id, label: l.label[locale] }))}
+        />
       </div>
       <label className="block text-xs font-semibold uppercase text-ink-muted">
         {dict.forms.budget}

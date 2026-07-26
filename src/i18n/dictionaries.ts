@@ -18,6 +18,8 @@ export type Dictionary = {
     guide: string;
     blog: string;
     privacy: string;
+    menu: string;
+    closeMenu: string;
   };
   cta: {
     viewListings: string;
@@ -124,6 +126,7 @@ export type Dictionary = {
   forms: {
     name: string;
     contact: string;
+    deal: string;
     dealSell: string;
     dealRent: string;
     type: string;
@@ -215,9 +218,11 @@ const en: Dictionary = {
     guide: "Guide",
     blog: "Journal",
     privacy: "Privacy",
+    menu: "Menu",
+    closeMenu: "Close menu",
   },
   cta: {
-    viewListings: "Browse examples",
+    viewListings: "View homes",
     sellWithUs: "Sell with Nomore",
     whatsapp: "WhatsApp",
     telegram: "Telegram",
@@ -237,8 +242,8 @@ const en: Dictionary = {
     showResults: "Show homes",
   },
   home: {
-    featured: "Example homes",
-    featuredHint: "Illustrative of style and areas — write us for a live match.",
+    featured: "Featured homes",
+    featuredHint: "Current picks on the coast — write us for a live shortlist.",
     howTitle: "How it works",
     howSteps: [
       "Tell us budget, area, and timing on WhatsApp",
@@ -339,6 +344,7 @@ const en: Dictionary = {
   forms: {
     name: "Name",
     contact: "Phone / WhatsApp",
+    deal: "Looking to",
     dealSell: "Sell",
     dealRent: "Rent out",
     type: "Property type",
@@ -353,8 +359,8 @@ const en: Dictionary = {
   about: {
     title: "About Nomore",
     p1: "Nomore means two things: an end to outdated realtor noise — and life by the sea.",
-    p2: "We’re a modern agency for Burgas and the coast. Clear presentation, messenger-first communication, media that actually helps sell.",
-    p3: "Site in four languages. Catalog built for phones. Owners get shooting without a separate media invoice.",
+    p2: "We’re a modern agency for Burgas and the Sunny Beach coast. Clear listings, messenger-first communication, media that helps sell.",
+    p3: "We reply on WhatsApp the same business day. Site in four languages. Owners get shooting without a separate media invoice.",
     valuesTitle: "How we work",
     values: [
       "Show the home honestly — big photos first",
@@ -391,7 +397,7 @@ const en: Dictionary = {
       "We collect contact details you send via forms or WhatsApp only to respond about property inquiries.",
       "Favorites, compare list, and cookie consent are stored in your browser (localStorage).",
       "Prices and availability can change; we confirm details during viewings and WhatsApp chat.",
-      "We use essential cookies/local storage for preferences. Analytics may be added later; see this page for updates.",
+      "After you accept the cookie banner we may load Google Analytics (GA4) to understand traffic and improve the site. You can clear site data in the browser to reset consent.",
       "Property info is provided in good faith; always verify documents with professionals before a deal.",
     ],
   },
@@ -451,10 +457,12 @@ const bg: Dictionary = {
     guide: "Гид",
     blog: "Журнал",
     privacy: "Поверителност",
+    menu: "Меню",
+    closeMenu: "Затвори менюто",
   },
   cta: {
     ...en.cta,
-    viewListings: "Виж примери",
+    viewListings: "Виж имотите",
     sellWithUs: "Продай с Nomore",
     applyViewing: "Заяви оглед",
     send: "Изпрати във WhatsApp",
@@ -472,8 +480,8 @@ const bg: Dictionary = {
     showResults: "Покажи имоти",
   },
   home: {
-    featured: "Примери за имоти",
-    featuredHint: "За стил и райони — за актуален подбор пиши ни.",
+    featured: "Актуални имоти",
+    featuredHint: "Текущи предложения на брега — пиши ни за жива подборка.",
     howTitle: "Как работим",
     howSteps: [
       "Казваш бюджет, район и срок във WhatsApp",
@@ -592,8 +600,8 @@ const bg: Dictionary = {
   about: {
     title: "За Nomore",
     p1: "Nomore означава две неща: край на остарелия брокерски шум — и живот край морето.",
-    p2: "Модерна агенция за Бургас и крайбрежието. Ясна презентация, комуникация в месинджър, медио което помага да се продаде.",
-    p3: "Сайт на четири езика. Каталог за телефона. Собствениците получават заснемане без отделна фактура за медио.",
+    p2: "Модерна агенция за Бургас и Слънчев бряг. Ясни обяви, комуникация в месинджър, медио което помага да се продаде.",
+    p3: "Отговаряме във WhatsApp в същия работен ден. Сайт на четири езика. Собствениците получават заснемане без отделна фактура за медио.",
     valuesTitle: "Как работим",
     values: [
       "Показваме имота честно — първо големите снимки",
@@ -630,7 +638,7 @@ const bg: Dictionary = {
       "Събираме контакти, които изпращате чрез форми или WhatsApp, само за да отговорим за имоти.",
       "Запазени, сравнение и съгласие за cookies се пазят в браузъра (localStorage).",
       "Цените и наличността могат да се променят; уточняваме детайлите при оглед и във WhatsApp.",
-      "Използваме необходими cookies/local storage за настройки. Аналитика може да се добави по-късно.",
+      "След OK на cookie банера можем да заредим Google Analytics (GA4), за да разбираме трафика и да подобряваме сайта. Можеш да изчистиш данните на сайта в браузъра, за да нулираш съгласието.",
       "Информацията за имоти е добросъвестна; винаги проверявайте документите с професионалисти преди сделка.",
     ],
   },
@@ -690,10 +698,12 @@ const ru: Dictionary = {
     guide: "Гид",
     blog: "Журнал",
     privacy: "Конфиденциальность",
+    menu: "Меню",
+    closeMenu: "Закрыть меню",
   },
   cta: {
     ...en.cta,
-    viewListings: "Смотреть примеры",
+    viewListings: "Смотреть объекты",
     sellWithUs: "Продать с Nomore",
     applyViewing: "Заявка на просмотр",
     send: "Отправить в WhatsApp",
@@ -710,8 +720,8 @@ const ru: Dictionary = {
     showResults: "Показать объекты",
   },
   home: {
-    featured: "Примеры объектов",
-    featuredHint: "Для стиля и районов — актуальный подбор напишите нам.",
+    featured: "Актуальные объекты",
+    featuredHint: "Текущие предложения на берегу — напишите нам за живую подборку.",
     howTitle: "Как это работает",
     howSteps: [
       "Пишешь бюджет, район и сроки в WhatsApp",
@@ -830,8 +840,8 @@ const ru: Dictionary = {
   about: {
     title: "О Nomore",
     p1: "Nomore — это два смысла: конец устаревшему риелторскому шуму и жизнь у моря.",
-    p2: "Современное агентство для Бургаса и побережья. Понятная подача, общение в мессенджере, медиа которое помогает продать.",
-    p3: "Сайт на четырёх языках. Каталог для телефона. Собственникам — съёмка без отдельного счёта за медиа.",
+    p2: "Современное агентство для Бургаса и Солнечного Берега. Понятные объявления, мессенджеры, медиа которое помогает продать.",
+    p3: "Отвечаем в WhatsApp в тот же рабочий день. Сайт на четырёх языках. Собственникам — съёмка без отдельного счёта за медиа.",
     valuesTitle: "Как работаем",
     values: [
       "Показываем дом честно — сначала большие фото",
@@ -868,7 +878,7 @@ const ru: Dictionary = {
       "Мы обрабатываем контакты из форм или WhatsApp только для ответа по недвижимости.",
       "Избранное, сравнение и согласие на cookies хранятся в браузере (localStorage).",
       "Цены и наличие могут меняться; детали подтверждаем на просмотре и в WhatsApp.",
-      "Используем необходимые cookies/local storage для настроек. Аналитика может появиться позже.",
+      "После OK на cookie-баннере можем загрузить Google Analytics (GA4), чтобы понимать трафик и улучшать сайт. Согласие можно сбросить, очистив данные сайта в браузере.",
       "Информация об объектах добросовестная; документы всегда проверяйте со специалистами перед сделкой.",
     ],
   },
@@ -928,10 +938,12 @@ const ua: Dictionary = {
     guide: "Гід",
     blog: "Журнал",
     privacy: "Конфіденційність",
+    menu: "Меню",
+    closeMenu: "Закрити меню",
   },
   cta: {
     ...en.cta,
-    viewListings: "Дивитись приклади",
+    viewListings: "Дивитись об’єкти",
     sellWithUs: "Продати з Nomore",
     applyViewing: "Заявка на перегляд",
     send: "Надіслати в WhatsApp",
@@ -948,8 +960,8 @@ const ua: Dictionary = {
     showResults: "Показати об’єкти",
   },
   home: {
-    featured: "Приклади об’єктів",
-    featuredHint: "Для стилю й районів — актуальну підбірку напишіть нам.",
+    featured: "Актуальні об’єкти",
+    featuredHint: "Поточні пропозиції на узбережжі — напишіть нам за живу підбірку.",
     howTitle: "Як це працює",
     howSteps: [
       "Пишеш бюджет, район і строки в WhatsApp",
@@ -1068,8 +1080,8 @@ const ua: Dictionary = {
   about: {
     title: "Про Nomore",
     p1: "Nomore — два сенси: кінець застарілому ріелторському шуму і життя на морі.",
-    p2: "Сучасне агентство для Бургаса та узбережжя. Зрозуміла подача, спілкування в месенджері, медіа яке допомагає продати.",
-    p3: "Сайт чотирма мовами. Каталог для телефона. Власникам — зйомка без окремого рахунку за медіа.",
+    p2: "Сучасне агентство для Бургаса та Сонячного Берега. Зрозумілі оголошення, месенджери, медіа яке допомагає продати.",
+    p3: "Відповідаємо в WhatsApp того ж робочого дня. Сайт чотирма мовами. Власникам — зйомка без окремого рахунку за медіа.",
     valuesTitle: "Як працюємо",
     values: [
       "Показуємо дім чесно — спочатку великі фото",
@@ -1106,7 +1118,7 @@ const ua: Dictionary = {
       "Ми обробляємо контакти з форм або WhatsApp лише щоб відповісти щодо нерухомості.",
       "Збережене, порівняння і згода на cookies зберігаються в браузері (localStorage).",
       "Ціни й наявність можуть змінюватися; деталі підтверджуємо на огляді та у WhatsApp.",
-      "Використовуємо необхідні cookies/local storage для налаштувань. Аналітика може з’явитися пізніше.",
+      "Після OK на cookie-банері можемо завантажити Google Analytics (GA4), щоб розуміти трафік і покращувати сайт. Згоду можна скинути, очистивши дані сайту в браузері.",
       "Інформація про об’єкти добросовісна; документи завжди перевіряйте з фахівцями перед угодою.",
     ],
   },

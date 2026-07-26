@@ -4,6 +4,7 @@
 **Live:** `https://ai.nomorevlad.vercel.app`  
 **Branch:** `cursor/tz-pro-full-backlog-da6b`  
 **TZ (enable stack):** `docs/TZ_MONITORING.md`  
+**Polish (ideal small inventory):** `docs/TZ_POLISH.md`  
 **Roadmap:** `TZ_PRODUCT.md` · CRM: `TZ_CRM_VITRINE.md` · Deploy: `TZ_DEPLOY.md`
 
 **Out of scope for now:** listing scrapers / FSBO parsers. Focus = **вітрина + ліди + стабільність + GA4**.

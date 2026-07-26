@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
+import { GlassSelect } from "@/components/GlassSelect";
 import { MessengerGlyph } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
 import { track } from "@/lib/analytics";
@@ -57,35 +58,29 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
           placeholder="+359 / +380…"
         />
       </label>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <label className="block text-xs font-semibold uppercase text-ink-muted">
-          {dict.forms.dealSell}
-          <select className={field} value={deal} onChange={(e) => setDeal(e.target.value)}>
-            <option value="sell">{dict.forms.dealSell}</option>
-            <option value="rent">{dict.forms.dealRent}</option>
-          </select>
-        </label>
-        <label className="block text-xs font-semibold uppercase text-ink-muted">
-          {dict.forms.type}
-          <select className={field} value={type} onChange={(e) => setType(e.target.value)}>
-            {Object.entries(dict.types).map(([k, v]) => (
-              <option key={k} value={k}>
-                {v}
-              </option>
-            ))}
-          </select>
-        </label>
+      <div className="relative z-10 grid gap-3 sm:grid-cols-2">
+        <GlassSelect
+          label={dict.forms.dealSell}
+          value={deal}
+          onChange={setDeal}
+          options={[
+            { value: "sell", label: dict.forms.dealSell },
+            { value: "rent", label: dict.forms.dealRent },
+          ]}
+        />
+        <GlassSelect
+          label={dict.forms.type}
+          value={type}
+          onChange={setType}
+          options={Object.entries(dict.types).map(([k, v]) => ({ value: k, label: v }))}
+        />
       </div>
-      <label className="block text-xs font-semibold uppercase text-ink-muted">
-        {dict.forms.location}
-        <select className={field} value={location} onChange={(e) => setLocation(e.target.value)}>
-          {locations.map((l) => (
-            <option key={l.id} value={l.id}>
-              {l.label[locale]}
-            </option>
-          ))}
-        </select>
-      </label>
+      <GlassSelect
+        label={dict.forms.location}
+        value={location}
+        onChange={setLocation}
+        options={locations.map((l) => ({ value: l.id, label: l.label[locale] }))}
+      />
       <label className="block text-xs font-semibold uppercase text-ink-muted">
         {dict.forms.description}
         <textarea

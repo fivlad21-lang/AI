@@ -17,17 +17,18 @@ import { StickyListingCta } from "@/components/StickyListingCta";
 import { ListingMiniMap } from "@/components/ListingMiniMap";
 import { WaPrimaryLink } from "@/components/WaPrimaryLink";
 import { formatEur } from "@/components/PriceText";
-import { getListing, getPublishedListings, listings } from "@/data/listings";
+import { getListing, getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
 import { pageMeta } from "@/lib/meta";
 import { SITE_URL } from "@/lib/site";
+import { waListingView } from "@/lib/wa-messages";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
-    listings.map((l) => ({ locale, slug: l.slug })),
+    getPublishedListings().map((l) => ({ locale, slug: l.slug })),
   );
 }
 
@@ -39,13 +40,14 @@ export async function generateMetadata({
   const { locale: raw, slug } = await params;
   const locale = (isLocale(raw) ? raw : "bg") as Locale;
   const listing = getListing(slug);
-  if (!listing) return {};
+  if (!listing || listing.status !== "published") return {};
   const loc = locations.find((l) => l.id === listing.location);
   const place = loc?.label[locale] ?? "";
   return pageMeta(locale, {
     title: `${listing.title[locale]}${place ? ` · ${place}` : ""}`,
     description: listing.description[locale],
     path: `listings/${slug}`,
+    image: listing.cover,
   });
 }
 
@@ -58,7 +60,7 @@ export default async function ListingPage({
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
   const listing = getListing(slug);
-  if (!listing) notFound();
+  if (!listing || listing.status !== "published") notFound();
   const dict = getDictionary(locale);
   const loc = locations.find((l) => l.id === listing.location);
   const pageUrl = `${SITE_URL}/${locale}/listings/${listing.slug}`;
@@ -66,9 +68,7 @@ export default async function ListingPage({
     .filter((l) => l.id !== listing.id && l.deal === listing.deal)
     .slice(0, 3);
 
-  const wa = whatsappUrl(
-    `[VIEW] ${listing.title.en}\n${listing.priceEur} EUR\n${pageUrl}`,
-  );
+  const wa = whatsappUrl(waListingView(locale, listing, pageUrl));
 
   const priceLabel = `${formatEur(listing.priceEur, locale)}${
     listing.deal === "rent" ? dict.listing.month : ""

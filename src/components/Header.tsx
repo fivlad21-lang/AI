@@ -11,6 +11,7 @@ import { Logo } from "@/components/Logo";
 import { HeartIcon } from "@/components/HeartIcon";
 import { MessengerButton } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
+import { waGeneric } from "@/lib/wa-messages";
 import { persistLocalePreference } from "@/lib/locale-detect";
 
 export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -82,7 +83,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
       >
         <button
           type="button"
-          aria-label="Close menu"
+          aria-label={dict.nav.closeMenu}
           onClick={close}
           className={`absolute inset-0 h-full w-full bg-black/70 transition-opacity ease-out ${
             entered ? "opacity-100" : "opacity-0"
@@ -104,7 +105,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               type="button"
               onClick={close}
               className="glass flex h-9 w-9 items-center justify-center rounded-full text-lg text-ink-muted hover:text-ink"
-              aria-label="Close"
+              aria-label={dict.nav.closeMenu}
             >
               ✕
             </button>
@@ -160,7 +161,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <MessengerButton
               kind="whatsapp"
               place="drawer"
-              href={whatsappUrl("Hi! Nomore Real Estate")}
+              href={whatsappUrl(waGeneric(locale))}
               label={dict.cta.whatsapp}
               className="w-full !justify-center"
             />
@@ -194,7 +195,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         <div className="flex items-center gap-2">
           <Link
             href={`/${locale}/favorites`}
-            className="glass hidden h-9 w-9 items-center justify-center rounded-full text-sm text-ink-muted hover:text-ink sm:flex"
+            className="glass flex h-9 w-9 items-center justify-center rounded-full text-sm text-ink-muted hover:text-ink"
             aria-label={dict.nav.favorites}
             title={dict.nav.favorites}
           >
@@ -218,7 +219,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           <MessengerButton
             kind="whatsapp"
             place="header"
-            href={whatsappUrl("Hi! Nomore Real Estate")}
+            href={whatsappUrl(waGeneric(locale))}
             label={dict.cta.whatsapp}
             className="hidden !px-4 !py-2 md:inline-flex"
           />
@@ -226,7 +227,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             type="button"
             className="glass flex h-10 w-10 items-center justify-center rounded-full text-sm lg:hidden"
             onClick={() => setOpen(true)}
-            aria-label="Menu"
+            aria-label={dict.nav.menu}
             aria-expanded={open}
           >
             ☰

@@ -6,6 +6,7 @@ import { MessengerButton } from "@/components/MessengerButton";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { waSellInterest } from "@/lib/wa-messages";
 import { pageMeta, routeTitles } from "@/lib/meta";
 
 export async function generateMetadata({
@@ -44,7 +45,7 @@ export default async function SellPage({
           <MessengerButton
             kind="whatsapp"
             place="sell"
-            href={whatsappUrl("[SELL] Want to list my property with shooting")}
+            href={whatsappUrl(waSellInterest(locale))}
             label={dict.cta.whatsapp}
           />
         </div>

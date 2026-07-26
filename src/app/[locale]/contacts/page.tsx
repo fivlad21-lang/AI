@@ -11,6 +11,7 @@ import {
   viberUrl,
   whatsappUrl,
 } from "@/lib/contacts";
+import { waContacts } from "@/lib/wa-messages";
 import { pageMeta, routeTitles } from "@/lib/meta";
 
 export async function generateMetadata({
@@ -35,7 +36,7 @@ export default async function ContactsPage({
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
   const dict = getDictionary(locale);
-  const tg = telegramUrl("Hi! Contacts page");
+  const tg = telegramUrl(waContacts(locale));
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
@@ -48,7 +49,7 @@ export default async function ContactsPage({
           <MessengerButton
             kind="whatsapp"
             place="contacts"
-            href={whatsappUrl("Hi! Contacts page")}
+            href={whatsappUrl(waContacts(locale))}
             label={dict.cta.whatsapp}
           />
           {tg && (

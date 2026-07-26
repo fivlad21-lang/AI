@@ -20,12 +20,15 @@ export function pageMeta(
     title: string;
     description?: string;
     path?: string;
+    /** Absolute or site-relative OG image */
+    image?: string;
   },
 ): Metadata {
   const dict = getDictionary(locale);
   const path = opts.path ?? "";
   const url = `${SITE_URL}/${locale}${path ? `/${path.replace(/^\//, "")}` : ""}`;
   const description = opts.description ?? dict.taglineSub;
+  const image = opts.image ?? "/brand/og-default.png";
 
   return {
     title: opts.title,
@@ -39,7 +42,7 @@ export function pageMeta(
       title: `${opts.title} · Nomore Real Estate`,
       description,
       url,
-      images: [{ url: "/brand/og-default.png" }],
+      images: [{ url: image }],
     },
   };
 }

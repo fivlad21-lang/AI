@@ -4,9 +4,10 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { Logo } from "@/components/Logo";
 import { MessengerButton } from "@/components/MessengerButton";
 import { telegramUrl, viberUrl, whatsappUrl } from "@/lib/contacts";
+import { waFooter } from "@/lib/wa-messages";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
-  const tg = telegramUrl("Hi from footer");
+  const tg = telegramUrl(waFooter(locale));
 
   return (
     <footer className="mt-auto border-t border-white/[0.06] bg-[#080c14] print:hidden">
@@ -53,7 +54,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <MessengerButton
               kind="whatsapp"
               place="footer"
-              href={whatsappUrl("Hi from footer")}
+              href={whatsappUrl(waFooter(locale))}
               label={dict.cta.whatsapp}
               className="!px-4 !py-2"
             />
