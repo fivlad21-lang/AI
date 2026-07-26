@@ -69,6 +69,9 @@ export type Dictionary = {
     sortPriceDesc: string;
     sortArea: string;
     loading: string;
+    viewList: string;
+    viewMap: string;
+    openListing: string;
   };
   listing: {
     demo: string;
@@ -254,6 +257,9 @@ const en: Dictionary = {
     sortPriceDesc: "Price ↓",
     sortArea: "Largest",
     loading: "Loading listings…",
+    viewList: "List",
+    viewMap: "Map",
+    openListing: "Open listing →",
   },
   listing: {
     demo: "",
@@ -473,6 +479,9 @@ const bg: Dictionary = {
     sortPriceDesc: "Цена ↓",
     sortArea: "Най-големи",
     loading: "Зареждане…",
+    viewList: "Списък",
+    viewMap: "Карта",
+    openListing: "Отвори обява →",
   },
   listing: {
     ...en.listing,
@@ -694,6 +703,9 @@ const ru: Dictionary = {
     sortPriceDesc: "Цена ↓",
     sortArea: "Площадь",
     loading: "Загрузка…",
+    viewList: "Список",
+    viewMap: "Карта",
+    openListing: "Открыть объявление →",
   },
   listing: {
     ...en.listing,
@@ -915,6 +927,9 @@ const ua: Dictionary = {
     sortPriceDesc: "Ціна ↓",
     sortArea: "Площа",
     loading: "Завантаження…",
+    viewList: "Список",
+    viewMap: "Карта",
+    openListing: "Відкрити оголошення →",
   },
   listing: {
     ...en.listing,

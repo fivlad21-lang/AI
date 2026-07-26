@@ -13,6 +13,10 @@ export type Listing = {
   deal: Deal;
   type: PropertyType;
   location: LocationId;
+  /** Approximate public pin (area/complex), not exact entrance */
+  lat: number;
+  lng: number;
+  addressPublic?: Record<Locale, string>;
   priceEur: number;
   pricePeriod?: "month";
   rooms: number | "studio";
@@ -53,6 +57,14 @@ export const listings: Listing[] = [
     deal: "sale",
     type: "apartment",
     location: "sunny-beach",
+    lat: 42.6962,
+    lng: 27.7145,
+    addressPublic: {
+      en: "Sunny Beach, sea-view complex",
+      bg: "Слънчев бряг, комплекс с морски изглед",
+      ru: "Солнечный Берег, комплекс с видом на море",
+      ua: "Сонячний Берег, комплекс з видом на море",
+    },
     priceEur: 118000,
     rooms: 2,
     areaM2: 78,
@@ -87,6 +99,14 @@ export const listings: Listing[] = [
     deal: "sale",
     type: "studio",
     location: "burgas",
+    lat: 42.5061,
+    lng: 27.4672,
+    addressPublic: {
+      en: "Burgas center",
+      bg: "Център на Бургас",
+      ru: "Центр Бургаса",
+      ua: "Центр Бургаса",
+    },
     priceEur: 69000,
     rooms: "studio",
     areaM2: 42,
@@ -119,6 +139,14 @@ export const listings: Listing[] = [
     deal: "sale",
     type: "villa",
     location: "sozopol",
+    lat: 42.4195,
+    lng: 27.698,
+    addressPublic: {
+      en: "Near Sozopol old town",
+      bg: "Край стария Созопол",
+      ru: "Рядом со старым Созополем",
+      ua: "Поруч зі старим Созополем",
+    },
     priceEur: 265000,
     rooms: 4,
     areaM2: 186,
@@ -150,6 +178,14 @@ export const listings: Listing[] = [
     deal: "rent",
     type: "apartment",
     location: "nesebar",
+    lat: 42.6578,
+    lng: 27.7285,
+    addressPublic: {
+      en: "Nesebar, residential area",
+      bg: "Несебър, жилищен район",
+      ru: "Несебр, жилой район",
+      ua: "Несебр, житловий район",
+    },
     priceEur: 650,
     pricePeriod: "month",
     rooms: 2,
@@ -182,6 +218,14 @@ export const listings: Listing[] = [
     deal: "sale",
     type: "apartment",
     location: "sveti-vlas",
+    lat: 42.7138,
+    lng: 27.761,
+    addressPublic: {
+      en: "Sveti Vlas, hillside complex",
+      bg: "Свети Влас, комплекс на хълма",
+      ru: "Святой Влас, комплекс на склоне",
+      ua: "Святий Влас, комплекс на схилі",
+    },
     priceEur: 189000,
     rooms: 3,
     areaM2: 112,
@@ -215,6 +259,14 @@ export const listings: Listing[] = [
     deal: "rent",
     type: "studio",
     location: "pomorie",
+    lat: 42.5595,
+    lng: 27.6435,
+    addressPublic: {
+      en: "Pomorie, near the seafront",
+      bg: "Поморие, близо до крайбрежието",
+      ru: "Поморие, рядом с набережной",
+      ua: "Поморіє, біля набережної",
+    },
     priceEur: 420,
     pricePeriod: "month",
     rooms: "studio",
@@ -247,6 +299,14 @@ export const listings: Listing[] = [
     deal: "sale",
     type: "apartment",
     location: "ravda",
+    lat: 42.6492,
+    lng: 27.678,
+    addressPublic: {
+      en: "Ravda",
+      bg: "Равда",
+      ru: "Равда",
+      ua: "Равда",
+    },
     priceEur: 99000,
     rooms: 2,
     areaM2: 68,

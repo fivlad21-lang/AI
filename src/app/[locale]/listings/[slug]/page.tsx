@@ -14,6 +14,7 @@ import { ListingJsonLd } from "@/components/JsonLd";
 import { MessengerButton, MessengerGlyph } from "@/components/MessengerButton";
 import { ListingBadges } from "@/components/ListingBadges";
 import { StickyListingCta } from "@/components/StickyListingCta";
+import { ListingMiniMap } from "@/components/ListingMiniMap";
 import { formatEur } from "@/components/PriceText";
 import { getListing, getPublishedListings, listings } from "@/data/listings";
 import { locations } from "@/data/locations";
@@ -96,7 +97,9 @@ export default async function ListingPage({
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
             {listing.title[locale]}
           </h1>
-          <p className="mt-2 text-ink-muted">{loc?.label[locale]}</p>
+          <p className="mt-2 text-ink-muted">
+            {listing.addressPublic?.[locale] ?? loc?.label[locale]}
+          </p>
           <p className="mt-4 text-2xl font-semibold tabular-nums">
             <PriceText listing={listing} dict={dict} locale={locale} />
           </p>
@@ -140,6 +143,12 @@ export default async function ListingPage({
       <p className="mt-8 max-w-3xl text-base leading-relaxed text-ink-muted">
         {listing.description[locale]}
       </p>
+
+      <ListingMiniMap
+        lat={listing.lat}
+        lng={listing.lng}
+        label={listing.addressPublic?.[locale] ?? loc?.label[locale] ?? ""}
+      />
 
       {(listing.video || listing.videoUrl) && (
         <div className="mt-6 print:hidden">

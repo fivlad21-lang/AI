@@ -128,6 +128,65 @@ select option {
   animation: pulse-soft 1.4s ease-in-out infinite;
 }
 
+/* Leaflet catalog / listing maps */
+.nomore-map-pin {
+  background: transparent !important;
+  border: none !important;
+}
+
+.nomore-map-pin__dot {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 2px;
+  border-radius: 999px;
+  background: var(--sea);
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.nomore-map-popup-wrap .leaflet-popup-content-wrapper {
+  background: #0c121c;
+  color: #eef3fb;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.nomore-map-popup-wrap .leaflet-popup-tip {
+  background: #0c121c;
+}
+
+.nomore-map-popup-wrap .leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+.nomore-map-popup__price {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 4px;
+}
+
+.nomore-map-popup__title {
+  font-size: 13px;
+  margin: 0 0 4px;
+  line-height: 1.35;
+}
+
+.nomore-map-popup__place {
+  font-size: 11px;
+  color: #8b97ab;
+  margin: 0 0 8px;
+}
+
+.nomore-map-popup__link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #7dd3fc !important;
+}
+
 @media print {
   body {
     background: white !important;
