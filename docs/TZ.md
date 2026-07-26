@@ -204,3 +204,18 @@ Next.js App Router + TS · Tailwind 4 · `output: "export"` · Vercel · Unbound
 - **G2** Publish checklist  
 - **G3** Listing statuses  
 - **G4** Domain — **пізніше**  
+
+---
+
+## 11. UX-Polish 1.1 (затверджено)
+
+1. Logo A: `Nomore` + `Estate` одного розміру  
+2. Microcopy: «Понятные объекты. Удобный процесс. Жильё на берегу моря.» (+ локалі)  
+3. Без global noise overlay  
+4. Без англ. eyebrows (Trust/Catalog/Process/…)  
+5. Людські відгуки  
+6. «Объекты в регионе» без geo-підзаголовка  
+7. Header: Buy · Rent · Sell · Contacts + ♥ + langs + WA  
+8. Слоган hero у 2 рядки (`taglineLine1` / `taglineLine2`)  
+9. Ціна: EUR основне + дрібні лв (без toggle)  
+10. Telegram: `@notany`  

@@ -3,6 +3,8 @@ import type { Locale } from "@/i18n/config";
 export type Dictionary = {
   brand: string;
   tagline: string;
+  taglineLine1: string;
+  taglineLine2: string;
   taglineSub: string;
   microcopy: string;
   nav: {
@@ -180,9 +182,11 @@ export type Dictionary = {
 const en: Dictionary = {
   brand: "Nomore Real Estate",
   tagline: "Homes by the sea. No more hassle.",
+  taglineLine1: "Homes by the sea.",
+  taglineLine2: "No more hassle.",
   taglineSub:
     "Buy, sell, and rent across Burgas region and Sunny Beach — clear listings, fast replies, modern media.",
-  microcopy: "Clear homes. Fast chat. Coast of Burgas.",
+  microcopy: "Clear listings. A simple process. Homes by the sea.",
   nav: {
     buy: "Buy",
     rent: "Rent",
@@ -219,7 +223,7 @@ const en: Dictionary = {
       "We shoot, publish, and filter real interest",
       "Viewings and deal support without the chaos",
     ],
-    areasTitle: "Where we work",
+    areasTitle: "Homes in the region",
     ownersTitle: "Own a property?",
     ownersText:
       "List with Nomore: pro photo & vertical video for our socials, then we handle the leads. Shooting is free — we work on a deal commission.",
@@ -397,9 +401,11 @@ const en: Dictionary = {
 const bg: Dictionary = {
   ...en,
   tagline: "Жилище край морето. Без излишното.",
+  taglineLine1: "Жилище край морето.",
+  taglineLine2: "Без излишното.",
   taglineSub:
     "Покупка, продажба и наем в Бургас и по крайбрежието — ясни обяви, бърз отговор, модерно медио.",
-  microcopy: "Ясни имоти. Бърз чат. Брегът на Бургас.",
+  microcopy: "Ясни имоти. Удобен процес. Жилище край морето.",
   nav: {
     buy: "Купи",
     rent: "Наем",
@@ -435,7 +441,7 @@ const bg: Dictionary = {
       "Заснемаме, публикуваме, филтрираме интереса",
       "Огледи и сделка без хаос",
     ],
-    areasTitle: "Къде работим",
+    areasTitle: "Имоти в региона",
     ownersTitle: "Имаш имот?",
     ownersText:
       "Пусни го с Nomore: професионални фото и вертикално видео за нашите социални мрежи. Заснемането е без отделна такса — работим на комисиона от сделката.",
@@ -612,9 +618,11 @@ const bg: Dictionary = {
 const ru: Dictionary = {
   ...en,
   tagline: "Жильё у моря. Без лишнего.",
+  taglineLine1: "Жильё у моря.",
+  taglineLine2: "Без лишнего.",
   taglineSub:
     "Покупка, продажа и аренда в Бургасе и на побережье — понятные объявления, быстрый ответ, современная подача.",
-  microcopy: "Понятные объекты. Быстрый чат. Берег Бургаса.",
+  microcopy: "Понятные объекты. Удобный процесс. Жильё на берегу моря.",
   nav: {
     buy: "Купить",
     rent: "Аренда",
@@ -650,7 +658,7 @@ const ru: Dictionary = {
       "Снимаем, публикуем, отсеиваем интерес",
       "Показы и сделка без хаоса",
     ],
-    areasTitle: "Где работаем",
+    areasTitle: "Объекты в регионе",
     ownersTitle: "Есть объект?",
     ownersText:
       "С Nomore: профессиональные фото и вертикальное видео для наших соцсетей. Съёмка без отдельной оплаты — работаем за комиссию со сделки.",
@@ -827,9 +835,11 @@ const ru: Dictionary = {
 const ua: Dictionary = {
   ...en,
   tagline: "Житло на морі. Без зайвого.",
+  taglineLine1: "Житло на морі.",
+  taglineLine2: "Без зайвого.",
   taglineSub:
     "Купівля, продаж і оренда в Бургасі та на узбережжі — зрозумілі оголошення, швидка відповідь, сучасна подача.",
-  microcopy: "Зрозумілі об’єкти. Швидкий чат. Узбережжя Бургаса.",
+  microcopy: "Зрозумілі об’єкти. Зручний процес. Житло на березі моря.",
   nav: {
     buy: "Купити",
     rent: "Оренда",
@@ -865,7 +875,7 @@ const ua: Dictionary = {
       "Знімаємо, публікуємо, відсіюємо інтерес",
       "Покази й угода без хаосу",
     ],
-    areasTitle: "Де працюємо",
+    areasTitle: "Об’єкти в регіоні",
     ownersTitle: "Є об’єкт?",
     ownersText:
       "З Nomore: професійні фото та вертикальне відео для наших соцмереж. Зйомка без окремої оплати — працюємо за комісією з угоди.",

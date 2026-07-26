@@ -9,17 +9,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { Currency } from "@/lib/currency";
 import { readJson, writeJson } from "@/lib/storage";
 
-const CURRENCY_KEY = "nomore-currency";
 const COMPARE_KEY = "nomore-compare";
 const FAVORITES_KEY = "nomore-favorites";
 const COOKIES_KEY = "nomore-cookies-ok";
 
 type AppCtx = {
-  currency: Currency;
-  setCurrency: (c: Currency) => void;
   favorites: string[];
   toggleFavorite: (id: string) => void;
   isFavorite: (id: string) => boolean;
@@ -34,23 +30,16 @@ type AppCtx = {
 const Ctx = createContext<AppCtx | null>(null);
 
 export function AppProviders({ children }: { children: ReactNode }) {
-  const [currency, setCurrencyState] = useState<Currency>("EUR");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [compare, setCompare] = useState<string[]>([]);
   const [cookiesOk, setCookiesOk] = useState(true);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setCurrencyState(readJson<Currency>(CURRENCY_KEY, "EUR"));
     setFavorites(readJson<string[]>(FAVORITES_KEY, []));
     setCompare(readJson<string[]>(COMPARE_KEY, []));
     setCookiesOk(readJson<boolean>(COOKIES_KEY, false));
     setHydrated(true);
-  }, []);
-
-  const setCurrency = useCallback((c: Currency) => {
-    setCurrencyState(c);
-    writeJson(CURRENCY_KEY, c);
   }, []);
 
   const toggleFavorite = useCallback((id: string) => {
@@ -99,8 +88,6 @@ export function AppProviders({ children }: { children: ReactNode }) {
 
   const value = useMemo(
     () => ({
-      currency,
-      setCurrency,
       favorites,
       toggleFavorite,
       isFavorite,
@@ -112,8 +99,6 @@ export function AppProviders({ children }: { children: ReactNode }) {
       acceptCookies,
     }),
     [
-      currency,
-      setCurrency,
       favorites,
       toggleFavorite,
       isFavorite,

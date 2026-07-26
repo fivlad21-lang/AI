@@ -6,8 +6,7 @@ export function Testimonials({ locale, dict }: { locale: Locale; dict: Dictionar
   return (
     <section className="border-y border-white/[0.06] bg-bg-elevated/40">
       <div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-        <p className="section-label">Trust</p>
-        <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
+        <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
           {dict.home.trustTitle}
         </h2>
         <div className="mt-10 grid gap-4 md:grid-cols-3">

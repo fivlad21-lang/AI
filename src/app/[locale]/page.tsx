@@ -42,11 +42,12 @@ export default async function HomePage({
           <div className="animate-rise">
             <Logo locale={locale} size="lg" />
           </div>
-          <p className="animate-rise mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+          <p className="animate-rise mt-3 max-w-xl text-sm leading-relaxed text-ink-muted md:text-[15px]">
             {dict.microcopy}
           </p>
-          <h1 className="animate-rise-delay-1 mt-5 max-w-3xl font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-            {dict.tagline}
+          <h1 className="animate-rise-delay-1 mt-5 max-w-3xl font-display text-[2.35rem] font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
+            <span className="block">{dict.taglineLine1}</span>
+            <span className="block">{dict.taglineLine2}</span>
           </h1>
           <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
             {dict.taglineSub}
@@ -72,12 +73,9 @@ export default async function HomePage({
 
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
         <div className="mb-8 flex items-end justify-between gap-4">
-          <div>
-            <p className="section-label">Catalog</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
-              {dict.home.featured}
-            </h2>
-          </div>
+          <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            {dict.home.featured}
+          </h2>
           <Link
             href={`/${locale}/buy`}
             className="text-sm font-semibold text-sea transition hover:text-ink"
@@ -94,8 +92,7 @@ export default async function HomePage({
 
       <section className="border-y border-white/[0.06] bg-bg-elevated/50">
         <div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-          <p className="section-label">Process</p>
-          <h2 className="mt-2 max-w-xl font-display text-2xl font-semibold tracking-tight md:text-3xl">
+          <h2 className="max-w-xl font-display text-2xl font-semibold tracking-tight md:text-3xl">
             {dict.home.howTitle}
           </h2>
           <ol className="mt-10 grid gap-4 md:grid-cols-3">
@@ -115,11 +112,9 @@ export default async function HomePage({
       <Testimonials locale={locale} dict={dict} />
 
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-        <p className="section-label">Coast</p>
-        <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
+        <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
           {dict.home.areasTitle}
         </h2>
-        <p className="mt-2 text-sm text-ink-muted">{dict.footer.geo}</p>
         <div className="mt-7 flex flex-wrap gap-2.5">
           {locations.map((l) => (
             <Link
@@ -149,8 +144,7 @@ export default async function HomePage({
             className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-sea/20 blur-3xl"
           />
           <div className="relative max-w-xl">
-            <p className="section-label">Owners</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
               {dict.home.ownersTitle}
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-ink-muted md:text-base">

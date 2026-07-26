@@ -16,8 +16,7 @@ export default async function BlogPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 md:px-6">
-      <p className="section-label">Journal</p>
-      <h1 className="mt-2 font-display text-4xl font-semibold">{dict.blog.title}</h1>
+      <h1 className="font-display text-4xl font-semibold">{dict.blog.title}</h1>
       <p className="mt-3 text-ink-muted">{dict.blog.subtitle}</p>
       <ul className="mt-10 space-y-4">
         {blogPosts.map((post) => (

@@ -10,6 +10,8 @@ export function Logo({
   size?: "sm" | "md" | "lg";
 }) {
   const h = size === "lg" ? 36 : size === "sm" ? 22 : 28;
+  const text =
+    size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-lg md:text-xl";
 
   return (
     <Link href={`/${locale}`} className="group inline-flex items-center gap-2.5">
@@ -21,17 +23,9 @@ export function Logo({
         className="rounded-lg"
         unoptimized
       />
-      <span className="flex items-baseline gap-2">
-        <span
-          className={`font-display font-semibold tracking-tight ${
-            size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-lg md:text-xl"
-          }`}
-        >
-          Nomore
-        </span>
-        <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted group-hover:text-ink md:text-[11px]">
-          estate
-        </span>
+      <span className={`flex items-baseline gap-2 font-display font-semibold tracking-tight ${text}`}>
+        <span>Nomore</span>
+        <span className="text-ink-muted transition group-hover:text-ink">Estate</span>
       </span>
     </Link>
   );

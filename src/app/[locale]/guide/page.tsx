@@ -18,8 +18,7 @@ export default async function GuidePage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-14 md:px-6">
-      <p className="section-label">FAQ</p>
-      <h1 className="mt-2 font-display text-4xl font-semibold tracking-tight">
+      <h1 className="font-display text-4xl font-semibold tracking-tight">
         {dict.guide.title}
       </h1>
       <p className="mt-3 text-ink-muted">{dict.guide.subtitle}</p>

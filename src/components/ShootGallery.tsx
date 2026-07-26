@@ -11,8 +11,7 @@ const shots = [
 export function ShootGallery({ dict }: { dict: Dictionary }) {
   return (
     <section className="mt-14">
-      <p className="section-label">Media</p>
-      <h2 className="mt-2 font-display text-2xl font-semibold">{dict.sell.shootTitle}</h2>
+      <h2 className="font-display text-2xl font-semibold">{dict.sell.shootTitle}</h2>
       <p className="mt-2 max-w-xl text-sm text-ink-muted">{dict.sell.shootText}</p>
       <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
         {shots.map((src) => (

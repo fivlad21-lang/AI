@@ -18,10 +18,10 @@ export const testimonials: Testimonial[] = [
       ua: "Покупець · Сонячний Берег",
     },
     quote: {
-      en: "Clear photos, fast WhatsApp replies, no pressure. Felt modern — not like old classifieds.",
-      bg: "Ясни снимки, бърз WhatsApp, без натиск. Модерно — не като стари обяви.",
-      ru: "Понятные фото, быстрый WhatsApp, без давления. Современно — не как старые доски объявлений.",
-      ua: "Зрозумілі фото, швидкий WhatsApp, без тиску. Сучасно — не як старі дошки оголошень.",
+      en: "The photos matched what I saw in person. I wrote on WhatsApp — they replied quickly, no pressure.",
+      bg: "Снимките съвпадаха с това, което видях на място. Писах във WhatsApp — отговориха бързо, без натиск.",
+      ru: "Фото реальные, без сюрпризов при просмотре. Написала в WhatsApp — ответили быстро, без давления.",
+      ua: "Фото справжні, без сюрпризів на перегляді. Написала в WhatsApp — відповіли швидко, без тиску.",
     },
   },
   {
@@ -34,10 +34,10 @@ export const testimonials: Testimonial[] = [
       ua: "Власник · Бургас",
     },
     quote: {
-      en: "They shot the apartment properly and posted it. I didn’t pay for media up front — commission on the deal.",
-      bg: "Заснеха апартамента както трябва и го пуснаха. Не платих медио предварително — комисиона от сделката.",
-      ru: "Сняли квартиру нормально и опубликовали. За медиа заранее не платил — комиссия со сделки.",
-      ua: "Зняли квартиру нормально і опублікували. За медіа наперед не платив — комісія з угоди.",
+      en: "They did the photos and a short video themselves — I didn’t pay for shooting separately. Then they handled the chat with people who were interested.",
+      bg: "Направиха снимките и кратко видео сами — не платих отделно за заснемане. После водеха чата с интересуващите се.",
+      ru: "Сделали фото и короткое видео сами, я за съёмку отдельно не платил. Потом вели переписку с интересующимися.",
+      ua: "Зробили фото й коротке відео самі — за зйомку окремо не платив. Потім вели переписку з тими, хто цікавився.",
     },
   },
   {
@@ -50,10 +50,10 @@ export const testimonials: Testimonial[] = [
       ua: "Довгострокова оренда · Несебр",
     },
     quote: {
-      en: "Found a furnished place in a week. Viewing was booked in chat — simple.",
-      bg: "Намерих обзаведен имот за седмица. Огледът се уговори в чат — просто.",
-      ru: "Нашла меблированное за неделю. Показ согласовали в чате — просто.",
-      ua: "Знайшла мебльоване за тиждень. Показ узгодили в чаті — просто.",
+      en: "I needed a furnished place long-term — within a week we found an option and booked the viewing right in chat.",
+      bg: "Търсех обзаведен имот за дълго — за седмица намерихме вариант и уговорихме оглед направо в чата.",
+      ru: "Искала надолго с мебелью — за неделю нашли вариант и согласовали показ прямо в чате.",
+      ua: "Шукала надовго з меблями — за тиждень знайшли варіант і узгодили показ прямо в чаті.",
     },
   },
 ];

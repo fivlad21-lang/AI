@@ -6,7 +6,6 @@ import { CatalogFilters } from "@/components/CatalogFilters";
 import { ListingCard } from "@/components/ListingCard";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
 import { GlassButton } from "@/components/GlassButton";
-import { CurrencyToggle } from "@/components/CurrencyToggle";
 import { filterListings, type Deal, type SortKey } from "@/data/listings";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -43,16 +42,13 @@ export function CatalogView({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="font-display text-3xl md:text-4xl">
-            {deal === "sale" ? dict.catalog.saleTitle : dict.catalog.rentTitle}
-          </h1>
-          <p className="mt-2 text-sm text-ink-muted">
-            {items.length} {dict.catalog.results}
-          </p>
-        </div>
-        <CurrencyToggle dict={dict} />
+      <div>
+        <h1 className="font-display text-3xl md:text-4xl">
+          {deal === "sale" ? dict.catalog.saleTitle : dict.catalog.rentTitle}
+        </h1>
+        <p className="mt-2 text-sm text-ink-muted">
+          {items.length} {dict.catalog.results}
+        </p>
       </div>
       <div className="mt-6">
         <CatalogFilters locale={locale} dict={dict} basePath={basePath} />

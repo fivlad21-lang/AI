@@ -10,7 +10,6 @@ import { ShareButton } from "@/components/ShareButton";
 import { PriceText } from "@/components/PriceText";
 import { PrintButton } from "@/components/PrintButton";
 import { ListingJsonLd } from "@/components/JsonLd";
-import { CurrencyToggle } from "@/components/CurrencyToggle";
 import { getListing, getPublishedListings, listings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
@@ -93,7 +92,6 @@ export default async function ListingPage({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2 print:hidden">
-          <CurrencyToggle dict={dict} />
           <FavoriteButton id={listing.id} />
           <CompareButton id={listing.id} dict={dict} />
           <ShareButton dict={dict} title={listing.title[locale]} url={pageUrl} />
