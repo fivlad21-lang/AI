@@ -3,7 +3,7 @@
 **Статус:** затверджено напрямок (2026-07-26)  
 **Live:** `https://ai.nomorevlad.vercel.app`  
 **Домен пізніше:** `nomore.estate`  
-**Пов’язано:** `TZ.md`, `TZ_DEPLOY.md`, `MONITORING.md`, `PUBLISH_CHECKLIST.md`
+**Пов’язано:** `TZ.md`, `TZ_DEPLOY.md`, `TZ_CRM_VITRINE.md`, `MONITORING.md`, `PUBLISH_CHECKLIST.md`
 
 ---
 
@@ -17,7 +17,7 @@
 | Trust | низький (сток) | свої фото + реальні адреси/райони |
 | Lead | високий | локалізовані WA + аналітика |
 | SEO | середній | локаційні інтро + блог |
-| Ops | ручний TS | Airtable→JSON при 10+ об’єктах |
+| Ops | ручний TS | CRM API sync 1–2×/день (`TZ_CRM_VITRINE.md`) |
 | Visual | сильний shell | свої hero/shoot |
 
 ---
@@ -60,12 +60,13 @@
 8. 3–6 статей блогу під запити Бургас / Акт 16 / оренда  
 9. Локалізовані префіли WhatsApp  
 
-## 5. P2 — зростання
+## 5. P2 — зростання / CRM
 
-10. Airtable sync  
+10. **CRM API sync** (основний шлях) — `TZ_CRM_VITRINE.md`  
 11. Домен + Google Business  
 12. Кейси зйомки на `/sell` своїми кадрами  
-13. Telegram bot / `/api/leads` (опційно)
+13. Telegram bot / `/api/leads` (опційно)  
+14. Airtable — лише fallback, якщо CRM API ще немає
 
 ## 6. Не робити зараз
 
@@ -78,7 +79,7 @@ Auth, оплата, повний CRM, бронювання з бекенд-ка�
 ## 8. Наповнення об’єктами
 
 **Зараз:** редагувати `listings.ts` + checklist + deploy.  
-**Пізніше (10+):** Airtable → `npm run sync:listings` → JSON.
+**Ціль:** CRM → cron sync → `listings.generated.json` → вітрина (`TZ_CRM_VITRINE.md`).
 
 ## 9. Моніторинг (щотижня)
 
