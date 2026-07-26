@@ -38,6 +38,7 @@ export function MessengerDock({ dict }: { dict: Dictionary }) {
       <MessengerButton
         kind="viber"
         variant="dock"
+        place="dock"
         href={viberUrl()}
         label={dict.cta.viber}
       />
@@ -45,6 +46,7 @@ export function MessengerDock({ dict }: { dict: Dictionary }) {
         <MessengerButton
           kind="telegram"
           variant="dock"
+          place="dock"
           href={tg}
           label={dict.cta.telegram}
         />
@@ -52,6 +54,7 @@ export function MessengerDock({ dict }: { dict: Dictionary }) {
       <MessengerButton
         kind="whatsapp"
         variant="dock"
+        place="dock"
         href={whatsappUrl("Hi! I'm writing from nomore.estate")}
         label={dict.cta.whatsapp}
       />

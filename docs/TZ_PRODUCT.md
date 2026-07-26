@@ -3,7 +3,7 @@
 **Статус:** затверджено напрямок (2026-07-26)  
 **Live:** `https://ai.nomorevlad.vercel.app`  
 **Домен пізніше:** `nomore.estate`  
-**Пов’язано:** `TZ.md`, `TZ_DEPLOY.md`, `TZ_CRM_VITRINE.md`, `MONITORING.md`, `PUBLISH_CHECKLIST.md`
+**Пов’язано:** `TZ.md`, `TZ_DEPLOY.md`, `TZ_CRM_VITRINE.md`, `TZ_MONITORING.md`, `MONITORING.md`, `PUBLISH_CHECKLIST.md`
 
 ---
 
@@ -49,7 +49,7 @@
 2. Покласти свої зображення в `/public/listings/{slug}/`.  
 3. Виставити `demo: false` на живих об’єктах.  
 4. About: коротко хто ви + SLA відповіді.  
-5. Увімкнути GA (`NEXT_PUBLIC_GA_ID`).
+5. Увімкнути GA (`NEXT_PUBLIC_GA_ID`) — див. `TZ_MONITORING.md`.
 
 ---
 

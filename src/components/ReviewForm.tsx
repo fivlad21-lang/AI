@@ -6,6 +6,7 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { GlassButton } from "@/components/GlassButton";
 import { MessengerGlyph } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
+import { track } from "@/lib/analytics";
 
 export function ReviewForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,8 @@ export function ReviewForm({ locale, dict }: { locale: Locale; dict: Dictionary 
       `Review: ${description}`,
       `Locale: ${locale}`,
     ].join("\n");
+    track("review_submit", { stars, place: "review" });
+    track("wa_click", { place: "review" });
     window.open(whatsappUrl(text), "_blank");
   };
 
@@ -38,7 +41,14 @@ export function ReviewForm({ locale, dict }: { locale: Locale; dict: Dictionary 
   return (
     <div id="leave-review" className="mt-10 scroll-mt-28">
       {!open ? (
-        <GlassButton type="button" variant="glass" onClick={() => setOpen(true)}>
+        <GlassButton
+          type="button"
+          variant="glass"
+          onClick={() => {
+            track("review_open");
+            setOpen(true);
+          }}
+        >
           {dict.cta.leaveReview}
         </GlassButton>
       ) : (

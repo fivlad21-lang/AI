@@ -5,6 +5,7 @@ import { GlassButton } from "@/components/GlassButton";
 import { MessengerGlyph } from "@/components/MessengerButton";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { track } from "@/lib/analytics";
 
 function nextDays(count: number) {
   const out: Date[] = [];
@@ -88,7 +89,13 @@ export function ViewingCalendar({
         ))}
       </div>
       <p className="mt-4 text-xs text-ink-muted">{dict.listing.autoReply}</p>
-      <GlassButton href={wa} external variant="primary" className="mt-4">
+      <GlassButton
+        href={wa}
+        external
+        variant="primary"
+        className="mt-4"
+        onClick={() => track("wa_click", { place: "viewing" })}
+      >
         <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
         {dict.cta.applyViewing}
       </GlassButton>

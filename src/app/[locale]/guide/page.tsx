@@ -51,6 +51,7 @@ export default async function GuidePage({
       <div className="mt-10 flex flex-wrap gap-3">
         <MessengerButton
           kind="whatsapp"
+          place="guide"
           href={whatsappUrl(`[FAQ] Question from guide page`)}
           label={dict.cta.whatsapp}
         />

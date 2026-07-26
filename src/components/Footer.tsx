@@ -52,6 +52,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           <div className="flex flex-wrap gap-2">
             <MessengerButton
               kind="whatsapp"
+              place="footer"
               href={whatsappUrl("Hi from footer")}
               label={dict.cta.whatsapp}
               className="!px-4 !py-2"
@@ -59,6 +60,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             {tg && (
               <MessengerButton
                 kind="telegram"
+                place="footer"
                 href={tg}
                 label={dict.cta.telegram}
                 className="!px-4 !py-2"
@@ -66,6 +68,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             )}
             <MessengerButton
               kind="viber"
+              place="footer"
               href={viberUrl()}
               label={dict.cta.viber}
               className="!px-4 !py-2"

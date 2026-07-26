@@ -65,6 +65,7 @@ export default async function HomePage({
             <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
               <MessengerButton
                 kind="whatsapp"
+                place="hero"
                 href={whatsappUrl(matchPrefill[locale])}
                 label={dict.cta.getMatch}
                 className="!px-6 !py-3"

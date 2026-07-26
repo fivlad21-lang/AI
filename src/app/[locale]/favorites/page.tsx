@@ -50,6 +50,7 @@ export default function FavoritesPage() {
           <div className="mt-6">
             <MessengerButton
               kind="whatsapp"
+              place="favorites"
               href={shortlist}
               label={dict.favorites.sendShortlist}
             />

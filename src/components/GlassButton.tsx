@@ -34,7 +34,13 @@ export function GlassButton({
   if (href) {
     if (external) {
       return (
-        <a href={href} className={cls} target="_blank" rel="noopener noreferrer">
+        <a
+          href={href}
+          className={cls}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onClick}
+        >
           {children}
         </a>
       );

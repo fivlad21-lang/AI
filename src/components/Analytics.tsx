@@ -1,18 +1,48 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import Script from "next/script";
+import { useApp } from "@/components/providers/AppProviders";
+import { getGaId, trackPageview } from "@/lib/analytics";
 
 /**
- * Analytics stub (F4). Set NEXT_PUBLIC_GA_ID when ready.
- * UTM notes (F5): append ?utm_source=&utm_medium=&utm_campaign= to ads;
- * WhatsApp deep-links already carry [BUY]/[RENT]/[SELL]/[VIEW]/[SHORTLIST] context.
+ * GA4 after cookie consent. Set NEXT_PUBLIC_GA_ID (e.g. G-XXXX).
+ * See docs/TZ_MONITORING.md.
  */
 export function Analytics() {
+  const { cookiesOk, hydrated } = useApp();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const id = getGaId();
+
+  const enabled = Boolean(hydrated && cookiesOk && id);
+
   useEffect(() => {
-    const id = process.env.NEXT_PUBLIC_GA_ID;
-    if (!id || typeof window === "undefined") return;
-    // Placeholder — wire gtag when ID provided.
-    (window as unknown as { __NOMORE_ANALYTICS__?: string }).__NOMORE_ANALYTICS__ = id;
-  }, []);
-  return null;
+    if (!enabled || !id) return;
+    const qs = searchParams?.toString();
+    const path = qs ? `${pathname}?${qs}` : pathname;
+    trackPageview(path);
+  }, [enabled, id, pathname, searchParams]);
+
+  if (!enabled || !id) return null;
+
+  return (
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
+        strategy="afterInteractive"
+      />
+      <Script id="nomore-ga-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', '${id}', { send_page_view: false });
+          window.__NOMORE_GA_READY__ = true;
+        `}
+      </Script>
+    </>
+  );
 }

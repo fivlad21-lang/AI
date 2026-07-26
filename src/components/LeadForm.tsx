@@ -7,6 +7,7 @@ import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
 import { MessengerGlyph } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
+import { track } from "@/lib/analytics";
 
 export function LeadForm({
   locale,
@@ -41,6 +42,7 @@ export function LeadForm({
       "",
       dict.listing.autoReply,
     ].join("\n");
+    track("wa_click", { place: "lead_form" });
     window.open(whatsappUrl(text), "_blank");
   };
 

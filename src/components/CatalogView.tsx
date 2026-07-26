@@ -11,6 +11,7 @@ import { filterListings, type Deal, type SortKey } from "@/data/listings";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
+import { track } from "@/lib/analytics";
 
 export function CatalogView({
   locale,
@@ -48,6 +49,7 @@ export function CatalogView({
     if (next === "list") params.delete("view");
     else params.set("view", "map");
     const q = params.toString();
+    track("catalog_view", { view: next, deal });
     router.push(q ? `${basePath}?${q}` : basePath, { scroll: false });
   };
 
@@ -98,6 +100,7 @@ export function CatalogView({
           <MessengerButton
             className="mt-4"
             kind="whatsapp"
+            place="catalog"
             href={whatsappUrl(
               `[${deal === "sale" ? "BUY" : "RENT"}] Need help finding a property`,
             )}

@@ -7,6 +7,7 @@ import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
 import { MessengerGlyph } from "@/components/MessengerButton";
 import { whatsappUrl } from "@/lib/contacts";
+import { track } from "@/lib/analytics";
 
 export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const [name, setName] = useState("");
@@ -35,6 +36,7 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
       "",
       dict.listing.autoReply,
     ].join("\n");
+    track("wa_click", { place: "sell_form" });
     window.open(whatsappUrl(text), "_blank");
   };
 

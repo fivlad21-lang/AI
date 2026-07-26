@@ -5,7 +5,8 @@ import { Footer } from "@/components/Footer";
 import { MessengerDock } from "@/components/MessengerDock";
 import { CookieBanner } from "@/components/CookieBanner";
 import { CompareBar } from "@/components/CompareBar";
-import { Analytics } from "@/components/Analytics";
+import { AnalyticsGate } from "@/components/AnalyticsGate";
+import { LocaleErrorBoundary } from "@/components/LocaleErrorBoundary";
 import { OrganizationJsonLd } from "@/components/JsonLd";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { isLocale, locales, type Locale } from "@/i18n/config";
@@ -59,10 +60,14 @@ export default async function LocaleLayout({
   return (
     <AppProviders>
       <OrganizationJsonLd />
-      <Analytics />
+      <AnalyticsGate />
       <div className="flex min-h-dvh flex-col" lang={locale === "ua" ? "uk" : locale}>
         <Header locale={locale} dict={dict} />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <LocaleErrorBoundary homeHref={`/${locale}`}>
+            {children}
+          </LocaleErrorBoundary>
+        </main>
         <Footer locale={locale} dict={dict} />
         <MessengerDock dict={dict} />
         <CompareBar locale={locale} dict={dict} />

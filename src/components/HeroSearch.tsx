@@ -7,6 +7,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { GlassSelect } from "@/components/GlassSelect";
 import { GlassButton } from "@/components/GlassButton";
+import { track } from "@/lib/analytics";
 
 export function HeroSearch({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const router = useRouter();
@@ -30,6 +31,13 @@ export function HeroSearch({ locale, dict }: { locale: Locale; dict: Dictionary 
     if (priceMax) params.set("priceMax", priceMax);
     const q = params.toString();
     const base = `/${locale}/${deal === "buy" ? "buy" : "rent"}`;
+    track("hero_search", {
+      deal,
+      has_location: location !== "all",
+      has_type: type !== "all",
+      has_rooms: rooms !== "all",
+      has_price: Boolean(priceMin || priceMax),
+    });
     router.push(q ? `${base}?${q}` : base);
   };
 

@@ -47,14 +47,21 @@ export default async function ContactsPage({
         <div className="mt-6 flex flex-wrap gap-2.5">
           <MessengerButton
             kind="whatsapp"
+            place="contacts"
             href={whatsappUrl("Hi! Contacts page")}
             label={dict.cta.whatsapp}
           />
           {tg && (
-            <MessengerButton kind="telegram" href={tg} label={dict.cta.telegram} />
+            <MessengerButton
+              kind="telegram"
+              place="contacts"
+              href={tg}
+              label={dict.cta.telegram}
+            />
           )}
           <MessengerButton
             kind="viber"
+            place="contacts"
             href={viberUrl()}
             label={dict.cta.viber}
           />

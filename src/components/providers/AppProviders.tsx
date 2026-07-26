@@ -25,6 +25,8 @@ type AppCtx = {
   isCompared: (id: string) => boolean;
   cookiesOk: boolean;
   acceptCookies: () => void;
+  /** true after localStorage hydrate — use before loading analytics */
+  hydrated: boolean;
 };
 
 const Ctx = createContext<AppCtx | null>(null);
@@ -97,6 +99,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
       isCompared,
       cookiesOk: hydrated ? cookiesOk : true,
       acceptCookies,
+      hydrated,
     }),
     [
       favorites,

@@ -43,6 +43,7 @@ export default async function SellPage({
         <div className="mt-7">
           <MessengerButton
             kind="whatsapp"
+            place="sell"
             href={whatsappUrl("[SELL] Want to list my property with shooting")}
             label={dict.cta.whatsapp}
           />

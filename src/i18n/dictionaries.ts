@@ -401,7 +401,7 @@ const en: Dictionary = {
     read: "Read",
   },
   cookies: {
-    text: "We use local storage for language, favorites, and consent. See Privacy.",
+    text: "We use local storage for language, favorites, and consent. After OK we may load analytics (GA4) to improve the site. See Privacy.",
     accept: "OK",
     more: "Privacy",
   },
@@ -640,7 +640,7 @@ const bg: Dictionary = {
     read: "Чети",
   },
   cookies: {
-    text: "Ползваме local storage за език, запазени и съгласие. Виж Поверителност.",
+    text: "Ползваме local storage за език, запазени и съгласие. След ОК може да заредим аналитика (GA4), за да подобрим сайта. Виж Поверителност.",
     accept: "ОК",
     more: "Поверителност",
   },
@@ -878,7 +878,7 @@ const ru: Dictionary = {
     read: "Читать",
   },
   cookies: {
-    text: "Мы используем local storage для языка, избранного и согласия. См. Конфиденциальность.",
+    text: "Мы используем local storage для языка, избранного и согласия. После OK можем загрузить аналитику (GA4), чтобы улучшать сайт. См. Конфиденциальность.",
     accept: "OK",
     more: "Конфиденциальность",
   },
@@ -1116,7 +1116,7 @@ const ua: Dictionary = {
     read: "Читати",
   },
   cookies: {
-    text: "Використовуємо local storage для мови, збереженого і згоди. Див. Конфіденційність.",
+    text: "Використовуємо local storage для мови, збереженого і згоди. Після OK можемо завантажити аналітику (GA4), щоб покращувати сайт. Див. Конфіденційність.",
     accept: "OK",
     more: "Конфіденційність",
   },

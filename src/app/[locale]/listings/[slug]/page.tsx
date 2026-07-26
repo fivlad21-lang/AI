@@ -15,6 +15,7 @@ import { MessengerButton, MessengerGlyph } from "@/components/MessengerButton";
 import { ListingBadges } from "@/components/ListingBadges";
 import { StickyListingCta } from "@/components/StickyListingCta";
 import { ListingMiniMap } from "@/components/ListingMiniMap";
+import { WaPrimaryLink } from "@/components/WaPrimaryLink";
 import { formatEur } from "@/components/PriceText";
 import { getListing, getPublishedListings, listings } from "@/data/listings";
 import { locations } from "@/data/locations";
@@ -184,11 +185,16 @@ export default async function ListingPage({
           listingUrl={pageUrl}
         />
         <div className="flex flex-col justify-end gap-3">
-          <GlassButton href={wa} external variant="primary">
+          <WaPrimaryLink href={wa} place="listing">
             <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
             {dict.cta.applyViewing}
-          </GlassButton>
-          <MessengerButton kind="whatsapp" href={wa} label={dict.cta.whatsapp} />
+          </WaPrimaryLink>
+          <MessengerButton
+            kind="whatsapp"
+            place="listing"
+            href={wa}
+            label={dict.cta.whatsapp}
+          />
           <p className="text-xs text-ink-muted">{dict.listing.autoReply}</p>
           <Link
             href={`/${locale}/${listing.deal === "sale" ? "buy" : "rent"}`}

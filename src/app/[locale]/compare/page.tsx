@@ -48,6 +48,7 @@ export default function ComparePage() {
           <div className="flex flex-wrap gap-2">
             <MessengerButton
               kind="whatsapp"
+              place="compare"
               href={shortlist}
               label={dict.cta.shortlist}
             />
