@@ -8,6 +8,7 @@ import { ListingCard } from "@/components/ListingCard";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
 import { MessengerButton } from "@/components/MessengerButton";
 import { filterListings, type Deal, type SortKey } from "@/data/listings";
+import { getLocation } from "@/data/locations";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { whatsappUrl } from "@/lib/contacts";
@@ -30,11 +31,14 @@ export function CatalogView({
 
   const basePath = `/${locale}/${deal === "sale" ? "buy" : "rent"}`;
   const view = sp.get("view") === "map" ? "map" : "list";
+  const locationId = sp.get("location") || undefined;
+  const locationMeta =
+    locationId && locationId !== "all" ? getLocation(locationId) : undefined;
   const features = (sp.get("features") || "").split(",").filter(Boolean);
   const sort = (sp.get("sort") || "new") as SortKey;
   const items = filterListings({
     deal,
-    location: sp.get("location") || undefined,
+    location: locationId,
     type: sp.get("type") || undefined,
     rooms: sp.get("rooms") || undefined,
     priceMin: sp.get("priceMin") ? Number(sp.get("priceMin")) : undefined,
@@ -57,13 +61,19 @@ export function CatalogView({
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
+        <div className="min-w-0 max-w-2xl">
           <h1 className="font-display text-3xl md:text-4xl">
             {deal === "sale" ? dict.catalog.saleTitle : dict.catalog.rentTitle}
+            {locationMeta ? ` · ${locationMeta.label[locale]}` : ""}
           </h1>
           <p className="mt-2 text-sm text-ink-muted">
             {items.length} {dict.catalog.results}
           </p>
+          {locationMeta && (
+            <p className="mt-3 text-sm leading-relaxed text-ink-muted md:text-[15px]">
+              {locationMeta.intro[locale]}
+            </p>
+          )}
         </div>
         <div className="glass flex rounded-full p-1">
           <button
