@@ -29,7 +29,7 @@ export async function generateMetadata({
   );
 
   return {
-    title: dict.brand,
+    title: { absolute: dict.brand },
     description: dict.taglineSub,
     alternates: {
       canonical: `${SITE_URL}/${locale}`,
