@@ -16,6 +16,7 @@ import { ListingBadges } from "@/components/ListingBadges";
 import { StickyListingCta } from "@/components/StickyListingCta";
 import { ListingMiniMap } from "@/components/ListingMiniMap";
 import { WaPrimaryLink } from "@/components/WaPrimaryLink";
+import { AgentCard } from "@/components/AgentCard";
 import { formatEur } from "@/components/PriceText";
 import { getListing, getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
@@ -176,6 +177,10 @@ export default async function ListingPage({
             </span>
           ))}
         </div>
+      </div>
+
+      <div className="glass mt-10 rounded-[1.75rem] p-4 md:p-5 print:hidden">
+        <AgentCard locale={locale} dict={dict} size="compact" />
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2 print:hidden">
