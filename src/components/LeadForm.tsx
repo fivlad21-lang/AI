@@ -7,6 +7,13 @@ import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
 import { GlassSelect } from "@/components/GlassSelect";
 import { track } from "@/lib/analytics";
+import { validateLeadFields } from "@/lib/lead-validation";
+
+function mapError(code: string | undefined, dict: Dictionary) {
+  if (code === "name") return dict.forms.invalidName;
+  if (code === "contact") return dict.forms.invalidContact;
+  return dict.forms.error;
+}
 
 export function LeadForm({
   locale,
@@ -31,8 +38,14 @@ export function LeadForm({
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    setStatus("sending");
     setError("");
+    const fieldErr = validateLeadFields(name, contact);
+    if (fieldErr) {
+      setStatus("error");
+      setError(mapError(fieldErr, dict));
+      return;
+    }
+    setStatus("sending");
     const kind = prefix.replace(/[\[\]]/g, "") || "BUY";
     try {
       const res = await fetch("/api/leads", {
@@ -53,7 +66,7 @@ export function LeadForm({
       const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
       if (!res.ok || !data?.ok) {
         setStatus("error");
-        setError(data?.error || dict.forms.error);
+        setError(mapError(data?.error, dict));
         return;
       }
       track("form_submit", { place: "lead_form", kind });
@@ -76,7 +89,13 @@ export function LeadForm({
       </label>
       <label className="block text-xs font-semibold uppercase text-ink-muted">
         {dict.forms.contact}
-        <input required className={field} value={contact} onChange={(e) => setContact(e.target.value)} />
+        <input
+          required
+          className={field}
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          placeholder="+359 / @username"
+        />
       </label>
       <div className="relative z-10 grid gap-3 sm:grid-cols-2">
         <GlassSelect

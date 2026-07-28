@@ -4,13 +4,11 @@ import { useParams } from "next/navigation";
 import { useMemo } from "react";
 import { ListingCard } from "@/components/ListingCard";
 import { GlassButton } from "@/components/GlassButton";
-import { MessengerButton } from "@/components/MessengerButton";
+import { ShortlistButton } from "@/components/ShortlistButton";
 import { useApp } from "@/components/providers/AppProviders";
 import { listings } from "@/data/listings";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
-import { waShortlist } from "@/lib/wa-messages";
 
 export default function FavoritesPage() {
   const params = useParams();
@@ -23,8 +21,6 @@ export default function FavoritesPage() {
     () => listings.filter((l) => favorites.includes(l.id) && l.status === "published"),
     [favorites],
   );
-
-  const shortlist = whatsappUrl(waShortlist(locale, items, "favorites"));
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
@@ -39,10 +35,11 @@ export default function FavoritesPage() {
       ) : (
         <>
           <div className="mt-6">
-            <MessengerButton
-              kind="whatsapp"
+            <ShortlistButton
+              locale={locale}
+              dict={dict}
+              items={items}
               place="favorites"
-              href={shortlist}
               label={dict.favorites.sendShortlist}
             />
           </div>

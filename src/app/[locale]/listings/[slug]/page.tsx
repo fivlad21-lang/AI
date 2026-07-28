@@ -11,21 +11,17 @@ import { ShareButton } from "@/components/ShareButton";
 import { PriceText } from "@/components/PriceText";
 import { PrintButton } from "@/components/PrintButton";
 import { ListingJsonLd } from "@/components/JsonLd";
-import { MessengerButton, MessengerGlyph } from "@/components/MessengerButton";
 import { ListingBadges } from "@/components/ListingBadges";
 import { StickyListingCta } from "@/components/StickyListingCta";
 import { ListingMiniMap } from "@/components/ListingMiniMap";
-import { WaPrimaryLink } from "@/components/WaPrimaryLink";
 import { AgentCard } from "@/components/AgentCard";
 import { formatEur } from "@/components/PriceText";
 import { getListing, getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
 import { pageMeta } from "@/lib/meta";
 import { SITE_URL } from "@/lib/site";
-import { waListingView } from "@/lib/wa-messages";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -68,8 +64,6 @@ export default async function ListingPage({
   const similar = getPublishedListings()
     .filter((l) => l.id !== listing.id && l.deal === listing.deal)
     .slice(0, 3);
-
-  const wa = whatsappUrl(waListingView(locale, listing, pageUrl));
 
   const priceLabel = `${formatEur(listing.priceEur, locale)}${
     listing.deal === "rent" ? dict.listing.month : ""
@@ -179,27 +173,17 @@ export default async function ListingPage({
         </div>
       </div>
 
-      <div className="glass mt-10 rounded-[1.75rem] p-4 md:p-5 print:hidden">
-        <AgentCard locale={locale} dict={dict} size="compact" />
-      </div>
-
       <div className="mt-10 grid gap-6 lg:grid-cols-2 print:hidden">
         <ViewingCalendar
+          locale={locale}
           dict={dict}
           listingTitle={listing.title[locale]}
           listingUrl={pageUrl}
         />
         <div className="flex flex-col justify-end gap-3">
-          <WaPrimaryLink href={wa} place="listing">
-            <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
-            {dict.cta.applyViewing}
-          </WaPrimaryLink>
-          <MessengerButton
-            kind="whatsapp"
-            place="listing"
-            href={wa}
-            label={dict.cta.whatsapp}
-          />
+          <div className="glass rounded-[1.75rem] p-4 md:p-5">
+            <AgentCard locale={locale} dict={dict} size="compact" />
+          </div>
           <p className="text-xs text-ink-muted">{dict.listing.autoReply}</p>
           <Link
             href={`/${locale}/${listing.deal === "sale" ? "buy" : "rent"}`}
@@ -221,11 +205,7 @@ export default async function ListingPage({
         </section>
       )}
 
-      <StickyListingCta
-        href={wa}
-        label={dict.cta.whatsapp}
-        priceLabel={priceLabel}
-      />
+      <StickyListingCta label={dict.cta.applyViewing} priceLabel={priceLabel} />
     </div>
   );
 }

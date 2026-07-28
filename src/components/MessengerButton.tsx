@@ -41,14 +41,21 @@ export function MessengerButton({
     if (place) trackMessenger(kind, place);
   };
 
+  // Custom schemes (viber://) break with target=_blank → about:invalid in Chrome
+  const openInNewTab = kind !== "viber";
+  const linkProps = {
+    href,
+    onClick,
+    ...(openInNewTab
+      ? { target: "_blank" as const, rel: "noopener noreferrer" }
+      : {}),
+  };
+
   if (variant === "dock") {
     return (
       <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...linkProps}
         aria-label={label}
-        onClick={onClick}
         className={`glass-strong flex items-center gap-3 rounded-full py-2.5 pl-2.5 pr-5 text-sm font-semibold text-ink shadow-[0_12px_40px_-16px_rgba(0,0,0,0.8)] ${className}`}
       >
         <span
@@ -64,11 +71,8 @@ export function MessengerButton({
   if (variant === "icon") {
     return (
       <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...linkProps}
         aria-label={label}
-        onClick={onClick}
         className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-white ${bg} ${className}`}
       >
         <Icon className="h-5 w-5" />
@@ -78,11 +82,8 @@ export function MessengerButton({
 
   return (
     <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...linkProps}
       aria-label={label}
-      onClick={onClick}
       className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-110 active:scale-[0.98] ${bg} ${className}`}
     >
       <Icon className="h-5 w-5 shrink-0" />

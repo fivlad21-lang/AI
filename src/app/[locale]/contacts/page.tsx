@@ -38,17 +38,16 @@ export default async function ContactsPage({
         <p className="mt-2 text-xs text-ink-muted">{dict.footer.geo}</p>
       </div>
 
-      <div className="glass mt-10 max-w-xl rounded-[1.75rem] p-5 md:p-6">
-        <AgentCard locale={locale} dict={dict} size="full" />
-        <p className="mt-4 text-xs text-ink-muted/80">{dict.footer.dockHint}</p>
-      </div>
-
-      <div className="mt-12 grid gap-8 lg:grid-cols-2">
-        <div>
-          <h2 className="font-display text-2xl">{dict.contacts.lookingTitle}</h2>
-          <p className="mt-2 text-sm text-ink-muted">{dict.listing.autoReply}</p>
+      <div className="mt-10 grid items-start gap-8 lg:grid-cols-2">
+        <div className="glass rounded-[1.75rem] p-5 md:p-6">
+          <AgentCard locale={locale} dict={dict} size="full" />
+          <p className="mt-4 text-xs text-ink-muted/80">{dict.footer.dockHint}</p>
         </div>
-        <LeadForm locale={locale} dict={dict} prefix="[BUY]" />
+        <div>
+          <h2 className="mb-4 font-display text-2xl">{dict.contacts.lookingTitle}</h2>
+          <p className="mb-4 text-sm text-ink-muted">{dict.listing.autoReply}</p>
+          <LeadForm locale={locale} dict={dict} prefix="[BUY]" />
+        </div>
       </div>
     </div>
   );

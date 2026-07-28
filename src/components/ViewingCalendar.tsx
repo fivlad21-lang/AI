@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { GlassButton } from "@/components/GlassButton";
-import { MessengerGlyph } from "@/components/MessengerButton";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
+import type { Locale } from "@/i18n/config";
 import { track } from "@/lib/analytics";
+import { validateLeadFields } from "@/lib/lead-validation";
 
 function nextDays(count: number) {
   const out: Date[] = [];
@@ -23,11 +23,19 @@ function nextDays(count: number) {
 
 const SLOTS = ["10:00", "12:00", "15:00", "17:30"];
 
+function mapError(code: string | undefined, dict: Dictionary) {
+  if (code === "name") return dict.forms.invalidName;
+  if (code === "contact") return dict.forms.invalidContact;
+  return dict.forms.error;
+}
+
 export function ViewingCalendar({
+  locale,
   dict,
   listingTitle,
   listingUrl,
 }: {
+  locale: Locale;
   dict: Dictionary;
   listingTitle: string;
   listingUrl: string;
@@ -35,6 +43,10 @@ export function ViewingCalendar({
   const days = useMemo(() => nextDays(5), []);
   const [dayIdx, setDayIdx] = useState(0);
   const [slot, setSlot] = useState(SLOTS[0]);
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [error, setError] = useState("");
 
   const day = days[dayIdx];
   const dayLabel = day
@@ -45,12 +57,51 @@ export function ViewingCalendar({
       })
     : "";
 
-  const wa = whatsappUrl(
-    `[VIEW] ${listingTitle}\nSlot: ${dayLabel} ${slot}\n${listingUrl}\n\n(${dict.listing.autoReply})`,
-  );
+  const field =
+    "glass mt-1.5 w-full rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-sea/50";
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError("");
+    const fieldErr = validateLeadFields(name, contact);
+    if (fieldErr) {
+      setStatus("error");
+      setError(mapError(fieldErr, dict));
+      return;
+    }
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: "VIEW",
+          locale,
+          name,
+          contact,
+          slot: `${dayLabel} ${slot}`,
+          comment: listingTitle,
+          source: listingUrl,
+        }),
+      });
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!res.ok || !data?.ok) {
+        setStatus("error");
+        setError(mapError(data?.error, dict));
+        return;
+      }
+      track("form_submit", { place: "viewing", kind: "VIEW" });
+      setStatus("ok");
+      setName("");
+      setContact("");
+    } catch {
+      setStatus("error");
+      setError(dict.forms.error);
+    }
+  };
 
   return (
-    <div className="glass rounded-3xl p-5 print:hidden">
+    <form id="viewing" onSubmit={submit} className="glass rounded-3xl p-5 print:hidden">
       <h2 className="font-display text-lg font-semibold">{dict.listing.viewingTitle}</h2>
       <p className="mt-1 text-sm text-ink-muted">{dict.listing.viewingHint}</p>
       <div className="mt-4 flex flex-wrap gap-2">
@@ -88,17 +139,30 @@ export function ViewingCalendar({
           </button>
         ))}
       </div>
+      <div className="mt-4 space-y-3">
+        <label className="block text-xs font-semibold uppercase text-ink-muted">
+          {dict.forms.name}
+          <input required className={field} value={name} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <label className="block text-xs font-semibold uppercase text-ink-muted">
+          {dict.forms.contact}
+          <input
+            required
+            className={field}
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+            placeholder="+359 / @username"
+          />
+        </label>
+      </div>
       <p className="mt-4 text-xs text-ink-muted">{dict.listing.autoReply}</p>
-      <GlassButton
-        href={wa}
-        external
-        variant="primary"
-        className="mt-4"
-        onClick={() => track("wa_click", { place: "viewing" })}
-      >
-        <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
-        {dict.cta.applyViewing}
+      <GlassButton type="submit" variant="primary" className="mt-4 w-full" disabled={status === "sending"}>
+        {status === "sending" ? dict.forms.sending : dict.cta.applyViewing}
       </GlassButton>
-    </div>
+      {status === "ok" && <p className="mt-2 text-xs text-ok">{dict.forms.success}</p>}
+      {status === "error" && (
+        <p className="mt-2 text-xs text-red-300">{error || dict.forms.error}</p>
+      )}
+    </form>
   );
 }

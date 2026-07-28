@@ -2,11 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SellForm } from "@/components/SellForm";
 import { ShootGallery } from "@/components/ShootGallery";
-import { MessengerButton } from "@/components/MessengerButton";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
-import { waSellInterest } from "@/lib/wa-messages";
 import { pageMeta, routeTitles } from "@/lib/meta";
 
 export async function generateMetadata({
@@ -41,14 +38,6 @@ export default async function SellPage({
         <p className="mt-5 max-w-2xl rounded-2xl border border-sea/25 bg-sea/[0.08] px-4 py-3.5 text-sm leading-relaxed text-ink">
           {dict.sell.modelB}
         </p>
-        <div className="mt-7">
-          <MessengerButton
-            kind="whatsapp"
-            place="sell"
-            href={whatsappUrl(waSellInterest(locale))}
-            label={dict.cta.whatsapp}
-          />
-        </div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-14">
           <div>

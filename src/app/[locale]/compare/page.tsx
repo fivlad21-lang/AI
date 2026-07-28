@@ -5,15 +5,13 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 import { GlassButton } from "@/components/GlassButton";
-import { MessengerButton } from "@/components/MessengerButton";
+import { ShortlistButton } from "@/components/ShortlistButton";
 import { PriceText } from "@/components/PriceText";
 import { useApp } from "@/components/providers/AppProviders";
 import { listings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
-import { waShortlist } from "@/lib/wa-messages";
 
 export default function ComparePage() {
   const params = useParams();
@@ -30,18 +28,17 @@ export default function ComparePage() {
     [compare],
   );
 
-  const shortlist = whatsappUrl(waShortlist(locale, items, "compare"));
-
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <h1 className="font-display text-3xl md:text-4xl">{dict.compare.title}</h1>
         {items.length > 0 && (
           <div className="flex flex-wrap gap-2">
-            <MessengerButton
-              kind="whatsapp"
+            <ShortlistButton
+              locale={locale}
+              dict={dict}
+              items={items}
               place="compare"
-              href={shortlist}
               label={dict.cta.shortlist}
             />
             <button

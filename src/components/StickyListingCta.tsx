@@ -1,14 +1,9 @@
 "use client";
 
-import { WhatsAppIcon } from "@/components/MessengerIcons";
-import { track } from "@/lib/analytics";
-
 export function StickyListingCta({
-  href,
   label,
   priceLabel,
 }: {
-  href: string;
   label: string;
   priceLabel: string;
 }) {
@@ -19,13 +14,9 @@ export function StickyListingCta({
           {priceLabel}
         </p>
         <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => track("wa_click", { place: "listing_sticky" })}
-          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white"
+          href="#viewing"
+          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-sea px-4 py-2.5 text-sm font-semibold text-white"
         >
-          <WhatsAppIcon className="h-5 w-5" />
           {label}
         </a>
       </div>

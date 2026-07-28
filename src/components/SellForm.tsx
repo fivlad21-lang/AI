@@ -7,6 +7,13 @@ import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
 import { GlassSelect } from "@/components/GlassSelect";
 import { track } from "@/lib/analytics";
+import { validateLeadFields } from "@/lib/lead-validation";
+
+function mapError(code: string | undefined, dict: Dictionary) {
+  if (code === "name") return dict.forms.invalidName;
+  if (code === "contact") return dict.forms.invalidContact;
+  return dict.forms.error;
+}
 
 export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const [name, setName] = useState("");
@@ -24,8 +31,14 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    setStatus("sending");
     setError("");
+    const fieldErr = validateLeadFields(name, contact);
+    if (fieldErr) {
+      setStatus("error");
+      setError(mapError(fieldErr, dict));
+      return;
+    }
+    setStatus("sending");
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
@@ -46,7 +59,7 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
       const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
       if (!res.ok || !data?.ok) {
         setStatus("error");
-        setError(data?.error || dict.forms.error);
+        setError(mapError(data?.error, dict));
         return;
       }
       track("form_submit", { place: "sell_form", kind: "SELL" });
@@ -75,7 +88,7 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
           className={field}
           value={contact}
           onChange={(e) => setContact(e.target.value)}
-          placeholder="+359 / +380…"
+          placeholder="+359 / @username"
         />
       </label>
       <div className="relative z-10 grid gap-3 sm:grid-cols-2">

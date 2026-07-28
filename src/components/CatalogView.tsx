@@ -6,13 +6,11 @@ import { CatalogFilters } from "@/components/CatalogFilters";
 import { CatalogMap } from "@/components/CatalogMap";
 import { ListingCard } from "@/components/ListingCard";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
-import { MessengerButton } from "@/components/MessengerButton";
+import { GlassButton } from "@/components/GlassButton";
 import { filterListings, type Deal, type SortKey } from "@/data/listings";
 import { getLocation } from "@/data/locations";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
-import { waCatalogHelp } from "@/lib/wa-messages";
 import { track } from "@/lib/analytics";
 
 export function CatalogView({
@@ -108,13 +106,9 @@ export function CatalogView({
         <div className="mt-10 glass rounded-3xl p-8 text-center">
           <p className="text-ink">{dict.catalog.empty}</p>
           <p className="mt-2 text-sm text-ink-muted">{dict.catalog.emptyHint}</p>
-          <MessengerButton
-            className="mt-4"
-            kind="whatsapp"
-            place="catalog"
-            href={whatsappUrl(waCatalogHelp(locale, deal))}
-            label={dict.cta.whatsapp}
-          />
+          <GlassButton href={`/${locale}/contacts`} variant="primary" className="mt-4">
+            {dict.cta.getMatch}
+          </GlassButton>
         </div>
       ) : view === "map" ? (
         <CatalogMap items={items} locale={locale} dict={dict} />

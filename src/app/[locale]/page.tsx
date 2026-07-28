@@ -6,19 +6,10 @@ import { HeroSearch } from "@/components/HeroSearch";
 import { ListingCard } from "@/components/ListingCard";
 import { Testimonials } from "@/components/Testimonials";
 import { Logo } from "@/components/Logo";
-import { MessengerButton } from "@/components/MessengerButton";
 import { getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
-
-const matchPrefill: Record<Locale, string> = {
-  en: "Hi! Nomore — I need a shortlist (budget / area / buy or rent):",
-  bg: "Здравейте! Nomore — искам подборка (бюджет / район / покупка или наем):",
-  ru: "Здравствуйте! Nomore — нужна подборка (бюджет / район / покупка или аренда):",
-  ua: "Вітаю! Nomore — потрібна підбірка (бюджет / район / купівля чи оренда):",
-};
 
 export default async function HomePage({
   params,
@@ -63,13 +54,9 @@ export default async function HomePage({
               {dict.taglineSub}
             </p>
             <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
-              <MessengerButton
-                kind="whatsapp"
-                place="hero"
-                href={whatsappUrl(matchPrefill[locale])}
-                label={dict.cta.getMatch}
-                className="!px-6 !py-3"
-              />
+              <GlassButton href={`/${locale}/contacts`} variant="primary">
+                {dict.cta.getMatch}
+              </GlassButton>
               <GlassButton href={`/${locale}/sell`} variant="glass">
                 {dict.cta.sellWithUs}
               </GlassButton>

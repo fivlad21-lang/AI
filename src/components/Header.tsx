@@ -158,13 +158,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </nav>
 
           <div className="border-t border-white/[0.06] p-4">
-            <MessengerButton
-              kind="whatsapp"
-              place="drawer"
-              href={whatsappUrl(waGeneric(locale))}
-              label={dict.cta.whatsapp}
-              className="w-full !justify-center"
-            />
+            <p className="text-xs text-ink-muted">{dict.footer.dockHint}</p>
           </div>
         </aside>
       </div>,
@@ -215,13 +209,12 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               </Link>
             ))}
           </div>
-          {/* Desktop only — mobile uses hero / drawer / dock after scroll */}
           <MessengerButton
             kind="whatsapp"
             place="header"
             href={whatsappUrl(waGeneric(locale))}
             label={dict.cta.whatsapp}
-            className="hidden !px-4 !py-2 md:inline-flex"
+            className="!px-3 !py-2 sm:!px-4"
           />
           <button
             type="button"

@@ -137,6 +137,8 @@ export type Dictionary = {
     needShoot: string;
     success: string;
     error: string;
+    invalidName: string;
+    invalidContact: string;
     sending: string;
     replyNote: string;
     slot: string;
@@ -363,6 +365,8 @@ const en: Dictionary = {
     needShoot: "I need photo & video shooting",
     success: "Request sent — we’ll reply soon.",
     error: "Couldn’t send. Try again or write us in the messenger dock.",
+    invalidName: "Enter a real name (at least 2 letters).",
+    invalidContact: "Enter a phone (+359…) or messenger (@username).",
     sending: "Sending…",
     replyNote: "We reply the same business day in WhatsApp, Telegram, or Viber.",
     slot: "Preferred slot",
@@ -393,7 +397,7 @@ const en: Dictionary = {
   favorites: {
     title: "Saved homes",
     empty: "Nothing saved yet. Tap the heart on a listing.",
-    sendShortlist: "Send selection on WhatsApp",
+    sendShortlist: "Send selection",
   },
   compare: {
     title: "Compare",
@@ -612,6 +616,8 @@ const bg: Dictionary = {
     needShoot: "Искам фото и видео заснемане",
     success: "Заявката е изпратена — ще отговорим скоро.",
     error: "Не успяхме да изпратим. Опитай отново или пиши през бутоните долу.",
+    invalidName: "Въведи истинско име (поне 2 букви).",
+    invalidContact: "Въведи телефон (+359…) или месинджър (@username).",
     sending: "Изпращане…",
     replyNote: "Отговаряме в същия работен ден във WhatsApp, Telegram или Viber.",
     slot: "Предпочитан слот",
@@ -860,6 +866,8 @@ const ru: Dictionary = {
     needShoot: "Нужна фото- и видеосъёмка",
     success: "Заявка отправлена — скоро ответим.",
     error: "Не удалось отправить. Попробуйте ещё раз или напишите через кнопки внизу.",
+    invalidName: "Укажите настоящее имя (минимум 2 буквы).",
+    invalidContact: "Укажите телефон (+359…) или мессенджер (@username).",
     sending: "Отправка…",
     replyNote: "Отвечаем в тот же рабочий день в WhatsApp, Telegram или Viber.",
     slot: "Удобный слот",
@@ -1108,6 +1116,8 @@ const ua: Dictionary = {
     needShoot: "Потрібна фото- та відеозйомка",
     success: "Заявку надіслано — скоро відповімо.",
     error: "Не вдалося надіслати. Спробуйте ще раз або напишіть через кнопки внизу.",
+    invalidName: "Вкажіть справжнє ім’я (мінімум 2 літери).",
+    invalidContact: "Вкажіть телефон (+359…) або месенджер (@username).",
     sending: "Надсилання…",
     replyNote: "Відповідаємо того ж робочого дня в WhatsApp, Telegram або Viber.",
     slot: "Зручний слот",

@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { MessengerButton } from "@/components/MessengerButton";
+import { GlassButton } from "@/components/GlassButton";
 import { faqItems } from "@/data/faq";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
-import { waGuide } from "@/lib/wa-messages";
 import { pageMeta, routeTitles } from "@/lib/meta";
 
 export async function generateMetadata({
@@ -50,12 +48,9 @@ export default async function GuidePage({
       </div>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <MessengerButton
-          kind="whatsapp"
-          place="guide"
-          href={whatsappUrl(waGuide(locale))}
-          label={dict.cta.whatsapp}
-        />
+        <GlassButton href={`/${locale}/contacts`} variant="primary">
+          {dict.cta.getMatch}
+        </GlassButton>
         <Link href={`/${locale}/blog`} className="self-center text-sm text-sea">
           {dict.nav.blog} →
         </Link>
