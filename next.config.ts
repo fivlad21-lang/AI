@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
+/**
+ * Vercel-native Next.js deploy (no `output: "export"`).
+ * Root `/` locale redirect is handled in `src/proxy.ts` (Accept-Language + cookie).
+ */
 const nextConfig: NextConfig = {
-  output: "export",
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

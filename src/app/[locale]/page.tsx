@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GlassButton } from "@/components/GlassButton";
+import { HeroSearch } from "@/components/HeroSearch";
 import { ListingCard } from "@/components/ListingCard";
-import { listings } from "@/data/listings";
+import { Testimonials } from "@/components/Testimonials";
+import { Logo } from "@/components/Logo";
+import { getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
 
 export default async function HomePage({
   params,
@@ -18,16 +20,15 @@ export default async function HomePage({
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
   const dict = getDictionary(locale);
-  const featured = listings.slice(0, 3);
+  const featured = getPublishedListings().slice(0, 3);
 
   return (
     <>
-      {/* Hero — one composition, brand first */}
       <section className="relative min-h-[88dvh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&q=80"
-            alt=""
+            alt="Black Sea coast near Burgas"
             fill
             className="object-cover object-center"
             priority
@@ -37,66 +38,43 @@ export default async function HomePage({
           <div className="absolute inset-0 bg-gradient-to-r from-bg/80 via-bg/40 to-transparent" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[88dvh] max-w-6xl flex-col justify-end px-4 pb-16 pt-24 md:justify-center md:px-6 md:pb-24 md:pt-20">
-          <p className="animate-rise font-display text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-            Nomore
-            <span className="ml-2 text-sm font-semibold uppercase tracking-[0.2em] text-ink-muted">
-              estate
-            </span>
-          </p>
-          <h1 className="animate-rise-delay-1 mt-5 max-w-3xl font-display text-[2.35rem] font-semibold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-            {dict.tagline}
-          </h1>
-          <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
-            {dict.taglineSub}
-          </p>
-          <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
-            <GlassButton href={`/${locale}/buy`} variant="primary">
-              {dict.cta.viewListings}
-            </GlassButton>
-            <GlassButton href={`/${locale}/sell`} variant="glass">
-              {dict.cta.sellWithUs}
-            </GlassButton>
-            <GlassButton
-              href={whatsappUrl("Hi! I want help finding a home")}
-              external
-              variant="ghost"
-            >
-              {dict.cta.whatsapp}
-            </GlassButton>
-          </div>
-          <p className="mt-8 text-xs text-ink-muted/80">{dict.home.demoNote}</p>
-        </div>
-      </section>
-
-      {/* Featured */}
-      <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <div className="relative mx-auto grid min-h-[88dvh] max-w-6xl items-end gap-10 px-4 pb-14 pt-24 md:items-center md:gap-12 md:px-6 md:pb-24 md:pt-20 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="section-label">Catalog</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
-              {dict.home.featured}
-            </h2>
+            <div className="animate-rise">
+              <Logo locale={locale} size="lg" />
+            </div>
+            <p className="animate-rise mt-3 max-w-xl text-sm leading-relaxed text-ink-muted md:text-[15px]">
+              {dict.microcopy}
+            </p>
+            <h1 className="animate-rise-delay-1 mt-5 max-w-xl font-display text-[2.35rem] font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-[3.25rem]">
+              <span className="block">{dict.taglineLine1}</span>
+              <span className="block">{dict.taglineLine2}</span>
+            </h1>
+            <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
+              {dict.taglineSub}
+            </p>
+            <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
+              <GlassButton href={`/${locale}/contacts`} variant="primary">
+                {dict.cta.getMatch}
+              </GlassButton>
+              <GlassButton href={`/${locale}/sell`} variant="glass">
+                {dict.cta.sellWithUs}
+              </GlassButton>
+              <GlassButton href={`/${locale}/buy`} variant="ghost">
+                {dict.cta.viewListings}
+              </GlassButton>
+            </div>
           </div>
-          <Link
-            href={`/${locale}/buy`}
-            className="text-sm font-semibold text-sea transition hover:text-ink"
-          >
-            {dict.cta.viewListings} →
-          </Link>
-        </div>
-        <div className="grid gap-5 md:grid-cols-3">
-          {featured.map((l) => (
-            <ListingCard key={l.id} listing={l} locale={locale} dict={dict} />
-          ))}
+
+          <div className="flex justify-start lg:justify-end">
+            <HeroSearch locale={locale} dict={dict} />
+          </div>
         </div>
       </section>
 
-      {/* How — LAB-style numbered steps */}
       <section className="border-y border-white/[0.06] bg-bg-elevated/50">
         <div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-          <p className="section-label">Process</p>
-          <h2 className="mt-2 max-w-xl font-display text-2xl font-semibold tracking-tight md:text-3xl">
+          <h2 className="max-w-xl font-display text-2xl font-semibold tracking-tight md:text-3xl">
             {dict.home.howTitle}
           </h2>
           <ol className="mt-10 grid gap-4 md:grid-cols-3">
@@ -113,10 +91,32 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* Areas */}
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-        <p className="section-label">Coast</p>
-        <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
+        <div className="mb-3 flex items-end justify-between gap-4">
+          <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            {dict.home.featured}
+          </h2>
+          <Link
+            href={`/${locale}/buy`}
+            className="text-sm font-semibold text-sea transition hover:text-ink"
+          >
+            {dict.cta.viewListings} →
+          </Link>
+        </div>
+        <p className="mb-8 max-w-2xl text-sm leading-relaxed text-ink-muted">
+          {dict.home.featuredHint}
+        </p>
+        <div className="grid gap-5 md:grid-cols-3">
+          {featured.map((l) => (
+            <ListingCard key={l.id} listing={l} locale={locale} dict={dict} />
+          ))}
+        </div>
+      </section>
+
+      <Testimonials locale={locale} dict={dict} />
+
+      <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
+        <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
           {dict.home.areasTitle}
         </h2>
         <div className="mt-7 flex flex-wrap gap-2.5">
@@ -130,9 +130,17 @@ export default async function HomePage({
             </Link>
           ))}
         </div>
+        <p className="mt-8 text-sm">
+          <Link href={`/${locale}/guide`} className="text-sea hover:text-ink">
+            {dict.nav.guide} →
+          </Link>
+          <span className="mx-3 text-ink-muted">·</span>
+          <Link href={`/${locale}/blog`} className="text-sea hover:text-ink">
+            {dict.nav.blog} →
+          </Link>
+        </p>
       </section>
 
-      {/* Owners CTA — attention → trust → action */}
       <section className="mx-auto max-w-6xl px-4 pb-24 md:px-6">
         <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.1] bg-gradient-to-br from-[#121a28] to-[#0a101a] p-7 md:flex md:items-center md:justify-between md:gap-12 md:p-12">
           <div
@@ -140,8 +148,7 @@ export default async function HomePage({
             className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-sea/20 blur-3xl"
           />
           <div className="relative max-w-xl">
-            <p className="section-label">Owners</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
+            <h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
               {dict.home.ownersTitle}
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-ink-muted md:text-base">

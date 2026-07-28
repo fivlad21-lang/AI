@@ -1,9 +1,20 @@
 import { notFound } from "next/navigation";
-import { GlassButton } from "@/components/GlassButton";
+import type { Metadata } from "next";
 import { SellForm } from "@/components/SellForm";
+import { ShootGallery } from "@/components/ShootGallery";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { whatsappUrl } from "@/lib/contacts";
+import { pageMeta, routeTitles } from "@/lib/meta";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  return pageMeta(locale, { title: routeTitles(locale).sell, path: "sell" });
+}
 
 export default async function SellPage({
   params,
@@ -18,8 +29,7 @@ export default async function SellPage({
   return (
     <div className="hero-grid">
       <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-        <p className="section-label">{dict.nav.sell}</p>
-        <h1 className="mt-3 max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl">
+        <h1 className="max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl">
           {dict.sell.title}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted md:text-lg">
@@ -28,20 +38,10 @@ export default async function SellPage({
         <p className="mt-5 max-w-2xl rounded-2xl border border-sea/25 bg-sea/[0.08] px-4 py-3.5 text-sm leading-relaxed text-ink">
           {dict.sell.modelB}
         </p>
-        <div className="mt-7">
-          <GlassButton
-            href={whatsappUrl("[SELL] Want to list my property with shooting")}
-            external
-            variant="glass"
-          >
-            {dict.cta.whatsapp}
-          </GlassButton>
-        </div>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-14">
           <div>
-            <p className="section-label">Includes</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold">
+            <h2 className="font-display text-2xl font-semibold">
               {dict.sell.includesTitle}
             </h2>
             <ul className="mt-6 space-y-3">
@@ -56,8 +56,7 @@ export default async function SellPage({
               ))}
             </ul>
 
-            <p className="section-label mt-12">Process</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold">
+            <h2 className="mt-12 font-display text-2xl font-semibold">
               {dict.sell.stepsTitle}
             </h2>
             <ol className="mt-6 space-y-3">
@@ -74,6 +73,8 @@ export default async function SellPage({
           </div>
           <SellForm locale={locale} dict={dict} />
         </div>
+
+        <ShootGallery dict={dict} />
       </div>
     </div>
   );

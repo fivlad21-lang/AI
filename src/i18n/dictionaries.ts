@@ -3,7 +3,10 @@ import type { Locale } from "@/i18n/config";
 export type Dictionary = {
   brand: string;
   tagline: string;
+  taglineLine1: string;
+  taglineLine2: string;
   taglineSub: string;
+  microcopy: string;
   nav: {
     buy: string;
     rent: string;
@@ -11,35 +14,80 @@ export type Dictionary = {
     about: string;
     contacts: string;
     favorites: string;
+    compare: string;
+    guide: string;
+    blog: string;
+    privacy: string;
+    menu: string;
+    closeMenu: string;
   };
   cta: {
     viewListings: string;
     sellWithUs: string;
     whatsapp: string;
+    telegram: string;
+    telegramSoon: string;
+    viber: string;
     applyViewing: string;
     send: string;
     reset: string;
+    shortlist: string;
+    compareAdd: string;
+    compareRemove: string;
+    share: string;
+    copyLink: string;
+    copied: string;
+    leaveReview: string;
+    getMatch: string;
+    showResults: string;
   };
   home: {
     featured: string;
+    featuredHint: string;
     howTitle: string;
     howSteps: [string, string, string];
     areasTitle: string;
     ownersTitle: string;
     ownersText: string;
-    demoNote: string;
+    trustTitle: string;
+    searchTitle: string;
+  };
+  review: {
+    title: string;
+    subtitle: string;
+    stars: string;
+    description: string;
+    submit: string;
+    hint: string;
+    optional: string;
   };
   catalog: {
     saleTitle: string;
     rentTitle: string;
     results: string;
     empty: string;
+    emptyHint: string;
     filters: string;
     all: string;
     type: string;
     location: string;
     rooms: string;
+    price: string;
+    priceMin: string;
+    priceMax: string;
+    area: string;
+    areaMin: string;
+    areaMax: string;
+    features: string;
+    sort: string;
     sortNew: string;
+    sortPriceAsc: string;
+    sortPriceDesc: string;
+    sortArea: string;
+    loading: string;
+    viewList: string;
+    viewMap: string;
+    openListing: string;
   };
   listing: {
     demo: string;
@@ -53,6 +101,15 @@ export type Dictionary = {
     similar: string;
     features: string;
     share: string;
+    beach: string;
+    minutes: string;
+    reserved: string;
+    sold: string;
+    print: string;
+    watchVideo: string;
+    viewingTitle: string;
+    viewingHint: string;
+    autoReply: string;
   };
   sell: {
     title: string;
@@ -63,10 +120,13 @@ export type Dictionary = {
     stepsTitle: string;
     steps: string[];
     formTitle: string;
+    shootTitle: string;
+    shootText: string;
   };
   forms: {
     name: string;
     contact: string;
+    deal: string;
     dealSell: string;
     dealRent: string;
     type: string;
@@ -76,30 +136,87 @@ export type Dictionary = {
     description: string;
     needShoot: string;
     success: string;
+    error: string;
+    invalidName: string;
+    invalidContact: string;
+    sending: string;
+    replyNote: string;
+    slot: string;
   };
   about: {
     title: string;
     p1: string;
     p2: string;
+    p3: string;
+    valuesTitle: string;
+    values: [string, string, string];
   };
   contacts: {
     title: string;
     subtitle: string;
     lookingTitle: string;
+    replyNote: string;
+  };
+  agent: {
+    role: string;
+    bio: string;
+  };
+  favorites: {
+    title: string;
+    empty: string;
+    sendShortlist: string;
+  };
+  compare: {
+    title: string;
+    empty: string;
+    max: string;
+    clear: string;
+  };
+  guide: {
+    title: string;
+    subtitle: string;
+  };
+  privacy: {
+    title: string;
+    updated: string;
+    body: string[];
+  };
+  blog: {
+    title: string;
+    subtitle: string;
+    read: string;
+  };
+  cookies: {
+    text: string;
+    accept: string;
+    more: string;
+  };
+  notFound: {
+    title: string;
+    text: string;
+    home: string;
+  };
+  currency: {
+    label: string;
   };
   types: Record<string, string>;
   features: Record<string, string>;
   footer: {
     rights: string;
     demo: string;
+    geo: string;
+    dockHint: string;
   };
 };
 
 const en: Dictionary = {
   brand: "Nomore Real Estate",
   tagline: "Homes by the sea. No more hassle.",
+  taglineLine1: "Homes by the sea.",
+  taglineLine2: "No more hassle.",
   taglineSub:
-    "Buy, sell, and rent across Burgas region and Sunny Beach — clear listings, fast replies, modern media.",
+    "Write us what you need on the Burgas coast — we match buy, rent, or sale. We reply quickly in messengers.",
+  microcopy: "Messenger-first. Homes by the sea. No more hassle.",
   nav: {
     buy: "Buy",
     rent: "Rent",
@@ -107,43 +224,88 @@ const en: Dictionary = {
     about: "About",
     contacts: "Contacts",
     favorites: "Saved",
+    compare: "Compare",
+    guide: "Guide",
+    blog: "Journal",
+    privacy: "Privacy",
+    menu: "Menu",
+    closeMenu: "Close menu",
   },
   cta: {
-    viewListings: "View listings",
+    viewListings: "View homes",
     sellWithUs: "Sell with Nomore",
     whatsapp: "WhatsApp",
+    telegram: "Telegram",
+    telegramSoon: "Telegram soon",
+    viber: "Viber",
     applyViewing: "Request a viewing",
-    send: "Send via WhatsApp",
+    send: "Send",
     reset: "Reset",
+    shortlist: "Send selection",
+    compareAdd: "Compare",
+    compareRemove: "In compare",
+    share: "Share",
+    copyLink: "Copy link",
+    copied: "Copied",
+    leaveReview: "Leave a review",
+    getMatch: "Get a shortlist",
+    showResults: "Show homes",
   },
   home: {
-    featured: "Featured (demo)",
+    featured: "Featured homes",
+    featuredHint: "Current picks on the coast — write us for a live shortlist.",
     howTitle: "How it works",
     howSteps: [
-      "Tell us what you need — or list your place",
-      "We shoot, publish, and filter real interest",
+      "Tell us budget, area, and timing in a messenger",
+      "We shortlist what fits — buy, rent, or your sale",
       "Viewings and deal support without the chaos",
     ],
     areasTitle: "Where we work",
     ownersTitle: "Own a property?",
     ownersText:
       "List with Nomore: pro photo & vertical video for our socials, then we handle the leads. Shooting is free — we work on a deal commission.",
-    demoNote: "Catalog currently shows demo homes so you can feel the product.",
+    trustTitle: "What clients say",
+    searchTitle: "Quick search",
+  },
+  review: {
+    title: "Leave a review",
+    subtitle: "Stars and a short note — sent to us in WhatsApp.",
+    stars: "Your rating",
+    description: "Your review",
+    submit: "Send review via WhatsApp",
+    hint: "We moderate before publishing — nothing goes live automatically.",
+    optional: "optional",
   },
   catalog: {
     saleTitle: "Buy",
     rentTitle: "Rent",
     results: "listings",
-    empty: "Nothing matched. Write us on WhatsApp — we’ll dig.",
+    empty: "Nothing matched.",
+    emptyHint: "Reset filters or write us — we’ll dig.",
     filters: "Filters",
     all: "All",
     type: "Type",
     location: "Area",
     rooms: "Rooms",
+    price: "Price (EUR)",
+    priceMin: "Min €",
+    priceMax: "Max €",
+    area: "Area m²",
+    areaMin: "Min m²",
+    areaMax: "Max m²",
+    features: "Features",
+    sort: "Sort",
     sortNew: "Newest",
+    sortPriceAsc: "Price ↑",
+    sortPriceDesc: "Price ↓",
+    sortArea: "Largest",
+    loading: "Loading listings…",
+    viewList: "List",
+    viewMap: "Map",
+    openListing: "Open listing →",
   },
   listing: {
-    demo: "Demo",
+    demo: "",
     sale: "Sale",
     rent: "Rent",
     video: "Video",
@@ -154,6 +316,16 @@ const en: Dictionary = {
     similar: "Similar",
     features: "Highlights",
     share: "Share",
+    beach: "To beach",
+    minutes: "min",
+    reserved: "Reserved",
+    sold: "Sold",
+    print: "Print",
+    watchVideo: "Watch video",
+    viewingTitle: "Pick a viewing slot",
+    viewingHint: "We’ll confirm the exact time in chat.",
+    autoReply:
+      "Thanks — we usually reply within a few hours (same day on weekdays).",
   },
   sell: {
     title: "Sell with Nomore",
@@ -166,20 +338,23 @@ const en: Dictionary = {
       "Short vertical video for Reels & TikTok",
       "Listing on the Nomore site",
       "Posts on our social channels",
-      "Lead handling via WhatsApp",
+      "Lead handling in messengers",
     ],
     stepsTitle: "Process",
     steps: [
       "Send a quick request",
-      "We align on details in WhatsApp",
+      "We align on details in chat",
       "Shoot day",
       "Publish & start viewings",
     ],
     formTitle: "Quick sale request",
+    shootTitle: "How we shoot",
+    shootText: "Light, honest frames — interiors, views, and a short vertical cut for social.",
   },
   forms: {
     name: "Name",
-    contact: "Phone / WhatsApp",
+    contact: "Phone / messenger",
+    deal: "Looking to",
     dealSell: "Sell",
     dealRent: "Rent out",
     type: "Property type",
@@ -188,18 +363,79 @@ const en: Dictionary = {
     comment: "Comment",
     description: "Short description",
     needShoot: "I need photo & video shooting",
-    success: "Opening WhatsApp with your request…",
+    success: "Request sent — we’ll reply soon.",
+    error: "Couldn’t send. Try again or write us in the messenger dock.",
+    invalidName: "Enter a real name (at least 2 letters).",
+    invalidContact: "Enter a phone (+359…) or messenger (@username).",
+    sending: "Sending…",
+    replyNote: "We reply the same business day in WhatsApp, Telegram, or Viber.",
+    slot: "Preferred slot",
   },
   about: {
     title: "About Nomore",
-    p1: "Nomore means two things: no more outdated realtor noise — and life by the sea (на морі).",
-    p2: "We’re a modern agency for Burgas and the coast. Clear presentation, messenger-first communication, media that actually helps sell.",
+    p1: "Nomore means two things: an end to outdated realtor noise — and life by the sea.",
+    p2: "We’re a modern agency for Burgas and the Sunny Beach coast. Clear listings, messenger-first communication, media that helps sell.",
+    p3: "We reply the same business day in messengers. Site in four languages. Owners get shooting without a separate media invoice.",
+    valuesTitle: "How we work",
+    values: [
+      "Show the home honestly — big photos first",
+      "Answer in chat, not endless call chains",
+      "Earn when the deal closes — aligned with owners",
+    ],
   },
   contacts: {
     title: "Contacts",
-    subtitle: "Write anytime — we reply on WhatsApp.",
+    subtitle: "Write anytime — we reply quickly.",
     lookingTitle: "Looking for a home?",
+    replyNote:
+      "Typical reply: same day on weekdays. Include budget, area, and buy vs rent.",
   },
+  agent: {
+    role: "Lead specialist at Nomore Estate",
+    bio: "I’ll help with shortlists, viewings, and deals on the Burgas coast.",
+  },
+  favorites: {
+    title: "Saved homes",
+    empty: "Nothing saved yet. Tap the heart on a listing.",
+    sendShortlist: "Send selection",
+  },
+  compare: {
+    title: "Compare",
+    empty: "Add up to 3 homes from the catalog.",
+    max: "Compare is full (3). Remove one first.",
+    clear: "Clear all",
+  },
+  guide: {
+    title: "Coast guide & FAQ",
+    subtitle: "Short answers for buyers, renters, and owners on the Burgas coast.",
+  },
+  privacy: {
+    title: "Privacy, cookies & disclaimer",
+    updated: "Updated July 2026",
+    body: [
+      "We collect contact details you send via forms or messengers only to respond about property inquiries.",
+      "Favorites, compare list, and cookie consent are stored in your browser (localStorage).",
+      "Prices and availability can change; we confirm details during viewings and in chat.",
+      "After you accept the cookie banner we may load Google Analytics (GA4) to understand traffic and improve the site. You can clear site data in the browser to reset consent.",
+      "Property info is provided in good faith; always verify documents with professionals before a deal.",
+    ],
+  },
+  blog: {
+    title: "Journal",
+    subtitle: "Short notes on buying, selling, and living by the sea.",
+    read: "Read",
+  },
+  cookies: {
+    text: "We use local storage for language, favorites, and consent. After OK we may load analytics (GA4) to improve the site. See Privacy.",
+    accept: "OK",
+    more: "Privacy",
+  },
+  notFound: {
+    title: "Lost on the coast",
+    text: "This page isn’t here. Back to homes — or write us in a messenger.",
+    home: "Home",
+  },
+  currency: { label: "Currency" },
   types: {
     apartment: "Apartment",
     house: "House",
@@ -216,15 +452,20 @@ const en: Dictionary = {
   },
   footer: {
     rights: "All rights reserved.",
-    demo: "Demo listings for preview.",
+    demo: "Write us in a messenger — we reply the same business day.",
+    geo: "Burgas region · Sunny Beach coast",
+    dockHint: "Messengers: use the floating buttons (WhatsApp, Telegram, Viber).",
   },
 };
 
 const bg: Dictionary = {
   ...en,
   tagline: "Жилище край морето. Без излишното.",
+  taglineLine1: "Жилище край морето.",
+  taglineLine2: "Без излишното.",
   taglineSub:
-    "Покупка, продажба и наем в Бургас и по крайбрежието — ясни обяви, бърз отговор, модерно медио.",
+    "Пиши какво търсиш по Бургаското крайбрежие — подбираме покупка, наем или продажба. Отговаряме бързо в месинджърите.",
+  microcopy: "Първо месинджър. Жилище край морето. Без излишното.",
   nav: {
     buy: "Купи",
     rent: "Наем",
@@ -232,43 +473,89 @@ const bg: Dictionary = {
     about: "За нас",
     contacts: "Контакти",
     favorites: "Запазени",
+    compare: "Сравни",
+    guide: "Гид",
+    blog: "Журнал",
+    privacy: "Поверителност",
+    menu: "Меню",
+    closeMenu: "Затвори менюто",
   },
   cta: {
+    ...en.cta,
     viewListings: "Виж имотите",
     sellWithUs: "Продай с Nomore",
-    whatsapp: "WhatsApp",
     applyViewing: "Заяви оглед",
-    send: "Изпрати във WhatsApp",
+    send: "Изпрати",
     reset: "Изчисти",
+    shortlist: "Изпрати подборка",
+    compareAdd: "Сравни",
+    compareRemove: "В сравнение",
+    share: "Сподели",
+    copyLink: "Копирай линк",
+    copied: "Копирано",
+    telegramSoon: "Telegram скоро",
+    viber: "Viber",
+    leaveReview: "Остави отзив",
+    getMatch: "Получи подборка",
+    showResults: "Покажи имоти",
   },
   home: {
-    featured: "Избрани (демо)",
+    featured: "Актуални имоти",
+    featuredHint: "Текущи предложения на брега — пиши ни за жива подборка.",
     howTitle: "Как работим",
     howSteps: [
-      "Казваш какво търсиш — или даваш имота",
-      "Заснемаме, публикуваме, филтрираме интереса",
+      "Казваш бюджет, район и срок в месинджър",
+      "Подбираме подходящото — покупка, наем или твоя продажба",
       "Огледи и сделка без хаос",
     ],
     areasTitle: "Къде работим",
     ownersTitle: "Имаш имот?",
     ownersText:
       "Пусни го с Nomore: професионални фото и вертикално видео за нашите социални мрежи. Заснемането е без отделна такса — работим на комисиона от сделката.",
-    demoNote: "Каталогът показва демо имоти, за да усетиш продукта.",
+    trustTitle: "Какво казват клиентите",
+    searchTitle: "Бързо търсене",
+  },
+  review: {
+    title: "Остави отзив",
+    subtitle: "Звезди и кратък текст — изпраща се към нас във WhatsApp.",
+    stars: "Твоята оценка",
+    description: "Отзивът",
+    submit: "Изпрати отзив във WhatsApp",
+    hint: "Публикуваме след преглед — нищо не излиза автоматично.",
+    optional: "по желание",
   },
   catalog: {
+    ...en.catalog,
     saleTitle: "Купи",
     rentTitle: "Наем",
     results: "имота",
-    empty: "Няма съвпадения. Пиши ни във WhatsApp.",
+    empty: "Няма съвпадения.",
+    emptyHint: "Изчисти филтрите или пиши ни.",
     filters: "Филтри",
     all: "Всички",
     type: "Тип",
     location: "Район",
     rooms: "Стаи",
+    price: "Цена (EUR)",
+    priceMin: "Мин €",
+    priceMax: "Макс €",
+    area: "Площ m²",
+    areaMin: "Мин m²",
+    areaMax: "Макс m²",
+    features: "Акценти",
+    sort: "Подредба",
     sortNew: "Най-нови",
+    sortPriceAsc: "Цена ↑",
+    sortPriceDesc: "Цена ↓",
+    sortArea: "Най-големи",
+    loading: "Зареждане…",
+    viewList: "Списък",
+    viewMap: "Карта",
+    openListing: "Отвори обява →",
   },
   listing: {
-    demo: "Демо",
+    ...en.listing,
+    demo: "",
     sale: "Продажба",
     rent: "Наем",
     video: "Видео",
@@ -279,8 +566,19 @@ const bg: Dictionary = {
     similar: "Подобни",
     features: "Акценти",
     share: "Сподели",
+    beach: "До плажа",
+    minutes: "мин",
+    reserved: "Резервиран",
+    sold: "Продаден",
+    print: "Печат",
+    watchVideo: "Гледай видео",
+    viewingTitle: "Избери слот за оглед",
+    viewingHint: "Точния час потвърждаваме в чат.",
+    autoReply:
+      "Благодарим — обикновено отговаряме до няколко часа (в работни дни).",
   },
   sell: {
+    ...en.sell,
     title: "Продай с Nomore",
     subtitle: "Искаш по-чиста и бърза продажба? Заснемаме както трябва и пускаме към аудиторията ни.",
     modelB:
@@ -291,20 +589,23 @@ const bg: Dictionary = {
       "Кратко вертикално видео за Reels & TikTok",
       "Обява в сайта Nomore",
       "Публикации в нашите социални мрежи",
-      "Обработка на запитвания във WhatsApp",
+      "Обработка на запитвания в месинджърите",
     ],
     stepsTitle: "Стъпки",
     steps: [
       "Кратка заявка",
-      "Уговаряме детайли във WhatsApp",
+      "Уговаряме детайли в чат",
       "Ден на заснемане",
       "Публикация и огледи",
     ],
     formTitle: "Заявка за бърза продажба",
+    shootTitle: "Как снимаме",
+    shootText: "Светли, честни кадри — интериор, гледки и кратък вертикал за социалните мрежи.",
   },
   forms: {
+    ...en.forms,
     name: "Име",
-    contact: "Телефон / WhatsApp",
+    contact: "Телефон / месинджър",
     dealSell: "Продажба",
     dealRent: "Наем",
     type: "Тип имот",
@@ -313,18 +614,79 @@ const bg: Dictionary = {
     comment: "Коментар",
     description: "Кратко описание",
     needShoot: "Искам фото и видео заснемане",
-    success: "Отваряме WhatsApp със заявката…",
+    success: "Заявката е изпратена — ще отговорим скоро.",
+    error: "Не успяхме да изпратим. Опитай отново или пиши през бутоните долу.",
+    invalidName: "Въведи истинско име (поне 2 букви).",
+    invalidContact: "Въведи телефон (+359…) или месинджър (@username).",
+    sending: "Изпращане…",
+    replyNote: "Отговаряме в същия работен ден във WhatsApp, Telegram или Viber.",
+    slot: "Предпочитан слот",
   },
   about: {
     title: "За Nomore",
-    p1: "Nomore означава две неща: no more остарял брокерски шум — и живот край морето (на морі).",
-    p2: "Модерна агенция за Бургас и крайбрежието. Ясна презентация, комуникация в месинджър, медио което помага да се продаде.",
+    p1: "Nomore означава две неща: край на остарелия брокерски шум — и живот край морето.",
+    p2: "Модерна агенция за Бургас и Слънчев бряг. Ясни обяви, комуникация в месинджър, медио което помага да се продаде.",
+    p3: "Отговаряме в същия работен ден в месинджърите. Сайт на четири езика. Собствениците получават заснемане без отделна фактура за медио.",
+    valuesTitle: "Как работим",
+    values: [
+      "Показваме имота честно — първо големите снимки",
+      "Отговаряме в чат, не в безкрайни обаждания",
+      "Печелим когато има сделка — заедно със собственика",
+    ],
   },
   contacts: {
     title: "Контакти",
-    subtitle: "Пиши по всяко време — отговаряме във WhatsApp.",
+    subtitle: "Пиши по всяко време — отговаряме бързо.",
     lookingTitle: "Търсиш дом?",
+    replyNote:
+      "Обикновено отговор в същия работен ден. Напиши бюджет, район и покупка/наем.",
   },
+  agent: {
+    role: "Водещ специалист в агенция Nomore Estate",
+    bio: "Помагам с подбор, огледи и сделки по Бургаското крайбрежие.",
+  },
+  favorites: {
+    title: "Запазени имоти",
+    empty: "Още няма запазени. Натисни сърцето на обява.",
+    sendShortlist: "Изпрати подборка във WhatsApp",
+  },
+  compare: {
+    title: "Сравнение",
+    empty: "Добави до 3 имота от каталога.",
+    max: "Сравнението е пълно (3). Премахни един.",
+    clear: "Изчисти всички",
+  },
+  guide: {
+    title: "Гид и FAQ",
+    subtitle: "Кратки отговори за купувачи, наематели и собственици на брега на Бургас.",
+  },
+  privacy: {
+    title: "Поверителност, cookies и отказ от отговорност",
+    updated: "Обновено юли 2026",
+    body: [
+      "Събираме контакти, които изпращате чрез форми или месинджъри, само за да отговорим за имоти.",
+      "Запазени, сравнение и съгласие за cookies се пазят в браузъра (localStorage).",
+      "Цените и наличността могат да се променят; уточняваме детайлите при оглед и в чат.",
+      "След OK на cookie банера можем да заредим Google Analytics (GA4), за да разбираме трафика и да подобряваме сайта. Можеш да изчистиш данните на сайта в браузъра, за да нулираш съгласието.",
+      "Информацията за имоти е добросъвестна; винаги проверявайте документите с професионалисти преди сделка.",
+    ],
+  },
+  blog: {
+    title: "Журнал",
+    subtitle: "Кратки бележки за покупка, продажба и живот край морето.",
+    read: "Чети",
+  },
+  cookies: {
+    text: "Ползваме local storage за език, запазени и съгласие. След ОК може да заредим аналитика (GA4), за да подобрим сайта. Виж Поверителност.",
+    accept: "ОК",
+    more: "Поверителност",
+  },
+  notFound: {
+    title: "Изгубен на брега",
+    text: "Тази страница я няма. Обратно към имотите — или пиши в месинджър.",
+    home: "Начало",
+  },
+  currency: { label: "Валута" },
   types: {
     apartment: "Апартамент",
     house: "Къща",
@@ -341,15 +703,20 @@ const bg: Dictionary = {
   },
   footer: {
     rights: "Всички права запазени.",
-    demo: "Демо обяви за преглед.",
+    demo: "Пиши в месинджър — отговаряме в същия работен ден.",
+    geo: "Област Бургас · Слънчев бряг",
+    dockHint: "Месинджъри: плаващите бутони (WhatsApp, Telegram, Viber).",
   },
 };
 
 const ru: Dictionary = {
   ...en,
   tagline: "Жильё у моря. Без лишнего.",
+  taglineLine1: "Жильё у моря.",
+  taglineLine2: "Без лишнего.",
   taglineSub:
-    "Покупка, продажа и аренда в Бургасе и на побережье — понятные объявления, быстрый ответ, современная подача.",
+    "Напиши, что ищешь на побережье Бургаса — подберём покупку, аренду или продажу. Быстро отвечаем в мессенджерах.",
+  microcopy: "Сначала мессенджер. Жильё у моря. Без лишнего.",
   nav: {
     buy: "Купить",
     rent: "Аренда",
@@ -357,43 +724,88 @@ const ru: Dictionary = {
     about: "О нас",
     contacts: "Контакты",
     favorites: "Избранное",
+    compare: "Сравнение",
+    guide: "Гид",
+    blog: "Журнал",
+    privacy: "Конфиденциальность",
+    menu: "Меню",
+    closeMenu: "Закрыть меню",
   },
   cta: {
+    ...en.cta,
     viewListings: "Смотреть объекты",
     sellWithUs: "Продать с Nomore",
-    whatsapp: "WhatsApp",
     applyViewing: "Заявка на просмотр",
-    send: "Отправить в WhatsApp",
+    send: "Отправить",
     reset: "Сбросить",
+    shortlist: "Отправить подборку",
+    compareAdd: "Сравнить",
+    compareRemove: "В сравнении",
+    share: "Поделиться",
+    copyLink: "Копировать ссылку",
+    copied: "Скопировано",
+    telegramSoon: "Telegram скоро",
+    leaveReview: "Оставить отзыв",
+    getMatch: "Получить подборку",
+    showResults: "Показать объекты",
   },
   home: {
-    featured: "Избранное (демо)",
+    featured: "Актуальные объекты",
+    featuredHint: "Текущие предложения на берегу — напишите нам за живую подборку.",
     howTitle: "Как это работает",
     howSteps: [
-      "Пишешь, что нужно — или отдаёшь объект",
-      "Снимаем, публикуем, отсеиваем интерес",
+      "Пишешь бюджет, район и сроки в мессенджер",
+      "Подбираем подходящее — покупка, аренда или ваша продажа",
       "Показы и сделка без хаоса",
     ],
     areasTitle: "Где работаем",
     ownersTitle: "Есть объект?",
     ownersText:
       "С Nomore: профессиональные фото и вертикальное видео для наших соцсетей. Съёмка без отдельной оплаты — работаем за комиссию со сделки.",
-    demoNote: "В каталоге демо-объекты, чтобы показать продукт.",
+    trustTitle: "Что говорят клиенты",
+    searchTitle: "Быстрый поиск",
+  },
+  review: {
+    title: "Оставить отзыв",
+    subtitle: "Звёзды и короткий текст — уходит нам в WhatsApp.",
+    stars: "Ваша оценка",
+    description: "Отзыв",
+    submit: "Отправить отзыв в WhatsApp",
+    hint: "Публикуем после проверки — ничего не выходит автоматически.",
+    optional: "необязательно",
   },
   catalog: {
+    ...en.catalog,
     saleTitle: "Купить",
     rentTitle: "Аренда",
     results: "объектов",
-    empty: "Ничего не нашли. Напишите в WhatsApp — подберём.",
+    empty: "Ничего не нашли.",
+    emptyHint: "Сбросьте фильтры или напишите нам.",
     filters: "Фильтры",
     all: "Все",
     type: "Тип",
     location: "Район",
     rooms: "Комнаты",
+    price: "Цена (EUR)",
+    priceMin: "Мин €",
+    priceMax: "Макс €",
+    area: "Площадь m²",
+    areaMin: "Мин m²",
+    areaMax: "Макс m²",
+    features: "Особенности",
+    sort: "Сортировка",
     sortNew: "Новые",
+    sortPriceAsc: "Цена ↑",
+    sortPriceDesc: "Цена ↓",
+    sortArea: "Площадь",
+    loading: "Загрузка…",
+    viewList: "Список",
+    viewMap: "Карта",
+    openListing: "Открыть объявление →",
   },
   listing: {
-    demo: "Демо",
+    ...en.listing,
+    demo: "",
     sale: "Продажа",
     rent: "Аренда",
     video: "Видео",
@@ -404,8 +816,19 @@ const ru: Dictionary = {
     similar: "Похожие",
     features: "Особенности",
     share: "Поделиться",
+    beach: "До пляжа",
+    minutes: "мин",
+    reserved: "Резерв",
+    sold: "Продано",
+    print: "Печать",
+    watchVideo: "Смотреть видео",
+    viewingTitle: "Выберите слот показа",
+    viewingHint: "Точное время подтвердим в чате.",
+    autoReply:
+      "Спасибо — обычно отвечаем в течение нескольких часов (в будни).",
   },
   sell: {
+    ...en.sell,
     title: "Продать с Nomore",
     subtitle: "Хотите продать чище и быстрее? Снимем как надо и покажем нашей аудитории.",
     modelB:
@@ -416,20 +839,23 @@ const ru: Dictionary = {
       "Короткое вертикальное видео для Reels & TikTok",
       "Карточка на сайте Nomore",
       "Публикации в наших соцсетях",
-      "Обработка заявок в WhatsApp",
+      "Обработка заявок в мессенджерах",
     ],
     stepsTitle: "Шаги",
     steps: [
       "Короткая заявка",
-      "Уточняем детали в WhatsApp",
+      "Уточняем детали в чате",
       "День съёмки",
       "Публикация и показы",
     ],
     formTitle: "Заявка на быструю продажу",
+    shootTitle: "Как снимаем",
+    shootText: "Светлые честные кадры — интерьер, виды и короткий вертикал для соцсетей.",
   },
   forms: {
+    ...en.forms,
     name: "Имя",
-    contact: "Телефон / WhatsApp",
+    contact: "Телефон / мессенджер",
     dealSell: "Продать",
     dealRent: "Сдать",
     type: "Тип объекта",
@@ -438,18 +864,79 @@ const ru: Dictionary = {
     comment: "Комментарий",
     description: "Короткое описание",
     needShoot: "Нужна фото- и видеосъёмка",
-    success: "Открываем WhatsApp с заявкой…",
+    success: "Заявка отправлена — скоро ответим.",
+    error: "Не удалось отправить. Попробуйте ещё раз или напишите через кнопки внизу.",
+    invalidName: "Укажите настоящее имя (минимум 2 буквы).",
+    invalidContact: "Укажите телефон (+359…) или мессенджер (@username).",
+    sending: "Отправка…",
+    replyNote: "Отвечаем в тот же рабочий день в WhatsApp, Telegram или Viber.",
+    slot: "Удобный слот",
   },
   about: {
     title: "О Nomore",
-    p1: "Nomore — это два смысла: no more устаревшего риелторского шума и жизнь у моря (на морі).",
-    p2: "Современное агентство для Бургаса и побережья. Понятная подача, общение в мессенджере, медиа которое помогает продать.",
+    p1: "Nomore — это два смысла: конец устаревшему риелторскому шуму и жизнь у моря.",
+    p2: "Современное агентство для Бургаса и Солнечного Берега. Понятные объявления, мессенджеры, медиа которое помогает продать.",
+    p3: "Отвечаем в тот же рабочий день в мессенджерах. Сайт на четырёх языках. Собственникам — съёмка без отдельного счёта за медиа.",
+    valuesTitle: "Как работаем",
+    values: [
+      "Показываем дом честно — сначала большие фото",
+      "Отвечаем в чате, не в бесконечных звонках",
+      "Зарабатываем, когда сделка закрыта — вместе с собственником",
+    ],
   },
   contacts: {
     title: "Контакты",
-    subtitle: "Пишите в любое время — отвечаем в WhatsApp.",
+    subtitle: "Пишите в любое время — отвечаем быстро.",
     lookingTitle: "Ищете жильё?",
+    replyNote:
+      "Обычно ответ в тот же будний день. Укажите бюджет, район и покупка/аренда.",
   },
+  agent: {
+    role: "Ведущий специалист агентства Nomore Estate",
+    bio: "Помогу с подбором, просмотрами и сделками на побережье Бургаса.",
+  },
+  favorites: {
+    title: "Избранное",
+    empty: "Пока пусто. Нажмите сердце на объекте.",
+    sendShortlist: "Отправить подборку в WhatsApp",
+  },
+  compare: {
+    title: "Сравнение",
+    empty: "Добавьте до 3 объектов из каталога.",
+    max: "Сравнение полное (3). Уберите один.",
+    clear: "Очистить",
+  },
+  guide: {
+    title: "Гид и FAQ",
+    subtitle: "Короткие ответы для покупателей, арендаторов и собственников на побережье Бургаса.",
+  },
+  privacy: {
+    title: "Конфиденциальность, cookies и дисклеймер",
+    updated: "Обновлено июль 2026",
+    body: [
+      "Мы обрабатываем контакты из форм или мессенджеров только для ответа по недвижимости.",
+      "Избранное, сравнение и согласие на cookies хранятся в браузере (localStorage).",
+      "Цены и наличие могут меняться; детали подтверждаем на просмотре и в чате.",
+      "После OK на cookie-баннере можем загрузить Google Analytics (GA4), чтобы понимать трафик и улучшать сайт. Согласие можно сбросить, очистив данные сайта в браузере.",
+      "Информация об объектах добросовестная; документы всегда проверяйте со специалистами перед сделкой.",
+    ],
+  },
+  blog: {
+    title: "Журнал",
+    subtitle: "Короткие заметки о покупке, продаже и жизни у моря.",
+    read: "Читать",
+  },
+  cookies: {
+    text: "Мы используем local storage для языка, избранного и согласия. После OK можем загрузить аналитику (GA4), чтобы улучшать сайт. См. Конфиденциальность.",
+    accept: "OK",
+    more: "Конфиденциальность",
+  },
+  notFound: {
+    title: "Заблудились на берегу",
+    text: "Страницы нет. На главную — или напишите в мессенджер.",
+    home: "На главную",
+  },
+  currency: { label: "Валюта" },
   types: {
     apartment: "Квартира",
     house: "Дом",
@@ -466,15 +953,20 @@ const ru: Dictionary = {
   },
   footer: {
     rights: "Все права защищены.",
-    demo: "Демо-объявления для превью.",
+    demo: "Пишите в мессенджер — отвечаем в тот же рабочий день.",
+    geo: "Область Бургас · Солнечный Берег",
+    dockHint: "Мессенджеры: плавающие кнопки (WhatsApp, Telegram, Viber).",
   },
 };
 
 const ua: Dictionary = {
   ...en,
   tagline: "Житло на морі. Без зайвого.",
+  taglineLine1: "Житло на морі.",
+  taglineLine2: "Без зайвого.",
   taglineSub:
-    "Купівля, продаж і оренда в Бургасі та на узбережжі — зрозумілі оголошення, швидка відповідь, сучасна подача.",
+    "Напиши, що шукаєш на узбережжі Бургаса — підберемо купівлю, оренду чи продаж. Швидко відповідаємо в месенджерах.",
+  microcopy: "Спочатку месенджер. Житло на морі. Без зайвого.",
   nav: {
     buy: "Купити",
     rent: "Оренда",
@@ -482,43 +974,88 @@ const ua: Dictionary = {
     about: "Про нас",
     contacts: "Контакти",
     favorites: "Збережене",
+    compare: "Порівняння",
+    guide: "Гід",
+    blog: "Журнал",
+    privacy: "Конфіденційність",
+    menu: "Меню",
+    closeMenu: "Закрити меню",
   },
   cta: {
+    ...en.cta,
     viewListings: "Дивитись об’єкти",
     sellWithUs: "Продати з Nomore",
-    whatsapp: "WhatsApp",
     applyViewing: "Заявка на перегляд",
-    send: "Надіслати в WhatsApp",
+    send: "Надіслати",
     reset: "Скинути",
+    shortlist: "Надіслати підбірку",
+    compareAdd: "Порівняти",
+    compareRemove: "У порівнянні",
+    share: "Поділитись",
+    copyLink: "Копіювати лінк",
+    copied: "Скопійовано",
+    telegramSoon: "Telegram скоро",
+    leaveReview: "Залишити відгук",
+    getMatch: "Отримати підбірку",
+    showResults: "Показати об’єкти",
   },
   home: {
-    featured: "Обране (демо)",
+    featured: "Актуальні об’єкти",
+    featuredHint: "Поточні пропозиції на узбережжі — напишіть нам за живу підбірку.",
     howTitle: "Як це працює",
     howSteps: [
-      "Пишеш, що потрібно — або віддаєш об’єкт",
-      "Знімаємо, публікуємо, відсіюємо інтерес",
+      "Пишеш бюджет, район і строки в месенджер",
+      "Підбираємо відповідне — купівля, оренда чи ваш продаж",
       "Покази й угода без хаосу",
     ],
     areasTitle: "Де працюємо",
     ownersTitle: "Є об’єкт?",
     ownersText:
       "З Nomore: професійні фото та вертикальне відео для наших соцмереж. Зйомка без окремої оплати — працюємо за комісією з угоди.",
-    demoNote: "У каталозі демо-об’єкти, щоб показати продукт.",
+    trustTitle: "Що кажуть клієнти",
+    searchTitle: "Швидкий пошук",
+  },
+  review: {
+    title: "Залишити відгук",
+    subtitle: "Зірки й короткий текст — іде нам у WhatsApp.",
+    stars: "Ваша оцінка",
+    description: "Відгук",
+    submit: "Надіслати відгук у WhatsApp",
+    hint: "Публікуємо після перевірки — нічого не виходить автоматично.",
+    optional: "необов’язково",
   },
   catalog: {
+    ...en.catalog,
     saleTitle: "Купити",
     rentTitle: "Оренда",
     results: "об’єктів",
-    empty: "Нічого не знайшли. Напишіть у WhatsApp — підберемо.",
+    empty: "Нічого не знайшли.",
+    emptyHint: "Скиньте фільтри або напишіть нам.",
     filters: "Фільтри",
     all: "Усі",
     type: "Тип",
     location: "Район",
     rooms: "Кімнати",
+    price: "Ціна (EUR)",
+    priceMin: "Мін €",
+    priceMax: "Макс €",
+    area: "Площа m²",
+    areaMin: "Мін m²",
+    areaMax: "Макс m²",
+    features: "Особливості",
+    sort: "Сортування",
     sortNew: "Нові",
+    sortPriceAsc: "Ціна ↑",
+    sortPriceDesc: "Ціна ↓",
+    sortArea: "Площа",
+    loading: "Завантаження…",
+    viewList: "Список",
+    viewMap: "Карта",
+    openListing: "Відкрити оголошення →",
   },
   listing: {
-    demo: "Демо",
+    ...en.listing,
+    demo: "",
     sale: "Продаж",
     rent: "Оренда",
     video: "Відео",
@@ -529,8 +1066,19 @@ const ua: Dictionary = {
     similar: "Схожі",
     features: "Особливості",
     share: "Поділитись",
+    beach: "До пляжу",
+    minutes: "хв",
+    reserved: "Резерв",
+    sold: "Продано",
+    print: "Друк",
+    watchVideo: "Дивитись відео",
+    viewingTitle: "Оберіть слот перегляду",
+    viewingHint: "Точний час підтвердимо в чаті.",
+    autoReply:
+      "Дякуємо — зазвичай відповідаємо протягом кількох годин (у будні).",
   },
   sell: {
+    ...en.sell,
     title: "Продати з Nomore",
     subtitle: "Хочете продати чистіше й швидше? Знімемо як треба і покажемо аудиторії.",
     modelB:
@@ -541,20 +1089,23 @@ const ua: Dictionary = {
       "Коротке вертикальне відео для Reels & TikTok",
       "Картка на сайті Nomore",
       "Публікації в наших соцмережах",
-      "Обробка заявок у WhatsApp",
+      "Обробка заявок у месенджерах",
     ],
     stepsTitle: "Кроки",
     steps: [
       "Коротка заявка",
-      "Узгоджуємо деталі в WhatsApp",
+      "Узгоджуємо деталі в чаті",
       "День зйомки",
       "Публікація і покази",
     ],
     formTitle: "Заявка на швидкий продаж",
+    shootTitle: "Як знімаємо",
+    shootText: "Світлі чесні кадри — інтер’єр, види й короткий вертикал для соцмереж.",
   },
   forms: {
+    ...en.forms,
     name: "Ім’я",
-    contact: "Телефон / WhatsApp",
+    contact: "Телефон / месенджер",
     dealSell: "Продати",
     dealRent: "Здати",
     type: "Тип об’єкта",
@@ -563,18 +1114,79 @@ const ua: Dictionary = {
     comment: "Коментар",
     description: "Короткий опис",
     needShoot: "Потрібна фото- та відеозйомка",
-    success: "Відкриваємо WhatsApp із заявкою…",
+    success: "Заявку надіслано — скоро відповімо.",
+    error: "Не вдалося надіслати. Спробуйте ще раз або напишіть через кнопки внизу.",
+    invalidName: "Вкажіть справжнє ім’я (мінімум 2 літери).",
+    invalidContact: "Вкажіть телефон (+359…) або месенджер (@username).",
+    sending: "Надсилання…",
+    replyNote: "Відповідаємо того ж робочого дня в WhatsApp, Telegram або Viber.",
+    slot: "Зручний слот",
   },
   about: {
     title: "Про Nomore",
-    p1: "Nomore — два сенси: no more застарілого ріелторського шуму і життя на морі.",
-    p2: "Сучасне агентство для Бургаса та узбережжя. Зрозуміла подача, спілкування в месенджері, медіа яке допомагає продати.",
+    p1: "Nomore — два сенси: кінець застарілому ріелторському шуму і життя на морі.",
+    p2: "Сучасне агентство для Бургаса та Сонячного Берега. Зрозумілі оголошення, месенджери, медіа яке допомагає продати.",
+    p3: "Відповідаємо того ж робочого дня в месенджерах. Сайт чотирма мовами. Власникам — зйомка без окремого рахунку за медіа.",
+    valuesTitle: "Як працюємо",
+    values: [
+      "Показуємо дім чесно — спочатку великі фото",
+      "Відповідаємо в чаті, не в нескінченних дзвінках",
+      "Заробляємо, коли угода закрита — разом із власником",
+    ],
   },
   contacts: {
     title: "Контакти",
-    subtitle: "Пишіть будь-коли — відповідаємо в WhatsApp.",
+    subtitle: "Пишіть будь-коли — відповідаємо швидко.",
     lookingTitle: "Шукаєте житло?",
+    replyNote:
+      "Зазвичай відповідь того ж буднього дня. Вкажіть бюджет, район і купівля/оренда.",
   },
+  agent: {
+    role: "Ведучий спеціаліст агентства Nomore Estate",
+    bio: "Допоможу з підбором, оглядами та угодами на узбережжі Бургаса.",
+  },
+  favorites: {
+    title: "Збережене",
+    empty: "Поки порожньо. Натисніть серце на об’єкті.",
+    sendShortlist: "Надіслати підбірку в WhatsApp",
+  },
+  compare: {
+    title: "Порівняння",
+    empty: "Додайте до 3 об’єктів із каталогу.",
+    max: "Порівняння повне (3). Приберіть один.",
+    clear: "Очистити",
+  },
+  guide: {
+    title: "Гід і FAQ",
+    subtitle: "Короткі відповіді для покупців, орендарів і власників на узбережжі Бургаса.",
+  },
+  privacy: {
+    title: "Конфіденційність, cookies і дисклеймер",
+    updated: "Оновлено липень 2026",
+    body: [
+      "Ми обробляємо контакти з форм або месенджерів лише щоб відповісти щодо нерухомості.",
+      "Збережене, порівняння і згода на cookies зберігаються в браузері (localStorage).",
+      "Ціни й наявність можуть змінюватися; деталі підтверджуємо на огляді та в чаті.",
+      "Після OK на cookie-банері можемо завантажити Google Analytics (GA4), щоб розуміти трафік і покращувати сайт. Згоду можна скинути, очистивши дані сайту в браузері.",
+      "Інформація про об’єкти добросовісна; документи завжди перевіряйте з фахівцями перед угодою.",
+    ],
+  },
+  blog: {
+    title: "Журнал",
+    subtitle: "Короткі нотатки про купівлю, продаж і життя на морі.",
+    read: "Читати",
+  },
+  cookies: {
+    text: "Використовуємо local storage для мови, збереженого і згоди. Після OK можемо завантажити аналітику (GA4), щоб покращувати сайт. Див. Конфіденційність.",
+    accept: "OK",
+    more: "Конфіденційність",
+  },
+  notFound: {
+    title: "Загубились на березі",
+    text: "Сторінки немає. На головну — або напишіть у месенджер.",
+    home: "На головну",
+  },
+  currency: { label: "Валюта" },
   types: {
     apartment: "Квартира",
     house: "Будинок",
@@ -591,7 +1203,9 @@ const ua: Dictionary = {
   },
   footer: {
     rights: "Усі права захищено.",
-    demo: "Демо-оголошення для прев’ю.",
+    demo: "Пишіть у месенджер — відповідаємо того ж робочого дня.",
+    geo: "Область Бургас · Сонячний Берег",
+    dockHint: "Месенджери: плаваючі кнопки (WhatsApp, Telegram, Viber).",
   },
 };
 

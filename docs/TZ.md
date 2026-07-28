@@ -1,9 +1,10 @@
-# ТЗ v3 — Nomore Real Estate
+# ТЗ-PRO 1.0 — Nomore Real Estate
 
-**Статус:** готове до реалізації  
+**Статус:** затверджено замовником (2026-07-26)  
 **Бренд:** Nomore Real Estate  
-**Домен:** `nomore.estate`  
-**Референс відчуття:** [nomorelab.wtf](https://nomorelab.wtf) — dark + glass + чіткі CTA + блокова структура, **без** курс-крику й строкатої палітри  
+**Плановий домен:** `nomore.estate` — **купівля пізніше** (не блокує реліз)  
+**Live (поки):** `https://ai.nomorevlad.vercel.app`  
+**Референс відчуття:** [nomorelab.wtf](https://nomorelab.wtf) — dark + glass + CTA + блоки; **без** курс-крику  
 
 ---
 
@@ -11,35 +12,34 @@
 
 | # | Тема | Рішення |
 |---|------|---------|
-| 1 | Зйомка для власників | **B** — фото/відео без окремої оплати; агентство на **комісії з угоди** |
-| 2 | Домен | **nomore.estate** (~$14.99/рік на Vercel; купівля окремим підтвердженням) |
-| 3 | Default locale | **`bg`**. Контент/реклама пріоритетно **RU + UA** |
+| 1 | Зйомка для власників | **B** — фото/відео без окремої оплати; комісія з угоди |
+| 2 | Домен | `nomore.estate` — купити **пізніше** |
+| 3 | Default locale | **`bg`**. Пріоритет якості copy: **RU + UA** |
 | 4 | WhatsApp | **+380 93 385 18 04** → `wa.me/380933851804` |
-| 5 | Слоган (A) | *Homes by the sea. No more hassle.* (+ локалі) |
-| 6 | Каталог | **Демо-об’єкти** з міткою Demo |
-| 7 | Візуал | Синьо-чорний, glass, стильні шрифти; стриманіше за LAB |
-| 8 | Telegram bot / @username | TBD → ліди через WhatsApp, поки немає бота |
+| 5 | Слоган A | *Homes by the sea. No more hassle.* (+ BG/RU/UA) |
+| 6 | Каталог старт | Placeholder-об’єкти без публічної мітки Demo (заміна пізніше) |
+| 7 | Візуал | Синьо-чорний, glass; стриманіше за LAB |
+| 8 | Telegram @ | **@notany** (dock deep-link). Bot token — TBD; ліди також через WhatsApp |
+| 9 | Беклог | **Реалізувати все** (§10 A1–G4, HIGH/MED/LOW) |
+| 10 | Логотипи | Згенерувати wordmark + mark + favicon + OG |
 
 ---
 
-## 1. Продукт і позиціонування
+## 1. Продукт
 
 ### 1.1. Хто ми
-Ріелторське агентство в **області Бургас** і на узбережжі (у т.ч. **Сонячний Берег**, Несебр, Равда, Поморіє, Созополь, Святий Влас).  
+Ріелторське агентство в **області Бургас** і на узбережжі (Сонячний Берег, Несебр, Равда, Поморіє, Созополь, Святий Влас).  
 Послуги: **купівля / продаж + оренда**.
 
 ### 1.2. Сенс «Nomore»
-1. **No more** — немає більше хаосу, «сайтів 2005», порожніх оголошень без нормальних фото.  
-2. **На морі** — житло й життя біля моря.
+1. **No more** — немає хаосу й порожніх оголошень без нормальних фото.  
+2. **На морі** — житло біля моря.
 
-### 1.3. Для кого
-Аудиторія **24+**: молоді професіонали, пари, remote, іноземці (UA/RU), локали BG.  
-Тон: спокійно, сучасно, по суті; трохи характеру; без люкс-пафосу і без курс-маркетингу.
+### 1.3. Аудиторія
+24+: професіонали, пари, remote, іноземці UA/RU, локали BG.  
+Тон: спокійно, сучасно, по суті.
 
-### 1.4. Одне речення
-Nomore Real Estate — сучасне агентство в Бургасі: показуємо об’єкти чисто, відповідаємо швидко в WhatsApp, знімаємо й просуваємо об’єкти власників у соцмережах.
-
-### 1.5. Слогани
+### 1.4. Слогани
 | Locale | Текст |
 |--------|--------|
 | EN | Homes by the sea. No more hassle. |
@@ -47,244 +47,176 @@ Nomore Real Estate — сучасне агентство в Бургасі: по
 | RU | Жильё у моря. Без лишнего. |
 | UA | Житло на морі. Без зайвого. |
 
-Підзаголовок: купівля / продаж / оренда · Бургас і узбережжя · чіткі оголошення · швидка відповідь.
+---
 
-### 1.6. Чим відрізняємось
-- Сучасний dark/glass UI (як LAB, але тихіше)  
-- Mobile-first каталог  
-- WhatsApp у один тап  
-- 4 мови  
-- Зйомка + соцмережі для власників (модель B)  
-- Швидкість і великі фото замість таблиць imot.bg  
+## 2. Візуал
+
+Coastal dark-tech. Палітра: `#070B12` / sea `#3B82F6` / lagoon як акцент.  
+Шрифти: **Unbounded** (display) + **Manrope** (body).  
+Hero: один склад — бренд, слоган, 1 речення, CTA, full-bleed візуал.  
+Без purple glow, cream+terracotta, газетного layout, «зібрано за N хв».
+
+**Бренд-ассети:** `/public/brand/` — wordmark, mark, favicon, OG.
 
 ---
 
-## 2. Візуальна система
+## 3. IA
 
-### 2.1. Настрій
-**Coastal dark-tech** = Nomore Lab мінус крик + нерухомість.  
-Темний фон, матове скло, один морський акцент, домінанта — фото об’єктів / узбережжя.
+`/{locale}/...` · `locale ∈ {bg,ru,ua,en}` · `/` → `/bg`
 
-**Не робити:** purple glow, rainbow градієнти, cream+terracotta кліше, газетний layout, «зібрано за 1:32», тарифні countdown-картки.
-
-### 2.2. Палітра
-```
---bg:           #070B12
---bg-elevated:  #0E1522
---bg-soft:      #151D2E
---ink:          #E8EEF7
---ink-muted:    #8B9BB4
---sea:          #3B82F6      /* primary */
---sea-deep:     #1D4ED8
---lagoon:       #67E8F9      /* rare accent only */
---line:         rgba(232,238,247,0.12)
---glass:        rgba(255,255,255,0.06)
---glass-border: rgba(255,255,255,0.14)
---ok:           #34D399
---warn:         #FBBF24
-```
-Lagoon — лише бейджі Demo / дрібні акценти, не половина UI.
-
-### 2.3. Glass
-Кнопки secondary, фільтри, чіпи, панелі:
-- `background: var(--glass)`
-- `backdrop-filter: blur(16–20px)`
-- `border: 1px solid var(--glass-border)`
-- hover: трохи світліше скло  
-Primary CTA: solid `--sea` (контраст на темному).
-
-### 2.4. Типографіка
-| Роль | Шрифт |
-|------|--------|
-| Display / H1–H2 | **Unbounded** |
-| Body / UI | **Manrope** |
-
-Ціни: `tabular-nums`. Не Inter / Roboto / Arial як бренд.
-
-### 2.5. Компоненти
-- Картки — лише для взаємодії (об’єкт, фільтр, форма). Не картки в hero.  
-- Скруглення 16–24px.  
-- Тіні мінімальні; глибина через шари/скло/фото.  
-- Іконки: тонкі line, один набір.
-
-### 2.6. Hero (перший екран)
-Один склад:
-1. Бренд (hero-level)  
-2. Слоган  
-3. 1 підтримуюче речення  
-4. CTA-група: **Дивитись об’єкти** (primary) · **Продати з Nomore** (glass) · WhatsApp (text/ghost)  
-5. Один домінантний візуал (full-bleed фото/градієнт моря)
-
-Без: статистик, бейджів «#1», плаваючих стікерів на фото, тарифів.
-
-### 2.7. Motion (2–4)
-1. Hero text rise/fade  
-2. Cards stagger on scroll  
-3. Gallery crossfade  
-4. Messenger dock з’являється після ~30% scroll  
+| Path | Сторінка |
+|------|----------|
+| `/` | Home |
+| `/buy` `/rent` | Каталоги |
+| `/listings/[slug]` | Об’єкт |
+| `/sell` | Продати з Nomore |
+| `/about` | Про нас |
+| `/contacts` | Контакти |
+| `/favorites` | Обране |
+| `/compare` | Порівняння |
+| `/guide` | Гід / FAQ |
+| `/privacy` | Privacy / cookies / disclaimer |
+| `/blog` | Гайд-статті (stubs) |
 
 ---
 
-## 3. Інформаційна архітектура
-
-URL: `/{locale}/...` · `locale ∈ {bg, ru, ua, en}`  
-`/` → редірект на `/bg`.
-
-| Path | Сторінка | Мета |
-|------|----------|------|
-| `/{locale}` | Home | Бренд, featured, how-to, owners, CTA |
-| `/{locale}/buy` | Купити | Каталог sale + фільтри |
-| `/{locale}/rent` | Оренда | Каталог rent + фільтри |
-| `/{locale}/listings/[slug]` | Об’єкт | Галерея, факти, WA, заявка |
-| `/{locale}/sell` | Продати з Nomore | Зйомка + модель B + форма |
-| `/{locale}/about` | Про нас | Double meaning + підхід |
-| `/{locale}/contacts` | Контакти | WA + форма «шукаю» |
-| `/{locale}/favorites` | Обране | localStorage (Phase A/B) |
-| `/{locale}/guide` | Гід / FAQ | Phase C |
-
-### Навігація (header)
-`Buy` · `Rent` · **`Sell with Nomore`** (акцент glass) · `About` · `Contacts` · lang switch · WhatsApp (desktop)
-
----
-
-## 4. Home — секції
-
-1. **Hero** — як у 2.6  
-2. **Featured (demo)** — 3 картки + лінк у каталог  
-3. **Як працюємо** — 3 кроки (`01/02/03` у стилі LAB, спокійно)  
-4. **Зона роботи** — чіпи локацій → `/buy?location=`  
-5. **Для власників** — зйомка/комісія + CTA → `/sell`  
-6. **Footer** — навігація, WA, мови, demo disclaimer  
-
----
-
-## 5. Каталог (Buy / Rent)
-
-- Compact glass filters; mobile-friendly selects  
-- Сітка 1 / 2 / 3  
-- Query: `location`, `type`, `rooms` (+ price у v2)  
-- Картка: фото, Sale/Rent/Demo/Video, ціна EUR, title, локація, м², ♥  
-- Empty → WhatsApp  
-
----
-
-## 6. Сторінка об’єкта
-
-Галерея → бейджі/title/ціна → факти → опис → фічі → sticky **Заявка на перегляд** + WhatsApp → схожі.
-
----
-
-## 7. Модель даних Listing
+## 4. Модель Listing
 
 ```ts
 Listing {
-  id: string
-  slug: string
-  demo: boolean
+  id, slug, demo: boolean
+  status: 'published' | 'reserved' | 'sold' | 'draft'
   deal: 'sale' | 'rent'
   type: 'apartment' | 'house' | 'villa' | 'studio'
   location: LocationId
-  priceEur: number
-  pricePeriod?: 'month'
-  rooms: number | 'studio'
-  areaM2: number
-  floor?: number
-  floorsTotal?: number
-  act?: '14' | '15' | '16'
+  priceEur, pricePeriod?, rooms, areaM2
+  floor?, floorsTotal?, act?
   features: string[]
-  cover: string
-  gallery: string[]
+  beachMinutes?: number
+  cover, gallery: string[]
   video?: boolean
-  title: Record<Locale, string>
-  description: Record<Locale, string>
+  videoUrl?: string
+  publishedAt: string
+  title, description: Record<Locale, string>
 }
 ```
 
-Валюта UI: **EUR**. Демо: ≥6 об’єктів.  
-Локації: `burgas`, `sunny-beach`, `nesebar`, `ravda`, `pomorie`, `sozopol`, `sveti-vlas`.
+Публічний каталог показує лише `status === 'published'`.  
+Валюта UI: **EUR / BGN** (фікс 1.95583).
 
 ---
 
-## 8. Продати з Nomore (`/sell`)
+## 5. Ліди
 
-### Модель B
-Проф. фото + вертикальне відео + сайт + пости в соцмережах Nomore + ліди.  
-Зйомка **без окремої оплати** — комісія з угоди.
-
-### Структура
-Hero + model B callout → що входить → кроки 01–04 → форма `[SELL]`  
-Чекбокс «Потрібна зйомка» = ON за замовчуванням.
-
-### Точки входу
-Header · Home hero · Home owners · Footer · `/sell`
+Форми → WhatsApp з префіксами `[BUY]` `[RENT]` `[SELL]` `[VIEW]` `[SHORTLIST]` `[FAQ]`.  
+Telegram dock: `@notany` → `t.me/notany`. Bot API — коли буде token.  
+Static export → без server `/api/leads` у v1; шлях описано в ops.
 
 ---
 
-## 9. Форми → WhatsApp (v1)
+## 6. Модель B (власники)
 
-| Форма | Префікс |
-|-------|---------|
-| Шукаю житло | `[BUY]` / `[RENT]` |
-| Перегляд | `[VIEW]` |
-| Швидкий продаж | `[SELL]` |
-
-v2: `POST /api/leads` → Telegram Bot.
+Фото + вертикальне відео + сайт + соцмережі + ліди.  
+Зйомка без окремої оплати — комісія з угоди.
 
 ---
 
-## 10. Месенджери
+## 7. Tech
 
-Floating glass WhatsApp dock · header WA · listing sticky · deep-links з контекстом.  
-Telegram UI — коли буде `@username`.
-
----
-
-## 11. i18n
-
-4 мови, словники UI, listing fields на всі локалі, switch зберігає path.  
-Якість RU/UA — пріоритет.
+Next.js App Router + TS · Tailwind 4 · Vercel (server/SSG, **без** `output: "export"`) · Unbounded + Manrope · listings у TS.  
+Див. також `docs/TZ_DEPLOY.md`.
 
 ---
 
-## 12. Що беремо з nomorelab.wtf
+## 8. DoD
 
-**Беремо:** dark base, glass, воронка увага→довіра→дія, одна CTA на секцію, нумерація `01/02/03`, бренд Nomore, типографіка/motion.  
-**Не беремо:** кислотну строкатість, тарифи/дефіцит, meta «зібрано за N хв», course-copy.  
-**Формула:** Lab − крик + великі фото нерухомості + каталог.
-
----
-
-## 13. Tech
-
-Next.js App Router + TS · Tailwind 4 · static export · listings у TS · forms → WhatsApp · Vercel · Unbounded + Manrope.
-
-**Не в v1:** кабінет, оплата, heavy map, Reels-фід на home, CRM.
+1. Мобілка: каталог → об’єкт → WA < 60 сек  
+2. ≤ 1 клік до Sell з ключових сторінок  
+3. На `/sell` за 5 сек: зйомка + соцмережі + комісія  
+4. 4 мови без змішаних рядків  
+5. Hero = бренд Nomore  
+6. Production 200  
+7. Домен — окремим кроком пізніше  
 
 ---
 
-## 14. Фази
+## 9. Відкриті питання (не блокують)
 
-**A — Foundation:** дизайн, i18n, Home/Buy/Rent/Listing/Sell/About/Contacts, демо, WhatsApp, домен.  
-**B — Real inventory:** CMS, реальні фото, Telegram bot, фільтр ціни.  
-**C — Trust:** Guide/FAQ, галерея зйомок, відео, SEO, аналітика.
-
----
-
-## 15. Definition of Done (публічний реліз)
-
-1. Мобілка: каталог → об’єкт → WhatsApp < 60 сек  
-2. ≤ 1 клік до **Продати з Nomore** з ключових сторінок  
-3. На `/sell` за 5 сек зрозуміло: зйомка + соцмережі + комісія  
-4. 4 мови без змішаних UI-рядків  
-5. Hero = бренд Nomore без навбару  
-6. Production 200 без SSO  
-7. Після покупки домену: `https://nomore.estate`  
+1. Купівля `nomore.estate`  
+2. Telegram bot token + chat id (username вже: `@notany`)  
+3. Реальні об’єкти замість демо  
 
 ---
 
-## 16. Залишилось від замовника
+## 10. Беклог реалізації (все)
 
-1. Підтвердити покупку `nomore.estate` ($14.99) + дані реєстранта  
-2. Telegram `@username` / bot token + chat id  
-3. Реальні об’єкти й фото  
-4. (Опційно) логотип для соцмереж  
+### A — Brand
+- **A1** Логотипи: wordmark, mark, favicon, OG  
+- **A2** Brand kit у header/footer  
+- **A3** Власні hero-ассети / якісні stock  
+- **A4** Опційний hero video (якщо є URL)  
+- **A5** Brand microcopy  
+
+### B — Trust
+- **B1** Guide/FAQ  
+- **B2** Shoot gallery на `/sell`  
+- **B3** Багатший About  
+- **B4** Testimonials  
+- **B5** Privacy / cookies / disclaimer  
+- **B6** Мови + ясність гео  
+
+### C — Catalog
+- **C1** Фільтри: ціна, площа, features  
+- **C2** Sort  
+- **C3** Compare  
+- **C4** Favorites page  
+- **C5** Lightbox + swipe  
+- **C6** Video на listing  
+- **C7** Beach minutes / area clarity  
+- **C8** Share  
+- **C9** Shortlist PDF-текст через WA  
+- **C10** Шлях заміни демо (checklist + status)  
+
+### D — Leads
+- **D1** Telegram bot path (stub / готовність)  
+- **D2** TG dock stub  
+- **D3** Viewing calendar  
+- **D4** Auto-reply UX copy  
+- **D5** Later CRM  
+
+### E — Polish
+- **E1** Skeletons / transitions  
+- **E2** Empty / error states  
+- **E3** Custom glass dropdowns  
+- **E4** EUR/BGN  
+- **E5** Cookie banner  
+- **E6** Branded 404  
+- **E7** Print-friendly listing  
+
+### F — SEO / growth
+- **F1** OG / sitemap / hreflang  
+- **F2** JSON-LD  
+- **F3** Blog/guide links  
+- **F4** Analytics stub  
+- **F5** UTM notes  
+
+### G — Ops
+- **G1** Light CMS path (TS data + checklist)  
+- **G2** Publish checklist  
+- **G3** Listing statuses  
+- **G4** Domain — **пізніше**  
+
+---
+
+## 11. UX-Polish 1.1 (затверджено)
+
+1. Logo A: `Nomore` + `Estate` одного розміру  
+2. Microcopy: «Понятные объекты. Удобный процесс. Жильё на берегу моря.» (+ локалі)  
+3. Без global noise overlay  
+4. Без англ. eyebrows (Trust/Catalog/Process/…)  
+5. Людські відгуки  
+6. «Объекты в регионе» без geo-підзаголовка  
+7. Header: Buy · Rent · Sell · Contacts + ♥ + langs + WA  
+8. Слоган hero у 2 рядки (`taglineLine1` / `taglineLine2`)  
+9. Ціна: EUR основне + дрібні лв (без toggle)  
+10. Telegram: `@notany`  
