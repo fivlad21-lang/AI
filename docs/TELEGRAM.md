@@ -1,23 +1,41 @@
-# Telegram leads (D1 / D2)
+# Telegram lead delivery (bot → owner DM)
 
-## Current state
-- Site is **static export** → no Next.js API routes on Vercel for this deploy mode.
-- Floating dock: **WhatsApp** (`+380 93 385 18 04`), **Telegram** [@notany](https://t.me/notany), **Viber** (`+49 151 40166765`).
-- Form leads primarily go to **WhatsApp** with prefixes `[BUY]` `[RENT]` `[SELL]` `[VIEW]` `[SHORTLIST]` `[FAQ]`.
-- Messenger buttons use brand SVG logos (not WA/TG text badges).
+Site forms (`SellForm`, `LeadForm`) POST to `/api/leads`. The API sends a plain-text message to **your Telegram DM** via Bot API — not a channel, not personal WhatsApp.
 
-## When ready
-1. Create bot via `@BotFather`, get token.
-2. Get your chat id (or channel id).
-3. Set `TELEGRAM_USERNAME` in `src/lib/contacts.ts` (public deep-link for users).
-4. Either:
-   - **A)** Add `POST /api/leads` that forwards to Telegram Bot API (static export already removed for Vercel), or
-   - **B)** Point forms to an external webhook (Make / n8n / Cloudflare Worker) that posts to Telegram.
+Floating dock (WA / Telegram / Viber) stays for chat; footer and contacts no longer duplicate messenger button rows.
 
-## Payload shape (ready)
+## Owner setup (once)
+
+1. Open [@BotFather](https://t.me/BotFather) → `/newbot` → copy the **bot token**.
+2. Start a chat with your bot and tap **/start** (required so the bot can message you).
+3. Get your numeric user id via [@userinfobot](https://t.me/userinfobot) or [@getidsbot](https://t.me/getidsbot).
+4. In **Vercel → Project → Settings → Environment Variables** set:
+   - `TELEGRAM_BOT_TOKEN` = bot token from BotFather
+   - `TELEGRAM_LEADS_CHAT_ID` = your user id (e.g. `123456789`)
+5. Redeploy.
+
+Locally, copy `.env.example` → `.env.local` and fill the same keys.
+
+## Message shape
+
 ```
-{
-  prefix: "[BUY]" | "[RENT]" | "[SELL]" | "[VIEW]" | "[SHORTLIST]" | "[FAQ]",
-  locale, name, contact, fields..., sourceUrl
-}
+[SELL] Nomore
+Name: …
+Contact: …
+Deal: …
+…
+Locale: ua
+Source: https://…
 ```
+
+Kinds: `SELL`, `BUY`, `RENT`, etc. (from the form `kind` / prefix).
+
+## Troubleshooting
+
+| Symptom | Fix |
+| --- | --- |
+| API 502 / “Telegram is not configured” | Both env vars missing or empty |
+| `chat not found` / `Forbidden` | You must `/start` the bot once; chat id must be **your user id**, not a channel |
+| Forms say success but nothing arrives | Wrong chat id, or bot token from a different bot |
+
+Public Telegram deep-link for visitors remains `@notany` in `src/lib/contacts.ts` (dock).

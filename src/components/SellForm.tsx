@@ -6,8 +6,6 @@ import type { Dictionary } from "@/i18n/dictionaries";
 import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
 import { GlassSelect } from "@/components/GlassSelect";
-import { MessengerGlyph } from "@/components/MessengerButton";
-import { whatsappUrl } from "@/lib/contacts";
 import { track } from "@/lib/analytics";
 
 export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -18,27 +16,49 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
   const [location, setLocation] = useState("burgas");
   const [description, setDescription] = useState("");
   const [needShoot, setNeedShoot] = useState(true);
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [error, setError] = useState("");
 
   const field =
     "glass mt-1.5 w-full rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-sea/50";
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const text = [
-      "[SELL] Nomore quick sale request",
-      `Name: ${name}`,
-      `Contact: ${contact}`,
-      `Deal: ${deal}`,
-      `Type: ${type}`,
-      `Location: ${location}`,
-      `Shooting: ${needShoot ? "yes" : "no"}`,
-      `Description: ${description}`,
-      `Locale: ${locale}`,
-      "",
-      dict.listing.autoReply,
-    ].join("\n");
-    track("wa_click", { place: "sell_form" });
-    window.open(whatsappUrl(text), "_blank");
+    setStatus("sending");
+    setError("");
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: "SELL",
+          locale,
+          name,
+          contact,
+          deal,
+          type,
+          location,
+          description,
+          needShoot,
+          source: typeof window !== "undefined" ? window.location.href : "",
+        }),
+      });
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!res.ok || !data?.ok) {
+        setStatus("error");
+        setError(data?.error || dict.forms.error);
+        return;
+      }
+      track("form_submit", { place: "sell_form", kind: "SELL" });
+      setStatus("ok");
+      setName("");
+      setContact("");
+      setDescription("");
+      setNeedShoot(true);
+    } catch {
+      setStatus("error");
+      setError(dict.forms.error);
+    }
   };
 
   return (
@@ -98,12 +118,14 @@ export function SellForm({ locale, dict }: { locale: Locale; dict: Dictionary })
         />
         {dict.forms.needShoot}
       </label>
-      <GlassButton type="submit" variant="primary" className="w-full">
-        <MessengerGlyph kind="whatsapp" className="h-4 w-4" />
-        {dict.cta.send}
+      <GlassButton type="submit" variant="primary" className="w-full" disabled={status === "sending"}>
+        {status === "sending" ? dict.forms.sending : dict.cta.send}
       </GlassButton>
-      <p className="text-xs text-ink-muted">{dict.forms.success}</p>
-      <p className="text-xs text-ink-muted">{dict.listing.autoReply}</p>
+      {status === "ok" && <p className="text-xs text-ok">{dict.forms.success}</p>}
+      {status === "error" && (
+        <p className="text-xs text-red-300">{error || dict.forms.error}</p>
+      )}
+      <p className="text-xs text-ink-muted">{dict.forms.replyNote}</p>
     </form>
   );
 }

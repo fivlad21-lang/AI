@@ -136,6 +136,9 @@ export type Dictionary = {
     description: string;
     needShoot: string;
     success: string;
+    error: string;
+    sending: string;
+    replyNote: string;
     slot: string;
   };
   about: {
@@ -196,6 +199,7 @@ export type Dictionary = {
     rights: string;
     demo: string;
     geo: string;
+    dockHint: string;
   };
 };
 
@@ -229,7 +233,7 @@ const en: Dictionary = {
     telegramSoon: "Telegram soon",
     viber: "Viber",
     applyViewing: "Request a viewing",
-    send: "Send via WhatsApp",
+    send: "Send",
     reset: "Reset",
     shortlist: "Send selection",
     compareAdd: "Compare",
@@ -343,7 +347,7 @@ const en: Dictionary = {
   },
   forms: {
     name: "Name",
-    contact: "Phone / WhatsApp",
+    contact: "Phone / messenger",
     deal: "Looking to",
     dealSell: "Sell",
     dealRent: "Rent out",
@@ -353,7 +357,10 @@ const en: Dictionary = {
     comment: "Comment",
     description: "Short description",
     needShoot: "I need photo & video shooting",
-    success: "Opening WhatsApp with your request…",
+    success: "Request sent — we’ll reply soon.",
+    error: "Couldn’t send. Try again or write us in the messenger dock.",
+    sending: "Sending…",
+    replyNote: "We reply the same business day via WhatsApp, Telegram, or Viber.",
     slot: "Preferred slot",
   },
   about: {
@@ -435,6 +442,7 @@ const en: Dictionary = {
     rights: "All rights reserved.",
     demo: "Write us on WhatsApp — we reply the same business day.",
     geo: "Burgas region · Sunny Beach coast",
+    dockHint: "Messengers: use the floating buttons (WhatsApp, Telegram, Viber).",
   },
 };
 
@@ -465,7 +473,7 @@ const bg: Dictionary = {
     viewListings: "Виж имотите",
     sellWithUs: "Продай с Nomore",
     applyViewing: "Заяви оглед",
-    send: "Изпрати във WhatsApp",
+    send: "Изпрати",
     reset: "Изчисти",
     shortlist: "Изпрати подборка",
     compareAdd: "Сравни",
@@ -585,7 +593,7 @@ const bg: Dictionary = {
   forms: {
     ...en.forms,
     name: "Име",
-    contact: "Телефон / WhatsApp",
+    contact: "Телефон / месинджър",
     dealSell: "Продажба",
     dealRent: "Наем",
     type: "Тип имот",
@@ -594,7 +602,10 @@ const bg: Dictionary = {
     comment: "Коментар",
     description: "Кратко описание",
     needShoot: "Искам фото и видео заснемане",
-    success: "Отваряме WhatsApp със заявката…",
+    success: "Заявката е изпратена — ще отговорим скоро.",
+    error: "Не успяхме да изпратим. Опитай отново или пиши през бутоните долу.",
+    sending: "Изпращане…",
+    replyNote: "Отговаряме в същия работен ден във WhatsApp, Telegram или Viber.",
     slot: "Предпочитан слот",
   },
   about: {
@@ -676,6 +687,7 @@ const bg: Dictionary = {
     rights: "Всички права запазени.",
     demo: "Пиши във WhatsApp — отговаряме в същия работен ден.",
     geo: "Област Бургас · Слънчев бряг",
+    dockHint: "Месинджъри: плаващите бутони (WhatsApp, Telegram, Viber).",
   },
 };
 
@@ -706,7 +718,7 @@ const ru: Dictionary = {
     viewListings: "Смотреть объекты",
     sellWithUs: "Продать с Nomore",
     applyViewing: "Заявка на просмотр",
-    send: "Отправить в WhatsApp",
+    send: "Отправить",
     reset: "Сбросить",
     shortlist: "Отправить подборку",
     compareAdd: "Сравнить",
@@ -825,7 +837,7 @@ const ru: Dictionary = {
   forms: {
     ...en.forms,
     name: "Имя",
-    contact: "Телефон / WhatsApp",
+    contact: "Телефон / мессенджер",
     dealSell: "Продать",
     dealRent: "Сдать",
     type: "Тип объекта",
@@ -834,7 +846,10 @@ const ru: Dictionary = {
     comment: "Комментарий",
     description: "Короткое описание",
     needShoot: "Нужна фото- и видеосъёмка",
-    success: "Открываем WhatsApp с заявкой…",
+    success: "Заявка отправлена — скоро ответим.",
+    error: "Не удалось отправить. Попробуйте ещё раз или напишите через кнопки внизу.",
+    sending: "Отправка…",
+    replyNote: "Отвечаем в тот же рабочий день в WhatsApp, Telegram или Viber.",
     slot: "Удобный слот",
   },
   about: {
@@ -916,6 +931,7 @@ const ru: Dictionary = {
     rights: "Все права защищены.",
     demo: "Пишите в WhatsApp — отвечаем в тот же рабочий день.",
     geo: "Область Бургас · Солнечный Берег",
+    dockHint: "Мессенджеры: плавающие кнопки (WhatsApp, Telegram, Viber).",
   },
 };
 
@@ -946,7 +962,7 @@ const ua: Dictionary = {
     viewListings: "Дивитись об’єкти",
     sellWithUs: "Продати з Nomore",
     applyViewing: "Заявка на перегляд",
-    send: "Надіслати в WhatsApp",
+    send: "Надіслати",
     reset: "Скинути",
     shortlist: "Надіслати підбірку",
     compareAdd: "Порівняти",
@@ -1065,7 +1081,7 @@ const ua: Dictionary = {
   forms: {
     ...en.forms,
     name: "Ім’я",
-    contact: "Телефон / WhatsApp",
+    contact: "Телефон / месенджер",
     dealSell: "Продати",
     dealRent: "Здати",
     type: "Тип об’єкта",
@@ -1074,7 +1090,10 @@ const ua: Dictionary = {
     comment: "Коментар",
     description: "Короткий опис",
     needShoot: "Потрібна фото- та відеозйомка",
-    success: "Відкриваємо WhatsApp із заявкою…",
+    success: "Заявку надіслано — скоро відповімо.",
+    error: "Не вдалося надіслати. Спробуйте ще раз або напишіть через кнопки внизу.",
+    sending: "Надсилання…",
+    replyNote: "Відповідаємо того ж робочого дня в WhatsApp, Telegram або Viber.",
     slot: "Зручний слот",
   },
   about: {
@@ -1156,6 +1175,7 @@ const ua: Dictionary = {
     rights: "Усі права захищено.",
     demo: "Пишіть у WhatsApp — відповідаємо того ж робочого дня.",
     geo: "Область Бургас · Сонячний Берег",
+    dockHint: "Месенджери: плаваючі кнопки (WhatsApp, Telegram, Viber).",
   },
 };
 

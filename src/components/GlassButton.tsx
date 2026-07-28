@@ -9,6 +9,7 @@ type Props = {
   className?: string;
   type?: "button" | "submit";
   external?: boolean;
+  disabled?: boolean;
 };
 
 const base =
@@ -29,9 +30,12 @@ export function GlassButton({
   className = "",
   type = "button",
   external,
+  disabled,
 }: Props) {
-  const cls = `${base} ${variants[variant]} ${className}`;
-  if (href) {
+  const cls = `${base} ${variants[variant]} ${className} ${
+    disabled ? "pointer-events-none opacity-60" : ""
+  }`;
+  if (href && !disabled) {
     if (external) {
       return (
         <a
@@ -52,7 +56,7 @@ export function GlassButton({
     );
   }
   return (
-    <button type={type} onClick={onClick} className={cls}>
+    <button type={type} onClick={onClick} className={cls} disabled={disabled}>
       {children}
     </button>
   );

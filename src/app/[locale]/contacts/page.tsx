@@ -1,17 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/LeadForm";
-import { MessengerButton } from "@/components/MessengerButton";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import {
-  VIBER_DISPLAY,
-  WHATSAPP_DISPLAY,
-  telegramUrl,
-  viberUrl,
-  whatsappUrl,
-} from "@/lib/contacts";
-import { waContacts } from "@/lib/wa-messages";
+import { VIBER_DISPLAY, WHATSAPP_DISPLAY } from "@/lib/contacts";
 import { pageMeta, routeTitles } from "@/lib/meta";
 
 export async function generateMetadata({
@@ -36,7 +28,6 @@ export default async function ContactsPage({
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
   const dict = getDictionary(locale);
-  const tg = telegramUrl(waContacts(locale));
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
@@ -45,32 +36,10 @@ export default async function ContactsPage({
         <p className="mt-3 text-ink-muted">{dict.contacts.subtitle}</p>
         <p className="mt-2 text-sm text-ink-muted">{dict.contacts.replyNote}</p>
         <p className="mt-2 text-xs text-ink-muted">{dict.footer.geo}</p>
-        <div className="mt-6 flex flex-wrap gap-2.5">
-          <MessengerButton
-            kind="whatsapp"
-            place="contacts"
-            href={whatsappUrl(waContacts(locale))}
-            label={dict.cta.whatsapp}
-          />
-          {tg && (
-            <MessengerButton
-              kind="telegram"
-              place="contacts"
-              href={tg}
-              label={dict.cta.telegram}
-            />
-          )}
-          <MessengerButton
-            kind="viber"
-            place="contacts"
-            href={viberUrl()}
-            label={dict.cta.viber}
-          />
-        </div>
-        <p className="mt-3 text-xs text-ink-muted">
-          WhatsApp {WHATSAPP_DISPLAY} · Viber {VIBER_DISPLAY}
-          {tg ? ` · Telegram @notany` : ""}
+        <p className="mt-6 text-sm text-ink-muted">
+          WhatsApp {WHATSAPP_DISPLAY} · Viber {VIBER_DISPLAY} · Telegram @notany
         </p>
+        <p className="mt-2 text-xs text-ink-muted/80">{dict.footer.dockHint}</p>
       </div>
       <div className="mt-12 grid gap-8 lg:grid-cols-2">
         <div>
