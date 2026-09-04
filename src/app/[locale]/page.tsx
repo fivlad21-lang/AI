@@ -5,6 +5,7 @@ import { GlassButton } from "@/components/GlassButton";
 import { HeroSearch } from "@/components/HeroSearch";
 import { ListingCard } from "@/components/ListingCard";
 import { Testimonials } from "@/components/Testimonials";
+import { AuthorGuide } from "@/components/AuthorGuide";
 import { Logo } from "@/components/Logo";
 import { getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
@@ -90,6 +91,8 @@ export default async function HomePage({
           </ol>
         </div>
       </section>
+
+      <AuthorGuide locale={locale} dict={dict} />
 
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
         <div className="mb-3 flex items-end justify-between gap-4">

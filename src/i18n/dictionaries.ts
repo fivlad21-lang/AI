@@ -51,6 +51,10 @@ export type Dictionary = {
     ownersText: string;
     trustTitle: string;
     searchTitle: string;
+    guideTitle: string;
+    guideText: string;
+    guideInstagram: string;
+    guideWrite: string;
   };
   review: {
     title: string;
@@ -215,8 +219,8 @@ const en: Dictionary = {
   taglineLine1: "Homes by the sea.",
   taglineLine2: "No more hassle.",
   taglineSub:
-    "Write us what you need on the Burgas coast — we match buy, rent, or sale. We reply quickly in messengers.",
-  microcopy: "Messenger-first. Homes by the sea. No more hassle.",
+    "Buy, rent, or sell on the Burgas coast — clear options, no pressure. We reply quickly in messengers.",
+  microcopy: "Homes by the sea. Clear answers. No more hassle.",
   nav: {
     buy: "Buy",
     rent: "Rent",
@@ -266,6 +270,11 @@ const en: Dictionary = {
       "List with Nomore: pro photo & vertical video for our socials, then we handle the leads. Shooting is free — we work on a deal commission.",
     trustTitle: "What clients say",
     searchTitle: "Quick search",
+    guideTitle: "Who leads the shortlist",
+    guideText:
+      "I’m on the Burgas coast and help with buy, rent, and sale — without pushing complexes that look nice in ads but hurt later with fees or winter costs. Clear options, real checks on the ground, answers in chat.",
+    guideInstagram: "My Instagram",
+    guideWrite: "Write to me",
   },
   review: {
     title: "Leave a review",
@@ -391,8 +400,8 @@ const en: Dictionary = {
       "Typical reply: same day on weekdays. Include budget, area, and buy vs rent.",
   },
   agent: {
-    role: "Lead specialist at Nomore Estate",
-    bio: "I’ll help with shortlists, viewings, and deals on the Burgas coast.",
+    role: "Helps with homes on the Burgas coast",
+    bio: "I’ll help with shortlists, viewings, and deals — clearly and without pressure.",
   },
   favorites: {
     title: "Saved homes",
@@ -464,8 +473,8 @@ const bg: Dictionary = {
   taglineLine1: "Жилище край морето.",
   taglineLine2: "Без излишното.",
   taglineSub:
-    "Пиши какво търсиш по Бургаското крайбрежие — подбираме покупка, наем или продажба. Отговаряме бързо в месинджърите.",
-  microcopy: "Първо месинджър. Жилище край морето. Без излишното.",
+    "Купи, наеми или продай по Бургаското крайбрежие — ясни варианти, без натиск. Бърз отговор в месинджърите.",
+  microcopy: "Жилище край морето. Ясни отговори. Без излишното.",
   nav: {
     buy: "Купи",
     rent: "Наем",
@@ -514,6 +523,11 @@ const bg: Dictionary = {
       "Пусни го с Nomore: професионални фото и вертикално видео за нашите социални мрежи. Заснемането е без отделна такса — работим на комисиона от сделката.",
     trustTitle: "Какво казват клиентите",
     searchTitle: "Бързо търсене",
+    guideTitle: "Кой води подбора",
+    guideText:
+      "На място съм по Бургаското крайбрежие — помагам с покупка, наем и продажба, без да ти впарявам комплекси, които после излизат скъпо с такси или зима. Ясни варианти, проверка на място, отговор в чат.",
+    guideInstagram: "Моят Instagram",
+    guideWrite: "Напиши ми",
   },
   review: {
     title: "Остави отзив",
@@ -642,13 +656,13 @@ const bg: Dictionary = {
       "Обикновено отговор в същия работен ден. Напиши бюджет, район и покупка/наем.",
   },
   agent: {
-    role: "Водещ специалист в агенция Nomore Estate",
-    bio: "Помагам с подбор, огледи и сделки по Бургаското крайбрежие.",
+    role: "Помага с жилища по Бургаското крайбрежие",
+    bio: "Помагам с подбор, огледи и сделки — ясно и без натиск.",
   },
   favorites: {
     title: "Запазени имоти",
     empty: "Още няма запазени. Натисни сърцето на обява.",
-    sendShortlist: "Изпрати подборка във WhatsApp",
+    sendShortlist: "Изпрати подборка",
   },
   compare: {
     title: "Сравнение",
@@ -715,8 +729,8 @@ const ru: Dictionary = {
   taglineLine1: "Жильё у моря.",
   taglineLine2: "Без лишнего.",
   taglineSub:
-    "Напиши, что ищешь на побережье Бургаса — подберём покупку, аренду или продажу. Быстро отвечаем в мессенджерах.",
-  microcopy: "Сначала мессенджер. Жильё у моря. Без лишнего.",
+    "Купи, сними или продай на побережье Бургаса — понятные варианты, без давления. Быстро отвечаем в мессенджерах.",
+  microcopy: "Жильё у моря. Понятные ответы. Без лишнего.",
   nav: {
     buy: "Купить",
     rent: "Аренда",
@@ -764,6 +778,11 @@ const ru: Dictionary = {
       "С Nomore: профессиональные фото и вертикальное видео для наших соцсетей. Съёмка без отдельной оплаты — работаем за комиссию со сделки.",
     trustTitle: "Что говорят клиенты",
     searchTitle: "Быстрый поиск",
+    guideTitle: "Кто ведёт подбор",
+    guideText:
+      "Я на побережье Бургаса и помогаю с покупкой, арендой и продажей — без впаривания комплексов, которые потом бьют по карману таксами или зимой. Понятные варианты, проверка на месте, ответ в чате.",
+    guideInstagram: "Мой Instagram",
+    guideWrite: "Написать мне",
   },
   review: {
     title: "Оставить отзыв",
@@ -892,13 +911,13 @@ const ru: Dictionary = {
       "Обычно ответ в тот же будний день. Укажите бюджет, район и покупка/аренда.",
   },
   agent: {
-    role: "Ведущий специалист агентства Nomore Estate",
-    bio: "Помогу с подбором, просмотрами и сделками на побережье Бургаса.",
+    role: "Помогает с жильём на побережье Бургаса",
+    bio: "Помогу с подбором, показами и сделками — понятно и без давления.",
   },
   favorites: {
     title: "Избранное",
     empty: "Пока пусто. Нажмите сердце на объекте.",
-    sendShortlist: "Отправить подборку в WhatsApp",
+    sendShortlist: "Отправить подборку",
   },
   compare: {
     title: "Сравнение",
@@ -965,8 +984,8 @@ const ua: Dictionary = {
   taglineLine1: "Житло на морі.",
   taglineLine2: "Без зайвого.",
   taglineSub:
-    "Напиши, що шукаєш на узбережжі Бургаса — підберемо купівлю, оренду чи продаж. Швидко відповідаємо в месенджерах.",
-  microcopy: "Спочатку месенджер. Житло на морі. Без зайвого.",
+    "Купи, орендуй або продай на узбережжі Бургаса — зрозумілі варіанти, без тиску. Швидко відповідаємо в месенджерах.",
+  microcopy: "Житло на морі. Зрозумілі відповіді. Без зайвого.",
   nav: {
     buy: "Купити",
     rent: "Оренда",
@@ -1014,6 +1033,11 @@ const ua: Dictionary = {
       "З Nomore: професійні фото та вертикальне відео для наших соцмереж. Зйомка без окремої оплати — працюємо за комісією з угоди.",
     trustTitle: "Що кажуть клієнти",
     searchTitle: "Швидкий пошук",
+    guideTitle: "Хто веде підбір",
+    guideText:
+      "Я на узбережжі Бургаса і допомагаю з купівлею, орендою та продажем — без впарювання комплексів, які потім б’ють по гаманцю таксами чи зимою. Зрозумілі варіанти, перевірка на місці, відповідь у чаті.",
+    guideInstagram: "Мій Instagram",
+    guideWrite: "Написати мені",
   },
   review: {
     title: "Залишити відгук",
@@ -1142,13 +1166,13 @@ const ua: Dictionary = {
       "Зазвичай відповідь того ж буднього дня. Вкажіть бюджет, район і купівля/оренда.",
   },
   agent: {
-    role: "Ведучий спеціаліст агентства Nomore Estate",
-    bio: "Допоможу з підбором, оглядами та угодами на узбережжі Бургаса.",
+    role: "Допомагає з житлом на узбережжі Бургаса",
+    bio: "Допоможу з підбором, оглядами та угодами — зрозуміло і без тиску.",
   },
   favorites: {
     title: "Збережене",
     empty: "Поки порожньо. Натисніть серце на об’єкті.",
-    sendShortlist: "Надіслати підбірку в WhatsApp",
+    sendShortlist: "Надіслати підбірку",
   },
   compare: {
     title: "Порівняння",
