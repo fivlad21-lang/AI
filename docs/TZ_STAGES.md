@@ -26,5 +26,11 @@
 - Заявка `VIEW` у Telegram з `Type: offline|online`
 - Бейдж «Online viewing», якщо лот підтримує онлайн
 
-## Етап 5 — Калькулятор (опційно)
+## Етап 5 — Калькулятор прихованих витрат ← done
+- Лише **sale**: блок на лоті (ціна + maintenance з паспорта) + секція `#costs` у `/guide`
+- Діапазони closing (tax/notary/registry) + cash at close + first-year living
+- Без % комісії покупця — текст «залежить від угоди»
+- Disclaimer + CTA на AUDIT / чат
+- Ставки в `src/lib/cost-estimate.ts` (легко підкрутити)
+
 ## Етап 6 — Реальний контент / GA / +359

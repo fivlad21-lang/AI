@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { GlassButton } from "@/components/GlassButton";
+import { CostCalculator } from "@/components/CostCalculator";
 import { faqItems } from "@/data/faq";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -35,6 +36,16 @@ export default async function GuidePage({
       <p className="mt-3 text-ink-muted">{dict.guide.subtitle}</p>
       <p className="mt-2 text-sm text-ink-muted">{dict.footer.geo}</p>
 
+      <div className="mt-8 glass rounded-[1.75rem] p-5 md:p-6">
+        <p className="text-sm leading-relaxed text-ink-muted">{dict.guide.costsTeaser}</p>
+        <a
+          href="#costs"
+          className="mt-3 inline-block text-sm font-semibold text-sea hover:underline"
+        >
+          {dict.guide.costsCta} ↓
+        </a>
+      </div>
+
       <div className="mt-10 space-y-3">
         {faqItems.map((item, i) => (
           <details key={item.id} className="glass group rounded-2xl px-5 py-4" open={i === 0}>
@@ -45,6 +56,10 @@ export default async function GuidePage({
             <p className="mt-3 text-sm leading-relaxed text-ink-muted">{item.a[locale]}</p>
           </details>
         ))}
+      </div>
+
+      <div className="mt-12">
+        <CostCalculator locale={locale} dict={dict} />
       </div>
 
       <div className="mt-10 flex flex-wrap gap-3">

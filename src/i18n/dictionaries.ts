@@ -236,6 +236,21 @@ export type Dictionary = {
   guide: {
     title: string;
     subtitle: string;
+    costsTeaser: string;
+    costsCta: string;
+  };
+  costs: {
+    title: string;
+    subtitle: string;
+    price: string;
+    maintenance: string;
+    closing: string;
+    cashAtClose: string;
+    firstYear: string;
+    commissionNote: string;
+    disclaimer: string;
+    ctaAudit: string;
+    ctaChat: string;
   };
   privacy: {
     title: string;
@@ -541,6 +556,23 @@ const en: Dictionary = {
   guide: {
     title: "Coast guide & FAQ",
     subtitle: "Short answers for buyers, renters, and owners on the Burgas coast.",
+    costsTeaser: "Buying soon? Rough closing costs and first-year living — ranges, not promises.",
+    costsCta: "Estimate costs",
+  },
+  costs: {
+    title: "Hidden-cost estimate",
+    subtitle: "Orientational ranges for a purchase on the Burgas coast — before you book a viewing.",
+    price: "Purchase price (€)",
+    maintenance: "Monthly complex fee (€)",
+    closing: "Closing (tax, notary, registry)",
+    cashAtClose: "Cash needed near closing",
+    firstYear: "First-year living (fees + buffer)",
+    commissionNote:
+      "Agent commission depends on the deal — we confirm it in chat, not as a fixed % here.",
+    disclaimer:
+      "Figures are approximate, not legal or tax advice. Final amounts come from your notary and lawyer.",
+    ctaAudit: "Property review from €79",
+    ctaChat: "Ask in chat",
   },
   privacy: {
     title: "Privacy, cookies & disclaimer",
@@ -865,6 +897,24 @@ const bg: Dictionary = {
   guide: {
     title: "Гид и FAQ",
     subtitle: "Кратки отговори за купувачи, наематели и собственици на брега на Бургас.",
+    costsTeaser: "Купуваш скоро? Ориентировъчни разходи при сделка и първа година — диапазони, не обещания.",
+    costsCta: "Оцени разходите",
+  },
+  costs: {
+    ...en.costs,
+    title: "Оценка на скрити разходи",
+    subtitle: "Ориентировъчни диапазони при покупка по Бургаското крайбрежие — преди оглед.",
+    price: "Цена на имота (€)",
+    maintenance: "Месечна такса комплекс (€)",
+    closing: "Закриване (данък, нотариус, вписване)",
+    cashAtClose: "Пари близо до сделката",
+    firstYear: "Първа година (такси + буфер)",
+    commissionNote:
+      "Комисионата на агента зависи от сделката — уточняваме в чат, без фиксиран % тук.",
+    disclaimer:
+      "Цифрите са приблизителни, не са правен или данъчен съвет. Финалът е при нотариус и адвокат.",
+    ctaAudit: "Разбор на обект от €79",
+    ctaChat: "Пиши в чат",
   },
   privacy: {
     title: "Поверителност, cookies и отказ от отговорност",
@@ -1188,6 +1238,24 @@ const ru: Dictionary = {
   guide: {
     title: "Гид и FAQ",
     subtitle: "Короткие ответы для покупателей, арендаторов и собственников на побережье Бургаса.",
+    costsTeaser: "Скоро покупка? Ориентировочные расходы на сделку и первый год — диапазоны, не обещания.",
+    costsCta: "Оценить расходы",
+  },
+  costs: {
+    ...en.costs,
+    title: "Оценка скрытых расходов",
+    subtitle: "Ориентировочные диапазоны при покупке на побережье Бургаса — до показа.",
+    price: "Цена объекта (€)",
+    maintenance: "Ежемесячный сбор комплекса (€)",
+    closing: "Закрытие (налог, нотариус, реестр)",
+    cashAtClose: "Деньги к закрытию сделки",
+    firstYear: "Первый год (сборы + буфер)",
+    commissionNote:
+      "Комиссия агента зависит от сделки — уточняем в чате, без фиксированного % здесь.",
+    disclaimer:
+      "Цифры приблизительные, не юридический и не налоговый совет. Финал — у нотариуса и юриста.",
+    ctaAudit: "Разбор объекта от €79",
+    ctaChat: "Написать в чат",
   },
   privacy: {
     title: "Конфиденциальность, cookies и дисклеймер",
@@ -1511,6 +1579,24 @@ const ua: Dictionary = {
   guide: {
     title: "Гід і FAQ",
     subtitle: "Короткі відповіді для покупців, орендарів і власників на узбережжі Бургаса.",
+    costsTeaser: "Скоро купуєте? Орієнтовні витрати на угоду й перший рік — діапазони, не обіцянки.",
+    costsCta: "Оцінити витрати",
+  },
+  costs: {
+    ...en.costs,
+    title: "Оцінка прихованих витрат",
+    subtitle: "Орієнтовні діапазони при купівлі на узбережжі Бургаса — перед переглядом.",
+    price: "Ціна об’єкта (€)",
+    maintenance: "Щомісячний внесок комплексу (€)",
+    closing: "Закриття (податок, нотаріус, реєстр)",
+    cashAtClose: "Гроші близько до угоди",
+    firstYear: "Перший рік (внески + буфер)",
+    commissionNote:
+      "Комісія агента залежить від угоди — уточнюємо в чаті, без фіксованого % тут.",
+    disclaimer:
+      "Цифри орієнтовні, не юридична й не податкова порада. Фінал — у нотаріуса та юриста.",
+    ctaAudit: "Розбір об’єкта від €79",
+    ctaChat: "Написати в чат",
   },
   privacy: {
     title: "Конфіденційність, cookies і дисклеймер",

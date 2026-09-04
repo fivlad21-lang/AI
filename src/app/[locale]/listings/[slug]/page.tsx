@@ -15,6 +15,7 @@ import { ListingBadges } from "@/components/ListingBadges";
 import { StickyListingCta } from "@/components/StickyListingCta";
 import { ListingMiniMap } from "@/components/ListingMiniMap";
 import { ListingPassport } from "@/components/ListingPassport";
+import { CostCalculator } from "@/components/CostCalculator";
 import { AgentCard } from "@/components/AgentCard";
 import { formatEur } from "@/components/PriceText";
 import { getListing, getPublishedListings, getViewingTypes } from "@/data/listings";
@@ -145,6 +146,18 @@ export default async function ListingPage({
 
       {listing.passport && (
         <ListingPassport passport={listing.passport} act={listing.act} dict={dict} />
+      )}
+
+      {listing.deal === "sale" && (
+        <div className="mt-8 max-w-2xl">
+          <CostCalculator
+            locale={locale}
+            dict={dict}
+            initialPriceEur={listing.priceEur}
+            initialMaintenanceEur={listing.passport?.maintenanceEur ?? 0}
+            compact
+          />
+        </div>
       )}
 
       <ListingMiniMap
