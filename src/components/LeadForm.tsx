@@ -5,7 +5,15 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { locations } from "@/data/locations";
 import { GlassButton } from "@/components/GlassButton";
-import { whatsappUrl } from "@/lib/contacts";
+import { GlassSelect } from "@/components/GlassSelect";
+import { track } from "@/lib/analytics";
+import { validateLeadFields } from "@/lib/lead-validation";
+
+function mapError(code: string | undefined, dict: Dictionary) {
+  if (code === "name") return dict.forms.invalidName;
+  if (code === "contact") return dict.forms.invalidContact;
+  return dict.forms.error;
+}
 
 export function LeadForm({
   locale,
@@ -22,23 +30,55 @@ export function LeadForm({
   const [location, setLocation] = useState("burgas");
   const [budget, setBudget] = useState("");
   const [comment, setComment] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [error, setError] = useState("");
 
   const field =
     "glass mt-1.5 w-full rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-sea/50";
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const text = [
-      `${prefix} Nomore lead`,
-      `Name: ${name}`,
-      `Contact: ${contact}`,
-      `Deal: ${deal}`,
-      `Location: ${location}`,
-      `Budget: ${budget || "-"}`,
-      `Comment: ${comment || "-"}`,
-      `Locale: ${locale}`,
-    ].join("\n");
-    window.open(whatsappUrl(text), "_blank");
+    setError("");
+    const fieldErr = validateLeadFields(name, contact);
+    if (fieldErr) {
+      setStatus("error");
+      setError(mapError(fieldErr, dict));
+      return;
+    }
+    setStatus("sending");
+    const kind = prefix.replace(/[\[\]]/g, "") || "BUY";
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind,
+          locale,
+          name,
+          contact,
+          deal,
+          location,
+          budget,
+          comment,
+          source: typeof window !== "undefined" ? window.location.href : "",
+        }),
+      });
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!res.ok || !data?.ok) {
+        setStatus("error");
+        setError(mapError(data?.error, dict));
+        return;
+      }
+      track("form_submit", { place: "lead_form", kind });
+      setStatus("ok");
+      setName("");
+      setContact("");
+      setBudget("");
+      setComment("");
+    } catch {
+      setStatus("error");
+      setError(dict.forms.error);
+    }
   };
 
   return (
@@ -49,26 +89,30 @@ export function LeadForm({
       </label>
       <label className="block text-xs font-semibold uppercase text-ink-muted">
         {dict.forms.contact}
-        <input required className={field} value={contact} onChange={(e) => setContact(e.target.value)} />
+        <input
+          required
+          className={field}
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          placeholder="+359 / @username"
+        />
       </label>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <label className="block text-xs font-semibold uppercase text-ink-muted">
-          Deal
-          <select className={field} value={deal} onChange={(e) => setDeal(e.target.value)}>
-            <option value="buy">{dict.nav.buy}</option>
-            <option value="rent">{dict.nav.rent}</option>
-          </select>
-        </label>
-        <label className="block text-xs font-semibold uppercase text-ink-muted">
-          {dict.forms.location}
-          <select className={field} value={location} onChange={(e) => setLocation(e.target.value)}>
-            {locations.map((l) => (
-              <option key={l.id} value={l.id}>
-                {l.label[locale]}
-              </option>
-            ))}
-          </select>
-        </label>
+      <div className="relative z-10 grid gap-3 sm:grid-cols-2">
+        <GlassSelect
+          label={dict.forms.deal}
+          value={deal}
+          onChange={setDeal}
+          options={[
+            { value: "buy", label: dict.nav.buy },
+            { value: "rent", label: dict.nav.rent },
+          ]}
+        />
+        <GlassSelect
+          label={dict.forms.location}
+          value={location}
+          onChange={setLocation}
+          options={locations.map((l) => ({ value: l.id, label: l.label[locale] }))}
+        />
       </div>
       <label className="block text-xs font-semibold uppercase text-ink-muted">
         {dict.forms.budget}
@@ -78,9 +122,14 @@ export function LeadForm({
         {dict.forms.comment}
         <textarea className={`${field} min-h-20`} value={comment} onChange={(e) => setComment(e.target.value)} />
       </label>
-      <GlassButton type="submit" variant="primary" className="w-full">
-        {dict.cta.send}
+      <GlassButton type="submit" variant="primary" className="w-full" disabled={status === "sending"}>
+        {status === "sending" ? dict.forms.sending : dict.cta.send}
       </GlassButton>
+      {status === "ok" && <p className="text-xs text-ok">{dict.forms.success}</p>}
+      {status === "error" && (
+        <p className="text-xs text-red-300">{error || dict.forms.error}</p>
+      )}
+      <p className="text-xs text-ink-muted">{dict.forms.replyNote}</p>
     </form>
   );
 }

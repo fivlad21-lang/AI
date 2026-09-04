@@ -1,41 +1,29 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { useApp } from "@/components/providers/AppProviders";
+import { HeartIcon } from "@/components/HeartIcon";
 
-const KEY = "nomore-favorites";
-
-function read(): string[] {
-  try {
-    return JSON.parse(localStorage.getItem(KEY) || "[]");
-  } catch {
-    return [];
-  }
-}
-
-export function FavoriteButton({ id }: { id: string }) {
-  const [on, setOn] = useState(false);
-
-  useEffect(() => {
-    setOn(read().includes(id));
-  }, [id]);
-
-  const toggle = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const cur = read();
-    const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
-    localStorage.setItem(KEY, JSON.stringify(next));
-    setOn(next.includes(id));
-  };
+export function FavoriteButton({ id, onMedia = false }: { id: string; onMedia?: boolean }) {
+  const { isFavorite, toggleFavorite } = useApp();
+  const on = isFavorite(id);
 
   return (
     <button
       type="button"
-      onClick={toggle}
-      className="glass flex h-9 w-9 items-center justify-center rounded-full text-sm"
-      aria-label="Favorite"
+      aria-label={on ? "Remove favorite" : "Save"}
+      aria-pressed={on}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFavorite(id);
+      }}
+      className={`flex h-9 w-9 items-center justify-center rounded-full transition ${
+        onMedia
+          ? "bg-black/55 text-white shadow-[0_2px_8px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:bg-black/70"
+          : "glass text-ink-muted hover:text-ink"
+      } ${on ? "text-rose-400" : ""}`}
     >
-      {on ? "♥" : "♡"}
+      <HeartIcon className="h-[18px] w-[18px]" filled={on} />
     </button>
   );
 }

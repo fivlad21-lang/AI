@@ -1,12 +1,48 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MessengerDock } from "@/components/MessengerDock";
+import { CookieBanner } from "@/components/CookieBanner";
+import { CompareBar } from "@/components/CompareBar";
+import { AnalyticsGate } from "@/components/AnalyticsGate";
+import { LocaleErrorBoundary } from "@/components/LocaleErrorBoundary";
+import { OrganizationJsonLd } from "@/components/JsonLd";
+import { AppProviders } from "@/components/providers/AppProviders";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { localeAlternates, routeTitles } from "@/lib/meta";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  const dict = getDictionary(locale);
+  const titles = routeTitles(locale);
+
+  return {
+    title: titles.home,
+    description: dict.taglineSub,
+    alternates: {
+      canonical: `${SITE_URL}/${locale}`,
+      ...localeAlternates(),
+    },
+    openGraph: {
+      locale: locale === "ua" ? "uk_UA" : locale,
+      title: `${titles.home} · Nomore Real Estate`,
+      description: dict.tagline,
+      url: `${SITE_URL}/${locale}`,
+      images: [{ url: "/brand/og-default.png" }],
+    },
+  };
 }
 
 export default async function LocaleLayout({
@@ -22,11 +58,21 @@ export default async function LocaleLayout({
   const dict = getDictionary(locale);
 
   return (
-    <div className="flex min-h-dvh flex-col">
-      <Header locale={locale} dict={dict} />
-      <main className="flex-1">{children}</main>
-      <Footer locale={locale} dict={dict} />
-      <MessengerDock label={dict.cta.whatsapp} />
-    </div>
+    <AppProviders>
+      <OrganizationJsonLd />
+      <AnalyticsGate />
+      <div className="flex min-h-dvh flex-col" lang={locale === "ua" ? "uk" : locale}>
+        <Header locale={locale} dict={dict} />
+        <main className="flex-1">
+          <LocaleErrorBoundary homeHref={`/${locale}`}>
+            {children}
+          </LocaleErrorBoundary>
+        </main>
+        <Footer locale={locale} dict={dict} />
+        <MessengerDock dict={dict} />
+        <CompareBar locale={locale} dict={dict} />
+        <CookieBanner locale={locale} dict={dict} />
+      </div>
+    </AppProviders>
   );
 }

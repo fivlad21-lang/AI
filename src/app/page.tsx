@@ -1,16 +1,14 @@
-"use client";
+import { headers, cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { LOCALE_COOKIE, resolveLocale } from "@/lib/locale-detect";
 
-import { useEffect } from "react";
-import { defaultLocale } from "@/i18n/config";
-
-export default function RootPage() {
-  useEffect(() => {
-    window.location.replace(`/${defaultLocale}`);
-  }, []);
-
-  return (
-    <div className="hero-grid grid min-h-dvh place-items-center px-6 text-center">
-      <p className="font-display text-2xl">Nomore estate</p>
-    </div>
-  );
+/** Fallback if Proxy is skipped — same cookie / Accept-Language rules. */
+export default async function RootPage() {
+  const jar = await cookies();
+  const h = await headers();
+  const locale = resolveLocale({
+    cookie: jar.get(LOCALE_COOKIE)?.value,
+    acceptLanguage: h.get("accept-language"),
+  });
+  redirect(`/${locale}`);
 }

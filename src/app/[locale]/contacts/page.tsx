@@ -1,9 +1,23 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { AgentCard } from "@/components/AgentCard";
 import { LeadForm } from "@/components/LeadForm";
-import { GlassButton } from "@/components/GlassButton";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { WHATSAPP_DISPLAY, whatsappUrl } from "@/lib/contacts";
+import { pageMeta, routeTitles } from "@/lib/meta";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale = (isLocale(raw) ? raw : "bg") as Locale;
+  return pageMeta(locale, {
+    title: routeTitles(locale).contacts,
+    path: "contacts",
+  });
+}
 
 export default async function ContactsPage({
   params,
@@ -20,21 +34,20 @@ export default async function ContactsPage({
       <div className="max-w-xl">
         <h1 className="font-display text-4xl font-semibold">{dict.contacts.title}</h1>
         <p className="mt-3 text-ink-muted">{dict.contacts.subtitle}</p>
-        <GlassButton
-          className="mt-6"
-          variant="primary"
-          href={whatsappUrl("Hi! Contacts page")}
-          external
-        >
-          WhatsApp {WHATSAPP_DISPLAY}
-        </GlassButton>
+        <p className="mt-2 text-sm text-ink-muted">{dict.contacts.replyNote}</p>
+        <p className="mt-2 text-xs text-ink-muted">{dict.footer.geo}</p>
       </div>
-      <div className="mt-12 grid gap-8 lg:grid-cols-2">
-        <div>
-          <h2 className="font-display text-2xl">{dict.contacts.lookingTitle}</h2>
-          <p className="mt-2 text-sm text-ink-muted">{dict.home.demoNote}</p>
+
+      <div className="mt-10 grid items-start gap-8 lg:grid-cols-2">
+        <div className="glass rounded-[1.75rem] p-5 md:p-6">
+          <AgentCard locale={locale} dict={dict} size="full" />
+          <p className="mt-4 text-xs text-ink-muted/80">{dict.footer.dockHint}</p>
         </div>
-        <LeadForm locale={locale} dict={dict} prefix="[BUY]" />
+        <div>
+          <h2 className="mb-4 font-display text-2xl">{dict.contacts.lookingTitle}</h2>
+          <p className="mb-4 text-sm text-ink-muted">{dict.listing.autoReply}</p>
+          <LeadForm locale={locale} dict={dict} prefix="[BUY]" />
+        </div>
       </div>
     </div>
   );

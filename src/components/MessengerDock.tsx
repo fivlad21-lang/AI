@@ -1,36 +1,67 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WHATSAPP_DISPLAY, whatsappUrl } from "@/lib/contacts";
+import { usePathname } from "next/navigation";
+import { MessengerButton } from "@/components/MessengerButton";
+import { useApp } from "@/components/providers/AppProviders";
+import { telegramUrl, viberUrl, whatsappUrl } from "@/lib/contacts";
+import { waDock } from "@/lib/wa-messages";
+import { isLocale, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export function MessengerDock({ label }: { label: string }) {
+export function MessengerDock({ dict }: { dict: Dictionary }) {
   const [visible, setVisible] = useState(false);
+  const { compare, cookiesOk } = useApp();
+  const pathname = usePathname();
+  const localePart = pathname.split("/")[1] ?? "bg";
+  const locale = (isLocale(localePart) ? localePart : "bg") as Locale;
+  const tg = telegramUrl(waDock(locale));
+  const lift = compare.length > 0 || !cookiesOk;
+  const onListing = /\/listings\//.test(pathname);
+  /** Home locale root — keep dock off until below hero so first screen has ≤1 WA. */
+  const onHome = /^\/(bg|ru|ua|en)\/?$/.test(pathname);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 220);
+    const threshold = onHome
+      ? Math.min(window.innerHeight * 0.75, 640)
+      : 220;
+    const onScroll = () => setVisible(window.scrollY > threshold);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [onHome, pathname]);
 
   return (
     <div
-      className={`fixed bottom-5 right-4 z-40 transition duration-500 md:bottom-8 md:right-8 ${
+      className={`fixed right-4 z-30 flex flex-col items-end gap-2 transition duration-500 print:hidden md:right-8 ${
+        onListing ? "max-md:hidden" : ""
+      } ${lift || onListing ? "bottom-28 md:bottom-24" : "bottom-5 md:bottom-8"} ${
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >
-      <a
-        href={whatsappUrl("Hi! I'm writing from nomore.estate")}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="glass-strong flex items-center gap-3 rounded-full py-2.5 pl-2.5 pr-5 text-sm font-semibold text-ink shadow-[0_12px_40px_-16px_rgba(0,0,0,0.8)]"
-        aria-label={`${label} ${WHATSAPP_DISPLAY}`}
-      >
-        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366] text-base font-bold text-white">
-          WA
-        </span>
-        <span className="hidden sm:inline">{label}</span>
-      </a>
+      <MessengerButton
+        kind="viber"
+        variant="dock"
+        place="dock"
+        href={viberUrl()}
+        label={dict.cta.viber}
+      />
+      {tg && (
+        <MessengerButton
+          kind="telegram"
+          variant="dock"
+          place="dock"
+          href={tg}
+          label={dict.cta.telegram}
+        />
+      )}
+      <MessengerButton
+        kind="whatsapp"
+        variant="dock"
+        place="dock"
+        href={whatsappUrl(waDock(locale))}
+        label={dict.cta.whatsapp}
+      />
     </div>
   );
 }
