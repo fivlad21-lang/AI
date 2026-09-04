@@ -114,7 +114,50 @@ export type Dictionary = {
     watchVideo: string;
     viewingTitle: string;
     viewingHint: string;
+    viewingMode: string;
+    viewingOffline: string;
+    viewingOnline: string;
+    viewingOfflineHint: string;
+    viewingOnlineHint: string;
+    onlineViewing: string;
     autoReply: string;
+  };
+  passport: {
+    title: string;
+    subtitle: string;
+    yearBuilt: string;
+    condition: string;
+    heating: string;
+    parking: string;
+    furniture: string;
+    maintenance: string;
+    maintenanceMonth: string;
+    maintenanceNone: string;
+    docs: string;
+    act: string;
+    conditionValues: {
+      new: string;
+      renovated: string;
+      good: string;
+      "needs-work": string;
+    };
+    heatingValues: {
+      central: string;
+      electric: string;
+      ac: string;
+      none: string;
+    };
+    parkingValues: {
+      garage: string;
+      spot: string;
+      street: string;
+      none: string;
+    };
+    furnitureValues: {
+      furnished: string;
+      partial: string;
+      unfurnished: string;
+    };
   };
   sell: {
     title: string;
@@ -348,8 +391,51 @@ const en: Dictionary = {
     watchVideo: "Watch video",
     viewingTitle: "Pick a viewing slot",
     viewingHint: "We’ll confirm the exact time in chat.",
+    viewingMode: "Viewing type",
+    viewingOffline: "On-site",
+    viewingOnline: "Online",
+    viewingOfflineHint: "On-site visit — we’ll confirm the exact time in chat.",
+    viewingOnlineHint: "Video call walkthrough — we’ll send the link after confirming the slot.",
+    onlineViewing: "Online viewing",
     autoReply:
       "Thanks — we usually reply within a few hours (same day on weekdays).",
+  },
+  passport: {
+    title: "Listing passport",
+    subtitle: "Clear facts before you book a viewing — no pushy extras.",
+    yearBuilt: "Year built",
+    condition: "Condition",
+    heating: "Heating",
+    parking: "Parking",
+    furniture: "Furniture",
+    maintenance: "Monthly fee",
+    maintenanceMonth: "/ mo",
+    maintenanceNone: "None / owner pays",
+    docs: "Documents",
+    act: "Act",
+    conditionValues: {
+      new: "New build",
+      renovated: "Renovated",
+      good: "Good",
+      "needs-work": "Needs work",
+    },
+    heatingValues: {
+      central: "Central",
+      electric: "Electric",
+      ac: "Air conditioning",
+      none: "None listed",
+    },
+    parkingValues: {
+      garage: "Garage",
+      spot: "Assigned spot",
+      street: "Street",
+      none: "None",
+    },
+    furnitureValues: {
+      furnished: "Furnished",
+      partial: "Partly furnished",
+      unfurnished: "Unfurnished",
+    },
   },
   sell: {
     title: "Sell with Nomore",
@@ -627,8 +713,52 @@ const bg: Dictionary = {
     watchVideo: "Гледай видео",
     viewingTitle: "Избери слот за оглед",
     viewingHint: "Точния час потвърждаваме в чат.",
+    viewingMode: "Тип оглед",
+    viewingOffline: "На място",
+    viewingOnline: "Онлайн",
+    viewingOfflineHint: "Оглед на място — точния час потвърждаваме в чат.",
+    viewingOnlineHint: "Видео оглед — след потвърждение на слота изпращаме линк.",
+    onlineViewing: "Онлайн оглед",
     autoReply:
       "Благодарим — обикновено отговаряме до няколко часа (в работни дни).",
+  },
+  passport: {
+    ...en.passport,
+    title: "Паспорт на имота",
+    subtitle: "Ясни факти преди оглед — без натиск.",
+    yearBuilt: "Година на строеж",
+    condition: "Състояние",
+    heating: "Отопление",
+    parking: "Паркинг",
+    furniture: "Обзавеждане",
+    maintenance: "Месечна такса",
+    maintenanceMonth: "/ мес.",
+    maintenanceNone: "Няма / плаща собственикът",
+    docs: "Документи",
+    act: "Акт",
+    conditionValues: {
+      new: "Ново строителство",
+      renovated: "Ремонтиран",
+      good: "Добро",
+      "needs-work": "Нуждае се от ремонт",
+    },
+    heatingValues: {
+      central: "Централно",
+      electric: "Електричество",
+      ac: "Климатик",
+      none: "Не е посочено",
+    },
+    parkingValues: {
+      garage: "Гараж",
+      spot: "Място",
+      street: "Улица",
+      none: "Няма",
+    },
+    furnitureValues: {
+      furnished: "Обзаведен",
+      partial: "Частично",
+      unfurnished: "Необзаведен",
+    },
   },
   sell: {
     ...en.sell,
@@ -906,8 +1036,52 @@ const ru: Dictionary = {
     watchVideo: "Смотреть видео",
     viewingTitle: "Выберите слот показа",
     viewingHint: "Точное время подтвердим в чате.",
+    viewingMode: "Тип показа",
+    viewingOffline: "На объекте",
+    viewingOnline: "Онлайн",
+    viewingOfflineHint: "Показ на объекте — точное время подтвердим в чате.",
+    viewingOnlineHint: "Видео-показ — после подтверждения слота пришлём ссылку.",
+    onlineViewing: "Онлайн-показ",
     autoReply:
       "Спасибо — обычно отвечаем в течение нескольких часов (в будни).",
+  },
+  passport: {
+    ...en.passport,
+    title: "Паспорт объекта",
+    subtitle: "Понятные факты до показа — без давления.",
+    yearBuilt: "Год постройки",
+    condition: "Состояние",
+    heating: "Отопление",
+    parking: "Парковка",
+    furniture: "Мебель",
+    maintenance: "Ежемесячный сбор",
+    maintenanceMonth: "/ мес.",
+    maintenanceNone: "Нет / платит собственник",
+    docs: "Документы",
+    act: "Акт",
+    conditionValues: {
+      new: "Новострой",
+      renovated: "После ремонта",
+      good: "Хорошее",
+      "needs-work": "Нужен ремонт",
+    },
+    heatingValues: {
+      central: "Центральное",
+      electric: "Электрическое",
+      ac: "Кондиционер",
+      none: "Не указано",
+    },
+    parkingValues: {
+      garage: "Гараж",
+      spot: "Место",
+      street: "Улица",
+      none: "Нет",
+    },
+    furnitureValues: {
+      furnished: "С мебелью",
+      partial: "Частично",
+      unfurnished: "Без мебели",
+    },
   },
   sell: {
     ...en.sell,
@@ -1185,8 +1359,52 @@ const ua: Dictionary = {
     watchVideo: "Дивитись відео",
     viewingTitle: "Оберіть слот перегляду",
     viewingHint: "Точний час підтвердимо в чаті.",
+    viewingMode: "Тип перегляду",
+    viewingOffline: "На об’єкті",
+    viewingOnline: "Онлайн",
+    viewingOfflineHint: "Огляд на об’єкті — точний час підтвердимо в чаті.",
+    viewingOnlineHint: "Відео-огляд — після підтвердження слота надішлемо лінк.",
+    onlineViewing: "Онлайн-огляд",
     autoReply:
       "Дякуємо — зазвичай відповідаємо протягом кількох годин (у будні).",
+  },
+  passport: {
+    ...en.passport,
+    title: "Паспорт лота",
+    subtitle: "Зрозумілі факти перед переглядом — без тиску.",
+    yearBuilt: "Рік будівництва",
+    condition: "Стан",
+    heating: "Опалення",
+    parking: "Паркування",
+    furniture: "Меблі",
+    maintenance: "Щомісячний внесок",
+    maintenanceMonth: "/ міс.",
+    maintenanceNone: "Немає / платить власник",
+    docs: "Документи",
+    act: "Акт",
+    conditionValues: {
+      new: "Новобуд",
+      renovated: "Після ремонту",
+      good: "Добрий",
+      "needs-work": "Потребує ремонту",
+    },
+    heatingValues: {
+      central: "Центральне",
+      electric: "Електричне",
+      ac: "Кондиціонер",
+      none: "Не вказано",
+    },
+    parkingValues: {
+      garage: "Гараж",
+      spot: "Місце",
+      street: "Вулиця",
+      none: "Немає",
+    },
+    furnitureValues: {
+      furnished: "З меблями",
+      partial: "Частково",
+      unfurnished: "Без меблів",
+    },
   },
   sell: {
     ...en.sell,

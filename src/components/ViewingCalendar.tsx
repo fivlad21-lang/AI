@@ -2,6 +2,7 @@
 
 import { useMemo, useState, type FormEvent } from "react";
 import { GlassButton } from "@/components/GlassButton";
+import type { ViewingType } from "@/data/listings";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 import { track } from "@/lib/analytics";
@@ -34,13 +35,17 @@ export function ViewingCalendar({
   dict,
   listingTitle,
   listingUrl,
+  viewingTypes = ["offline"],
 }: {
   locale: Locale;
   dict: Dictionary;
   listingTitle: string;
   listingUrl: string;
+  viewingTypes?: ViewingType[];
 }) {
+  const modes = viewingTypes.length ? viewingTypes : (["offline"] as ViewingType[]);
   const days = useMemo(() => nextDays(5), []);
+  const [mode, setMode] = useState<ViewingType>(modes[0]);
   const [dayIdx, setDayIdx] = useState(0);
   const [slot, setSlot] = useState(SLOTS[0]);
   const [name, setName] = useState("");
@@ -59,6 +64,9 @@ export function ViewingCalendar({
 
   const field =
     "glass mt-1.5 w-full rounded-xl px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-sea/50";
+
+  const hint =
+    mode === "online" ? dict.listing.viewingOnlineHint : dict.listing.viewingOfflineHint;
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -79,6 +87,7 @@ export function ViewingCalendar({
           locale,
           name,
           contact,
+          type: mode,
           slot: `${dayLabel} ${slot}`,
           comment: listingTitle,
           source: listingUrl,
@@ -90,7 +99,7 @@ export function ViewingCalendar({
         setError(mapError(data?.error, dict));
         return;
       }
-      track("form_submit", { place: "viewing", kind: "VIEW" });
+      track("form_submit", { place: "viewing", kind: "VIEW", type: mode });
       setStatus("ok");
       setName("");
       setContact("");
@@ -103,7 +112,30 @@ export function ViewingCalendar({
   return (
     <form id="viewing" onSubmit={submit} className="glass rounded-3xl p-5 print:hidden">
       <h2 className="font-display text-lg font-semibold">{dict.listing.viewingTitle}</h2>
-      <p className="mt-1 text-sm text-ink-muted">{dict.listing.viewingHint}</p>
+      <p className="mt-1 text-sm text-ink-muted">{hint}</p>
+
+      {modes.length > 1 && (
+        <div className="mt-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
+            {dict.listing.viewingMode}
+          </p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {modes.map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMode(m)}
+                className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
+                  m === mode ? "bg-sea text-white" : "glass text-ink-muted hover:text-ink"
+                }`}
+              >
+                {m === "online" ? dict.listing.viewingOnline : dict.listing.viewingOffline}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mt-4 flex flex-wrap gap-2">
         {days.map((d, i) => {
           const label = d.toLocaleDateString(undefined, {

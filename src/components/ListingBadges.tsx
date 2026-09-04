@@ -10,12 +10,14 @@ export function ListingBadges({
   status,
   dict,
   beachMinutes,
+  onlineViewing,
 }: {
   deal: Deal;
   video?: boolean;
   status?: ListingStatus;
   dict: Dictionary;
   beachMinutes?: number;
+  onlineViewing?: boolean;
 }) {
   return (
     <div className="flex flex-wrap gap-1.5">
@@ -29,6 +31,11 @@ export function ListingBadges({
       {video && (
         <span className={`${chipBase} bg-black/65 backdrop-blur-sm`}>
           ▶ {dict.listing.video}
+        </span>
+      )}
+      {onlineViewing && (
+        <span className={`${chipBase} bg-black/65 backdrop-blur-sm`}>
+          {dict.listing.onlineViewing}
         </span>
       )}
       {status === "reserved" && (
