@@ -14,9 +14,10 @@ import { ListingJsonLd } from "@/components/JsonLd";
 import { ListingBadges } from "@/components/ListingBadges";
 import { StickyListingCta } from "@/components/StickyListingCta";
 import { ListingMiniMap } from "@/components/ListingMiniMap";
+import { ListingPassport } from "@/components/ListingPassport";
 import { AgentCard } from "@/components/AgentCard";
 import { formatEur } from "@/components/PriceText";
-import { getListing, getPublishedListings } from "@/data/listings";
+import { getListing, getPublishedListings, getViewingTypes } from "@/data/listings";
 import { locations } from "@/data/locations";
 import { isLocale, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -61,6 +62,7 @@ export default async function ListingPage({
   const dict = getDictionary(locale);
   const loc = locations.find((l) => l.id === listing.location);
   const pageUrl = `${SITE_URL}/${locale}/listings/${listing.slug}`;
+  const viewingTypes = getViewingTypes(listing);
   const similar = getPublishedListings()
     .filter((l) => l.id !== listing.id && l.deal === listing.deal)
     .slice(0, 3);
@@ -89,6 +91,7 @@ export default async function ListingPage({
             status={listing.status === "published" ? undefined : listing.status}
             dict={dict}
             beachMinutes={listing.beachMinutes}
+            onlineViewing={viewingTypes.includes("online")}
           />
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-4xl">
             {listing.title[locale]}
@@ -140,6 +143,10 @@ export default async function ListingPage({
         {listing.description[locale]}
       </p>
 
+      {listing.passport && (
+        <ListingPassport passport={listing.passport} act={listing.act} dict={dict} />
+      )}
+
       <ListingMiniMap
         lat={listing.lat}
         lng={listing.lng}
@@ -179,6 +186,7 @@ export default async function ListingPage({
           dict={dict}
           listingTitle={listing.title[locale]}
           listingUrl={pageUrl}
+          viewingTypes={viewingTypes}
         />
         <div className="flex flex-col justify-end gap-3">
           <div className="glass rounded-[1.75rem] p-4 md:p-5">

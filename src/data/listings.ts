@@ -4,6 +4,22 @@ import type { LocationId } from "@/data/locations";
 export type Deal = "sale" | "rent";
 export type PropertyType = "apartment" | "house" | "villa" | "studio";
 export type ListingStatus = "published" | "reserved" | "sold" | "draft";
+export type ViewingType = "offline" | "online";
+export type PassportCondition = "new" | "renovated" | "good" | "needs-work";
+export type PassportHeating = "central" | "electric" | "ac" | "none";
+export type PassportParking = "garage" | "spot" | "street" | "none";
+export type PassportFurniture = "furnished" | "partial" | "unfurnished";
+
+/** Structured facts for the listing passport (Stage 4). */
+export type ListingPassport = {
+  yearBuilt?: number;
+  condition?: PassportCondition;
+  heating?: PassportHeating;
+  parking?: PassportParking;
+  furniture?: PassportFurniture;
+  /** Monthly maintenance / management fee in EUR */
+  maintenanceEur?: number;
+};
 
 export type Listing = {
   id: string;
@@ -30,10 +46,18 @@ export type Listing = {
   gallery: string[];
   video?: boolean;
   videoUrl?: string;
+  /** Offline (on-site) and/or online (video call) viewing. Default: offline only. */
+  viewingTypes?: ViewingType[];
+  passport?: ListingPassport;
   publishedAt: string;
   title: Record<Locale, string>;
   description: Record<Locale, string>;
 };
+
+export function getViewingTypes(listing: Listing): ViewingType[] {
+  const types = listing.viewingTypes?.length ? listing.viewingTypes : (["offline"] as ViewingType[]);
+  return types.filter((t, i, arr) => arr.indexOf(t) === i);
+}
 
 const img = {
   sea1: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
@@ -76,6 +100,15 @@ export const listings: Listing[] = [
     cover: img.apt1,
     gallery: [img.apt1, img.coast1, img.apt2, img.sea2],
     video: false,
+    viewingTypes: ["offline", "online"],
+    passport: {
+      yearBuilt: 2019,
+      condition: "good",
+      heating: "ac",
+      parking: "spot",
+      furniture: "furnished",
+      maintenanceEur: 45,
+    },
     publishedAt: "2026-07-01",
     title: {
       en: "2-bed apartment with sea view",
@@ -116,6 +149,15 @@ export const listings: Listing[] = [
     beachMinutes: 18,
     cover: img.studio1,
     gallery: [img.studio1, img.apt3, img.apt2],
+    viewingTypes: ["offline"],
+    passport: {
+      yearBuilt: 2015,
+      condition: "renovated",
+      heating: "electric",
+      parking: "street",
+      furniture: "furnished",
+      maintenanceEur: 28,
+    },
     publishedAt: "2026-07-05",
     title: {
       en: "Modern studio in Burgas center",
@@ -155,6 +197,15 @@ export const listings: Listing[] = [
     cover: img.villa1,
     gallery: [img.villa1, img.villa2, img.coast2, img.sea1],
     video: true,
+    viewingTypes: ["offline", "online"],
+    passport: {
+      yearBuilt: 2012,
+      condition: "good",
+      heating: "central",
+      parking: "garage",
+      furniture: "partial",
+      maintenanceEur: 0,
+    },
     publishedAt: "2026-06-20",
     title: {
       en: "Family villa with garden near Sozopol",
@@ -195,6 +246,15 @@ export const listings: Listing[] = [
     beachMinutes: 9,
     cover: img.apt2,
     gallery: [img.apt2, img.apt1, img.coast1],
+    viewingTypes: ["offline"],
+    passport: {
+      yearBuilt: 2008,
+      condition: "good",
+      heating: "electric",
+      parking: "spot",
+      furniture: "furnished",
+      maintenanceEur: 35,
+    },
     publishedAt: "2026-07-10",
     title: {
       en: "Furnished 2-bed for long-term rent",
@@ -236,6 +296,15 @@ export const listings: Listing[] = [
     cover: img.sea1,
     gallery: [img.sea1, img.apt3, img.coast2, img.villa2],
     video: true,
+    viewingTypes: ["offline", "online"],
+    passport: {
+      yearBuilt: 2021,
+      condition: "new",
+      heating: "ac",
+      parking: "garage",
+      furniture: "furnished",
+      maintenanceEur: 60,
+    },
     publishedAt: "2026-06-28",
     title: {
       en: "Top-floor apartment in Sveti Vlas",
@@ -276,6 +345,15 @@ export const listings: Listing[] = [
     beachMinutes: 6,
     cover: img.apt3,
     gallery: [img.apt3, img.studio1, img.coast1],
+    viewingTypes: ["online"],
+    passport: {
+      yearBuilt: 2010,
+      condition: "needs-work",
+      heating: "none",
+      parking: "street",
+      furniture: "furnished",
+      maintenanceEur: 20,
+    },
     publishedAt: "2026-07-12",
     title: {
       en: "Cozy studio for rent in Pomorie",

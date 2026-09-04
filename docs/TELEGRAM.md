@@ -31,6 +31,8 @@ Source: https://…
 
 Kinds: `SELL`, `BUY`, `RENT`, `VIEW`, `SHORTLIST`, `CONSULT`, `AUDIT`, etc.
 
+For `VIEW`, optional `type` is `offline` (on-site) or `online` (video walkthrough).
+
 For `AUDIT`, include a listing/complex URL in the payload (`listingUrl`).
 
 ## Troubleshooting
