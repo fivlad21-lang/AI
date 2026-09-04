@@ -16,6 +16,7 @@ const pages = [
   "/buy",
   "/rent",
   "/sell",
+  "/services",
   "/about",
   "/contacts",
   "/favorites",

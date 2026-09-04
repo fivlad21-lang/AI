@@ -16,6 +16,7 @@ type LeadBody = {
   comment?: string;
   description?: string;
   slot?: string;
+  listingUrl?: string;
   needShoot?: boolean;
   source?: string;
 };
@@ -23,6 +24,11 @@ type LeadBody = {
 function clean(s: unknown, max = 500) {
   if (typeof s !== "string") return "";
   return s.trim().slice(0, max);
+}
+
+function looksLikeUrl(raw: string) {
+  if (raw.length < 8 || raw.length > 500) return false;
+  return /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}([\/?#].*)?$/i.test(raw);
 }
 
 export async function POST(request: Request) {
@@ -36,6 +42,7 @@ export async function POST(request: Request) {
   const name = clean(body.name, 120);
   const contact = clean(body.contact, 120);
   const kind = clean(body.kind, 32) || "LEAD";
+  const listingUrl = clean(body.listingUrl, 500);
 
   if (kind === "SHORTLIST") {
     const comment = clean(body.comment, 2000);
@@ -49,6 +56,10 @@ export async function POST(request: Request) {
     }
   }
 
+  if (kind === "AUDIT" && !looksLikeUrl(listingUrl)) {
+    return NextResponse.json({ ok: false, error: "link" }, { status: 400 });
+  }
+
   const locale = clean(body.locale, 8) || "-";
   const lines = [
     `[${kind}] Nomore`,
@@ -59,6 +70,7 @@ export async function POST(request: Request) {
     body.location ? `Location: ${clean(body.location, 60)}` : null,
     body.budget ? `Budget: ${clean(body.budget, 60)}` : null,
     body.slot ? `Slot: ${clean(body.slot, 80)}` : null,
+    listingUrl ? `Listing URL: ${listingUrl}` : null,
     typeof body.needShoot === "boolean"
       ? `Shooting: ${body.needShoot ? "yes" : "no"}`
       : null,
@@ -71,7 +83,6 @@ export async function POST(request: Request) {
   const result = await sendTelegramLead(lines.join("\n"));
   if (!result.ok) {
     console.error("[leads]", result.error);
-    // Never leak Telegram Bot API text to the client
     return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
   }
 

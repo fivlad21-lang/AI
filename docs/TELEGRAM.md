@@ -29,7 +29,9 @@ Locale: ua
 Source: https://…
 ```
 
-Kinds: `SELL`, `BUY`, `RENT`, `VIEW`, `SHORTLIST`, etc.
+Kinds: `SELL`, `BUY`, `RENT`, `VIEW`, `SHORTLIST`, `CONSULT`, `AUDIT`, etc.
+
+For `AUDIT`, include a listing/complex URL in the payload (`listingUrl`).
 
 ## Troubleshooting
 

@@ -11,6 +11,7 @@ export type Dictionary = {
     buy: string;
     rent: string;
     sell: string;
+    services: string;
     about: string;
     contacts: string;
     favorites: string;
@@ -165,6 +166,19 @@ export type Dictionary = {
     role: string;
     bio: string;
   };
+  services: {
+    title: string;
+    subtitle: string;
+    request: string;
+    linkLabel: string;
+    invalidLink: string;
+    note: string;
+    homeTitle: string;
+    homeText: string;
+    homeCta: string;
+    consult: { title: string; text: string; price: string };
+    audit: { title: string; text: string; price: string };
+  };
   favorites: {
     title: string;
     empty: string;
@@ -225,6 +239,7 @@ const en: Dictionary = {
     buy: "Buy",
     rent: "Rent",
     sell: "Sell with Nomore",
+    services: "Services",
     about: "About",
     contacts: "Contacts",
     favorites: "Saved",
@@ -403,6 +418,29 @@ const en: Dictionary = {
     role: "Helps with homes on the Burgas coast",
     bio: "I’ll help with shortlists, viewings, and deals — clearly and without pressure.",
   },
+  services: {
+    title: "Services",
+    subtitle:
+      "Not only listings — a short call or a clear verdict on a property or complex before you commit.",
+    request: "Send request",
+    linkLabel: "Link to listing or complex",
+    invalidLink: "Add a valid link (https://…).",
+    note: "We reply in messengers. Price is a starting point — details in chat.",
+    homeTitle: "Need more than a catalog?",
+    homeText:
+      "Video consultation or a property check — useful if you follow our coast content and want a clear next step.",
+    homeCta: "View services",
+    consult: {
+      title: "Video consultation",
+      text: "About 30 minutes: living, rent, or investment — we go through your situation and next steps.",
+      price: "from €49",
+    },
+    audit: {
+      title: "Property review",
+      text: "Send a link to an apartment or complex — verdict on fees, winter readiness, and obvious risks.",
+      price: "from €79",
+    },
+  },
   favorites: {
     title: "Saved homes",
     empty: "Nothing saved yet. Tap the heart on a listing.",
@@ -479,6 +517,7 @@ const bg: Dictionary = {
     buy: "Купи",
     rent: "Наем",
     sell: "Продай с Nomore",
+    services: "Услуги",
     about: "За нас",
     contacts: "Контакти",
     favorites: "Запазени",
@@ -659,6 +698,29 @@ const bg: Dictionary = {
     role: "Помага с жилища по Бургаското крайбрежие",
     bio: "Помагам с подбор, огледи и сделки — ясно и без натиск.",
   },
+  services: {
+    title: "Услуги",
+    subtitle:
+      "Не само обяви — кратък разговор или ясен вердикт за имот/комплекс преди да решиш.",
+    request: "Изпрати заявка",
+    linkLabel: "Линк към обява или комплекс",
+    invalidLink: "Добави валиден линк (https://…).",
+    note: "Отговаряме в месинджърите. Цената е начална — детайли в чат.",
+    homeTitle: "Трябва ти повече от каталог?",
+    homeText:
+      "Видео консултация или проверка на имот — полезно, ако гледаш нашите материали и искаш ясна следваща стъпка.",
+    homeCta: "Виж услугите",
+    consult: {
+      title: "Видео консултация",
+      text: "Около 30 мин: живот, наем или инвестиция — минаваме ситуацията и следващите стъпки.",
+      price: "от €49",
+    },
+    audit: {
+      title: "Разбор на обект",
+      text: "Пращаш линк към апартамент или комплекс — вердикт за такси, зима и очевидни рискове.",
+      price: "от €79",
+    },
+  },
   favorites: {
     title: "Запазени имоти",
     empty: "Още няма запазени. Натисни сърцето на обява.",
@@ -735,6 +797,7 @@ const ru: Dictionary = {
     buy: "Купить",
     rent: "Аренда",
     sell: "Продать с Nomore",
+    services: "Услуги",
     about: "О нас",
     contacts: "Контакты",
     favorites: "Избранное",
@@ -914,6 +977,29 @@ const ru: Dictionary = {
     role: "Помогает с жильём на побережье Бургаса",
     bio: "Помогу с подбором, показами и сделками — понятно и без давления.",
   },
+  services: {
+    title: "Услуги",
+    subtitle:
+      "Не только объявления — короткий созвон или понятный вердикт по объекту/комплексу до решения.",
+    request: "Отправить заявку",
+    linkLabel: "Ссылка на объявление или комплекс",
+    invalidLink: "Добавьте рабочую ссылку (https://…).",
+    note: "Отвечаем в мессенджерах. Цена стартовая — детали в чате.",
+    homeTitle: "Нужно больше, чем каталог?",
+    homeText:
+      "Видео-консультация или разбор объекта — полезно, если смотрите наш контент и хотите понятный следующий шаг.",
+    homeCta: "Смотреть услуги",
+    consult: {
+      title: "Видео-консультация",
+      text: "Около 30 минут: жизнь, аренда или инвестиция — разбираем ситуацию и следующие шаги.",
+      price: "от €49",
+    },
+    audit: {
+      title: "Разбор объекта",
+      text: "Присылаете ссылку на квартиру или комплекс — вердикт по таксам, зиме и очевидным рискам.",
+      price: "от €79",
+    },
+  },
   favorites: {
     title: "Избранное",
     empty: "Пока пусто. Нажмите сердце на объекте.",
@@ -990,6 +1076,7 @@ const ua: Dictionary = {
     buy: "Купити",
     rent: "Оренда",
     sell: "Продати з Nomore",
+    services: "Послуги",
     about: "Про нас",
     contacts: "Контакти",
     favorites: "Збережене",
@@ -1168,6 +1255,29 @@ const ua: Dictionary = {
   agent: {
     role: "Допомагає з житлом на узбережжі Бургаса",
     bio: "Допоможу з підбором, оглядами та угодами — зрозуміло і без тиску.",
+  },
+  services: {
+    title: "Послуги",
+    subtitle:
+      "Не лише оголошення — коротка розмова або зрозумілий вердикт по об’єкту/комплексу перед рішенням.",
+    request: "Надіслати заявку",
+    linkLabel: "Посилання на оголошення або комплекс",
+    invalidLink: "Додайте робоче посилання (https://…).",
+    note: "Відповідаємо в месенджерах. Ціна стартова — деталі в чаті.",
+    homeTitle: "Потрібно більше, ніж каталог?",
+    homeText:
+      "Відео-консультація або розбір об’єкта — корисно, якщо дивитесь наш контент і хочете зрозумілий наступний крок.",
+    homeCta: "Дивитись послуги",
+    consult: {
+      title: "Відео-консультація",
+      text: "Близько 30 хв: життя, оренда чи інвестиція — розбираємо ситуацію і наступні кроки.",
+      price: "від €49",
+    },
+    audit: {
+      title: "Розбір об’єкта",
+      text: "Кидаєте посилання на квартиру чи комплекс — вердикт по таксах, зимі та очевидних ризиках.",
+      price: "від €79",
+    },
   },
   favorites: {
     title: "Збережене",

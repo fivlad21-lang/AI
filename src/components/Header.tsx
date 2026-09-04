@@ -30,6 +30,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const primary = [
     { href: `/${locale}/buy`, label: dict.nav.buy },
     { href: `/${locale}/rent`, label: dict.nav.rent },
+    { href: `/${locale}/services`, label: dict.nav.services },
     { href: `/${locale}/sell`, label: dict.nav.sell, accent: true },
     { href: `/${locale}/contacts`, label: dict.nav.contacts },
   ];
