@@ -1,11 +1,13 @@
 # ТЗ-DEPLOY 1.0 — Аудит деплою Nomore
 
 **Статус:** затверджено + **fix deployed** (2026-07-26)  
-**Канонічний live URL:** `https://ai.nomorevlad.vercel.app`  
-**Також на проєкті може бути:** `https://ai-nomorevlad.vercel.app` (дефіс = project slug)  
-**Плановий домен (пізніше):** `nomore.estate`  
+**Канонічний live URL:** `https://nomoreestate.agency`  
+**Fallback / preview:** `https://ai.nomorevlad.vercel.app`  
+**Плановий старий бренд-домен:** `nomore.estate` (не використовується зараз)  
 **Репо:** `fivlad21-lang/AI`  
 **Гілка:** `cursor/tz-pro-full-backlog-da6b`
+
+Див. також [`DOMAIN.md`](./DOMAIN.md) — чекліст DNS + Vercel Domains.
 
 ---
 
@@ -31,13 +33,13 @@
 ## 2. Канон URL
 
 ```
-https://ai.nomorevlad.vercel.app
+https://nomoreestate.agency
 ```
 
 - Без trailing slash.
-- Env: `NEXT_PUBLIC_SITE_URL=https://ai.nomorevlad.vercel.app`
+- Env: `NEXT_PUBLIC_SITE_URL=https://nomoreestate.agency`
 - Fallback у `src/lib/site.ts` — той самий host.
-- Після `nomore.estate`: оновити Domains + env + fallback + sitemap/robots.
+- Старий `ai.nomorevlad.vercel.app` може лишатись як alias.
 
 ---
 
@@ -49,12 +51,12 @@ https://ai.nomorevlad.vercel.app
    - Root Directory: *(empty)*
    - **Output Directory: EMPTY** ← не `out`, не `.next`
    - Build Command: default (`next build` / `npm run build`)
-3. Env: `NEXT_PUBLIC_SITE_URL=https://ai.nomorevlad.vercel.app`
+3. Env: `NEXT_PUBLIC_SITE_URL=https://nomoreestate.agency`
 4. **Redeploy → Clear cache and redeploy**
 5. Smoke:
-   - `https://ai.nomorevlad.vercel.app/` → 308/307 → `/bg`
-   - `https://ai.nomorevlad.vercel.app/bg` → сайт Nomore
-   - `https://ai-nomorevlad.vercel.app/bg` → те саме (якщо alias живий)
+   - `https://nomoreestate.agency/` → 308/307 → `/bg`
+   - `https://nomoreestate.agency/bg` → сайт Nomore
+   - `https://ai.nomorevlad.vercel.app/bg` → те саме (alias)
 
 ---
 

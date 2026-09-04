@@ -1,8 +1,8 @@
 # Monitoring — Nomore Real Estate
 
 **Updated:** 2026-07-26  
-**Live:** `https://ai.nomorevlad.vercel.app`  
-**Branch:** `cursor/tz-pro-full-backlog-da6b`  
+**Live:** `https://nomoreestate.agency` (alias: `https://ai.nomorevlad.vercel.app`)  
+**Domain setup:** [`DOMAIN.md`](./DOMAIN.md)**Branch:** `cursor/tz-pro-full-backlog-da6b`  
 **TZ (enable stack):** `docs/TZ_MONITORING.md`  
 **Polish (ideal small inventory):** `docs/TZ_POLISH.md`  
 **Roadmap:** `TZ_PRODUCT.md` · CRM: `TZ_CRM_VITRINE.md` · Deploy: `TZ_DEPLOY.md`

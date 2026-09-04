@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
-const site = process.env.NEXT_PUBLIC_SITE_URL || "https://ai.nomorevlad.vercel.app";
+const site = process.env.NEXT_PUBLIC_SITE_URL || "https://nomoreestate.agency";
 const locales = ["bg", "ru", "ua", "en"];
 
 const pages = [

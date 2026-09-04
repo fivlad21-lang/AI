@@ -4,17 +4,17 @@ export const WHATSAPP_DISPLAY = "+380 93 385 18 04";
 export const VIBER_E164 = "4915140166765";
 export const VIBER_DISPLAY = "+49 151 40166765";
 
+/**
+ * Public Instagram profile URL.
+ * When null, the home author block hides the Instagram button.
+ */
+export const INSTAGRAM_URL: string | null = "https://www.instagram.com/nomore.estate";
+
 export const BRAND = "Nomore Real Estate";
-export const DOMAIN = "nomore.estate";
+export const DOMAIN = "nomoreestate.agency";
 
 /** Public Telegram username (without @) */
 export const TELEGRAM_USERNAME: string | null = "notany";
-
-/**
- * Public Instagram profile URL. Set when ready, e.g. https://www.instagram.com/yourhandle/
- * When null, the home author block hides the Instagram button.
- */
-export const INSTAGRAM_URL: string | null = null;
 
 export function whatsappUrl(text: string) {
   return `https://wa.me/${WHATSAPP_E164}?text=${encodeURIComponent(text)}`;

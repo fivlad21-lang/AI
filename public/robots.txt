@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai.nomorevlad.vercel.app/sitemap.xml
+Sitemap: https://nomoreestate.agency/sitemap.xml

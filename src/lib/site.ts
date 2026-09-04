@@ -1,5 +1,5 @@
-/** Canonical live host (dot, not hyphen). Override via NEXT_PUBLIC_SITE_URL. */
+/** Canonical live host. Override via NEXT_PUBLIC_SITE_URL in Vercel. */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://ai.nomorevlad.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://nomoreestate.agency";
 
-export const PLANNED_DOMAIN = "nomore.estate";
+export const PLANNED_DOMAIN = "nomoreestate.agency";
