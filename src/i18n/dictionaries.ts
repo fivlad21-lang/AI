@@ -56,6 +56,17 @@ export type Dictionary = {
     guideText: string;
     guideInstagram: string;
     guideWrite: string;
+    /** Soft note: we search beyond the public catalog */
+    approachNote: string;
+  };
+  search: {
+    title: string;
+    subtitle: string;
+    submit: string;
+    anyArea: string;
+    budgetHint: string;
+    commentHint: string;
+    defaultNote: string;
   };
   review: {
     title: string;
@@ -291,7 +302,7 @@ const en: Dictionary = {
   taglineLine1: "Homes by the sea.",
   taglineLine2: "No more hassle.",
   taglineSub:
-    "Buy, rent, or sell on the Burgas coast — clear options, no pressure. We reply quickly in messengers.",
+    "We shortlist homes on the Burgas coast for you — consult, review a listing, or ask for a personal match. Catalog is optional.",
   microcopy: "Homes by the sea. Clear answers. No more hassle.",
   nav: {
     buy: "Buy",
@@ -329,13 +340,14 @@ const en: Dictionary = {
     showResults: "Show homes",
   },
   home: {
-    featured: "Featured homes",
-    featuredHint: "Current picks on the coast — write us for a live shortlist.",
+    featured: "Example homes",
+    featuredHint:
+      "Sample stock while we build the live catalog — for a real match, send a search request or book a consult.",
     howTitle: "How it works",
     howSteps: [
-      "Tell us budget, area, and timing in a messenger",
-      "We shortlist what fits — buy, rent, or your sale",
-      "Viewings and deal support without the chaos",
+      "Tell us budget, area, and timing — form or messenger",
+      "We shortlist what fits from the market, not only the site",
+      "Viewings (on-site or online) and calm deal support",
     ],
     areasTitle: "Where we work",
     ownersTitle: "Own a property?",
@@ -348,6 +360,18 @@ const en: Dictionary = {
       "I’m on the Burgas coast and help with buy, rent, and sale — without pushing complexes that look nice in ads but hurt later with fees or winter costs. Clear options, real checks on the ground, answers in chat.",
     guideInstagram: "My Instagram",
     guideWrite: "Write to me",
+    approachNote:
+      "We are not a warehouse of 100 ads. You describe the need — we search and filter on the coast.",
+  },
+  search: {
+    title: "Find a home for me",
+    subtitle:
+      "Budget, area, buy or rent — we reply with a shortlist in chat. No catalog required.",
+    submit: "Send search request",
+    anyArea: "Any coast area",
+    budgetHint: "e.g. up to €120,000",
+    commentHint: "Rooms, sea distance, for living or rent…",
+    defaultNote: "Personal shortlist request",
   },
   review: {
     title: "Leave a review",
@@ -666,13 +690,14 @@ const bg: Dictionary = {
     showResults: "Покажи имоти",
   },
   home: {
-    featured: "Актуални имоти",
-    featuredHint: "Текущи предложения на брега — пиши ни за жива подборка.",
+    featured: "Примерни имоти",
+    featuredHint:
+      "Примерен каталог, докато събираме живи обяви — за реален подбор изпрати заявка или запази консултация.",
     howTitle: "Как работим",
     howSteps: [
-      "Казваш бюджет, район и срок в месинджър",
-      "Подбираме подходящото — покупка, наем или твоя продажба",
-      "Огледи и сделка без хаос",
+      "Казваш бюджет, район и срок — форма или месинджър",
+      "Подбираме от пазара, не само от сайта",
+      "Огледи (на място или онлайн) и спокойна сделка",
     ],
     areasTitle: "Къде работим",
     ownersTitle: "Имаш имот?",
@@ -685,6 +710,18 @@ const bg: Dictionary = {
       "На място съм по Бургаското крайбрежие — помагам с покупка, наем и продажба, без да ти впарявам комплекси, които после излизат скъпо с такси или зима. Ясни варианти, проверка на място, отговор в чат.",
     guideInstagram: "Моят Instagram",
     guideWrite: "Напиши ми",
+    approachNote:
+      "Не сме склад със 100 обяви. Описваш нуждата — търсим и филтрираме на брега.",
+  },
+  search: {
+    title: "Намери ми дом",
+    subtitle:
+      "Бюджет, район, покупка или наем — отговаряме с подборка в чат. Каталогът не е задължителен.",
+    submit: "Изпрати заявка за търсене",
+    anyArea: "Всеки район на брега",
+    budgetHint: "напр. до €120 000",
+    commentHint: "Стаи, близост до морето, за живот или под наем…",
+    defaultNote: "Лична заявка за подборка",
   },
   review: {
     title: "Остави отзив",
@@ -1007,13 +1044,14 @@ const ru: Dictionary = {
     showResults: "Показать объекты",
   },
   home: {
-    featured: "Актуальные объекты",
-    featuredHint: "Текущие предложения на берегу — напишите нам за живую подборку.",
+    featured: "Примеры объектов",
+    featuredHint:
+      "Образцы, пока собираем живой каталог — для реального подбора отправьте запрос или запишитесь на консультацию.",
     howTitle: "Как это работает",
     howSteps: [
-      "Пишешь бюджет, район и сроки в мессенджер",
-      "Подбираем подходящее — покупка, аренда или ваша продажа",
-      "Показы и сделка без хаоса",
+      "Пишете бюджет, район и сроки — форма или мессенджер",
+      "Подбираем с рынка, не только с сайта",
+      "Показы (на месте или онлайн) и спокойная сделка",
     ],
     areasTitle: "Где работаем",
     ownersTitle: "Есть объект?",
@@ -1026,6 +1064,18 @@ const ru: Dictionary = {
       "Я на побережье Бургаса и помогаю с покупкой, арендой и продажей — без впаривания комплексов, которые потом бьют по карману таксами или зимой. Понятные варианты, проверка на месте, ответ в чате.",
     guideInstagram: "Мой Instagram",
     guideWrite: "Написать мне",
+    approachNote:
+      "Мы не склад из 100 объявлений. Вы описываете задачу — мы ищем и фильтруем на побережье.",
+  },
+  search: {
+    title: "Найдите мне жильё",
+    subtitle:
+      "Бюджет, район, покупка или аренда — ответим подборкой в чате. Каталог не обязателен.",
+    submit: "Отправить запрос на поиск",
+    anyArea: "Любой район побережья",
+    budgetHint: "напр. до €120 000",
+    commentHint: "Комнаты, до моря, для жизни или под аренду…",
+    defaultNote: "Личный запрос на подборку",
   },
   review: {
     title: "Оставить отзыв",
@@ -1348,13 +1398,14 @@ const ua: Dictionary = {
     showResults: "Показати об’єкти",
   },
   home: {
-    featured: "Актуальні об’єкти",
-    featuredHint: "Поточні пропозиції на узбережжі — напишіть нам за живу підбірку.",
+    featured: "Приклади об’єктів",
+    featuredHint:
+      "Зразки, поки збираємо живий каталог — для реального підбору надішліть запит або запишіться на консультацію.",
     howTitle: "Як це працює",
     howSteps: [
-      "Пишеш бюджет, район і строки в месенджер",
-      "Підбираємо відповідне — купівля, оренда чи ваш продаж",
-      "Покази й угода без хаосу",
+      "Пишете бюджет, район і строки — форма або месенджер",
+      "Підбираємо з ринку, не лише з сайту",
+      "Покази (на місці чи онлайн) і спокійна угода",
     ],
     areasTitle: "Де працюємо",
     ownersTitle: "Є об’єкт?",
@@ -1367,6 +1418,18 @@ const ua: Dictionary = {
       "Я на узбережжі Бургаса і допомагаю з купівлею, орендою та продажем — без впарювання комплексів, які потім б’ють по гаманцю таксами чи зимою. Зрозумілі варіанти, перевірка на місці, відповідь у чаті.",
     guideInstagram: "Мій Instagram",
     guideWrite: "Написати мені",
+    approachNote:
+      "Ми не склад зі 100 оголошень. Описуєте задачу — шукаємо й фільтруємо на узбережжі.",
+  },
+  search: {
+    title: "Знайдіть мені житло",
+    subtitle:
+      "Бюджет, район, купівля чи оренда — відповімо підбіркою в чаті. Каталог не обов’язковий.",
+    submit: "Надіслати запит на пошук",
+    anyArea: "Будь-який район узбережжя",
+    budgetHint: "напр. до €120 000",
+    commentHint: "Кімнати, до моря, для життя чи під оренду…",
+    defaultNote: "Особистий запит на підбірку",
   },
   review: {
     title: "Залишити відгук",

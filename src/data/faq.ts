@@ -8,6 +8,21 @@ export type FaqItem = {
 
 export const faqItems: FaqItem[] = [
   {
+    id: "shortlist-first",
+    q: {
+      en: "Do you have many listings on the site?",
+      bg: "Имате ли много обяви на сайта?",
+      ru: "У вас много объявлений на сайте?",
+      ua: "У вас багато оголошень на сайті?",
+    },
+    a: {
+      en: "We are not a warehouse of ads. Send a search request (budget + area) or book a consult — we shortlist from the market and reply in chat.",
+      bg: "Не сме склад с обяви. Изпрати заявка за търсене (бюджет + район) или запази консултация — подбираме от пазара и отговаряме в чат.",
+      ru: "Мы не склад объявлений. Отправьте запрос на поиск (бюджет + район) или запишитесь на консультацию — подберём с рынка и ответим в чате.",
+      ua: "Ми не склад оголошень. Надішліть запит на пошук (бюджет + район) або запишіться на консультацію — підберемо з ринку й відповімо в чаті.",
+    },
+  },
+  {
     id: "areas",
     q: {
       en: "Where do you work?",

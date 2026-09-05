@@ -1,5 +1,5 @@
-export const WHATSAPP_E164 = "380933851804";
-export const WHATSAPP_DISPLAY = "+380 93 385 18 04";
+export const WHATSAPP_E164 = "359886690813";
+export const WHATSAPP_DISPLAY = "+359 886 690 813";
 
 export const VIBER_E164 = "4915140166765";
 export const VIBER_DISPLAY = "+49 151 40166765";
