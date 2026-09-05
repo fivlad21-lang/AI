@@ -7,6 +7,7 @@ import { ListingCard } from "@/components/ListingCard";
 import { Testimonials } from "@/components/Testimonials";
 import { AuthorGuide } from "@/components/AuthorGuide";
 import { HomeServices } from "@/components/HomeServices";
+import { SearchRequestForm } from "@/components/SearchRequestForm";
 import { Logo } from "@/components/Logo";
 import { getPublishedListings } from "@/data/listings";
 import { locations } from "@/data/locations";
@@ -55,12 +56,15 @@ export default async function HomePage({
             <p className="animate-rise-delay-2 mt-5 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
               {dict.taglineSub}
             </p>
+            <p className="animate-rise-delay-2 mt-3 max-w-lg text-sm leading-relaxed text-ink-muted">
+              {dict.home.approachNote}
+            </p>
             <div className="animate-rise-delay-2 mt-9 flex flex-wrap gap-3">
-              <GlassButton href={`/${locale}/contacts`} variant="primary">
+              <GlassButton href="#search" variant="primary">
                 {dict.cta.getMatch}
               </GlassButton>
-              <GlassButton href={`/${locale}/sell`} variant="glass">
-                {dict.cta.sellWithUs}
+              <GlassButton href={`/${locale}/services`} variant="glass">
+                {dict.nav.services}
               </GlassButton>
               <GlassButton href={`/${locale}/buy`} variant="ghost">
                 {dict.cta.viewListings}
@@ -93,9 +97,29 @@ export default async function HomePage({
         </div>
       </section>
 
-      <AuthorGuide locale={locale} dict={dict} />
-
       <HomeServices locale={locale} dict={dict} />
+
+      <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
+          <SearchRequestForm locale={locale} dict={dict} />
+          <div className="glass rounded-[1.75rem] p-6 md:p-8">
+            <p className="text-sm leading-relaxed text-ink-muted">{dict.home.approachNote}</p>
+            <p className="mt-4 text-sm leading-relaxed text-ink-muted">
+              {dict.services.homeText}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <GlassButton href={`/${locale}/services`} variant="primary">
+                {dict.services.homeCta}
+              </GlassButton>
+              <GlassButton href={`/${locale}/contacts`} variant="glass">
+                {dict.nav.contacts}
+              </GlassButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <AuthorGuide locale={locale} dict={dict} />
 
       <section className="mx-auto max-w-6xl px-4 py-20 md:px-6">
         <div className="mb-3 flex items-end justify-between gap-4">

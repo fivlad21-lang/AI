@@ -29,7 +29,7 @@ Locale: ua
 Source: https://…
 ```
 
-Kinds: `SELL`, `BUY`, `RENT`, `VIEW`, `SHORTLIST`, `CONSULT`, `AUDIT`, etc.
+Kinds: `SELL`, `BUY`, `RENT`, `VIEW`, `SHORTLIST`, `SEARCH`, `CONSULT`, `AUDIT`, etc.
 
 For `VIEW`, optional `type` is `offline` (on-site) or `online` (video walkthrough).
 

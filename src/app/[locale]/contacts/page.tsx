@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { AgentCard } from "@/components/AgentCard";
-import { LeadForm } from "@/components/LeadForm";
+import { SearchRequestForm } from "@/components/SearchRequestForm";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMeta, routeTitles } from "@/lib/meta";
+import { WHATSAPP_DISPLAY } from "@/lib/contacts";
 
 export async function generateMetadata({
   params,
@@ -35,6 +36,9 @@ export default async function ContactsPage({
         <h1 className="font-display text-4xl font-semibold">{dict.contacts.title}</h1>
         <p className="mt-3 text-ink-muted">{dict.contacts.subtitle}</p>
         <p className="mt-2 text-sm text-ink-muted">{dict.contacts.replyNote}</p>
+        <p className="mt-2 text-sm text-ink-muted">
+          WhatsApp: <span className="font-semibold text-ink">{WHATSAPP_DISPLAY}</span>
+        </p>
         <p className="mt-2 text-xs text-ink-muted">{dict.footer.geo}</p>
       </div>
 
@@ -42,11 +46,11 @@ export default async function ContactsPage({
         <div className="glass rounded-[1.75rem] p-5 md:p-6">
           <AgentCard locale={locale} dict={dict} size="full" />
           <p className="mt-4 text-xs text-ink-muted/80">{dict.footer.dockHint}</p>
+          <p className="mt-4 text-sm leading-relaxed text-ink-muted">{dict.home.approachNote}</p>
         </div>
         <div>
           <h2 className="mb-4 font-display text-2xl">{dict.contacts.lookingTitle}</h2>
-          <p className="mb-4 text-sm text-ink-muted">{dict.listing.autoReply}</p>
-          <LeadForm locale={locale} dict={dict} prefix="[BUY]" />
+          <SearchRequestForm locale={locale} dict={dict} />
         </div>
       </div>
     </div>
