@@ -109,6 +109,26 @@ body {
   animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
 }
 
+@keyframes hero-ken {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.hero-media {
+  animation: hero-ken 28s ease-out forwards;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media {
+    animation: none;
+  }
+}
+
 select option {
   background: #0e1522;
   color: #eef3fb;
