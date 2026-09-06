@@ -30,15 +30,17 @@ export default async function HomePage({
       <section className="relative min-h-[88dvh] overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&q=80"
-            alt="Black Sea coast near Burgas"
+            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1800&q=80"
+            alt="Modern coastal villa with pool near the sea"
             fill
-            className="object-cover object-center"
+            className="hero-media object-cover object-[center_35%]"
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-bg/55 via-bg/75 to-bg" />
-          <div className="absolute inset-0 bg-gradient-to-r from-bg/80 via-bg/40 to-transparent" />
+          {/* Lighter wash so the property stays readable */}
+          <div className="absolute inset-0 bg-gradient-to-b from-bg/35 via-bg/45 to-bg" />
+          <div className="absolute inset-0 bg-gradient-to-r from-bg/70 via-bg/25 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_40%,transparent_0%,rgba(6,8,15,0.35)_70%)]" />
         </div>
 
         <div className="relative mx-auto grid min-h-[88dvh] max-w-6xl items-end gap-10 px-4 pb-14 pt-24 md:items-center md:gap-12 md:px-6 md:pb-24 md:pt-20 lg:grid-cols-2 lg:items-center">
